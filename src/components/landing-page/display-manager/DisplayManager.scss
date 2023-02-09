@@ -5,8 +5,8 @@
   height: $display-manager-height;
   border-radius: 15px;
 
-  .MuiIconButton-root {
-    height: 100%;
+  .MuiToggleButton-root {
+    height: $display-manager-height;
     aspect-ratio: 1;
   }
 }
