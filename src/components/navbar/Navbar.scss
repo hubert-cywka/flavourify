@@ -1,0 +1,51 @@
+@import './src/styles/variables';
+
+.navbar-container {
+  width: 80vw;
+  height: $navbar-height;
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
+
+  -webkit-box-shadow: 0px -5px 5px -1px rgba(13, 17, 80, 0.05);
+  -moz-box-shadow: 0px -5px 5px -1px rgba(13, 17, 80, 0.05);
+  box-shadow: 0px -5px 5px -1px rgba(13, 17, 80, 0.05);
+
+  .MuiBottomNavigation-root {
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .navbar-tile {
+    box-sizing: border-box;
+    height: $navbar-height;
+    width: $navbar-height;
+    border-radius: 50%;
+
+    .MuiBottomNavigationAction-label {
+      font-weight: 600;
+      margin-top: 5px;
+      letter-spacing: 2px;
+      font-size: 0.7rem;
+    }
+
+    .MuiSvgIcon-root {
+      transition: transform 0.3s;
+    }
+
+    &.Mui-selected {
+      .MuiSvgIcon-root {
+        transform: scaleX(-1) scale(1.3);
+      }
+    }
+  }
+
+  .divider {
+    height: 70%;
+    margin: auto 0;
+  }
+}

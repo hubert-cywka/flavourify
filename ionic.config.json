@@ -1,0 +1,7 @@
+{
+  "name": "Flavourify!",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

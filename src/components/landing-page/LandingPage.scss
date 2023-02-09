@@ -1,0 +1,10 @@
+@import './src/styles/shared';
+
+.landing-page-container {
+  @include page-container;
+
+  .settings-paper {
+    width: 300px;
+    height: 70px;
+  }
+}
