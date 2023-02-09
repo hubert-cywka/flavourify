@@ -1,0 +1,12 @@
+@import './src/styles/variables';
+
+.display-manager-container {
+  width: 80vw;
+  height: $display-manager-height;
+  border-radius: 15px;
+
+  .MuiIconButton-root {
+    height: 100%;
+    aspect-ratio: 1;
+  }
+}
