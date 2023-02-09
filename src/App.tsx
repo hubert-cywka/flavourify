@@ -8,6 +8,8 @@ import {
   setCustomViewportHeightVariable,
   setCustomViewportSizeVariableUpdater, setCustomViewportWidthVariable
 } from './utility/viewportSizeVariable';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './services/QueryClient';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
@@ -74,7 +76,9 @@ function App() {
   return (
     <ColorModeContext.Provider value={{ toggleColorMode, colorMode: colorMode }}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={AppRouter} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={AppRouter} />
+        </QueryClientProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
