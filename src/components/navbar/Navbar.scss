@@ -1,11 +1,11 @@
 @import './src/styles/variables';
 
 .navbar-container {
-  width: 80vw;
+  width: $navbar-width;
   height: $navbar-height;
   position: absolute;
   box-sizing: border-box;
-  bottom: 10px;
+  bottom: $page-offset;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;

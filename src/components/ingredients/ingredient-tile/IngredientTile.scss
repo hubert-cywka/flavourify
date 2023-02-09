@@ -1,0 +1,8 @@
+.ingredient-tile-container {
+  transition: opacity 0.2s;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

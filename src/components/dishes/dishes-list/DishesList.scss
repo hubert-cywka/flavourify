@@ -1,0 +1,13 @@
+@import './src/styles/variables';
+
+.dishes-list-container {
+  box-sizing: border-box;
+  overflow: scroll;
+
+  .dish-card {
+    width: 90vw;
+    height: calc(100 * var(--vh) - #{$navbar-height} - calc(2 * #{$dish-card-spacing}) - calc(2 * #{$page-offset}) - #{$display-manager-height});
+    margin-top: calc(#{$display-manager-height} + #{$page-offset} + #{$dish-card-spacing});
+    box-sizing: border-box;
+  }
+}

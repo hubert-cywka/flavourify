@@ -1,0 +1,30 @@
+.dish-card-container {
+  box-sizing: border-box;
+  padding: 10px;
+
+  .dish-image {
+    border-radius: 5px;
+    max-height: 50%;
+    margin-bottom: 10px;
+  }
+
+  .ingredients-list {
+    box-sizing: border-box;
+  }
+
+  .dish-name, .dish-recipe {
+    padding: 0.5em;
+    width: 90%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .dish-name {
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+
+  .dish-recipe {
+    font-size: 0.9em;
+  }
+}
