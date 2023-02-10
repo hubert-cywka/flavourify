@@ -1,4 +1,6 @@
+import { Quantity } from './Quantity';
+
 export interface Ingredient {
   name: string;
-  amount?: string;
+  quantity?: Quantity;
 }

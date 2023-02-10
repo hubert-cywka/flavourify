@@ -24,6 +24,7 @@ const DishDetails = ({ dish, className, flipCallback }: DishDetailsProps) => {
           className="ingredients-list"
           ingredients={dish.ingredients}
           amountLimit={0}
+          withMultiplier={true}
         />
         <DishRecipe recipe={dish.recipe} className="dish-recipe" />
       </Box>
