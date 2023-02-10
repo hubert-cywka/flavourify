@@ -6,10 +6,11 @@ import DishRating from '../dish-rating/DishRating';
 
 interface DishCardProps {
   dish: Dish;
+  flipCallback: () => void;
   className?: string;
 }
 
-const DishCard = ({ dish, className }: DishCardProps) => {
+const DishCard = ({ dish, className, flipCallback }: DishCardProps) => {
   return (
     <Card className={`dish-card-container ${className}`}>
       <CardMedia
@@ -28,6 +29,7 @@ const DishCard = ({ dish, className }: DishCardProps) => {
         amountLimit={5}
       />
       <Button
+        onClick={flipCallback}
         sx={{
           textTransform: 'none'
         }}

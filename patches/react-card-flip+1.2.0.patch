@@ -1,0 +1,38 @@
+diff --git a/node_modules/react-card-flip/lib/ReactCardFlip.js b/node_modules/react-card-flip/lib/ReactCardFlip.js
+index 444f1fa..47e9f22 100644
+--- a/node_modules/react-card-flip/lib/ReactCardFlip.js
++++ b/node_modules/react-card-flip/lib/ReactCardFlip.js
+@@ -66,14 +66,9 @@ var ReactCardFlip = function (props) {
+     var styles = {
+         back: __assign({ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', height: '100%', left: '0', position: isFlipped ? 'relative' : 'absolute', top: '0', transform: flipDirection === 'horizontal' ? backRotateY : backRotateX, transformStyle: 'preserve-3d', transition: "".concat(flipSpeedFrontToBack, "s"), width: '100%' }, back),
+         container: {
+-            perspective: '1000px',
+             zIndex: "".concat(cardZIndex),
+         },
+-        flipper: {
+-            height: '100%',
+-            position: 'relative',
+-            width: '100%',
+-        },
++        flipper: {},
+         front: __assign({ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', height: '100%', left: '0', position: isFlipped ? 'absolute' : 'relative', top: '0', transform: flipDirection === 'horizontal' ? frontRotateY : frontRotateX, transformStyle: 'preserve-3d', transition: "".concat(flipSpeedBackToFront, "s"), width: '100%', zIndex: '2' }, front),
+     };
+     return (React.createElement("div", { className: getContainerClassName, style: __assign(__assign({}, styles.container), containerStyle) },
+diff --git a/node_modules/react-card-flip/src/ReactCardFlip.tsx b/node_modules/react-card-flip/src/ReactCardFlip.tsx
+index 4139611..f9f4f9c 100644
+--- a/node_modules/react-card-flip/src/ReactCardFlip.tsx
++++ b/node_modules/react-card-flip/src/ReactCardFlip.tsx
+@@ -73,13 +73,9 @@ const ReactCardFlip: React.FC<ReactFlipCardProps> = (props) => {
+       ...back,
+     },
+     container: {
+-      perspective: '1000px',
+       zIndex: `${cardZIndex}`,
+     },
+     flipper: {
+-      height: '100%',
+-      position: 'relative',
+-      width: '100%',
+     },
+     front: {
+       WebkitBackfaceVisibility: 'hidden',

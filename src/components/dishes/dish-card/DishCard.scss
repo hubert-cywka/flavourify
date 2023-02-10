@@ -7,10 +7,6 @@
   padding: 10px;
   justify-content: flex-end;
 
-  * {
-    box-sizing: border-box;
-  }
-
   .dish-image {
     border-radius: $dish-card-inner-border-radius;
     margin-bottom: 10px;
@@ -28,6 +24,7 @@
     background-color: rgba(128, 128, 128, 0.075);
     border-radius: $dish-card-inner-border-radius;
     width: 100%;
+    box-sizing: border-box;
   }
 
   .dish-name {
