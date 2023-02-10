@@ -9,7 +9,9 @@ interface IngredientTileProps {
 
 const IngredientTile = ({ ingredient, className }: IngredientTileProps) => {
   const constructLabel = (): string => {
-    return ingredient.amount ? ingredient.name + ': ' + ingredient.amount : ingredient.name;
+    return ingredient.quantity
+      ? ingredient.name + ': ' + ingredient.quantity.amount + ingredient.quantity.unit
+      : ingredient.name;
   };
 
   return (

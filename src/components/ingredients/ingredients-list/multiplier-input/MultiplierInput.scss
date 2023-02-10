@@ -1,0 +1,31 @@
+.multiplier-input-container {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+
+  .value-field {
+    background-color: rgba(128, 128, 128, 0.1);
+    padding: 5px;
+    min-width: 50px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .buttons-container {
+    .increment-button, .decrement-button {
+      padding: 0 5px;
+      font-weight: bold;
+
+      &.MuiButtonBase-root {
+        min-width: 40px;
+        height: 100%;
+      }
+    }
+
+  }
+}
