@@ -6,7 +6,13 @@
   border-radius: 15px;
 
   .MuiToggleButton-root {
+    color: white;
     height: $display-manager-height;
     aspect-ratio: 1;
+
+    &.Mui-selected {
+      opacity: 0.5;
+      color: white;
+    }
   }
 }
