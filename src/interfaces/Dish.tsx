@@ -5,5 +5,5 @@ export interface Dish {
   name: string;
   img: string;
   ingredients: Ingredient[];
-  recipe: string;
+  recipe: string[];
 }
