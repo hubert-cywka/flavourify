@@ -10,4 +10,14 @@
     margin-top: calc(#{$display-manager-height} + #{$page-offset} + #{$dish-card-spacing});
     box-sizing: border-box;
   }
+
+  &.error {
+    .error-image {
+      width: 80vw;
+    }
+
+    .MuiTypography-root {
+      font-weight: bold;
+    }
+  }
 }

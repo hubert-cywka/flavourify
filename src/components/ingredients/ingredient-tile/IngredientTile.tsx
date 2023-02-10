@@ -1,11 +1,6 @@
 import { Chip } from '@mui/material';
 import './IngredientTile.scss';
-
-export interface Ingredient {
-  id: number;
-  name: string;
-  amount?: string;
-}
+import { type Ingredient } from '../../../interfaces/Ingredient';
 
 interface IngredientTileProps {
   ingredient: Ingredient;
@@ -17,7 +12,9 @@ const IngredientTile = ({ ingredient, className }: IngredientTileProps) => {
     return ingredient.amount ? ingredient.name + ': ' + ingredient.amount : ingredient.name;
   };
 
-  return <Chip className={`ingredient-tile-container ${className}`} label={constructLabel()}></Chip>;
+  return (
+    <Chip className={`ingredient-tile-container ${className}`} label={constructLabel()}></Chip>
+  );
 };
 
 export default IngredientTile;

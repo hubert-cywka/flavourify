@@ -10,13 +10,17 @@ interface ColorModeSettingsProps {
 
 const ColorModeSettings = ({ className }: ColorModeSettingsProps) => {
   const { colorMode, toggleColorMode } = useContext(ColorModeContext);
-  const colorModeIcon = colorMode === 'dark' ? <Brightness5RoundedIcon /> : <Brightness4RoundedIcon />;
+  const colorModeIcon =
+    colorMode === 'dark' ? <Brightness5RoundedIcon /> : <Brightness4RoundedIcon />;
 
-  return <SettingsPaper
-    className={className}
-    text={'Toggle color mode'}
-    icon={colorModeIcon}
-    callback={toggleColorMode} />;
+  return (
+    <SettingsPaper
+      className={className}
+      text={'Toggle color mode'}
+      icon={colorModeIcon}
+      callback={toggleColorMode}
+    />
+  );
 };
 
 export default ColorModeSettings;

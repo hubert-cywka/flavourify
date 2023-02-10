@@ -18,28 +18,34 @@ const Navbar = () => {
   };
 
   return (
-    <Box className='navbar-container'>
-      <BottomNavigation value={path} onChange={navigateTo} sx={{
-        bgcolor: 'secondary.main',
-        color: 'text.secondary'
-      }}>
+    <Box className="navbar-container">
+      <BottomNavigation
+        value={path}
+        onChange={navigateTo}
+        sx={{
+          bgcolor: 'secondary.main',
+          color: 'text.secondary'
+        }}>
         <BottomNavigationAction
-          className='navbar-tile'
-          label='Home'
+          className="navbar-tile"
+          label="Home"
           value={ROUTE.LANDING}
-          icon={<ReceiptLongRoundedIcon />} />
-        <Divider className='divider' light orientation='vertical' />
+          icon={<ReceiptLongRoundedIcon />}
+        />
+        <Divider className="divider" light orientation="vertical" />
         <BottomNavigationAction
-          className='navbar-tile'
-          label='Menu'
+          className="navbar-tile"
+          label="Menu"
           value={ROUTE.WEEK_MENU}
-          icon={<RestaurantMenuRoundedIcon />} />
-        <Divider className='divider' light orientation='vertical' />
+          icon={<RestaurantMenuRoundedIcon />}
+        />
+        <Divider className="divider" light orientation="vertical" />
         <BottomNavigationAction
-          className='navbar-tile'
-          label='Settings'
+          className="navbar-tile"
+          label="Settings"
           value={ROUTE.SETTINGS}
-          icon={<SettingsApplicationsRoundedIcon />} />
+          icon={<SettingsApplicationsRoundedIcon />}
+        />
       </BottomNavigation>
     </Box>
   );
