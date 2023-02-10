@@ -1,0 +1,27 @@
+.dish-recipe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .recipe-step {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.075);
+    margin-bottom: 5px;
+
+    .recipe-step-number {
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+
+    .recipe-step-text {
+      font-size: 0.75rem;
+      text-align: left;
+    }
+  }
+}

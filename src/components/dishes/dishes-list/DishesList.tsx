@@ -8,6 +8,10 @@ import { shuffleArray } from '../../../utility/shuffleArray';
 import QueryResultsBuilder from '../../../utility/Builder';
 import { Box, Typography } from '@mui/material';
 import { Dish } from '../../../interfaces/Dish';
+import { useState } from 'react';
+import DishDetails from '../dish-details/DishDetails';
+import ReactCardFlip from 'react-card-flip';
+import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
 
 interface DishesListProps {
   className?: string;
@@ -16,15 +20,22 @@ interface DishesListProps {
 
 const DishesList = ({ displayParameters, className }: DishesListProps) => {
   const { data: dishes, status } = useQuery(['DISHES_QUERY'], getDishes);
+  const [isFrontSide, swapSide] = useState(true);
+
+  const flipCard = () => {
+    swapSide((prevState) => !prevState);
+  };
 
   const parseDishesList = (dishes: Dish[]) => {
-    if (displayParameters.includes('shuffle')) return shuffleArray<Dish>(dishes);
+    if (displayParameters.includes(DISPLAY_PARAMS.SHUFFLE)) return shuffleArray<Dish>(dishes);
     return dishes;
   };
 
   return QueryResultsBuilder.createResult(status)
     .onSuccess(
       <Swiper
+        allowSlideNext={isFrontSide}
+        allowSlidePrev={isFrontSide}
         direction="vertical"
         slidesPerView="auto"
         className={`dishes-list-container ${className}`}>
@@ -32,7 +43,10 @@ const DishesList = ({ displayParameters, className }: DishesListProps) => {
           parseDishesList(dishes).map((dish, id) => {
             return (
               <SwiperSlide key={id}>
-                <DishCard className="dish-card" dish={dish} />
+                <ReactCardFlip isFlipped={!isFrontSide}>
+                  <DishCard flipCallback={flipCard} className="dish-card" dish={dish} />
+                  <DishDetails flipCallback={flipCard} className="dish-card" dish={dish} />
+                </ReactCardFlip>
               </SwiperSlide>
             );
           })}

@@ -11,6 +11,11 @@ interface DisplayManagerProps {
   setDisplayParameters: (params: string[]) => void;
 }
 
+export namespace DISPLAY_PARAMS {
+  export const SHUFFLE = 'shuffle';
+  export const FAVOURITE = 'favourite';
+}
+
 const DisplayManager = ({
   displayParameters,
   setDisplayParameters,
@@ -23,10 +28,10 @@ const DisplayManager = ({
   return (
     <Box className={`display-manager-container ${className}`} sx={{ bgcolor: 'secondary.main' }}>
       <ToggleButtonGroup value={displayParameters} onChange={updateDisplayParameters}>
-        <ToggleButton value="shuffle">
+        <ToggleButton value={DISPLAY_PARAMS.SHUFFLE}>
           <ShuffleRoundedIcon />
         </ToggleButton>
-        <ToggleButton value="favourite">
+        <ToggleButton value={DISPLAY_PARAMS.FAVOURITE}>
           <StarRoundedIcon />
         </ToggleButton>
       </ToggleButtonGroup>

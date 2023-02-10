@@ -24,7 +24,7 @@ const IngredientsList = ({ ingredients, amountLimit, className }: IngredientsLis
       {parseIngredientsList(ingredients, amountLimit).map((ingredient, id) => {
         return <IngredientTile key={id} className="ingredient-tile" ingredient={ingredient} />;
       })}
-      {amountLimit < ingredients.length && (
+      {amountLimit > 0 && amountLimit < ingredients.length && (
         <IngredientTile
           className="ingredient-tile"
           ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}

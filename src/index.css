@@ -1,8 +1,7 @@
 body {
     margin: 0;
     box-sizing: border-box;
-    overflow: hidden;
-    font-family: 'Montserrat', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
