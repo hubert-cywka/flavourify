@@ -1,4 +1,3 @@
-import DishCard from '../dish-card/DishCard';
 import './DishesList.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -9,9 +8,10 @@ import QueryResultsBuilder from '../../../utility/Builder';
 import { Box, Typography } from '@mui/material';
 import { Dish } from '../../../interfaces/Dish';
 import { useState } from 'react';
-import DishDetails from '../dish-details/DishDetails';
 import ReactCardFlip from 'react-card-flip';
 import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
+import DishCardBack from '../dish-card/dish-card-back/DishCardBack';
+import DishCardFront from '../dish-card/dish-card-front/DishCardFront';
 
 interface DishesListProps {
   className?: string;
@@ -44,8 +44,8 @@ const DishesList = ({ displayParameters, className }: DishesListProps) => {
             return (
               <SwiperSlide key={id}>
                 <ReactCardFlip isFlipped={!isFrontSide}>
-                  <DishCard flipCallback={flipCard} className="dish-card" dish={dish} />
-                  <DishDetails flipCallback={flipCard} className="dish-card" dish={dish} />
+                  <DishCardFront flipCallback={flipCard} className="dish-card" dish={dish} />
+                  <DishCardBack flipCallback={flipCard} className="dish-card" dish={dish} />
                 </ReactCardFlip>
               </SwiperSlide>
             );
