@@ -1,8 +1,8 @@
-import { Dish } from '../../../interfaces/Dish';
 import { Box, Button, Card, CardMedia, Typography } from '@mui/material';
-import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
-import './DishDetails.scss';
-import DishRecipe from '../dish-recipe/DishRecipe';
+import './DishCardBack.scss';
+import { Dish } from '../../../../interfaces/Dish';
+import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
+import DishRecipe from '../../dish-recipe/DishRecipe';
 
 interface DishDetailsProps {
   dish: Dish;
@@ -10,9 +10,9 @@ interface DishDetailsProps {
   className?: string;
 }
 
-const DishDetails = ({ dish, className, flipCallback }: DishDetailsProps) => {
+const DishCardBack = ({ dish, className, flipCallback }: DishDetailsProps) => {
   return (
-    <Card className={`dish-details-container ${className}`}>
+    <Card className={`dish-card-back-container ${className}`}>
       <Box className="scrollable-dish-details">
         <CardMedia
           className="dish-image"
@@ -34,11 +34,11 @@ const DishDetails = ({ dish, className, flipCallback }: DishDetailsProps) => {
           textTransform: 'none'
         }}
         variant="contained"
-        className="hide-details-button">
+        className="flip-card-button">
         Go back
       </Button>
     </Card>
   );
 };
 
-export default DishDetails;
+export default DishCardBack;

@@ -1,0 +1,28 @@
+@import './src/styles/variables';
+@import '../DishCardShared';
+
+.dish-card-back-container {
+  @include dish-card-container;
+  position: relative;
+
+  .scrollable-dish-details {
+    @include dish-card-components;
+
+    overflow-y: auto;
+    flex-grow: 1;
+
+    .dish-image {
+      height: 30%;
+    }
+
+    .ingredients-list, .dish-name {
+      margin-bottom: 10px;
+    }
+  }
+
+  .flip-card-button {
+    width: 100%;
+    border-radius: $dish-card-inner-border-radius;
+    font-weight: bold;
+  }
+}

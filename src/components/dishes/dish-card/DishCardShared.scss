@@ -1,25 +1,14 @@
-@import './src/styles/variables';
+@import './src/styles/shared';
 
-.dish-card-container {
+@mixin dish-card-container {
   box-sizing: border-box;
   flex-direction: column;
   display: flex;
   padding: 10px;
   justify-content: flex-end;
+}
 
-  .dish-image {
-    border-radius: $dish-card-inner-border-radius;
-    margin-bottom: 10px;
-    flex-grow: 1;
-    height: 50%;
-  }
-
-  .ingredients-list {
-    overflow: hidden;
-    padding: 3px;
-    margin-bottom: 10px;
-  }
-
+@mixin dish-card-components {
   .ingredients-list, .dish-name {
     background-color: rgba(128, 128, 128, 0.075);
     border-radius: $dish-card-inner-border-radius;
@@ -31,22 +20,18 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0.5em;
-    margin: 0 auto;
     font-size: 1.2em;
     font-weight: bold;
     overflow: hidden;
   }
 
-  .show-details-button {
-    width: 100%;
+  .dish-image {
     border-radius: $dish-card-inner-border-radius;
-    font-weight: bold;
+    margin-bottom: 10px;
   }
 
-  .ratings-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 15px;
+  .ingredients-list {
+    overflow: hidden;
+    padding: 3px;
   }
 }
