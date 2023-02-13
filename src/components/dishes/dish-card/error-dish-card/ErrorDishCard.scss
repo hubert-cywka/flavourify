@@ -1,0 +1,38 @@
+@import '../DishCardShared';
+@import './src/styles/variables';
+
+.error-dish-card-container {
+  @include dish-card;
+  @include dish-card-container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  .image-container {
+    flex-grow: 1;
+    overflow: hidden;
+
+    .error-image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .error-title, .image-container, .error-button {
+    border-radius: $dish-card-inner-border-radius;
+    padding: $dish-card-spacing;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .error-title, .image-container {
+    background-color: $highlighted-background;
+    margin-bottom: $dish-card-spacing;
+  }
+
+  .error-button {
+    font-weight: bold;
+  }
+}

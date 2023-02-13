@@ -1,0 +1,5 @@
+@import './src/styles/shared';
+
+.popup-error-container {
+  @include appear-animation;
+}

@@ -5,18 +5,35 @@
   @include dish-card-container;
   position: relative;
 
+  .edit-panel {
+    box-sizing: border-box;
+    border-radius: $dish-card-inner-border-radius;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+
+    .action-button {
+      margin: 0 10px;
+    }
+  }
+
   .scrollable-dish-details {
     @include dish-card-components;
-
     overflow-y: auto;
     flex-grow: 1;
 
-    .dish-image {
-      height: 30%;
-    }
-
     .ingredients-list, .dish-name {
       margin-bottom: 10px;
+    }
+
+    .dish-name {
+      margin-top: 10px;
+    }
+
+    .image-container {
+      height: 40%;
     }
   }
 

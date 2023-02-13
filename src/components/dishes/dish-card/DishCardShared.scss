@@ -10,7 +10,7 @@
 
 @mixin dish-card-components {
   .ingredients-list, .dish-name {
-    background-color: rgba(128, 128, 128, 0.075);
+    background-color: $highlighted-background;
     border-radius: $dish-card-inner-border-radius;
     width: 100%;
     box-sizing: border-box;
@@ -23,15 +23,26 @@
     font-size: 1.2em;
     font-weight: bold;
     overflow: hidden;
+    text-align: center;
+
+    input {
+      text-align: center;
+    }
   }
 
-  .dish-image {
+  .image-container {
+    position: relative;
+    overflow: hidden;
     border-radius: $dish-card-inner-border-radius;
-    margin-bottom: 10px;
+
+    .dish-image {
+      height: 100%;
+      margin-bottom: 10px;
+    }
   }
 
   .ingredients-list {
     overflow: hidden;
-    padding: 3px;
+    padding: 10px;
   }
 }

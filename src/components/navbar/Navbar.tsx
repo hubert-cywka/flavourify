@@ -1,4 +1,4 @@
-import { BottomNavigationAction, BottomNavigation, Box, Divider } from '@mui/material';
+import { BottomNavigationAction, BottomNavigation, Box } from '@mui/material';
 import ROUTE from '../router/RoutingConstants';
 import SettingsApplicationsRoundedIcon from '@mui/icons-material/SettingsApplicationsRounded';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
@@ -32,14 +32,12 @@ const Navbar = () => {
           value={ROUTE.LANDING}
           icon={<ReceiptLongRoundedIcon />}
         />
-        <Divider className="divider" light orientation="vertical" />
         <BottomNavigationAction
           className="navbar-tile"
           label="Menu"
           value={ROUTE.WEEK_MENU}
           icon={<RestaurantMenuRoundedIcon />}
         />
-        <Divider className="divider" light orientation="vertical" />
         <BottomNavigationAction
           className="navbar-tile"
           label="Settings"
