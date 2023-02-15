@@ -5,3 +5,8 @@ export const getDishes = async (): Promise<Dish[]> => {
   const { data } = await apiClient.get<Dish[]>('/dishes');
   return data.slice();
 };
+
+export const updateDish = async (updatedDish: Dish): Promise<Dish> => {
+  const { data } = await apiClient.put<Dish>(`/dishes/${updatedDish.id}`, updatedDish);
+  return data;
+};

@@ -1,28 +1,42 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 @import '../DishCardShared';
+
+.swiper-slide-visible {
+  .image-container {
+    .dish-image {
+      transform: scale(1.1);
+    }
+  }
+}
 
 .dish-card-front-container {
   @include dish-card-container;
   @include dish-card-components;
 
-  .dish-image {
+  .image-container {
     flex-grow: 1;
-    height: 50%;
+
+    .dish-image {
+      transition: transform 1s ease-in-out;
+    }
   }
 
-  .ingredients-list {
-    margin-bottom: 10px;
-  }
+  .content-container {
+    .ingredients-list {
+      margin-bottom: 10px;
+    }
 
-  .dish-name {
-    margin: 0 auto;
-  }
+    .dish-name {
+      margin: 10px auto;
+    }
 
-  .ratings-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 15px;
+    .ratings-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding: 15px;
+    }
   }
 
   .flip-card-button {

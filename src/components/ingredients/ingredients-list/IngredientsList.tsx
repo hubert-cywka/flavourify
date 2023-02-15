@@ -1,46 +1,80 @@
 import IngredientTile from '../ingredient-tile/IngredientTile';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
 import { Ingredient } from '../../../interfaces/Ingredient';
-import { useState } from 'react';
-import MultiplierInput from './multiplier-input/MultiplierInput';
+import { RefObject, useCallback, useState, useMemo } from 'react';
+import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
+import { AddRounded } from '@mui/icons-material';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
+import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/Constants';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
   amountLimit: number;
   className?: string;
   withMultiplier?: boolean;
+  editable?: boolean;
+  reference?: RefObject<any>;
 }
 
 const IngredientsList = ({
   ingredients,
   amountLimit,
   className,
-  withMultiplier
+  withMultiplier,
+  editable,
+  reference
 }: IngredientsListProps) => {
   const [multiplier, setMultiplier] = useState<number>(1);
+  const [displayedIngredients, setDisplayedIngredients] = useState<Ingredient[]>(ingredients);
 
-  const reduceIngredientList = (ingredientsList: Ingredient[], amount: number): Ingredient[] => {
-    if (amount <= 0) return ingredientsList;
-    return ingredientsList.slice(0, amount);
-  };
+  useUpdateEffect(() => {
+    setDisplayedIngredients(ingredients);
+  }, [ingredients]);
 
-  const getNumberOfItemsOverLimit = (): number => {
-    return ingredients.length - amountLimit;
-  };
+  const getReducedIngredientsList = useCallback((): Ingredient[] => {
+    if (amountLimit <= 0) return displayedIngredients;
+    return displayedIngredients.slice(0, amountLimit);
+  }, [displayedIngredients, amountLimit]);
 
-  const multiplyAmount = (ingredientsList: Ingredient[], multiplier: number) => {
-    if (Number.isNaN(multiplier)) return ingredientsList;
-    let multipliedIngredients: Ingredient[] = structuredClone(ingredientsList);
-    for (const ingredient of multipliedIngredients) {
-      if (ingredient.quantity) ingredient.quantity.amount *= multiplier;
-    }
-    return multipliedIngredients;
-  };
+  const getNumberOfItemsOverLimit = useCallback((): number => {
+    return displayedIngredients.length - amountLimit;
+  }, [displayedIngredients, amountLimit]);
+
+  const addNewIngredient = useCallback(() => {
+    displayedIngredients.push({ name: NEW_INGREDIENT_PLACEHOLDER });
+    setDisplayedIngredients(displayedIngredients.slice());
+  }, [displayedIngredients]);
+
+  const deleteIngredient = useCallback(
+    (id: number) => {
+      displayedIngredients.splice(id, 1);
+      setDisplayedIngredients(displayedIngredients.slice());
+    },
+    [displayedIngredients]
+  );
+
+  const buildIngredientList = useMemo(
+    (): ReactJSXElement[] =>
+      getReducedIngredientsList().map((ingredient, id) => {
+        return (
+          <IngredientTile
+            key={id}
+            className="ingredient-tile"
+            editable={editable}
+            ingredient={ingredient}
+            multiplier={editable ? 1 : multiplier}
+            deleteCallback={() => deleteIngredient(id)}
+          />
+        );
+      }),
+    [displayedIngredients, editable, multiplier]
+  );
 
   return (
-    <Box className={`ingredient-list-container ${className}`}>
-      {withMultiplier && (
+    <Box className={`ingredient-list-container ${className}`} ref={reference}>
+      {withMultiplier && !editable && (
         <>
           <Box className="servings-container">
             <Typography className="servings-text">Servings: </Typography>
@@ -55,16 +89,17 @@ const IngredientsList = ({
           <Divider className="ingredients-divider" />
         </>
       )}
-      {multiplyAmount(reduceIngredientList(ingredients, amountLimit), multiplier).map(
-        (ingredient, id) => {
-          return <IngredientTile key={id} className="ingredient-tile" ingredient={ingredient} />;
-        }
-      )}
-      {amountLimit > 0 && amountLimit < ingredients.length && (
+      {buildIngredientList}
+      {amountLimit > 0 && amountLimit < displayedIngredients.length && (
         <IngredientTile
           className="ingredient-tile"
           ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
         />
+      )}
+      {editable && (
+        <IconButton onClick={addNewIngredient} className="ingredient-tile">
+          <AddRounded />
+        </IconButton>
       )}
     </Box>
   );

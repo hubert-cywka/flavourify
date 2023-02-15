@@ -12,3 +12,26 @@
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
 }
+
+@mixin appear-animation {
+  animation: appear 0.5s ease-in-out;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin dish-card {
+  width: $page-width;
+  height: calc(100 * var(--vh) - #{$navbar-height} - calc(2 * #{$dish-card-spacing}) - calc(2 * #{$page-offset}) - #{$display-manager-height});
+  margin-top: calc(#{$display-manager-height} + #{$page-offset} + #{$dish-card-spacing});
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}

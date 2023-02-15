@@ -1,33 +1,23 @@
-import { Box, Button, Card, CardMedia, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import './DishCardFront.scss';
-import DishRating from '../../dish-rating/DishRating';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
-import { Dish } from '../../../../interfaces/Dish';
-
-interface DishCardProps {
-  dish: Dish;
-  flipCallback: () => void;
-  className?: string;
-}
+import DishImage from '../../dish-image/DishImage';
+import { DishCardProps } from '../DishCard';
 
 const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
   return (
     <Card className={`dish-card-front-container ${className}`}>
-      <CardMedia
-        className="dish-image"
-        component="img"
-        alt={dish.name}
-        image={dish.img}></CardMedia>
-      <Typography className="dish-name">{dish.name}</Typography>
-      <Box className="ratings-container">
-        <DishRating className="dish-rating" type={'personal'} />
-        <DishRating className="dish-rating" type={'global'} />
+      <Box className="image-container">
+        <DishImage src={dish.img} altText={dish.name} className="dish-image" />
       </Box>
-      <IngredientsList
-        className="ingredients-list"
-        ingredients={dish.ingredients}
-        amountLimit={5}
-      />
+      <Box className="content-container">
+        <Typography className="dish-name">{dish.name}</Typography>
+        <IngredientsList
+          className="ingredients-list"
+          ingredients={dish.ingredients}
+          amountLimit={5}
+        />
+      </Box>
       <Button
         onClick={flipCallback}
         sx={{
