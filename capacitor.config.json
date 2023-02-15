@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.Flavourify!",
-  "appName": "Flavourify!",
+  "appId": "io.ionic.Flavourify",
+  "appName": "Flavourify",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

@@ -7,7 +7,11 @@ import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInpu
 import { AddRounded } from '@mui/icons-material';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/Constants';
+import {
+  MAX_INGREDIENTS_MULTIPLIER,
+  MIN_INGREDIENTS_MULTIPLIER,
+  NEW_INGREDIENT_PLACEHOLDER
+} from '../../../constants/Constants';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
@@ -55,7 +59,7 @@ const IngredientsList = ({
     [displayedIngredients]
   );
 
-  const buildIngredientList = useMemo(
+  const parsedIngredientsList = useMemo(
     (): ReactJSXElement[] =>
       getReducedIngredientsList().map((ingredient, id) => {
         return (
@@ -82,20 +86,23 @@ const IngredientsList = ({
               className="multiplier-input"
               callback={setMultiplier}
               value={multiplier}
-              min={1}
-              max={10}
+              min={MIN_INGREDIENTS_MULTIPLIER}
+              max={MAX_INGREDIENTS_MULTIPLIER}
             />
           </Box>
           <Divider className="ingredients-divider" />
         </>
       )}
-      {buildIngredientList}
+
+      {parsedIngredientsList}
+
       {amountLimit > 0 && amountLimit < displayedIngredients.length && (
         <IngredientTile
           className="ingredient-tile"
           ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
         />
       )}
+
       {editable && (
         <IconButton onClick={addNewIngredient} className="ingredient-tile">
           <AddRounded />

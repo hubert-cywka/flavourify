@@ -4,11 +4,10 @@ import { useCallback } from 'react';
 
 interface MultiplierInputProps {
   value: number;
-  // eslint-disable-next-line no-unused-vars
-  callback: (value: number) => void;
   min?: number;
   max?: number;
   className?: string;
+  callback: (value: number) => void; // eslint-disable-line no-unused-vars
 }
 
 const MultiplierInput = ({ value, callback, min, max, className }: MultiplierInputProps) => {

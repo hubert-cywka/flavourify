@@ -1,7 +1,7 @@
 import { Input } from '@mui/material';
 import React, { RefObject, useCallback, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import PopupAlert from '../../alert/PopupAlert';
+import { useSnackbar } from 'notistack';
 
 interface EditableTextFieldProps {
   isReadOnly?: boolean;
@@ -25,15 +25,11 @@ const EditableTextField = ({
   type
 }: EditableTextFieldProps) => {
   const [displayedValue, setDisplayedValue] = useState<string>(value);
-  const [currentAlertMessage, setCurrentAlertMessage] = useState('');
+  const { enqueueSnackbar } = useSnackbar();
 
   useUpdateEffect(() => {
     setDisplayedValue(value);
   }, [isReadOnly]);
-
-  const handleAlertClose = (event: React.SyntheticEvent<any> | Event, reason: string) => {
-    if (reason !== 'clickaway') setCurrentAlertMessage('');
-  };
 
   const allowEdit = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -42,49 +38,44 @@ const EditableTextField = ({
     [isReadOnly]
   );
 
-  const isValidNumber = (value: string): boolean => {
+  const isValidNumber = useCallback((value: string): boolean => {
     return /^-?\d*\.?\d*$/.test(value);
-  };
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (max && e.target.value.length > max) {
-      setCurrentAlertMessage(
-        errorMessage ? errorMessage : `This value can be only ${max} characters long.`
-      );
-    } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
-      setCurrentAlertMessage('This value must be a valid number.');
-    } else {
-      setDisplayedValue(e.target.value);
-      setCurrentAlertMessage('');
-    }
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      if (max && e.target.value.length > max) {
+        enqueueSnackbar(
+          errorMessage ? errorMessage : `This value can be only ${max} characters long.`
+        );
+      } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
+        enqueueSnackbar('This value must be a valid number.');
+      } else {
+        setDisplayedValue(e.target.value);
+      }
+    },
+    []
+  );
 
-  const checkIfEmpty = () => {
+  const checkIfEmpty = useCallback(() => {
     if (!displayedValue.length) {
-      setCurrentAlertMessage('This field can not be empty.');
+      enqueueSnackbar('This field can not be empty.');
       setDisplayedValue(value);
     }
-  };
+  }, [displayedValue]);
 
   return (
     <>
       <Input
-        multiline={multiline}
         ref={reference}
+        multiline={multiline}
+        className={className}
         disableUnderline={true}
         sx={{ color: 'text.primary' }}
-        className={className}
         value={displayedValue}
-        onMouseDown={(e) => allowEdit(e)}
         onBlur={checkIfEmpty}
-        onChange={(e) => handleChange(e)}></Input>
-      {currentAlertMessage && (
-        <PopupAlert
-          open={!!currentAlertMessage}
-          onClose={handleAlertClose}
-          message={currentAlertMessage}
-        />
-      )}
+        onChange={(e) => handleChange(e)}
+        onMouseDown={(e) => allowEdit(e)}></Input>
     </>
   );
 };
