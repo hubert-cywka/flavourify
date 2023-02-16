@@ -18,13 +18,7 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
           amountLimit={5}
         />
       </Box>
-      <Button
-        onClick={flipCallback}
-        sx={{
-          textTransform: 'none'
-        }}
-        variant="contained"
-        className="flip-card-button">
+      <Button onClick={flipCallback} variant="contained" className="flip-card-button">
         Show recipe
       </Button>
     </Card>

@@ -55,9 +55,11 @@ const IngredientTile = ({
 
   const toggleQuantity = () => {
     setHasQuantity((prevState) => {
-      if (!prevState)
+      if (!prevState) {
         setDisplayedIngredient({ ...displayedIngredient, quantity: { amount: 0, unit: 'pcs' } });
-      else setDisplayedIngredient({ name: displayedIngredient.name });
+      } else {
+        setDisplayedIngredient({ name: displayedIngredient.name });
+      }
       return !prevState;
     });
   };
@@ -92,38 +94,36 @@ const IngredientTile = ({
           </>
         )}
       </Box>
+
       <Dialog open={open} onClose={closeEditDialog}>
         <Card className="ingredients-edit-dialog">
           <Box className="ingredients-edit-dialog-row">
-            <Typography className="name-label">Name:</Typography>{' '}
+            <Typography className="field-name-label">Name:</Typography>
             <EditableTextField
-              className="edit-field"
+              className="editable-text-field"
               value={displayedIngredient.name}
-              multiline={true}
               reference={nameRef}
               max={INGREDIENT_NAME_MAX_LENGTH}
               errorMessage={INGREDIENT_EDIT_ERROR}
             />
           </Box>
-          {hasQuantity && !!displayedIngredient.quantity && (
+          {!!displayedIngredient.quantity && (
             <>
               <Box className="ingredients-edit-dialog-row">
-                <Typography className="name-label">Amount:</Typography>
+                <Typography className="field-name-label">Amount:</Typography>
                 <EditableTextField
-                  className="edit-field"
+                  className="editable-text-field"
                   value={displayedIngredient.quantity.amount.toString()}
-                  multiline={true}
                   reference={amountRef}
                   max={INGREDIENT_COUNT_MAX_LENGTH}
                   type="number"
                 />
               </Box>
               <Box className="ingredients-edit-dialog-row">
-                <Typography className="name-label">Unit:</Typography>
+                <Typography className="field-name-label">Unit:</Typography>
                 <EditableTextField
-                  className="edit-field"
+                  className="editable-text-field"
                   value={displayedIngredient.quantity.unit}
-                  multiline={true}
                   reference={unitRef}
                   max={INGREDIENT_UNIT_MAX_LENGTH}
                 />
@@ -148,7 +148,7 @@ const IngredientTile = ({
               onClick={toggleQuantity}
               className="action-button"
               startIcon={<MonitorWeightRoundedIcon />}>
-              {hasQuantity ? 'Remove quantity' : 'Add quantity'}
+              Toggle quantity
             </Button>
             <Button
               sx={{ textTransform: 'none' }}

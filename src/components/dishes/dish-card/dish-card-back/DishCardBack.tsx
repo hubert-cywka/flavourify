@@ -5,7 +5,7 @@ import IngredientsList from '../../../ingredients/ingredients-list/IngredientsLi
 import DishRecipe from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
 import { CancelRounded, CheckCircleRounded } from '@mui/icons-material';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
 import { updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
@@ -15,10 +15,13 @@ import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl
 import { DISHES_QUERY } from '../../../../constants/QueryConstants';
 import {
   DISH_NAME_MAX_LENGTH,
+  DISH_UPDATE_ERROR,
+  IMAGE_COMPRESSION_ERROR,
   NAME_EDIT_ERROR,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../../constants/Constants';
 import { DishCardProps } from '../DishCard';
+import { useSnackbar } from 'notistack';
 
 const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,6 +31,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
   const recipeRef = useRef<HTMLDivElement>(null);
   const ingredientsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   const enterEditMode = useCallback(() => {
     setReadOnly(false);
@@ -85,7 +89,12 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
 
   const updateDishImage = useCallback(async (): Promise<string> => {
     if (!imageRef?.current) return displayedDish.img;
-    else return await getCompressedImageUrl(imageRef.current.src);
+    try {
+      return await getCompressedImageUrl(imageRef.current.src);
+    } catch {
+      enqueueSnackbar(IMAGE_COMPRESSION_ERROR);
+      return displayedDish.img;
+    }
   }, [displayedDish]);
 
   const createUpdatedDishRecipe = useCallback(async (): Promise<Dish> => {
@@ -110,7 +119,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
         await queryClient.invalidateQueries([DISHES_QUERY]);
         setDisplayedDish(res);
       })
-      .catch(() => {})
+      .catch(() => enqueueSnackbar(DISH_UPDATE_ERROR))
       .finally(() => {
         setReadOnly(true);
         setIsLoading(false);
@@ -122,36 +131,41 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
     flipCallback();
   };
 
-  return (
-    <Card className={`dish-card-back-container ${className}`}>
-      <Box className="edit-panel">
-        {isLoading ? (
-          <CircularProgress />
-        ) : readOnly ? (
+  const getEditingPanel = useMemo(() => {
+    if (isLoading) {
+      return <CircularProgress className="action-button" />;
+    } else if (readOnly) {
+      return (
+        <IconButton
+          sx={{ color: 'primary.light' }}
+          className="action-button"
+          onClick={enterEditMode}>
+          <EditIconRounded />
+        </IconButton>
+      );
+    } else {
+      return (
+        <>
           <IconButton
             sx={{ color: 'primary.light' }}
             className="action-button"
-            onClick={enterEditMode}>
-            <EditIconRounded />
+            onClick={cancelEdit}>
+            <CancelRounded />
           </IconButton>
-        ) : (
-          <>
-            <IconButton
-              sx={{ color: 'primary.light' }}
-              className="action-button"
-              onClick={cancelEdit}>
-              <CancelRounded />
-            </IconButton>
-            <IconButton
-              sx={{ color: 'primary.light' }}
-              className="action-button"
-              onClick={approveEdit}>
-              <CheckCircleRounded />
-            </IconButton>
-          </>
-        )}
-      </Box>
+          <IconButton
+            sx={{ color: 'primary.light' }}
+            className="action-button"
+            onClick={approveEdit}>
+            <CheckCircleRounded />
+          </IconButton>
+        </>
+      );
+    }
+  }, [isLoading, readOnly]);
 
+  return (
+    <Card className={`dish-card-back-container ${className}`}>
+      <Box className="edit-panel">{getEditingPanel}</Box>
       <Box className="scrollable-dish-details">
         <Box className="image-container">
           <DishImage
@@ -185,13 +199,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
           reference={recipeRef}
         />
       </Box>
-      <Button
-        onClick={handleFlipCallback}
-        sx={{
-          textTransform: 'none'
-        }}
-        variant="contained"
-        className="flip-card-button">
+      <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
         Go back
       </Button>
     </Card>

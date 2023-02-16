@@ -2,24 +2,12 @@
 @import './src/styles/shared';
 @import '../DishCardShared';
 
-.swiper-slide-visible {
-  .image-container {
-    .dish-image {
-      transform: scale(1.1);
-    }
-  }
-}
-
 .dish-card-front-container {
   @include dish-card-container;
   @include dish-card-components;
 
   .image-container {
     flex-grow: 1;
-
-    .dish-image {
-      transition: transform 1s ease-in-out;
-    }
   }
 
   .content-container {

@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getDishes } from '../../../services/DishService';
 import QueryResultsBuilder from '../../../utility/Builder';
 import { Box } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { EffectCreative, Virtual } from 'swiper';
 import DishCard from '../dish-card/DishCard';
 import ErrorDishCard from '../dish-card/error-dish-card/ErrorDishCard';
@@ -20,24 +20,28 @@ import {
 } from '../../../constants/Constants';
 import { queryClient } from '../../../services/QueryClient';
 import { DISHES_QUERY } from '../../../constants/QueryConstants';
+import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
+import { shuffleArray } from '../../../utility/shuffleArray';
+import { Dish } from '../../../interfaces/Dish';
+import { LastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 
 interface DishesListProps {
   className?: string;
-  displayParameters?: string[];
+  displayParameters: string[];
 }
 
-const DishesList = ({ className }: DishesListProps) => {
+const DishesList = ({ className, displayParameters }: DishesListProps) => {
   const { data: dishes, status } = useQuery(['DISHES_QUERY'], getDishes);
   const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
   const [isFrontSide, setFrontSide] = useState(true);
-  const [slideId, setSlideId] = useState<number>(0);
+  const { lastViewedDish, setLastViewedDish } = useContext(LastViewedDishContext);
 
   const flipCard = useCallback(() => {
     setFrontSide((prevState) => !prevState);
   }, []);
 
-  const saveSlideId = () => {
-    if (swiperRef) setSlideId(swiperRef.realIndex);
+  const saveDishId = () => {
+    if (swiperRef) setLastViewedDish({ ...lastViewedDish, dishId: swiperRef.realIndex });
   };
 
   const goToFirstSlide = () => {
@@ -48,16 +52,19 @@ const DishesList = ({ className }: DishesListProps) => {
     queryClient.invalidateQueries([DISHES_QUERY]);
   };
 
-  //const handleSwipe = () => {
-  //if (dishes && displayParameters.includes(DISPLAY_PARAMS.SHUFFLE))
-  //swiperRef?.slideTo(Math.floor(Math.random() * (dishes.length - 1)));
-  //};
+  const prepareDishesList = (dishesList: Dish[]) => {
+    if (displayParameters.includes(DISPLAY_PARAMS.SHUFFLE)) {
+      return shuffleArray(dishesList);
+    } else {
+      return dishesList.slice();
+    }
+  };
 
   return QueryResultsBuilder.createResult(status)
     .onSuccess(
       <Swiper
         modules={[Virtual, EffectCreative]}
-        initialSlide={slideId}
+        initialSlide={lastViewedDish.dishId}
         effect="creative"
         creativeEffect={{
           prev: { translate: [0, '-120%', -500] },
@@ -66,19 +73,21 @@ const DishesList = ({ className }: DishesListProps) => {
         allowSlidePrev={isFrontSide}
         allowSlideNext={isFrontSide}
         onSwiper={setSwiperRef}
-        onSlideChangeTransitionEnd={saveSlideId}
+        onSlideChangeTransitionEnd={saveDishId}
         slidesPerView={1}
         direction="vertical"
         virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}
         className={`dishes-list-container ${className}`}>
         {dishes &&
-          dishes.slice().map((dish, id) => {
-            return (
-              <SwiperSlide key={id} virtualIndex={id}>
-                <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
-              </SwiperSlide>
-            );
-          })}
+          prepareDishesList(dishes)
+            .slice()
+            .map((dish, id) => {
+              return (
+                <SwiperSlide key={id} virtualIndex={id}>
+                  <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
+                </SwiperSlide>
+              );
+            })}
         <SwiperSlide>
           <ErrorDishCard
             callback={goToFirstSlide}

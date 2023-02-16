@@ -11,10 +11,9 @@ interface SettingsPaperProps {
 
 const SettingsPaper = ({ text, icon, callback, className }: SettingsPaperProps) => {
   return (
-    <Paper className={`settings-paper-container ${className}`} sx={{ bgcolor: 'secondary.light' }}>
+    <Paper className={`settings-paper-container ${className}`} sx={{ bgcolor: 'secondary.main' }}>
       <IconButton onClick={callback} color="primary" className="icon">
-        {' '}
-        {icon}{' '}
+        {icon}
       </IconButton>
       <Divider className="divider" orientation="vertical" sx={{ borderColor: 'primary.main' }} />
       <Typography className="text"> {text} </Typography>

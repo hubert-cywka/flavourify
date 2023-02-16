@@ -17,11 +17,7 @@ const ErrorDishCard = ({ img, title, caption, callback }: ErrorDishCardProps) =>
       <Typography variant="h6" className="error-title">
         {title}
       </Typography>
-      <Button
-        onClick={callback}
-        variant="contained"
-        className="error-button"
-        sx={{ textTransform: 'none' }}>
+      <Button onClick={callback} variant="contained" className="error-button">
         {caption}
       </Button>
     </Card>

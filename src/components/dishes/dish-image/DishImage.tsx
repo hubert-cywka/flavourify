@@ -1,11 +1,11 @@
 import { Box, CardMedia, IconButton, Input, Typography } from '@mui/material';
-import React, { RefObject, useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import PopupAlert from '../../alert/PopupAlert';
 import './DishImage.scss';
 import FilterRoundedIcon from '@mui/icons-material/FilterRounded';
 import imageCompression from 'browser-image-compression';
 import { IMAGE_EDIT_ERROR, IMAGE_EDIT_INFO } from '../../../constants/Constants';
+import { useSnackbar } from 'notistack';
 
 interface DishImageProps {
   src: string;
@@ -18,22 +18,17 @@ interface DishImageProps {
 const DishImage = ({ src, altText, className, editable, reference }: DishImageProps) => {
   const [displayedImageSrc, setDisplayedImageSrc] = useState<string>(src);
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useUpdateEffect(() => {
     setDisplayedImageSrc(src);
   }, [src, editable]);
 
-  const handleAlertClose = (event: React.SyntheticEvent<any> | Event, reason: string) => {
-    if (reason !== 'clickaway') setIsAlertVisible(false);
-  };
-
   const validateUploadedImage = (files: FileList) => {
     if (files[0] && (files[0].type.includes('image/png') || files[0].type.includes('image/jpeg'))) {
-      setIsAlertVisible(false);
       return true;
     } else {
-      setIsAlertVisible(true);
+      enqueueSnackbar(IMAGE_EDIT_ERROR);
       return false;
     }
   };
@@ -60,7 +55,6 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
             id="image"
             inputProps={{ accept: 'image/png, image/jpeg' }}
             onChange={updateDisplayedImageSource}
-            sx={{ opacity: '0' }}
             inputRef={imageInputRef}
           />
           <Box className="edit-icon-container">
@@ -78,9 +72,6 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
         alt={altText}
         ref={reference}
         image={displayedImageSrc}></CardMedia>
-      {isAlertVisible && (
-        <PopupAlert open={isAlertVisible} onClose={handleAlertClose} message={IMAGE_EDIT_ERROR} />
-      )}
     </label>
   );
 };

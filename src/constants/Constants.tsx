@@ -1,9 +1,9 @@
 export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
 
 export const NAME_EDIT_ERROR = 'Name of dish can have only 35 characters';
+export const INGREDIENT_EDIT_ERROR = 'Ingredient name can only be 20 characters long';
 export const IMAGE_EDIT_ERROR =
   'You have to upload file in .png or .jpeg format. It will be scaled down if necessary.';
-export const INGREDIENT_EDIT_ERROR = 'Ingredient name can only be 20 characters long';
 
 export const IMAGE_EDIT_INFO = 'Upload picture of your dish in .png or .jpg format.';
 
@@ -19,3 +19,9 @@ export const DISH_NAME_MAX_LENGTH = 35;
 export const INGREDIENT_NAME_MAX_LENGTH = 20;
 export const INGREDIENT_COUNT_MAX_LENGTH = 5;
 export const INGREDIENT_UNIT_MAX_LENGTH = 8;
+
+export const MIN_INGREDIENTS_MULTIPLIER = 1;
+export const MAX_INGREDIENTS_MULTIPLIER = 10;
+
+export const DISH_UPDATE_ERROR = 'Failed to update dish recipe. Please try again later.';
+export const IMAGE_COMPRESSION_ERROR = 'Failed to compress image. Updating dish without new image.';
