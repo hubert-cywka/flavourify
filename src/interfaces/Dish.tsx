@@ -1,7 +1,7 @@
 import { Ingredient } from './Ingredient';
 
 export interface Dish {
-  id: number;
+  id?: number;
   name: string;
   img: string;
   ingredients: Ingredient[];

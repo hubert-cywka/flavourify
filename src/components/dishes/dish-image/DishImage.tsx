@@ -28,7 +28,7 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
     if (files[0] && (files[0].type.includes('image/png') || files[0].type.includes('image/jpeg'))) {
       return true;
     } else {
-      enqueueSnackbar(IMAGE_EDIT_ERROR);
+      enqueueSnackbar(IMAGE_EDIT_ERROR, { variant: 'warning' });
       return false;
     }
   };

@@ -1,9 +1,22 @@
 @import './src/styles/variables';
 
 .display-manager-container {
+  display: flex;
+  justify-content: space-evenly;
   width: 80vw;
   height: $display-manager-height;
   border-radius: 15px;
+
+  .action-button {
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .action-button-label {
+      font-size: 0.65rem;
+    }
+  }
 
   .MuiToggleButton-root {
     color: white;

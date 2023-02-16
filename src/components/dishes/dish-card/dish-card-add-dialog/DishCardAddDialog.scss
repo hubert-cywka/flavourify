@@ -1,0 +1,17 @@
+@import "./src/styles/shared";
+@import "./src/styles/variables";
+
+.dish-card-add-dialog {
+  .dish-card-add-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .dish-card-add {
+      @include dish-card;
+      box-sizing: border-box;
+      margin: 0;
+    }
+  }
+}

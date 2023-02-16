@@ -22,18 +22,12 @@
   .scrollable-dish-details {
     @include dish-card-components;
     overflow-y: auto;
+    overflow-x: hidden;
     flex-grow: 1;
-
-    .ingredients-list, .dish-name {
-      margin-bottom: 10px;
-    }
-
-    .dish-name {
-      margin-top: 10px;
-    }
 
     .image-container {
       height: 40%;
+      text-align: center;
     }
   }
 

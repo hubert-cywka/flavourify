@@ -1,6 +1,6 @@
 import AppRouter from './components/router/AppRouter';
 import { RouterProvider } from 'react-router';
-import { createTheme, PaletteMode, ThemeProvider } from '@mui/material';
+import { createTheme, IconButton, PaletteMode, ThemeProvider } from '@mui/material';
 import { useLocalStorage } from './utility/hooks/useLocalStorage';
 import { ColorModeContext } from './contexts/ColorModeContext';
 import {
@@ -10,9 +10,10 @@ import {
 } from './utility/viewportSizeVariable';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
-import { SnackbarProvider } from 'notistack';
+import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
 import { LastViewedDish, LastViewedDishContext } from './contexts/LastViewedDishContext';
 import { useState } from 'react';
+import { HighlightOffRounded } from '@mui/icons-material';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
@@ -20,6 +21,15 @@ function App() {
     categoryId: 0,
     dishId: 0
   });
+
+  const dismissSnackbar = (id: SnackbarKey) => {
+    const { closeSnackbar } = useSnackbar();
+    return (
+      <IconButton onClick={() => closeSnackbar(id)}>
+        <HighlightOffRounded />
+      </IconButton>
+    );
+  };
 
   const updateLastViewedDish = (lastViewed: LastViewedDish) => {
     setLastViewedDish(lastViewed);
@@ -33,6 +43,11 @@ function App() {
   setCustomViewportSizeVariableUpdater();
 
   const theme = createTheme({
+    typography: {
+      allVariants: {
+        fontFamily: 'Montserrat'
+      }
+    },
     palette: {
       mode: colorMode,
       ...(colorMode === 'light'
@@ -99,6 +114,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <SnackbarProvider
+              action={(key) => dismissSnackbar(key)}
               maxSnack={5}
               preventDuplicate={true}
               variant="warning"

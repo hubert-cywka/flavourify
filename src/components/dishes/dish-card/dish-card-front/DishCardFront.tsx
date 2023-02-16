@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography } from '@mui/material';
+import { Box, Button, Card, Divider, Typography } from '@mui/material';
 import './DishCardFront.scss';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishImage from '../../dish-image/DishImage';
@@ -11,7 +11,9 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
         <DishImage src={dish.img} altText={dish.name} className="dish-image" />
       </Box>
       <Box className="content-container">
+        <Divider className="field-label">Name</Divider>
         <Typography className="dish-name">{dish.name}</Typography>
+        <Divider className="field-label">Ingredients</Divider>
         <IngredientsList
           className="ingredients-list"
           ingredients={dish.ingredients}

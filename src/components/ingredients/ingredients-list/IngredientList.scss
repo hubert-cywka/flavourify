@@ -2,6 +2,7 @@
 
 .ingredient-list-container {
   width: 100%;
+  text-align: center;
 
   .ingredient-tile {
     height: 3vh;
@@ -27,5 +28,6 @@
   .ingredients-divider {
     margin: 10px auto;
     width: 90%;
+    opacity: 0.5;
   }
 }
