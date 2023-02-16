@@ -133,7 +133,6 @@ const IngredientTile = ({
           <Divider className="divider" />
           <Box className="ingredients-edit-dialog-row">
             <Button
-              sx={{ textTransform: 'none' }}
               size="small"
               variant="contained"
               onClick={handleDelete}
@@ -142,7 +141,6 @@ const IngredientTile = ({
               Delete
             </Button>
             <Button
-              sx={{ textTransform: 'none' }}
               size="small"
               variant="contained"
               onClick={toggleQuantity}
@@ -151,7 +149,6 @@ const IngredientTile = ({
               Toggle quantity
             </Button>
             <Button
-              sx={{ textTransform: 'none' }}
               size="small"
               variant="contained"
               onClick={updateIngredient}

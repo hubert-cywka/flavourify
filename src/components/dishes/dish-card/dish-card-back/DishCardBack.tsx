@@ -1,19 +1,21 @@
-import { Box, Button, Card, CircularProgress, IconButton } from '@mui/material';
+import { Box, Button, Card, CircularProgress, Dialog, IconButton, Typography } from '@mui/material';
 import './DishCardBack.scss';
 import { Dish } from '../../../../interfaces/Dish';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishRecipe from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
-import { CancelRounded, CheckCircleRounded } from '@mui/icons-material';
+import { CancelRounded, CheckCircleRounded, DeleteRounded } from '@mui/icons-material';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
-import { updateDish } from '../../../../services/DishService';
+import { deleteDish, updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
 import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { DISHES_QUERY } from '../../../../constants/QueryConstants';
 import {
+  DISH_DELETE_ERROR,
+  DISH_DELETE_SUCCESS,
   DISH_NAME_MAX_LENGTH,
   DISH_UPDATE_ERROR,
   IMAGE_COMPRESSION_ERROR,
@@ -22,10 +24,12 @@ import {
 } from '../../../../constants/Constants';
 import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 
 const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [readOnly, setReadOnly] = useState<boolean>(true);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
   const nameRef = useRef<HTMLInputElement>(null);
   const recipeRef = useRef<HTMLDivElement>(null);
@@ -131,17 +135,36 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
     flipCallback();
   };
 
+  const removeDish = () => {
+    deleteDish(dish.id)
+      .then(async () => {
+        await queryClient.invalidateQueries([DISHES_QUERY]);
+        setIsDeleteDialogOpen(false);
+        handleFlipCallback();
+        enqueueSnackbar(DISH_DELETE_SUCCESS);
+      })
+      .catch(() => enqueueSnackbar(DISH_DELETE_ERROR));
+  };
+
   const getEditingPanel = useMemo(() => {
     if (isLoading) {
       return <CircularProgress className="action-button" />;
     } else if (readOnly) {
       return (
-        <IconButton
-          sx={{ color: 'primary.light' }}
-          className="action-button"
-          onClick={enterEditMode}>
-          <EditIconRounded />
-        </IconButton>
+        <>
+          <IconButton
+            sx={{ color: 'primary.light' }}
+            className="action-button"
+            onClick={enterEditMode}>
+            <EditIconRounded />
+          </IconButton>
+          <IconButton
+            sx={{ color: 'primary.light' }}
+            className="action-button"
+            onClick={() => setIsDeleteDialogOpen(true)}>
+            <DeleteRounded />
+          </IconButton>
+        </>
       );
     } else {
       return (
@@ -164,45 +187,73 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
   }, [isLoading, readOnly]);
 
   return (
-    <Card className={`dish-card-back-container ${className}`}>
-      <Box className="edit-panel">{getEditingPanel}</Box>
-      <Box className="scrollable-dish-details">
-        <Box className="image-container">
-          <DishImage
-            src={dish.img}
-            altText={dish.name}
-            className="dish-image"
+    <>
+      <Card className={`dish-card-back-container ${className}`}>
+        <Box className="edit-panel">{getEditingPanel}</Box>
+        <Box className="scrollable-dish-details">
+          <Box className="image-container">
+            <DishImage
+              src={dish.img}
+              altText={dish.name}
+              className="dish-image"
+              editable={!readOnly}
+              reference={imageRef}
+            />
+          </Box>
+          <EditableTextField
+            className="dish-name"
+            isReadOnly={readOnly}
+            value={displayedDish.name}
+            reference={nameRef}
+            max={DISH_NAME_MAX_LENGTH}
+            errorMessage={NAME_EDIT_ERROR}
+          />
+          <IngredientsList
+            className="ingredients-list"
+            ingredients={displayedDish.ingredients}
+            amountLimit={0}
+            withMultiplier={true}
             editable={!readOnly}
-            reference={imageRef}
+            reference={ingredientsRef}
+          />
+          <DishRecipe
+            recipe={displayedDish.recipe}
+            className="dish-recipe"
+            isReadOnly={readOnly}
+            reference={recipeRef}
           />
         </Box>
-        <EditableTextField
-          className="dish-name"
-          isReadOnly={readOnly}
-          value={displayedDish.name}
-          reference={nameRef}
-          max={DISH_NAME_MAX_LENGTH}
-          errorMessage={NAME_EDIT_ERROR}
-        />
-        <IngredientsList
-          className="ingredients-list"
-          ingredients={displayedDish.ingredients}
-          amountLimit={0}
-          withMultiplier={true}
-          editable={!readOnly}
-          reference={ingredientsRef}
-        />
-        <DishRecipe
-          recipe={displayedDish.recipe}
-          className="dish-recipe"
-          isReadOnly={readOnly}
-          reference={recipeRef}
-        />
-      </Box>
-      <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
-        Go back
-      </Button>
-    </Card>
+        <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
+          Go back
+        </Button>
+      </Card>
+      {isDeleteDialogOpen && (
+        <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
+          <Box className="delete-dialog">
+            <Box className="delete-dialog-text">
+              <Typography>Do you really want to delete this dish recipe?</Typography>
+              <Typography className="delete-dialog-warning">This is irreversible.</Typography>
+            </Box>
+            <Box>
+              <Button
+                className="delete-dialog-button"
+                variant="contained"
+                onClick={() => setIsDeleteDialogOpen(false)}
+                startIcon={<HighlightOffRoundedIcon />}>
+                Cancel
+              </Button>
+              <Button
+                className="delete-dialog-button"
+                variant="contained"
+                onClick={removeDish}
+                startIcon={<DeleteRounded />}>
+                Confirm
+              </Button>
+            </Box>
+          </Box>
+        </Dialog>
+      )}
+    </>
   );
 };
 

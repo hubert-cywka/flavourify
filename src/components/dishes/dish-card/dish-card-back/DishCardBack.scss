@@ -43,3 +43,26 @@
     font-weight: bold;
   }
 }
+
+.delete-dialog-container {
+  .delete-dialog {
+    padding: $dish-card-spacing;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .delete-dialog-text {
+      padding: $dish-card-spacing;
+
+      .delete-dialog-warning {
+        font-weight: bold;
+      }
+    }
+
+    .delete-dialog-button {
+      margin: 10px 10px 0 10px;
+    }
+  }
+}
