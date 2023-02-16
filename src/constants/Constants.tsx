@@ -25,3 +25,6 @@ export const MAX_INGREDIENTS_MULTIPLIER = 10;
 
 export const DISH_UPDATE_ERROR = 'Failed to update dish recipe. Please try again later.';
 export const IMAGE_COMPRESSION_ERROR = 'Failed to compress image. Updating dish without new image.';
+
+export const DISH_DELETE_SUCCESS = 'Dish recipe deleted successfully';
+export const DISH_DELETE_ERROR = 'Failed to delete dish recipe. Please try again later.';
