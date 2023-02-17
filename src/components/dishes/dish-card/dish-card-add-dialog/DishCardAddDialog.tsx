@@ -1,7 +1,11 @@
 import DishCardBack from '../dish-card-back/DishCardBack';
 import { Dish } from '../../../../interfaces/Dish';
 import './DishCardAddDialog.scss';
-import { DISH_IMAGE_PLACEHOLDER, DISH_NAME_PLACEHOLDER } from '../../../../constants/Constants';
+import {
+  DISH_TAGS_DEFAULT,
+  DISH_IMAGE_PLACEHOLDER,
+  DISH_NAME_PLACEHOLDER
+} from '../../../../constants/Constants';
 import { Dialog, Box } from '@mui/material';
 import React from 'react';
 
@@ -9,7 +13,8 @@ const EMPTY_DISH_PLACEHOLDER: Dish = {
   name: DISH_NAME_PLACEHOLDER,
   recipe: [],
   ingredients: [],
-  img: DISH_IMAGE_PLACEHOLDER
+  img: DISH_IMAGE_PLACEHOLDER,
+  tags: DISH_TAGS_DEFAULT
 };
 
 interface DishCardAddDialogProps {
@@ -17,7 +22,7 @@ interface DishCardAddDialogProps {
   open: boolean;
 }
 
-const DishCardAdd = ({ onClose, open }: DishCardAddDialogProps) => {
+const DishCardAddDialog = ({ onClose, open }: DishCardAddDialogProps) => {
   const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -47,4 +52,4 @@ const DishCardAdd = ({ onClose, open }: DishCardAddDialogProps) => {
   );
 };
 
-export default DishCardAdd;
+export default DishCardAddDialog;

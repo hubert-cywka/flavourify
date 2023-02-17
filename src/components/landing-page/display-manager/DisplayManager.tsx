@@ -4,7 +4,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import './DisplayManager.scss';
 import React, { useState } from 'react';
 import { QueueRounded } from '@mui/icons-material';
-import DishCardAddDialog from '../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
+import DishCardAddDialog from '../../dishes/dish-card/dish-card-add-dialog/DishCardAddDialog';
 
 interface DisplayManagerProps {
   className?: string;
@@ -23,7 +23,7 @@ const DisplayManager = ({
   setDisplayParameters,
   className
 }: DisplayManagerProps) => {
-  const [isAddDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDishAddDialogOpen, setIsDishAddDialogOpen] = useState(false);
   const updateDisplayParameters = (event: React.MouseEvent<HTMLElement>, newParams: string[]) => {
     setDisplayParameters(newParams);
   };
@@ -39,14 +39,13 @@ const DisplayManager = ({
             <StarRoundedIcon />
           </ToggleButton>
         </ToggleButtonGroup>
-        <IconButton onClick={() => setIsDialogOpen(true)} className="action-button">
+        <IconButton onClick={() => setIsDishAddDialogOpen(true)} className="action-button">
           <QueueRounded />
           <Typography className="action-button-label">New dish</Typography>
         </IconButton>
       </Box>
-      {isAddDialogOpen && (
-        <DishCardAddDialog open={isAddDialogOpen} onClose={() => setIsDialogOpen(false)} />
-      )}
+
+      <DishCardAddDialog open={isDishAddDialogOpen} onClose={() => setIsDishAddDialogOpen(false)} />
     </>
   );
 };

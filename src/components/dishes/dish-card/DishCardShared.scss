@@ -25,6 +25,12 @@
       border-radius: $dish-card-inner-border-radius;
       border-top: thin solid rgba(128, 128, 128, 0.1);
     }
+
+    &.no-divider {
+      &:before, &:after {
+        border-top: 0;
+      }
+    }
   }
 
   .dish-name {

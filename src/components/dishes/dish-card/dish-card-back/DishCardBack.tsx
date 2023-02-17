@@ -26,12 +26,7 @@ import {
   DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
   DISH_DELETE_SUCCESS,
-  DISH_EMPTY_INGREDIENTS_ERROR,
-  DISH_EMPTY_NAME_ERROR,
-  DISH_EMPTY_RECIPE_ERROR,
   DISH_NAME_MAX_LENGTH,
-  DISH_NAME_PLACEHOLDER,
-  DISH_NOT_CHANDED_NAME_ERROR,
   DISH_UPDATE_ERROR,
   DISH_UPDATE_SUCCESS,
   IMAGE_COMPRESSION_ERROR,
@@ -41,6 +36,8 @@ import {
 import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import DishTags from '../../dish-tags/DishTags';
+import { validateDishFields } from '../../../../utility/validateDishFields';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -63,6 +60,7 @@ const DishCardBack = ({
   const recipeRef = useRef<HTMLDivElement>(null);
   const ingredientsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const tagsRef = useRef<HTMLDivElement>(null);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -92,6 +90,18 @@ const DishCardBack = ({
     }
 
     return newRecipe;
+  }, [displayedDish]);
+
+  const updateTags = useCallback(() => {
+    if (!tagsRef?.current?.children) return displayedDish.tags;
+
+    const newTags: string[] = [];
+    const newTagsArray = Array.from(tagsRef.current.children);
+    for (let i = 0; i < newTagsArray.length - 1; i++) {
+      newTags.push((newTagsArray[i] as HTMLDivElement).innerHTML);
+    }
+
+    return newTags;
   }, [displayedDish]);
 
   const updateIngredients = useCallback(() => {
@@ -131,39 +141,15 @@ const DishCardBack = ({
   }, [displayedDish]);
 
   const createUpdatedDishRecipe = useCallback(async (): Promise<Dish> => {
-    const newName = updateName();
-    const newRecipe = updateRecipe();
-    const newIngredients = updateIngredients();
-    const newImage = await updateDishImage();
-
     return {
       ...displayedDish,
-      name: newName,
-      recipe: newRecipe,
-      ingredients: newIngredients,
-      img: newImage
+      name: updateName(),
+      recipe: updateRecipe(),
+      ingredients: updateIngredients(),
+      tags: updateTags(),
+      img: await updateDishImage()
     };
   }, [displayedDish]);
-
-  const isAllDataPassed = (validatedDish: Dish) => {
-    let isCorrect = true;
-    if (!validatedDish.name.length) {
-      isCorrect = false;
-      enqueueSnackbar(DISH_EMPTY_NAME_ERROR);
-    } else if (validatedDish.name.includes(DISH_NAME_PLACEHOLDER)) {
-      isCorrect = false;
-      enqueueSnackbar(DISH_NOT_CHANDED_NAME_ERROR);
-    }
-    if (!validatedDish.recipe.length) {
-      isCorrect = false;
-      enqueueSnackbar(DISH_EMPTY_RECIPE_ERROR);
-    }
-    if (!validatedDish.ingredients.length) {
-      isCorrect = false;
-      enqueueSnackbar(DISH_EMPTY_INGREDIENTS_ERROR);
-    }
-    return isCorrect;
-  };
 
   const getRequestMethod = (dishToSend: Dish) => {
     return addMode ? addDish(dishToSend) : updateDish(dishToSend);
@@ -172,7 +158,9 @@ const DishCardBack = ({
   const approveEdit = useCallback(async () => {
     setIsLoading(true);
     const updatedDish = await createUpdatedDishRecipe();
-    if (!isAllDataPassed(updatedDish)) {
+    const validationFailedReason = validateDishFields(updatedDish);
+    if (validationFailedReason) {
+      enqueueSnackbar(validationFailedReason);
       setIsLoading(false);
       return;
     }
@@ -276,6 +264,8 @@ const DishCardBack = ({
             max={DISH_NAME_MAX_LENGTH}
             errorMessage={NAME_EDIT_ERROR}
           />
+          <Divider className="field-label no-divider">Available in</Divider>
+          <DishTags tags={dish.tags} editable={!readOnly} reference={tagsRef} />
           <Divider className="field-label">Ingredients</Divider>
           <IngredientsList
             className="ingredients-list"
