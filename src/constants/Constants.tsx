@@ -1,4 +1,6 @@
 export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
+export const DISH_NAME_PLACEHOLDER = 'Your dish name';
+export const DISH_IMAGE_PLACEHOLDER = './no-recipes.svg';
 
 export const NAME_EDIT_ERROR = 'Name of dish can have only 35 characters';
 export const INGREDIENT_EDIT_ERROR = 'Ingredient name can only be 20 characters long';
@@ -23,8 +25,16 @@ export const INGREDIENT_UNIT_MAX_LENGTH = 8;
 export const MIN_INGREDIENTS_MULTIPLIER = 1;
 export const MAX_INGREDIENTS_MULTIPLIER = 10;
 
+export const DISH_UPDATE_SUCCESS = 'Dish updated successfully.';
 export const DISH_UPDATE_ERROR = 'Failed to update dish recipe. Please try again later.';
 export const IMAGE_COMPRESSION_ERROR = 'Failed to compress image. Updating dish without new image.';
 
 export const DISH_DELETE_SUCCESS = 'Dish recipe deleted successfully';
 export const DISH_DELETE_ERROR = 'Failed to delete dish recipe. Please try again later.';
+
+export const DISH_ADD_SUCCESS = 'Dish added successfully. If you want, you can add another.';
+export const DISH_EMPTY_NAME_ERROR = 'You have to enter dish name.';
+export const DISH_EMPTY_INGREDIENTS_ERROR = 'You have to add at least 1 ingredient.';
+export const DISH_EMPTY_RECIPE_ERROR = 'You have to add at least 1 recipe step.';
+export const DISH_NOT_CHANDED_NAME_ERROR =
+  'Please, find any original name. Placeholder value is not allowed.';

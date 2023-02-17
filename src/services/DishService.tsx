@@ -15,3 +15,8 @@ export const deleteDish = async (dishId: number) => {
   const { data } = await apiClient.delete(`/dishes/${dishId}`);
   return data;
 };
+
+export const addDish = async (newDish: Dish): Promise<Dish> => {
+  const { data } = await apiClient.post<Dish>('/dishes', newDish);
+  return data;
+};

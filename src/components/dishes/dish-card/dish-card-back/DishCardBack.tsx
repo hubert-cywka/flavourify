@@ -1,4 +1,13 @@
-import { Box, Button, Card, CircularProgress, Dialog, IconButton, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CircularProgress,
+  Dialog,
+  Divider,
+  IconButton,
+  Typography
+} from '@mui/material';
 import './DishCardBack.scss';
 import { Dish } from '../../../../interfaces/Dish';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
@@ -7,17 +16,24 @@ import EditIconRounded from '@mui/icons-material/EditRounded';
 import { CancelRounded, CheckCircleRounded, DeleteRounded } from '@mui/icons-material';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
-import { deleteDish, updateDish } from '../../../../services/DishService';
+import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
 import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { DISHES_QUERY } from '../../../../constants/QueryConstants';
 import {
+  DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
   DISH_DELETE_SUCCESS,
+  DISH_EMPTY_INGREDIENTS_ERROR,
+  DISH_EMPTY_NAME_ERROR,
+  DISH_EMPTY_RECIPE_ERROR,
   DISH_NAME_MAX_LENGTH,
+  DISH_NAME_PLACEHOLDER,
+  DISH_NOT_CHANDED_NAME_ERROR,
   DISH_UPDATE_ERROR,
+  DISH_UPDATE_SUCCESS,
   IMAGE_COMPRESSION_ERROR,
   NAME_EDIT_ERROR,
   NEW_INGREDIENT_PLACEHOLDER
@@ -26,15 +42,28 @@ import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 
-const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [readOnly, setReadOnly] = useState<boolean>(true);
+interface DishCardBackProps extends DishCardProps {
+  addMode?: boolean;
+  onQuerySuccess?: () => void;
+}
+
+const DishCardBack = ({
+  dish,
+  className,
+  flipCallback,
+  addMode,
+  onQuerySuccess
+}: DishCardBackProps) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [readOnly, setReadOnly] = useState<boolean>(!addMode);
+
   const nameRef = useRef<HTMLInputElement>(null);
   const recipeRef = useRef<HTMLDivElement>(null);
   const ingredientsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+
   const { enqueueSnackbar } = useSnackbar();
 
   const enterEditMode = useCallback(() => {
@@ -116,14 +145,46 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
     };
   }, [displayedDish]);
 
+  const isAllDataPassed = (validatedDish: Dish) => {
+    let isCorrect = true;
+    if (!validatedDish.name.length) {
+      isCorrect = false;
+      enqueueSnackbar(DISH_EMPTY_NAME_ERROR);
+    } else if (validatedDish.name.includes(DISH_NAME_PLACEHOLDER)) {
+      isCorrect = false;
+      enqueueSnackbar(DISH_NOT_CHANDED_NAME_ERROR);
+    }
+    if (!validatedDish.recipe.length) {
+      isCorrect = false;
+      enqueueSnackbar(DISH_EMPTY_RECIPE_ERROR);
+    }
+    if (!validatedDish.ingredients.length) {
+      isCorrect = false;
+      enqueueSnackbar(DISH_EMPTY_INGREDIENTS_ERROR);
+    }
+    return isCorrect;
+  };
+
+  const getRequestMethod = (dishToSend: Dish) => {
+    return addMode ? addDish(dishToSend) : updateDish(dishToSend);
+  };
+
   const approveEdit = useCallback(async () => {
     setIsLoading(true);
-    updateDish(await createUpdatedDishRecipe())
+    const updatedDish = await createUpdatedDishRecipe();
+    if (!isAllDataPassed(updatedDish)) {
+      setIsLoading(false);
+      return;
+    }
+    getRequestMethod(updatedDish)
       .then(async (res) => {
-        await queryClient.invalidateQueries([DISHES_QUERY]);
-        setDisplayedDish(res);
+        queryClient.invalidateQueries([DISHES_QUERY]).finally(() => {
+          if (onQuerySuccess) onQuerySuccess();
+          setDisplayedDish(res);
+          enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, { variant: 'success' });
+        });
       })
-      .catch(() => enqueueSnackbar(DISH_UPDATE_ERROR))
+      .catch(() => enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' }))
       .finally(() => {
         setReadOnly(true);
         setIsLoading(false);
@@ -132,18 +193,24 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
 
   const handleFlipCallback = () => {
     cancelEdit();
-    flipCallback();
+    if (flipCallback) {
+      flipCallback();
+    }
   };
 
   const removeDish = () => {
+    if (!dish.id) return;
+    setIsLoading(true);
     deleteDish(dish.id)
       .then(async () => {
-        await queryClient.invalidateQueries([DISHES_QUERY]);
-        setIsDeleteDialogOpen(false);
-        handleFlipCallback();
-        enqueueSnackbar(DISH_DELETE_SUCCESS);
+        queryClient.invalidateQueries([DISHES_QUERY]).finally(() => {
+          setIsDeleteDialogOpen(false);
+          handleFlipCallback();
+          enqueueSnackbar(DISH_DELETE_SUCCESS, { variant: 'success' });
+        });
       })
-      .catch(() => enqueueSnackbar(DISH_DELETE_ERROR));
+      .catch(() => enqueueSnackbar(DISH_DELETE_ERROR))
+      .finally(() => setIsLoading(false));
   };
 
   const getEditingPanel = useMemo(() => {
@@ -189,7 +256,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
   return (
     <>
       <Card className={`dish-card-back-container ${className}`}>
-        <Box className="edit-panel">{getEditingPanel}</Box>
+        {!addMode && <Box className="edit-panel">{getEditingPanel}</Box>}
         <Box className="scrollable-dish-details">
           <Box className="image-container">
             <DishImage
@@ -200,6 +267,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
               reference={imageRef}
             />
           </Box>
+          <Divider className="field-label">Name</Divider>
           <EditableTextField
             className="dish-name"
             isReadOnly={readOnly}
@@ -208,6 +276,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
             max={DISH_NAME_MAX_LENGTH}
             errorMessage={NAME_EDIT_ERROR}
           />
+          <Divider className="field-label">Ingredients</Divider>
           <IngredientsList
             className="ingredients-list"
             ingredients={displayedDish.ingredients}
@@ -216,6 +285,7 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
             editable={!readOnly}
             reference={ingredientsRef}
           />
+          <Divider className="field-label">Recipe</Divider>
           <DishRecipe
             recipe={displayedDish.recipe}
             className="dish-recipe"
@@ -223,9 +293,15 @@ const DishCardBack = ({ dish, className, flipCallback }: DishCardProps) => {
             reference={recipeRef}
           />
         </Box>
-        <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
-          Go back
-        </Button>
+        {addMode ? (
+          <Button onClick={approveEdit} variant="contained" className="flip-card-button">
+            Submit recipe
+          </Button>
+        ) : (
+          <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
+            Go back
+          </Button>
+        )}
       </Card>
       {isDeleteDialogOpen && (
         <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>

@@ -6,7 +6,7 @@ import { Dish } from '../../../interfaces/Dish';
 export interface DishCardProps {
   dish: Dish;
   isFrontSide?: boolean;
-  flipCallback: () => void;
+  flipCallback?: () => void;
   className?: string;
 }
 

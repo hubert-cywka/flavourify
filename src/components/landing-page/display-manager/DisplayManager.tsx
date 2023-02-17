@@ -1,8 +1,10 @@
-import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Box, IconButton, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import './DisplayManager.scss';
-import React from 'react';
+import React, { useState } from 'react';
+import { QueueRounded } from '@mui/icons-material';
+import DishCardAddDialog from '../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
 
 interface DisplayManagerProps {
   className?: string;
@@ -21,21 +23,31 @@ const DisplayManager = ({
   setDisplayParameters,
   className
 }: DisplayManagerProps) => {
+  const [isAddDialogOpen, setIsDialogOpen] = useState(false);
   const updateDisplayParameters = (event: React.MouseEvent<HTMLElement>, newParams: string[]) => {
     setDisplayParameters(newParams);
   };
 
   return (
-    <Box className={`display-manager-container ${className}`} sx={{ bgcolor: 'secondary.main' }}>
-      <ToggleButtonGroup value={displayParameters} onChange={updateDisplayParameters}>
-        <ToggleButton value={DISPLAY_PARAMS.SHUFFLE}>
-          <ShuffleRoundedIcon />
-        </ToggleButton>
-        <ToggleButton value={DISPLAY_PARAMS.FAVOURITE}>
-          <StarRoundedIcon />
-        </ToggleButton>
-      </ToggleButtonGroup>
-    </Box>
+    <>
+      <Box className={`display-manager-container ${className}`} sx={{ bgcolor: 'secondary.main' }}>
+        <ToggleButtonGroup value={displayParameters} onChange={updateDisplayParameters}>
+          <ToggleButton value={DISPLAY_PARAMS.SHUFFLE}>
+            <ShuffleRoundedIcon />
+          </ToggleButton>
+          <ToggleButton value={DISPLAY_PARAMS.FAVOURITE}>
+            <StarRoundedIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <IconButton onClick={() => setIsDialogOpen(true)} className="action-button">
+          <QueueRounded />
+          <Typography className="action-button-label">New dish</Typography>
+        </IconButton>
+      </Box>
+      {isAddDialogOpen && (
+        <DishCardAddDialog open={isAddDialogOpen} onClose={() => setIsDialogOpen(false)} />
+      )}
+    </>
   );
 };
 
