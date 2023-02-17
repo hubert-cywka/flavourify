@@ -6,4 +6,5 @@ export interface Dish {
   img: string;
   ingredients: Ingredient[];
   recipe: string[];
+  tags: string[];
 }
