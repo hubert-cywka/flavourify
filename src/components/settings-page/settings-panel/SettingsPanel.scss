@@ -1,0 +1,35 @@
+@import './src/styles/variables';
+
+.settings-panel-container {
+  display: flex;
+  flex-direction: column;
+
+  .settings-panel-header {
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    font-weight: bold;
+  }
+
+  .settings-panel-item {
+    border: thin solid $highlighted-background;
+    font-size: 0.9rem;
+
+    .icon {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      background-color: $highlighted-background;
+    }
+  }
+
+  .displayed-setting {
+    flex-grow: 1;
+    overflow: hidden;
+
+    .dish-card-add {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

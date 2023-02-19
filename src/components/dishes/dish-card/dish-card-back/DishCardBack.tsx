@@ -21,7 +21,7 @@ import { queryClient } from '../../../../services/QueryClient';
 import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
-import { DISHES_QUERY } from '../../../../constants/QueryConstants';
+import { DISHES_QUERY, TAGS_QUERY } from '../../../../constants/QueryConstants';
 import {
   DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
@@ -39,6 +39,9 @@ import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import DishTags from '../../dish-tags/DishTags';
 import { validateDishFields } from '../../../../utility/validateDishFields';
 import { getCompleteTagsFromTagNames } from '../../../../utility/getCompleteTagsFromTagNames';
+import { useQuery } from '@tanstack/react-query';
+import { Tag } from '../../../../interfaces/Tag';
+import { getTags } from '../../../../services/TagsService';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -52,6 +55,8 @@ const DishCardBack = ({
   addMode,
   onQuerySuccess
 }: DishCardBackProps) => {
+  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -94,7 +99,7 @@ const DishCardBack = ({
   }, [displayedDish]);
 
   const updateTags = useCallback(() => {
-    if (!tagsRef?.current?.children) return displayedDish.tags;
+    if (!tagsRef?.current?.children || !tagsList) return displayedDish.tags;
 
     const newTags: string[] = [];
     const newTagsArray = Array.from(tagsRef.current.children);
@@ -102,7 +107,7 @@ const DishCardBack = ({
       newTags.push((newTagsArray[i] as HTMLDivElement).innerHTML);
     }
 
-    return getCompleteTagsFromTagNames(newTags);
+    return getCompleteTagsFromTagNames(newTags, tagsList);
   }, [displayedDish]);
 
   const updateIngredients = useCallback(() => {

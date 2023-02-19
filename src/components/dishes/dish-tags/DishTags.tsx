@@ -51,14 +51,17 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
       target: { value }
     } = e;
     const newTags = typeof value === 'string' ? value.split(',') : value;
-    setDisplayedTags(getCompleteTagsFromTagNames(newTags));
+    if (tagsList) setDisplayedTags(getCompleteTagsFromTagNames(newTags, tagsList));
   };
 
   const handleTagsEditDialogClose = () => {
-    if (displayedTags.length > MAX_TAGS_NUMBER || displayedTags.length < MIN_TAGS_NUMBER) {
-      enqueueSnackbar(TAGS_SELECTED_ERROR);
-    } else {
+    if (
+      !tagsList?.length ||
+      (displayedTags.length <= MAX_TAGS_NUMBER && displayedTags.length >= MIN_TAGS_NUMBER)
+    ) {
       setIsEditDialogVisible(false);
+    } else {
+      enqueueSnackbar(TAGS_SELECTED_ERROR);
     }
   };
 

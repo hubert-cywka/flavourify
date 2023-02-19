@@ -14,7 +14,7 @@
 }
 
 @mixin appear-animation {
-  animation: appear 0.5s ease-in-out;
+  animation: appear 0s ease-in-out;
 
   @keyframes appear {
     from {
