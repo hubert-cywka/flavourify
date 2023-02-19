@@ -1,0 +1,13 @@
+.displayed-tag-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .displayed-tag-icon {
+    margin-right: 10px;
+  }
+}
+
+.displayed-tag-selector {
+  width: 70vw;
+}

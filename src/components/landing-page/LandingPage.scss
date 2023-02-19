@@ -4,11 +4,6 @@
 .landing-page-container {
   @include page-container;
 
-  .settings-paper {
-    width: 300px;
-    height: 70px;
-  }
-
   .display-manager {
     width: $navbar-width;
     position: absolute;

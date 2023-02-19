@@ -12,7 +12,7 @@ export const MAX_TAGS_NUMBER = 4;
 export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
 export const DISH_NAME_PLACEHOLDER = 'Your dish name';
 export const DISH_IMAGE_PLACEHOLDER = './no-recipes.svg';
-export const DISH_TAGS_DEFAULT = ['Other'];
+export const DISH_TAGS_DEFAULT = [];
 
 export const TAGS_SELECTED_INFO = `Please select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags that describes this dish best.`;
 export const TAGS_SELECTED_ERROR = `You have to select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags.`;
@@ -26,6 +26,8 @@ export const IMAGE_EDIT_INFO = 'Upload picture of your dish in .png or .jpg form
 export const NO_RECIPES_IMAGE = './no-recipes.svg';
 export const NO_RECIPES_TITLE = 'Could not find any recipes!';
 export const NO_RECIPES_BUTTON = 'Reload recipes';
+
+export const ALL_TAGS = { name: 'All', id: -1 };
 
 export const NO_TAGS_IMAGE = './no-tags.svg';
 export const NO_TAGS_ERROR = 'No tags are currently available. Sorry.';

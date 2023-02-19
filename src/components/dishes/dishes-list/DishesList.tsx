@@ -1,13 +1,12 @@
 import './DishesList.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperRef from 'swiper';
+import SwiperRef, { EffectCreative, Virtual } from 'swiper';
 import 'swiper/scss';
 import { useQuery } from '@tanstack/react-query';
 import { getDishes } from '../../../services/DishService';
 import QueryResultsBuilder from '../../../utility/Builder';
 import { Box } from '@mui/material';
 import { useCallback, useContext, useState } from 'react';
-import { EffectCreative, Virtual } from 'swiper';
 import DishCard from '../dish-card/DishCard';
 import ErrorDishCard from '../dish-card/error-dish-card/ErrorDishCard';
 import {
@@ -31,17 +30,19 @@ interface DishesListProps {
 }
 
 const DishesList = ({ className, displayParameters }: DishesListProps) => {
-  const { data: dishes, status } = useQuery(['DISHES_QUERY'], getDishes);
+  const { lastViewedDish, setLastViewedDish } = useContext(LastViewedDishContext);
+  const { data: dishes, status } = useQuery(['DISHES_QUERY', lastViewedDish.displayedTag.id], () =>
+    getDishes(lastViewedDish.displayedTag.id)
+  );
   const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
   const [isFrontSide, setFrontSide] = useState(true);
-  const { lastViewedDish, setLastViewedDish } = useContext(LastViewedDishContext);
 
   const flipCard = useCallback(() => {
     setFrontSide((prevState) => !prevState);
   }, []);
 
   const saveDishId = () => {
-    if (swiperRef) setLastViewedDish({ ...lastViewedDish, dishId: swiperRef.realIndex });
+    if (swiperRef) setLastViewedDish({ ...lastViewedDish, dishSlideId: swiperRef.realIndex });
   };
 
   const goToFirstSlide = () => {
@@ -64,7 +65,7 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     .onSuccess(
       <Swiper
         modules={[Virtual, EffectCreative]}
-        initialSlide={lastViewedDish.dishId}
+        initialSlide={lastViewedDish.dishSlideId}
         effect="creative"
         creativeEffect={{
           prev: { translate: [0, '-120%', -500] },

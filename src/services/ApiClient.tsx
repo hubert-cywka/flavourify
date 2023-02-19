@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiURL = 'https://63e5206e8e1ed4ccf6ee6a9f.mockapi.io/';
+const apiURL = 'http://localhost:8080/';
 
 export const apiClient = axios.create({
   baseURL: apiURL

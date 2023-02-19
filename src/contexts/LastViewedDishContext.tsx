@@ -1,8 +1,9 @@
 import { createContext } from 'react';
+import { Tag } from '../interfaces/Tag';
 
 export interface LastViewedDish {
-  categoryId: number;
-  dishId: number;
+  displayedTag: Tag;
+  dishSlideId: number;
 }
 
 export const LastViewedDishContext = createContext(
