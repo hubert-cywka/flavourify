@@ -1,8 +1,10 @@
 import { apiClient } from './ApiClient';
 import { Dish } from '../interfaces/Dish';
+import { ALL_TAGS } from '../constants/Constants';
 
-export const getDishes = async (): Promise<Dish[]> => {
-  const { data } = await apiClient.get<Dish[]>('/dishes');
+export const getDishes = async (id: number): Promise<Dish[]> => {
+  const requestPath = id == ALL_TAGS.id ? '/dishes' : `/dishes?tag_id=${id}`;
+  const { data } = await apiClient.get<Dish[]>(requestPath);
   return data.slice();
 };
 

@@ -38,6 +38,7 @@ import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import DishTags from '../../dish-tags/DishTags';
 import { validateDishFields } from '../../../../utility/validateDishFields';
+import { getCompleteTagsFromTagNames } from '../../../../utility/getCompleteTagsFromTagNames';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -101,7 +102,7 @@ const DishCardBack = ({
       newTags.push((newTagsArray[i] as HTMLDivElement).innerHTML);
     }
 
-    return newTags;
+    return getCompleteTagsFromTagNames(newTags);
   }, [displayedDish]);
 
   const updateIngredients = useCallback(() => {
@@ -170,11 +171,11 @@ const DishCardBack = ({
           if (onQuerySuccess) onQuerySuccess();
           setDisplayedDish(res);
           enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, { variant: 'success' });
+          setReadOnly(true);
         });
       })
       .catch(() => enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' }))
       .finally(() => {
-        setReadOnly(true);
         setIsLoading(false);
       });
   }, [displayedDish]);

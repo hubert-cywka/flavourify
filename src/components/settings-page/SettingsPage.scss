@@ -1,5 +1,11 @@
 @import './src/styles/shared';
 
-.generator-page-container {
+.settings-page-container {
   @include page-container;
+
+  .settings-paper {
+    width: 300px;
+    height: 70px;
+    margin-bottom: 30px;
+  }
 }

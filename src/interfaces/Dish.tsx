@@ -1,4 +1,5 @@
 import { Ingredient } from './Ingredient';
+import { Tag } from './Tag';
 
 export interface Dish {
   id?: number;
@@ -6,5 +7,5 @@ export interface Dish {
   img: string;
   ingredients: Ingredient[];
   recipe: string[];
-  tags: string[];
+  tags: Tag[];
 }

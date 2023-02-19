@@ -14,12 +14,13 @@ import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
 import { LastViewedDish, LastViewedDishContext } from './contexts/LastViewedDishContext';
 import { useState } from 'react';
 import { HighlightOffRounded } from '@mui/icons-material';
+import { ALL_TAGS } from './constants/Constants';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
   const [lastViewedDish, setLastViewedDish] = useState<LastViewedDish>({
-    categoryId: 0,
-    dishId: 0
+    displayedTag: ALL_TAGS,
+    dishSlideId: 0
   });
 
   const dismissSnackbar = (id: SnackbarKey) => {

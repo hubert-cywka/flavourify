@@ -27,9 +27,10 @@ import { useQuery } from '@tanstack/react-query';
 import { TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { Tag } from '../../../interfaces/Tag';
+import { getCompleteTagsFromTagNames } from '../../../utility/getCompleteTagsFromTagNames';
 
 interface DishTagsProps {
-  tags: string[];
+  tags: Tag[];
   editable?: boolean;
   className?: string;
   reference?: RefObject<any>;
@@ -37,7 +38,7 @@ interface DishTagsProps {
 
 const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
   const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
-  const [displayedTags, setDisplayedTags] = useState(tags);
+  const [displayedTags, setDisplayedTags] = useState<Tag[]>(tags);
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -50,7 +51,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
       target: { value }
     } = e;
     const newTags = typeof value === 'string' ? value.split(',') : value;
-    setDisplayedTags(newTags);
+    setDisplayedTags(getCompleteTagsFromTagNames(newTags));
   };
 
   const handleTagsEditDialogClose = () => {
@@ -61,13 +62,17 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
     }
   };
 
+  const getDisplayedTagsNames = () => {
+    return displayedTags.map((tag) => tag.name);
+  };
+
   return (
     <>
       <Box className={`tags-list-container ${className}`} ref={reference}>
         {displayedTags.map((category, id) => {
           return (
-            <Box key={category + id} className="tag-chip">
-              {category}
+            <Box key={category.name + id} className="tag-chip">
+              {category.name}
             </Box>
           );
         })}
@@ -88,7 +93,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
             <Select
               multiple
               className="tags-select-input"
-              value={displayedTags}
+              value={getDisplayedTagsNames()}
               onChange={handleTagsChange}
               MenuProps={{ className: 'tags-select-menu' }}
               renderValue={(selected) => (
