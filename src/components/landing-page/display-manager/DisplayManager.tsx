@@ -3,13 +3,12 @@ import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import './DisplayManager.scss';
 import React from 'react';
-import DisplayedTag from '../../displayed-tag/DisplayedTag';
+import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
 
 interface DisplayManagerProps {
   className?: string;
   displayParameters: string[];
-  // eslint-disable-next-line no-unused-vars
-  setDisplayParameters: (params: string[]) => void;
+  setDisplayParameters: (params: string[]) => void; // eslint-disable-line no-unused-vars
 }
 
 export namespace DISPLAY_PARAMS {

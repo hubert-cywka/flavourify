@@ -1,12 +1,12 @@
 import { Box, Dialog } from '@mui/material';
 import { useContext, useState } from 'react';
-import { LastViewedDishContext } from '../../contexts/LastViewedDishContext';
 import { useQuery } from '@tanstack/react-query';
-import { Tag } from '../../interfaces/Tag';
-import { TAGS_QUERY } from '../../constants/QueryConstants';
-import { getTags } from '../../services/TagsService';
 import { SearchRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
+import { Tag } from '../../../interfaces/Tag';
+import { TAGS_QUERY } from '../../../constants/QueryConstants';
+import { getTags } from '../../../services/TagsService';
+import { LastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import DisplayedTagSelector from '../displayed-tag-selector/DisplayedTagSelector';
 
 interface DisplayedTagProps {

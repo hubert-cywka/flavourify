@@ -1,0 +1,91 @@
+@import './src/styles/variables';
+
+.MuiList-root {
+  .MuiMenuItem-root {
+    font-size: 0.8rem;
+  }
+}
+
+.tags-management-panel-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .divider {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .tags-tab-panel {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+
+    .tags-tab-text {
+      .info {
+        text-align: justify;
+        font-size: 0.7rem;
+        padding: $dish-card-spacing;
+      }
+
+      .requirements {
+        font-weight: 600;
+        opacity: 0.75;
+        text-align: center;
+      }
+    }
+
+    .tags-tab-content {
+      padding: $dish-card-spacing;
+
+      .tag-inputs-container {
+        display: flex;
+        height: 30px;
+
+        .tag-type-selector {
+          height: 100%;
+          margin-left: 10px;
+        }
+
+        .tag-name-input {
+          height: 100%;
+          font-size: 0.8rem;
+          flex-grow: 1;
+        }
+      }
+
+      .selected-tag {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .action-button {
+        margin: 10px auto;
+        width: fit-content;
+      }
+
+      .tags-divider {
+        font-size: 0.5rem;
+        margin-top: 25px;
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .tag {
+          font-size: 0.7rem;
+          padding: 5px 10px;
+          background-color: $highlighted-background;
+          margin: 3px;
+          border-radius: 10px;
+
+          &.selected {
+            background-color: $strong-highlighted-background;
+          }
+        }
+      }
+    }
+  }
+}

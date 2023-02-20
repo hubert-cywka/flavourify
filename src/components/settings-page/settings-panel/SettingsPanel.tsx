@@ -8,6 +8,7 @@ import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import DishCardAdd from '../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
 import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
+import TagsManagementPanel from '../../tags/tags-management-panel/TagsManagementPanel';
 
 interface SettingsPanelProps {
   className?: string;
@@ -26,6 +27,11 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
   const displayDishAddPanel = () => {
     setDisplayedSetting(<DishCardAdd className="dish-card-add" onClose={goBackToSettings} />);
     setDisplayedSettingName('Add new dish');
+  };
+
+  const displayTagsManagementPanel = () => {
+    setDisplayedSetting(<TagsManagementPanel className="tags-management-panel" />);
+    setDisplayedSettingName('Manage tags');
   };
 
   return (
@@ -62,6 +68,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
             icon={<TagRounded className="icon" />}
             text="Manage tags"
             className="settings-panel-item"
+            callback={displayTagsManagementPanel}
           />
         </>
       )}

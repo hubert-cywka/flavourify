@@ -1,15 +1,15 @@
 import { useContext } from 'react';
-import { LastViewedDishContext } from '../../contexts/LastViewedDishContext';
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { Tag } from '../../interfaces/Tag';
-import { TAGS_QUERY } from '../../constants/QueryConstants';
-import { getTags } from '../../services/TagsService';
-import Builder from '../../utility/Builder';
 import FastfoodRoundedIcon from '@mui/icons-material/FastfoodRounded';
 import './DisplayedTagSelector.scss';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
-import { ALL_TAGS, NO_TAGS_ERROR } from '../../constants/Constants';
+import { Tag } from '../../../interfaces/Tag';
+import { TAGS_QUERY } from '../../../constants/QueryConstants';
+import { getTags } from '../../../services/TagsService';
+import { LastViewedDishContext } from '../../../contexts/LastViewedDishContext';
+import Builder from '../../../utility/Builder';
+import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/Constants';
 
 interface DisplayedTagSelectorProps {
   className?: string;

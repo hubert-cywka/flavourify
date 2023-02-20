@@ -1,3 +1,5 @@
+import { Tag, TagType } from '../interfaces/Tag';
+
 export const DISH_NAME_MAX_LENGTH = 35;
 export const INGREDIENT_NAME_MAX_LENGTH = 20;
 export const INGREDIENT_COUNT_MAX_LENGTH = 5;
@@ -8,6 +10,31 @@ export const MAX_INGREDIENTS_MULTIPLIER = 10;
 
 export const MIN_TAGS_NUMBER = 1;
 export const MAX_TAGS_NUMBER = 4;
+
+export const TAG_NAME_MIN_LENGTH = 3;
+export const TAG_NAME_MAX_LENGTH = 20;
+
+export const TAG_DELETE_INFO =
+  'Select one tag from list by clicking on it and click button to delete it. All dishes with this tag will have it removed.';
+export const TAG_DELETE_WARNING = 'This change is irreversible.';
+export const TAG_ADD_INFO =
+  'Create new tag for your dishes, propose its name and select one of few available categories, that suits it most.';
+export const TAG_ADD_REQUIREMENTS = `Name has to be at least ${TAG_NAME_MIN_LENGTH} characters long, up to maximum ${TAG_NAME_MAX_LENGTH} characters.`;
+export const TAG_UPDATE_INFO =
+  'Select one tag from list by clicking on it and update its name or delete it. All dishes with this tag will be updated accordingly.';
+
+export const TAG_TYPES: TagType[] = ['Cuisine', 'Course', 'Diet', 'Other'];
+
+export const TAG_ADD_ERROR_LENGTH = `Failed to add tag. Name has to be at least ${TAG_NAME_MIN_LENGTH} characters long, up to maximum ${TAG_NAME_MAX_LENGTH} characters.`;
+export const TAG_ADD_ERROR = 'Failed to add tag. Please try again later';
+export const TAG_ADD_SUCCESS = 'Tag added successfully';
+
+export const TAG_DELETE_ERROR = 'Failed to delete tag. Please try again later';
+export const TAG_DELETE_SUCCESS = 'Tag deleted successfully';
+
+export const TAG_UPDATE_ERROR_LENGTH = `Failed to update tag. Name has to be at least ${TAG_NAME_MIN_LENGTH} characters long, up to maximum ${TAG_NAME_MAX_LENGTH} characters.`;
+export const TAG_UPDATE_ERROR = 'Failed to update tag. Please try again later';
+export const TAG_UPDATE_SUCCESS = 'Tag updated successfully';
 
 export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
 export const DISH_NAME_PLACEHOLDER = 'Your dish name';
@@ -27,7 +54,7 @@ export const NO_RECIPES_IMAGE = './no-recipes.svg';
 export const NO_RECIPES_TITLE = 'Could not find any recipes!';
 export const NO_RECIPES_BUTTON = 'Reload recipes';
 
-export const ALL_TAGS = { name: 'All', id: -1 };
+export const ALL_TAGS: Tag = { name: 'All', id: -1, type: 'Other' };
 
 export const NO_TAGS_IMAGE = './no-tags.svg';
 export const NO_TAGS_ERROR = 'No tags are currently available. Sorry.';
