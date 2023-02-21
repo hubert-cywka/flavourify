@@ -11,17 +11,15 @@ import {
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
 import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
-import { LastViewedDish, LastViewedDishContext } from './contexts/LastViewedDishContext';
+import { selectedTagContext } from './contexts/SelectedTagContext';
 import { useState } from 'react';
 import { HighlightOffRounded } from '@mui/icons-material';
 import { ALL_TAGS } from './constants/Constants';
+import { Tag } from './interfaces/Tag';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
-  const [lastViewedDish, setLastViewedDish] = useState<LastViewedDish>({
-    displayedTag: ALL_TAGS,
-    dishSlideId: 0
-  });
+  const [selectedTag, setSelectedTag] = useState<Tag>(ALL_TAGS);
 
   const dismissSnackbar = (id: SnackbarKey) => {
     const { closeSnackbar } = useSnackbar();
@@ -32,8 +30,8 @@ function App() {
     );
   };
 
-  const updateLastViewedDish = (lastViewed: LastViewedDish) => {
-    setLastViewedDish(lastViewed);
+  const updateSelectedTag = (selectedTag: Tag) => {
+    setSelectedTag(selectedTag);
   };
 
   const toggleColorMode = () =>
@@ -110,8 +108,8 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={{ toggleColorMode, colorMode: colorMode }}>
-      <LastViewedDishContext.Provider
-        value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish }}>
+      <selectedTagContext.Provider
+        value={{ setSelectedTag: updateSelectedTag, selectedTag: selectedTag }}>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <SnackbarProvider
@@ -124,7 +122,7 @@ function App() {
             </SnackbarProvider>
           </QueryClientProvider>
         </ThemeProvider>
-      </LastViewedDishContext.Provider>
+      </selectedTagContext.Provider>
     </ColorModeContext.Provider>
   );
 }

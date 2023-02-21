@@ -2,10 +2,20 @@ import { apiClient } from './ApiClient';
 import { Dish } from '../interfaces/Dish';
 import { ALL_TAGS } from '../constants/Constants';
 
-export const getDishes = async (id: number): Promise<Dish[]> => {
-  const requestPath = id == ALL_TAGS.id ? '/dishes' : `/dishes?tag_id=${id}`;
-  const { data } = await apiClient.get<Dish[]>(requestPath);
-  return data.slice();
+export interface DishesPage {
+  dishes: Dish[];
+  hasNext: boolean;
+  hasPrevious: boolean;
+  currentPage: number;
+  totalPages: number;
+}
+
+export const getDishesPage = async (id: number, page: number): Promise<DishesPage> => {
+  console.log('Fetching page: ' + page);
+  const { data } = await apiClient.get<DishesPage>(
+    `/dishes?tagid=${id !== ALL_TAGS.id ? id : ''}&page=${page}`
+  );
+  return data;
 };
 
 export const updateDish = async (updatedDish: Dish): Promise<Dish> => {
