@@ -7,7 +7,7 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { Tag } from '../../../interfaces/Tag';
 import { TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
-import { LastViewedDishContext } from '../../../contexts/LastViewedDishContext';
+import { selectedTagContext } from '../../../contexts/SelectedTagContext';
 import Builder from '../../../utility/Builder';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/Constants';
 
@@ -17,10 +17,10 @@ interface DisplayedTagSelectorProps {
 
 const DisplayedTagSelector = ({ className }: DisplayedTagSelectorProps) => {
   const { data: tagsList, status } = useQuery<Tag[]>([TAGS_QUERY], getTags);
-  const { lastViewedDish, setLastViewedDish } = useContext(LastViewedDishContext);
+  const { selectedTag, setSelectedTag } = useContext(selectedTagContext);
 
   const updateDisplayedTag = (tag: Tag) => {
-    setLastViewedDish({ ...lastViewedDish, displayedTag: tag });
+    setSelectedTag(tag);
   };
 
   const getQueryResult = () => {
@@ -31,7 +31,7 @@ const DisplayedTagSelector = ({ className }: DisplayedTagSelectorProps) => {
             <ListItemText className="selectable-tag-text" disableTypography>
               {ALL_TAGS.name}
             </ListItemText>
-            {ALL_TAGS.id === lastViewedDish.displayedTag.id && (
+            {ALL_TAGS.id === selectedTag.id && (
               <ListItemIcon>
                 <DoneRoundedIcon className="selected-tag-icon" sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
@@ -47,7 +47,7 @@ const DisplayedTagSelector = ({ className }: DisplayedTagSelectorProps) => {
                   <ListItemText className="selectable-tag-text" disableTypography>
                     {tag.name}
                   </ListItemText>
-                  {tag.id === lastViewedDish.displayedTag.id && (
+                  {tag.id === selectedTag.id && (
                     <ListItemIcon>
                       <DoneRoundedIcon
                         className="selected-tag-icon"

@@ -130,7 +130,8 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
   };
 
   const getListOfTagsByType = (type: TagType) => {
-    return tagsList?.map((tag) => {
+    if (!tagsList) return;
+    return tagsList.map((tag) => {
       if (
         (type === 'Other' && !['Cuisine', 'Course', 'Diet'].includes(tag.type)) ||
         tag.type === type

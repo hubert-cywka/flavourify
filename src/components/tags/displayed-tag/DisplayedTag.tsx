@@ -6,7 +6,7 @@ import './DisplayedTag.scss';
 import { Tag } from '../../../interfaces/Tag';
 import { TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
-import { LastViewedDishContext } from '../../../contexts/LastViewedDishContext';
+import { selectedTagContext } from '../../../contexts/SelectedTagContext';
 import DisplayedTagSelector from '../displayed-tag-selector/DisplayedTagSelector';
 
 interface DisplayedTagProps {
@@ -16,7 +16,7 @@ interface DisplayedTagProps {
 const DisplayedTag = ({ className }: DisplayedTagProps) => {
   const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
   const [isTagSelectDialogOpen, setIsTagSelectDialogOpen] = useState<boolean>(false);
-  const { lastViewedDish } = useContext(LastViewedDishContext);
+  const { selectedTag } = useContext(selectedTagContext);
 
   return (
     <>
@@ -25,7 +25,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
         sx={{ color: 'text.secondary' }}
         onClick={() => setIsTagSelectDialogOpen(true)}>
         <SearchRounded className="displayed-tag-icon" />
-        {tagsList && lastViewedDish.displayedTag.name}
+        {tagsList && selectedTag.name}
       </Box>
       <Dialog open={isTagSelectDialogOpen} onClose={() => setIsTagSelectDialogOpen(false)}>
         <DisplayedTagSelector className="displayed-tag-selector" />
