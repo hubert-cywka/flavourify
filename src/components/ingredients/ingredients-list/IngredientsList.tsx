@@ -2,16 +2,16 @@ import IngredientTile from '../ingredient-tile/IngredientTile';
 import { Box, Divider, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
 import { Ingredient } from '../../../interfaces/Ingredient';
-import { RefObject, useCallback, useState, useMemo } from 'react';
+import { RefObject, useCallback, useMemo, useState } from 'react';
 import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
 import { AddRounded } from '@mui/icons-material';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import {
   MAX_INGREDIENTS_MULTIPLIER,
-  MIN_INGREDIENTS_MULTIPLIER,
-  NEW_INGREDIENT_PLACEHOLDER
-} from '../../../constants/Constants';
+  MIN_INGREDIENTS_MULTIPLIER
+} from '../../../constants/NumberConstants';
+import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];

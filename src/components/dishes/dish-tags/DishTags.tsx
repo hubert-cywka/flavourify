@@ -12,15 +12,7 @@ import './DishTags.scss';
 import { CheckCircleOutlineRounded, EditRounded } from '@mui/icons-material';
 import { RefObject, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import {
-  DISH_TAGS_DEFAULT,
-  TAGS_SELECTED_ERROR,
-  TAGS_SELECTED_INFO,
-  MAX_TAGS_NUMBER,
-  MIN_TAGS_NUMBER,
-  NO_TAGS_ERROR,
-  NO_TAGS_IMAGE
-} from '../../../constants/Constants';
+import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../../../constants/NumberConstants';
 import { useSnackbar } from 'notistack';
 import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackupRestoreRounded';
 import { useQuery } from '@tanstack/react-query';
@@ -28,6 +20,13 @@ import { TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { Tag } from '../../../interfaces/Tag';
 import { getCompleteTagsFromTagNames } from '../../../utility/getCompleteTagsFromTagNames';
+import {
+  NO_TAGS_ERROR,
+  NO_TAGS_IMAGE,
+  TAGS_SELECTED_ERROR,
+  TAGS_SELECTED_INFO
+} from '../../../constants/TagsConstants';
+import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
 
 interface DishTagsProps {
   tags: Tag[];
@@ -44,7 +43,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
 
   useUpdateEffect(() => {
     setDisplayedTags(tags);
-  }, [tags]);
+  }, [editable]);
 
   const handleTagsChange = (e: SelectChangeEvent<string[]>) => {
     const {

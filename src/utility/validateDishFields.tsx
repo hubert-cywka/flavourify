@@ -1,14 +1,13 @@
 import { Dish } from '../interfaces/Dish';
+import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../constants/NumberConstants';
 import {
   DISH_EMPTY_INGREDIENTS_ERROR,
   DISH_EMPTY_NAME_ERROR,
   DISH_EMPTY_RECIPE_ERROR,
   DISH_NAME_PLACEHOLDER,
   DISH_NOT_CHANGED_NAME_ERROR,
-  DISH_WRONG_TAGS_COUNT_ERROR,
-  MAX_TAGS_NUMBER,
-  MIN_TAGS_NUMBER
-} from '../constants/Constants';
+  DISH_WRONG_TAGS_COUNT_ERROR
+} from '../constants/DishesConstants';
 
 export const validateDishFields = (validatedDish: Dish): string => {
   if (!validatedDish.name.length) {

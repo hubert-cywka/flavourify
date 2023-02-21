@@ -12,12 +12,11 @@ import { useQuery } from '@tanstack/react-query';
 import { SearchRounded, TagRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
 import { Tag } from '../../../interfaces/Tag';
-import { TAGS_WITH_CONTENT_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { selectedTagContext } from '../../../contexts/SelectedTagContext';
 import Builder from '../../../utility/Builder';
-import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/Constants';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
 
 interface DisplayedTagProps {
   className?: string;
@@ -25,11 +24,13 @@ interface DisplayedTagProps {
 
 const DisplayedTag = ({ className }: DisplayedTagProps) => {
   const [isTagSelectDialogOpen, setIsTagSelectDialogOpen] = useState<boolean>(false);
-  const { data: tagsList, status } = useQuery<Tag[]>(
-    [TAGS_WITH_CONTENT_QUERY],
-    () => getTags(true),
-    { staleTime: 1000 }
-  );
+  const { data: tagsList, status } = useQuery<Tag[]>({
+    queryFn: () => getTags(true),
+    queryKey: [],
+    cacheTime: 0,
+    staleTime: 0,
+    refetchOnWindowFocus: 'always'
+  });
   const { selectedTag, setSelectedTag } = useContext(selectedTagContext);
   const [textFilter, setTextFilter] = useState('');
 

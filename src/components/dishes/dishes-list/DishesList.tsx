@@ -2,21 +2,13 @@ import './DishesList.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperRef, { Virtual } from 'swiper';
 import 'swiper/scss';
-import { useQuery } from '@tanstack/react-query';
-import { getDishesPage } from '../../../services/DishService';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { DishesPage, getDishesPage } from '../../../services/DishService';
 import QueryResultsBuilder from '../../../utility/Builder';
 import { Box } from '@mui/material';
 import { useCallback, useContext, useState } from 'react';
 import DishCard from '../dish-card/DishCard';
 import ErrorDishCard from '../dish-card/error-dish-card/ErrorDishCard';
-import {
-  LAST_RECIPE_BUTTON,
-  LAST_RECIPE_IMAGE,
-  LAST_RECIPE_TITLE,
-  NO_RECIPES_BUTTON,
-  NO_RECIPES_IMAGE,
-  NO_RECIPES_TITLE
-} from '../../../constants/Constants';
 import { queryClient } from '../../../services/QueryClient';
 import { DISHES_QUERY } from '../../../constants/QueryConstants';
 import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
@@ -24,7 +16,14 @@ import { shuffleArray } from '../../../utility/shuffleArray';
 import { Dish } from '../../../interfaces/Dish';
 import { selectedTagContext } from '../../../contexts/SelectedTagContext';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import { pushUnique } from '../../../utility/pushUnique';
+import {
+  LAST_RECIPE_BUTTON,
+  LAST_RECIPE_IMAGE,
+  LAST_RECIPE_TITLE,
+  NO_RECIPES_BUTTON,
+  NO_RECIPES_IMAGE,
+  NO_RECIPES_TITLE
+} from '../../../constants/DishesConstants';
 
 interface DishesListProps {
   className?: string;
@@ -33,20 +32,23 @@ interface DishesListProps {
 
 const DishesList = ({ className, displayParameters }: DishesListProps) => {
   const { selectedTag } = useContext(selectedTagContext);
-  const [displayedDishes, setDisplayedDishes] = useState<Dish[]>([]);
   const [isFrontSide, setFrontSide] = useState(true);
-  const [page, setPage] = useState(0);
 
-  const { data, status, isPreviousData } = useQuery(
-    [DISHES_QUERY, selectedTag.id, page],
-    () => getDishesPage(selectedTag.id, page),
-    {
-      keepPreviousData: true,
-      onSuccess: (res) => {
-        setDisplayedDishes((current) => pushUnique(current.slice(), res.dishes));
+  const { data, fetchNextPage, hasNextPage, fetchPreviousPage, isFetching, status } =
+    useInfiniteQuery(
+      [DISHES_QUERY, { tag: selectedTag.id }],
+      ({ pageParam = 0 }) => getDishesPage(selectedTag.id, pageParam),
+      {
+        getNextPageParam: (lastPage) => {
+          if (lastPage.hasNext) return lastPage.currentPage + 1;
+          else return undefined;
+        },
+        getPreviousPageParam: (lastPage) => {
+          if (lastPage.hasPrevious) return lastPage.currentPage - 1;
+          else return undefined;
+        }
       }
-    }
-  );
+    );
   const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
 
   const flipCard = useCallback(() => {
@@ -54,19 +56,22 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
   }, []);
 
   const reloadDishRecipes = () => {
-    queryClient.invalidateQueries([DISHES_QUERY, selectedTag.id, page]);
+    queryClient.invalidateQueries([DISHES_QUERY, { tag: selectedTag.id }]);
   };
 
   const goToFirstSlide = () => {
-    setPage(0);
     if (swiperRef) swiperRef.slideTo(0);
   };
 
-  const prepareDishesList = (dishesList: Dish[]) => {
+  const prepareDishesList = (dishPages: DishesPage[]) => {
+    const extractedDishes: Dish[] = [];
+    dishPages.forEach((page) => {
+      extractedDishes.push(...page.dishes);
+    });
     if (displayParameters.includes(DISPLAY_PARAMS.SHUFFLE)) {
-      return shuffleArray(dishesList);
+      return shuffleArray(extractedDishes.slice());
     } else {
-      return dishesList.slice();
+      return extractedDishes.slice();
     }
   };
 
@@ -80,16 +85,6 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     });
   };
 
-  const appendNextPage = () => {
-    if (!isPreviousData && data?.hasNext && data.currentPage < data.totalPages) {
-      queryClient
-        .prefetchQuery(['DISHES_QUERY', selectedTag.id, page + 1], () =>
-          getDishesPage(selectedTag.id, page + 1)
-        )
-        .then(() => setPage(Math.min(data.currentPage + 1, data.totalPages)));
-    }
-  };
-
   return QueryResultsBuilder.createResult(status)
     .onSuccess(
       <>
@@ -99,13 +94,14 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
             allowSlidePrev={isFrontSide}
             allowSlideNext={isFrontSide}
             onSwiper={setSwiperRef}
-            onReachEnd={appendNextPage}
+            onReachEnd={() => fetchNextPage()}
+            onReachBeginning={() => fetchPreviousPage()}
             slidesPerView={1}
             direction="vertical"
             virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}
             className={`dishes-list-container ${className}`}>
-            {buildDishCards(prepareDishesList(displayedDishes))}
-            {!data.hasNext && (
+            {buildDishCards(prepareDishesList(data.pages))}
+            {!hasNextPage && !isFetching && (
               <SwiperSlide>
                 <ErrorDishCard
                   callback={goToFirstSlide}
