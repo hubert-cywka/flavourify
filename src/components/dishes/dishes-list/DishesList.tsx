@@ -43,7 +43,7 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     {
       keepPreviousData: true,
       onSuccess: (res) => {
-        setDisplayedDishes((current) => pushUnique(current, res.dishes));
+        setDisplayedDishes((current) => pushUnique(current.slice(), res.dishes));
       }
     }
   );

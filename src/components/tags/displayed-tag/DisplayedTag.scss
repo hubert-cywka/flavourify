@@ -1,13 +1,63 @@
+@import './src/styles/variables';
+
 .displayed-tag-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  font-size: 0.8rem;
 
   .displayed-tag-icon {
     margin-right: 10px;
+    font-size: 1.25rem;
   }
 }
 
-.displayed-tag-selector {
-  width: 70vw;
+.holder {
+  position: relative;
+
+  .selectable-tags-list {
+    top: calc(#{$display-manager-height} + 5px);
+    position: absolute;
+    border-radius: 10px;
+    min-width: 70vw;
+
+    .tags-list-header {
+      display: flex;
+
+      .tags-search-input {
+        font-weight: bold;
+        flex-grow: 1;
+      }
+
+      .tags-list-header-icon {
+        margin: 0 auto;
+      }
+    }
+
+    .scrollable-tags-holder {
+      max-height: 30vh;
+      overflow-y: auto;
+
+      .selectable-tag {
+        border-top: thin solid $highlighted-background;
+        box-sizing: border-box;
+
+        .selectable-tag-text {
+          font-size: 0.8rem;
+          align-items: baseline;
+          display: flex;
+
+          .tag-type {
+            margin-left: 10px;
+            opacity: 0.5;
+            font-size: 0.6rem;
+          }
+        }
+
+        .selected-tag-icon {
+          margin-left: auto;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
 }
