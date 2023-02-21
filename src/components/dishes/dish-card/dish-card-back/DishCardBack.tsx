@@ -55,7 +55,7 @@ const DishCardBack = ({
   addMode,
   onQuerySuccess
 }: DishCardBackProps) => {
-  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
+  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));

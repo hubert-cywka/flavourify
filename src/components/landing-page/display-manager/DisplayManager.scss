@@ -2,16 +2,18 @@
 
 .display-manager-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   width: 80vw;
   height: $display-manager-height;
   border-radius: 15px;
 
   .selected-tag {
-    height: 100%;
-    flex-grow: 1;
+    min-width: 100px;
+    height: $display-manager-height;
+    padding: 10px;
     background-color: $highlighted-background;
+    box-sizing: border-box;
   }
 
   .MuiToggleButton-root {

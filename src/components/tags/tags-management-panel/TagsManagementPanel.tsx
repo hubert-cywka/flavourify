@@ -49,7 +49,7 @@ interface TagsManagementPanelProps {
 }
 
 const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
-  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
+  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
 
   const [selectedType, setSelectedType] = useState<TagType>('Other');
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);

@@ -1,8 +1,8 @@
 import { Tag, TagType } from '../interfaces/Tag';
 import { apiClient } from './ApiClient';
 
-export const getTags = async (): Promise<Tag[]> => {
-  const { data } = await apiClient.get('/tags');
+export const getTags = async (onlyWithContent?: boolean): Promise<Tag[]> => {
+  const { data } = await apiClient.get(`/tags?withContent=${onlyWithContent}`);
   return data;
 };
 

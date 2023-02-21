@@ -37,7 +37,7 @@ interface DishTagsProps {
 }
 
 const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
-  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], getTags);
+  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
   const [displayedTags, setDisplayedTags] = useState<Tag[]>(tags);
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
