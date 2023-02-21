@@ -22,17 +22,7 @@ import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { DISHES_QUERY, TAGS_QUERY } from '../../../../constants/QueryConstants';
-import {
-  DISH_ADD_SUCCESS,
-  DISH_DELETE_ERROR,
-  DISH_DELETE_SUCCESS,
-  DISH_NAME_MAX_LENGTH,
-  DISH_UPDATE_ERROR,
-  DISH_UPDATE_SUCCESS,
-  IMAGE_COMPRESSION_ERROR,
-  NAME_EDIT_ERROR,
-  NEW_INGREDIENT_PLACEHOLDER
-} from '../../../../constants/Constants';
+import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
 import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
@@ -42,6 +32,16 @@ import { getCompleteTagsFromTagNames } from '../../../../utility/getCompleteTags
 import { useQuery } from '@tanstack/react-query';
 import { Tag } from '../../../../interfaces/Tag';
 import { getTags } from '../../../../services/TagsService';
+import {
+  DISH_ADD_SUCCESS,
+  DISH_DELETE_ERROR,
+  DISH_DELETE_SUCCESS,
+  DISH_UPDATE_ERROR,
+  DISH_UPDATE_SUCCESS,
+  IMAGE_COMPRESSION_ERROR,
+  NAME_EDIT_ERROR,
+  NEW_INGREDIENT_PLACEHOLDER
+} from '../../../../constants/DishesConstants';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -172,39 +172,47 @@ const DishCardBack = ({
     }
     getRequestMethod(updatedDish)
       .then(async (res) => {
-        queryClient.invalidateQueries([DISHES_QUERY]).finally(() => {
-          if (onQuerySuccess) onQuerySuccess();
-          setDisplayedDish(res);
-          enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, { variant: 'success' });
-          setReadOnly(true);
-        });
+        queryClient
+          .invalidateQueries({ queryKey: [DISHES_QUERY], refetchType: 'all' })
+          .finally(() => {
+            if (onQuerySuccess) onQuerySuccess();
+            setIsLoading(false);
+            setDisplayedDish(res);
+            setReadOnly(true);
+            enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, {
+              variant: 'success'
+            });
+          });
       })
-      .catch(() => enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' }))
-      .finally(() => {
+      .catch(() => {
+        enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' });
         setIsLoading(false);
       });
   }, [displayedDish]);
 
   const handleFlipCallback = () => {
     cancelEdit();
-    if (flipCallback) {
-      flipCallback();
-    }
+    if (flipCallback) flipCallback();
   };
 
   const removeDish = () => {
-    if (!dish.id) return;
+    if (dish.id === undefined) return;
     setIsLoading(true);
     deleteDish(dish.id)
       .then(async () => {
-        queryClient.invalidateQueries([DISHES_QUERY]).finally(() => {
-          setIsDeleteDialogOpen(false);
-          handleFlipCallback();
-          enqueueSnackbar(DISH_DELETE_SUCCESS, { variant: 'success' });
-        });
+        queryClient
+          .invalidateQueries({ queryKey: [DISHES_QUERY], refetchType: 'all' })
+          .finally(() => {
+            setIsDeleteDialogOpen(false);
+            setIsLoading(false);
+            handleFlipCallback();
+            enqueueSnackbar(DISH_DELETE_SUCCESS, { variant: 'success' });
+          });
       })
-      .catch(() => enqueueSnackbar(DISH_DELETE_ERROR))
-      .finally(() => setIsLoading(false));
+      .catch(() => {
+        enqueueSnackbar(DISH_DELETE_ERROR);
+        setIsLoading(false);
+      });
   };
 
   const getEditingPanel = useMemo(() => {

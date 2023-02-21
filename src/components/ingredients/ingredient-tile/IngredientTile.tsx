@@ -9,10 +9,10 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import {
   INGREDIENT_COUNT_MAX_LENGTH,
-  INGREDIENT_EDIT_ERROR,
   INGREDIENT_NAME_MAX_LENGTH,
   INGREDIENT_UNIT_MAX_LENGTH
-} from '../../../constants/Constants';
+} from '../../../constants/NumberConstants';
+import { INGREDIENT_EDIT_ERROR } from '../../../constants/DishesConstants';
 
 interface IngredientTileProps {
   ingredient: Ingredient;

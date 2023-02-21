@@ -4,7 +4,7 @@ import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import './DishImage.scss';
 import FilterRoundedIcon from '@mui/icons-material/FilterRounded';
 import imageCompression from 'browser-image-compression';
-import { IMAGE_EDIT_ERROR, IMAGE_EDIT_INFO } from '../../../constants/Constants';
+import { IMAGE_EDIT_ERROR, IMAGE_EDIT_INFO } from '../../../constants/DishesConstants';
 import { useSnackbar } from 'notistack';
 
 interface DishImageProps {

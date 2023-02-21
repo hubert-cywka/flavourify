@@ -10,24 +10,6 @@ import {
   Tab,
   Typography
 } from '@mui/material';
-import {
-  TAG_ADD_ERROR,
-  TAG_ADD_ERROR_LENGTH,
-  TAG_ADD_INFO,
-  TAG_ADD_REQUIREMENTS,
-  TAG_ADD_SUCCESS,
-  TAG_DELETE_ERROR,
-  TAG_DELETE_INFO,
-  TAG_DELETE_SUCCESS,
-  TAG_DELETE_WARNING,
-  TAG_NAME_MAX_LENGTH,
-  TAG_NAME_MIN_LENGTH,
-  TAG_TYPES,
-  TAG_UPDATE_ERROR,
-  TAG_UPDATE_ERROR_LENGTH,
-  TAG_UPDATE_INFO,
-  TAG_UPDATE_SUCCESS
-} from '../../../constants/Constants';
 import { TAGS_QUERY } from '../../../constants/QueryConstants';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -43,6 +25,23 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import './TagsManagementPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { queryClient } from '../../../services/QueryClient';
+import {
+  TAG_ADD_ERROR,
+  TAG_ADD_ERROR_LENGTH,
+  TAG_ADD_INFO,
+  TAG_ADD_REQUIREMENTS,
+  TAG_ADD_SUCCESS,
+  TAG_DELETE_ERROR,
+  TAG_DELETE_INFO,
+  TAG_DELETE_SUCCESS,
+  TAG_DELETE_WARNING,
+  TAG_TYPES,
+  TAG_UPDATE_ERROR,
+  TAG_UPDATE_ERROR_LENGTH,
+  TAG_UPDATE_INFO,
+  TAG_UPDATE_SUCCESS
+} from '../../../constants/TagsConstants';
+import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../constants/NumberConstants';
 
 interface TagsManagementPanelProps {
   className?: string;

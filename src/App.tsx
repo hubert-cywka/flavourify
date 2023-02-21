@@ -14,8 +14,9 @@ import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
 import { selectedTagContext } from './contexts/SelectedTagContext';
 import { useState } from 'react';
 import { HighlightOffRounded } from '@mui/icons-material';
-import { ALL_TAGS } from './constants/Constants';
+import { ALL_TAGS } from './constants/TagsConstants';
 import { Tag } from './interfaces/Tag';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
@@ -118,6 +119,7 @@ function App() {
               preventDuplicate={true}
               variant="warning"
               anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+              <ReactQueryDevtools />
               <RouterProvider router={AppRouter} />
             </SnackbarProvider>
           </QueryClientProvider>
