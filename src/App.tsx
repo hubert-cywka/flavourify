@@ -11,16 +11,17 @@ import {
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
 import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
-import { selectedTagContext } from './contexts/SelectedTagContext';
+import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { useState } from 'react';
 import { HighlightOffRounded } from '@mui/icons-material';
 import { ALL_TAGS } from './constants/TagsConstants';
-import { Tag } from './interfaces/Tag';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
   const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
-  const [selectedTag, setSelectedTag] = useState<Tag>(ALL_TAGS);
+  const [lastViewedDish, setLastViewedDish] = useState<lastViewedDishI>({
+    tag: ALL_TAGS,
+    slide: 0
+  });
 
   const dismissSnackbar = (id: SnackbarKey) => {
     const { closeSnackbar } = useSnackbar();
@@ -31,8 +32,8 @@ function App() {
     );
   };
 
-  const updateSelectedTag = (selectedTag: Tag) => {
-    setSelectedTag(selectedTag);
+  const updateLastViewedDish = (lastViewed: lastViewedDishI) => {
+    setLastViewedDish(lastViewed);
   };
 
   const toggleColorMode = () =>
@@ -109,8 +110,8 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={{ toggleColorMode, colorMode: colorMode }}>
-      <selectedTagContext.Provider
-        value={{ setSelectedTag: updateSelectedTag, selectedTag: selectedTag }}>
+      <lastViewedDishContext.Provider
+        value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish: lastViewedDish }}>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <SnackbarProvider
@@ -119,12 +120,11 @@ function App() {
               preventDuplicate={true}
               variant="warning"
               anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-              <ReactQueryDevtools />
               <RouterProvider router={AppRouter} />
             </SnackbarProvider>
           </QueryClientProvider>
         </ThemeProvider>
-      </selectedTagContext.Provider>
+      </lastViewedDishContext.Provider>
     </ColorModeContext.Provider>
   );
 }

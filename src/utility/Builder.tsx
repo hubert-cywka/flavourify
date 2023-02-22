@@ -30,6 +30,11 @@ class QueryResultsBuilder {
     return this;
   }
 
+  onLoading(result: ReactJSXElement) {
+    this.loading = result;
+    return this;
+  }
+
   build(): ReactJSXElement {
     if (this._status === 'success') {
       return this.success;

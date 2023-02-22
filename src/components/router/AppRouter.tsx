@@ -4,6 +4,7 @@ import SettingsPage from '../settings-page/SettingsPage';
 import WeekMenuPage from '../week-menu-page/WeekMenuPage';
 import ROUTE from './RoutingConstants';
 import Navbar from '../navbar/Navbar';
+import FoundDishPage from '../found-dish-page/FoundDishPage';
 
 const appRouter = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const appRouter = createBrowserRouter([
       {
         path: ROUTE.WEEK_MENU,
         element: <WeekMenuPage />
+      },
+      {
+        path: ROUTE.FOUND_DISH,
+        element: <FoundDishPage />
       }
     ]
   }

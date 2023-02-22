@@ -10,8 +10,12 @@ export interface DishesPage {
   totalPages: number;
 }
 
+export interface DishNameAndId {
+  name: string;
+  id: number;
+}
+
 export const getDishesPage = async (id: number, page: number): Promise<DishesPage> => {
-  console.log('Fetching page: ' + page);
   const { data } = await apiClient.get<DishesPage>(
     `/dishes?tagid=${id !== ALL_TAGS.id ? id : ''}&page=${page}`
   );
@@ -30,5 +34,15 @@ export const deleteDish = async (dishId: number) => {
 
 export const addDish = async (newDish: Dish): Promise<Dish> => {
   const { data } = await apiClient.post<Dish>('/dishes', newDish);
+  return data;
+};
+
+export const getListOfDishesByName = async (name: string): Promise<DishNameAndId[]> => {
+  const { data } = await apiClient.get<DishNameAndId[]>(`/dishes/names?name=${name}`);
+  return data;
+};
+
+export const getDish = async (dishId: number): Promise<Dish> => {
+  const { data } = await apiClient.get<Dish>(`/dishes/${dishId}`);
   return data;
 };

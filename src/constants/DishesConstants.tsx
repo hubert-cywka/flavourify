@@ -2,7 +2,7 @@ import { DISH_NAME_MAX_LENGTH, INGREDIENT_NAME_MAX_LENGTH } from './NumberConsta
 
 export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
 export const DISH_NAME_PLACEHOLDER = 'Your dish name';
-export const DISH_IMAGE_PLACEHOLDER = './no-recipes.svg';
+export const DISH_IMAGE_PLACEHOLDER = '/no-recipes.svg';
 export const DISH_TAGS_DEFAULT = [];
 
 export const NAME_EDIT_ERROR = `Name of dish can have only ${DISH_NAME_MAX_LENGTH} characters`;
@@ -12,11 +12,15 @@ export const IMAGE_EDIT_ERROR =
 
 export const IMAGE_EDIT_INFO = 'Upload picture of your dish in .png or .jpg format.';
 
-export const NO_RECIPES_IMAGE = './no-recipes.svg';
+export const DISH_SEARCH_DONE_IMAGE = '/all-done.svg';
+export const DISH_SEARCH_DONE_TITLE = 'Got everything you needed?';
+export const DISH_SEARCH_DONE_BUTTON = 'Go back to previous page';
+
+export const NO_RECIPES_IMAGE = '/no-recipes.svg';
 export const NO_RECIPES_TITLE = 'Could not find any recipes!';
 export const NO_RECIPES_BUTTON = 'Reload recipes';
 
-export const LAST_RECIPE_IMAGE = './last-recipe.svg';
+export const LAST_RECIPE_IMAGE = '/last-recipe.svg';
 export const LAST_RECIPE_TITLE = 'It was last recipe!';
 export const LAST_RECIPE_BUTTON = 'Return to beginning';
 

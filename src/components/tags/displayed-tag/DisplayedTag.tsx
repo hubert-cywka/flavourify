@@ -13,7 +13,7 @@ import { SearchRounded, TagRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
 import { Tag } from '../../../interfaces/Tag';
 import { getTags } from '../../../services/TagsService';
-import { selectedTagContext } from '../../../contexts/SelectedTagContext';
+import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import Builder from '../../../utility/Builder';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
@@ -31,11 +31,11 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
     staleTime: 0,
     refetchOnWindowFocus: 'always'
   });
-  const { selectedTag, setSelectedTag } = useContext(selectedTagContext);
+  const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const [textFilter, setTextFilter] = useState('');
 
   const updateDisplayedTag = (tag: Tag) => {
-    setSelectedTag(tag);
+    setLastViewedDish({ tag: tag, slide: 0 });
   };
 
   const getQueryResult = () => {
@@ -46,7 +46,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
             <ListItemText className="selectable-tag-text" disableTypography>
               {ALL_TAGS.name}
             </ListItemText>
-            {ALL_TAGS.id === selectedTag.id && (
+            {ALL_TAGS.id === lastViewedDish.tag.id && (
               <ListItemIcon>
                 <DoneRoundedIcon className="selected-tag-icon" sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
@@ -64,7 +64,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
                       <Box className="tag-name">{tag.name}</Box>
                       <Box className="tag-type">{tag.type}</Box>
                     </ListItemText>
-                    {tag.id === selectedTag.id && (
+                    {tag.id === lastViewedDish.tag.id && (
                       <ListItemIcon>
                         <DoneRoundedIcon
                           className="selected-tag-icon"
@@ -92,17 +92,17 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
       <Box className="holder">
         <Box
           className={`displayed-tag-container ${className}`}
-          sx={{ color: 'text.secondary' }}
           onClick={() => setIsTagSelectDialogOpen((prev) => !prev)}>
           <TagRounded className="displayed-tag-icon" />
-          {tagsList && selectedTag.name}
+          {tagsList && lastViewedDish.tag.name}
         </Box>
 
         {isTagSelectDialogOpen && (
-          <List
-            className="selectable-tags-list"
-            sx={{ bgcolor: 'secondary.main', color: 'text.secondary' }}>
+          <List className="selectable-tags-list" sx={{ bgcolor: 'secondary.main' }}>
             <ListItem className="tags-list-header">
+              <ListItemIcon className="tags-list-header-icon">
+                <SearchRounded sx={{ color: 'text.secondary' }} />
+              </ListItemIcon>
               <Input
                 value={textFilter}
                 sx={{ color: 'text.secondary' }}
@@ -110,9 +110,6 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
                 placeholder="Search tags..."
                 className="tags-search-input"
               />
-              <ListItemIcon>
-                <SearchRounded className="tags-list-header-icon" sx={{ color: 'text.secondary' }} />
-              </ListItemIcon>
             </ListItem>
             {getQueryResult()}
           </List>
