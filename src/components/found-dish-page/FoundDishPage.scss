@@ -1,0 +1,25 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.found-dish-page-container {
+  @include page-container;
+
+  .slides-container {
+    box-sizing: border-box;
+    height: 100%;
+
+    .dish-card {
+      @include dish-card;
+    }
+  }
+
+  .display-manager {
+    width: $navbar-width;
+    position: absolute;
+    box-sizing: border-box;
+    top: $page-offset;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+}

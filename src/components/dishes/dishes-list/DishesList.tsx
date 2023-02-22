@@ -14,7 +14,7 @@ import { DISHES_QUERY } from '../../../constants/QueryConstants';
 import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
 import { shuffleArray } from '../../../utility/shuffleArray';
 import { Dish } from '../../../interfaces/Dish';
-import { selectedTagContext } from '../../../contexts/SelectedTagContext';
+import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import {
   LAST_RECIPE_BUTTON,
@@ -27,17 +27,17 @@ import {
 
 interface DishesListProps {
   className?: string;
-  displayParameters: string[];
+  displayParameters?: string[];
 }
 
 const DishesList = ({ className, displayParameters }: DishesListProps) => {
-  const { selectedTag } = useContext(selectedTagContext);
+  const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const [isFrontSide, setFrontSide] = useState(true);
 
   const { data, fetchNextPage, hasNextPage, fetchPreviousPage, isFetching, status } =
     useInfiniteQuery(
-      [DISHES_QUERY, { tag: selectedTag.id }],
-      ({ pageParam = 0 }) => getDishesPage(selectedTag.id, pageParam),
+      [DISHES_QUERY, { tag: lastViewedDish.tag.id }],
+      ({ pageParam = 0 }) => getDishesPage(lastViewedDish.tag.id, pageParam),
       {
         getNextPageParam: (lastPage) => {
           if (lastPage.hasNext) return lastPage.currentPage + 1;
@@ -55,8 +55,12 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     setFrontSide((prevState) => !prevState);
   }, []);
 
+  const updateLastViewedDish = () => {
+    if (swiperRef) setLastViewedDish({ ...lastViewedDish, slide: swiperRef.activeIndex });
+  };
+
   const reloadDishRecipes = () => {
-    queryClient.invalidateQueries([DISHES_QUERY, { tag: selectedTag.id }]);
+    queryClient.invalidateQueries([DISHES_QUERY, { tag: lastViewedDish.tag.id }]);
   };
 
   const goToFirstSlide = () => {
@@ -68,7 +72,7 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     dishPages.forEach((page) => {
       extractedDishes.push(...page.dishes);
     });
-    if (displayParameters.includes(DISPLAY_PARAMS.SHUFFLE)) {
+    if (displayParameters?.includes(DISPLAY_PARAMS.SHUFFLE)) {
       return shuffleArray(extractedDishes.slice());
     } else {
       return extractedDishes.slice();
@@ -93,9 +97,11 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
             modules={[Virtual]}
             allowSlidePrev={isFrontSide}
             allowSlideNext={isFrontSide}
+            initialSlide={lastViewedDish.slide}
             onSwiper={setSwiperRef}
             onReachEnd={() => fetchNextPage()}
             onReachBeginning={() => fetchPreviousPage()}
+            onSlideChangeTransitionEnd={updateLastViewedDish}
             slidesPerView={1}
             direction="vertical"
             virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}

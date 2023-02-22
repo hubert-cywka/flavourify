@@ -23,7 +23,7 @@ export const TAG_UPDATE_ERROR_LENGTH = `Failed to update tag. Name has to be at 
 export const TAG_UPDATE_ERROR = 'Failed to update tag. Please try again later';
 export const TAG_UPDATE_SUCCESS = 'Tag updated successfully';
 export const TAG_UPDATE_INFO =
-  'Select one tag from list by clicking on it and update its name or delete it. All dishes with this tag will be updated accordingly.';
+  'Select one tag from list by clicking on it and update its name. All dishes with this tag will be updated accordingly.';
 
 export const TAGS_SELECTED_INFO = `Please select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags that describes this dish best.`;
 export const TAGS_SELECTED_ERROR = `You have to select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags.`;
