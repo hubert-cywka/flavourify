@@ -1,4 +1,5 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .MuiList-root {
   .MuiMenuItem-root {
@@ -74,12 +75,8 @@
         flex-wrap: wrap;
         justify-content: center;
 
-        .tag {
-          font-size: 0.7rem;
-          padding: 5px 10px;
-          background-color: $highlighted-background;
-          margin: 3px;
-          border-radius: 10px;
+        .search-list-item {
+          @include tag-chip;
 
           &.selected {
             background-color: $strong-highlighted-background;

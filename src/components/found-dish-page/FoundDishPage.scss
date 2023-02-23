@@ -13,13 +13,7 @@
     }
   }
 
-  .display-manager {
-    width: $navbar-width;
-    position: absolute;
-    box-sizing: border-box;
-    top: $page-offset;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 1000;
+  .top-navbar {
+      @include navbar;
   }
 }

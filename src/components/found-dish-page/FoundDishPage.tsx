@@ -1,6 +1,5 @@
 import './FoundDishPage.scss';
 import { Box } from '@mui/material';
-import DisplayManager from '../landing-page/display-manager/DisplayManager';
 import DishCard from '../dishes/dish-card/DishCard';
 import { useQuery } from '@tanstack/react-query';
 import { DISH_QUERY } from '../../constants/QueryConstants';
@@ -19,16 +18,12 @@ import {
   NO_RECIPES_TITLE
 } from '../../constants/DishesConstants';
 import appRouter from '../router/AppRouter';
+import TopNavbar from '../navbars/top-navbar/TopNavbar';
 
 const FoundDishPage = () => {
   const { id } = useParams();
 
-  if (!id) return <></>;
-  const {
-    data: dish,
-    status,
-    refetch
-  } = useQuery([DISH_QUERY, { id: id }], () => getDish(parseInt(id)));
+  const { data: dish, status, refetch } = useQuery([DISH_QUERY, { id: id }], () => getDish(id));
   const [isFrontSide, setFrontSide] = useState(true);
 
   const flipCard = useCallback(() => {
@@ -78,7 +73,7 @@ const FoundDishPage = () => {
         bgcolor: 'primary.main',
         color: 'text.primary'
       }}>
-      <DisplayManager className="display-manager" singleDishVariant />
+      <TopNavbar className="top-navbar" singleDishVariant />
       {getQueryResults()}
     </Box>
   );

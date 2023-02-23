@@ -1,13 +1,14 @@
 import { BottomNavigationAction, BottomNavigation, Box } from '@mui/material';
-import ROUTE from '../router/RoutingConstants';
+import ROUTE from '../../router/RoutingConstants';
 import SettingsApplicationsRoundedIcon from '@mui/icons-material/SettingsApplicationsRounded';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
-import './Navbar.scss';
+import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
+import './BottomNavbar.scss';
 import { SyntheticEvent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-const Navbar = () => {
+const BottomNavbar = () => {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <Box className="navbar-container">
+    <Box className="bottom-navbar-container">
       <BottomNavigation
         value={path}
         onChange={navigateTo}
@@ -28,9 +29,15 @@ const Navbar = () => {
         }}>
         <BottomNavigationAction
           className="navbar-tile"
-          label="Home"
+          label="Recipes"
           value={ROUTE.LANDING}
           icon={<ReceiptLongRoundedIcon />}
+        />
+        <BottomNavigationAction
+          className="navbar-tile"
+          label="Discover"
+          value={ROUTE.DISCOVER}
+          icon={<TravelExploreRoundedIcon />}
         />
         <BottomNavigationAction
           className="navbar-tile"
@@ -49,4 +56,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default BottomNavbar;

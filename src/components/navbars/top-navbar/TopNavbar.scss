@@ -1,6 +1,6 @@
 @import './src/styles/variables';
 
-.display-manager-container {
+.top-navbar-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -29,10 +29,6 @@
     align-items: center;
     padding: 10px 20px;
     box-sizing: border-box;
-
-    .back-button-icon {
-
-    }
 
     .back-button-label {
       font-size: 0.8rem;

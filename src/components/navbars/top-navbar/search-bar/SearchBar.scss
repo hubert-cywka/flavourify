@@ -1,0 +1,15 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.dish-names-list-container {
+  flex-grow: 1;
+
+  .search-bar-container {
+    @include search-bar;
+  }
+
+  .search-list {
+    @include search-list;
+    overflow-y: auto;
+  }
+}

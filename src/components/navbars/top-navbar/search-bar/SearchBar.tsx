@@ -41,28 +41,28 @@ const SearchBar = ({ className }: SearchBarProps) => {
             data.map((dish) => (
               <ListItem
                 key={dish.id}
-                className="found-dish-item"
+                className="search-list-item"
                 onClick={() => navigateToSearchResultPage(dish.id)}>
-                <ListItemText className="found-dish-item-text" disableTypography>
+                <ListItemText className="list-item-text" disableTypography>
                   {dish.name}
                 </ListItemText>
-                <ListItemIcon sx={{ color: 'text.secondary' }}>
-                  <NavigateNextRounded className="found-dish-item-icon" />
+                <ListItemIcon sx={{ color: 'accent.main' }}>
+                  <NavigateNextRounded className="list-item-icon" />
                 </ListItemIcon>
               </ListItem>
             ))}
         </>
       )
       .onError(
-        <ListItem className="found-dish-item">
-          <ListItemText className="found-dish-item-text" disableTypography>
+        <ListItem className="search-list-item">
+          <ListItemText className="list-item-text" disableTypography>
             Could not find any dishes
           </ListItemText>
         </ListItem>
       )
       .onLoading(
-        <ListItem className="found-dish-item">
-          <ListItemText className="found-dish-item-text" disableTypography>
+        <ListItem className="search-list-item">
+          <ListItemText className="list-item-text" disableTypography>
             Searching...
           </ListItemText>
         </ListItem>
@@ -72,7 +72,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
 
   return (
     <ClickAwayListener onClickAway={() => setAreSearchResultsDisplayed(false)}>
-      <Box className="holder">
+      <Box className="dish-names-list-container">
         <Box className={`search-bar-container ${className}`}>
           <SearchRounded className="search-icon" />
           <Input
@@ -85,7 +85,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
           />
         </Box>
         {areSearchResultsDisplayed && textFilter.length > 0 && (
-          <List sx={{ bgcolor: 'secondary.main' }} className="found-dishes-list">
+          <List sx={{ bgcolor: 'secondary.main' }} className="search-list">
             {getQueryResults()}
           </List>
         )}
