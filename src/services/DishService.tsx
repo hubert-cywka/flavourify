@@ -42,7 +42,7 @@ export const getListOfDishesByName = async (name: string): Promise<DishNameAndId
   return data;
 };
 
-export const getDish = async (dishId: number): Promise<Dish> => {
+export const getDish = async (dishId: string | undefined): Promise<Dish> => {
   const { data } = await apiClient.get<Dish>(`/dishes/${dishId}`);
   return data;
 };

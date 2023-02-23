@@ -1,12 +1,9 @@
 import { Box } from '@mui/material';
 import './LandingPage.scss';
 import DishesList from '../dishes/dishes-list/DishesList';
-import DisplayManager from './display-manager/DisplayManager';
-import { useState } from 'react';
+import TopNavbar from '../navbars/top-navbar/TopNavbar';
 
 const LandingPage = () => {
-  const [displayParameters, setDisplayParameters] = useState<string[]>([]);
-
   return (
     <Box
       className="landing-page-container"
@@ -14,12 +11,8 @@ const LandingPage = () => {
         bgcolor: 'primary.main',
         color: 'text.primary'
       }}>
-      <DisplayManager
-        className="display-manager"
-        displayParameters={displayParameters}
-        setDisplayParameters={setDisplayParameters}
-      />
-      <DishesList displayParameters={displayParameters} />
+      <TopNavbar className="top-navbar" />
+      <DishesList />
     </Box>
   );
 };

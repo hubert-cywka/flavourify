@@ -1,4 +1,5 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .displayed-tag-container {
   display: flex;
@@ -12,53 +13,17 @@
   }
 }
 
-.holder {
-  .selectable-tags-list {
-    top: calc(#{$display-manager-height} + 5px);
-    left: 0;
-    position: absolute;
-    border-radius: 10px;
-    width: 100%;
+.tags-list-container {
+  .search-list {
+    @include search-list;
 
     .tags-list-header {
-      display: flex;
-
-      .tags-search-input {
-        font-weight: bold;
-        flex-grow: 1;
-        margin-left: 10px;
-      }
-
-      .tags-list-header-icon {
-        min-width: fit-content;
-      }
+      @include search-bar;
     }
 
-    .scrollable-tags-holder {
+    .tag-items-container {
       max-height: 30vh;
       overflow-y: auto;
-
-      .selectable-tag {
-        border-top: thin solid $highlighted-background;
-        box-sizing: border-box;
-
-        .selectable-tag-text {
-          font-size: 0.8rem;
-          align-items: baseline;
-          display: flex;
-
-          .tag-type {
-            margin-left: 10px;
-            opacity: 0.5;
-            font-size: 0.6rem;
-          }
-        }
-
-        .selected-tag-icon {
-          margin-left: auto;
-          font-size: 0.9rem;
-        }
-      }
     }
   }
 }

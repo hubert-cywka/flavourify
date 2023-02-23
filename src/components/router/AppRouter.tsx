@@ -3,15 +3,16 @@ import LandingPage from '../landing-page/LandingPage';
 import SettingsPage from '../settings-page/SettingsPage';
 import WeekMenuPage from '../week-menu-page/WeekMenuPage';
 import ROUTE from './RoutingConstants';
-import Navbar from '../navbar/Navbar';
 import FoundDishPage from '../found-dish-page/FoundDishPage';
+import BottomNavbar from '../navbars/bottom-navbar/BottomNavbar';
+import DiscoverPage from '../discover-page/DiscoverPage';
 
 const appRouter = createBrowserRouter([
   {
     path: ROUTE.LANDING,
     element: (
       <>
-        <Outlet /> <Navbar />
+        <Outlet /> <BottomNavbar />
       </>
     ),
     children: [
@@ -30,6 +31,10 @@ const appRouter = createBrowserRouter([
       {
         path: ROUTE.FOUND_DISH,
         element: <FoundDishPage />
+      },
+      {
+        path: ROUTE.DISCOVER,
+        element: <DiscoverPage />
       }
     ]
   }

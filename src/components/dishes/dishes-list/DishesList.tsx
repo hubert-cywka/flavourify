@@ -1,21 +1,8 @@
 import './DishesList.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperRef, { Virtual } from 'swiper';
 import 'swiper/scss';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { DishesPage, getDishesPage } from '../../../services/DishService';
-import QueryResultsBuilder from '../../../utility/Builder';
-import { Box } from '@mui/material';
-import { useCallback, useContext, useState } from 'react';
-import DishCard from '../dish-card/DishCard';
-import ErrorDishCard from '../dish-card/error-dish-card/ErrorDishCard';
-import { queryClient } from '../../../services/QueryClient';
-import { DISHES_QUERY } from '../../../constants/QueryConstants';
-import { DISPLAY_PARAMS } from '../../landing-page/display-manager/DisplayManager';
-import { shuffleArray } from '../../../utility/shuffleArray';
 import { Dish } from '../../../interfaces/Dish';
 import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { DISHES_QUERY } from '../../../constants/QueryConstants';
 import {
   LAST_RECIPE_BUTTON,
   LAST_RECIPE_IMAGE,
@@ -24,17 +11,26 @@ import {
   NO_RECIPES_IMAGE,
   NO_RECIPES_TITLE
 } from '../../../constants/DishesConstants';
+import { DishesPage, getDishesPage } from '../../../services/DishService';
+import DishCard from '../dish-card/DishCard';
+import ErrorDishCard from '../dish-card/error-dish-card/ErrorDishCard';
+import QueryResultsBuilder from '../../../utility/Builder';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Box } from '@mui/material';
+import SwiperRef, { EffectCreative, Virtual } from 'swiper';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useCallback, useContext, useState } from 'react';
 
 interface DishesListProps {
   className?: string;
-  displayParameters?: string[];
 }
 
-const DishesList = ({ className, displayParameters }: DishesListProps) => {
+const DishesList = ({ className }: DishesListProps) => {
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const [isFrontSide, setFrontSide] = useState(true);
+  const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, fetchPreviousPage, isFetching, status } =
+  const { data, fetchNextPage, hasNextPage, fetchPreviousPage, isFetching, status, refetch } =
     useInfiniteQuery(
       [DISHES_QUERY, { tag: lastViewedDish.tag.id }],
       ({ pageParam = 0 }) => getDishesPage(lastViewedDish.tag.id, pageParam),
@@ -49,52 +45,48 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
         }
       }
     );
-  const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
 
   const flipCard = useCallback(() => {
     setFrontSide((prevState) => !prevState);
   }, []);
 
-  const updateLastViewedDish = () => {
+  const updateLastViewedDish = useCallback(() => {
     if (swiperRef) setLastViewedDish({ ...lastViewedDish, slide: swiperRef.activeIndex });
-  };
+  }, [lastViewedDish, swiperRef?.activeIndex]);
 
-  const reloadDishRecipes = () => {
-    queryClient.invalidateQueries([DISHES_QUERY, { tag: lastViewedDish.tag.id }]);
-  };
-
-  const goToFirstSlide = () => {
+  const goToFirstSlide = useCallback(() => {
     if (swiperRef) swiperRef.slideTo(0);
-  };
+  }, [swiperRef]);
 
-  const prepareDishesList = (dishPages: DishesPage[]) => {
-    const extractedDishes: Dish[] = [];
-    dishPages.forEach((page) => {
-      extractedDishes.push(...page.dishes);
-    });
-    if (displayParameters?.includes(DISPLAY_PARAMS.SHUFFLE)) {
-      return shuffleArray(extractedDishes.slice());
-    } else {
-      return extractedDishes.slice();
-    }
-  };
+  const prepareDishesSlides = useCallback(
+    (dishPages: DishesPage[]) => {
+      const extractedDishes: Dish[] = [];
+      dishPages.forEach((page) => {
+        extractedDishes.push(...page.dishes);
+      });
 
-  const buildDishCards = (dishes: Dish[]): ReactJSXElement[] => {
-    return dishes.map((dish) => {
-      return (
-        <SwiperSlide key={dish.id} virtualIndex={dish.id}>
-          <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
-        </SwiperSlide>
-      );
-    });
-  };
+      return extractedDishes.map((dish) => {
+        return (
+          <SwiperSlide key={dish.id} virtualIndex={dish.id}>
+            <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
+          </SwiperSlide>
+        );
+      });
+    },
+    [isFrontSide]
+  );
 
   return QueryResultsBuilder.createResult(status)
     .onSuccess(
       <>
         {data && (
           <Swiper
-            modules={[Virtual]}
+            modules={[Virtual, EffectCreative]}
+            effect="creative"
+            creativeEffect={{
+              prev: { translate: [0, '-120%', -500] },
+              next: { translate: [0, '120%', -500] }
+            }}
             allowSlidePrev={isFrontSide}
             allowSlideNext={isFrontSide}
             initialSlide={lastViewedDish.slide}
@@ -106,8 +98,8 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
             direction="vertical"
             virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}
             className={`dishes-list-container ${className}`}>
-            {buildDishCards(prepareDishesList(data.pages))}
-            {!hasNextPage && !isFetching && (
+            {prepareDishesSlides(data.pages)}
+            {!hasNextPage && !isFetching ? (
               <SwiperSlide>
                 <ErrorDishCard
                   callback={goToFirstSlide}
@@ -115,6 +107,10 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
                   title={LAST_RECIPE_TITLE}
                   caption={LAST_RECIPE_BUTTON}
                 />
+              </SwiperSlide>
+            ) : (
+              <SwiperSlide>
+                <ErrorDishCard loading />
               </SwiperSlide>
             )}
           </Swiper>
@@ -124,7 +120,7 @@ const DishesList = ({ className, displayParameters }: DishesListProps) => {
     .onError(
       <Box className={`dishes-list-container error ${className}`}>
         <ErrorDishCard
-          callback={reloadDishRecipes}
+          callback={refetch}
           img={NO_RECIPES_IMAGE}
           title={NO_RECIPES_TITLE}
           caption={NO_RECIPES_BUTTON}

@@ -122,7 +122,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
                 variant="contained"
                 startIcon={<SettingsBackupRestoreRoundedIcon />}
                 onClick={() => setDisplayedTags(DISH_TAGS_DEFAULT)}>
-                Set default tags
+                Clear tags
               </Button>
               <Button
                 size="small"

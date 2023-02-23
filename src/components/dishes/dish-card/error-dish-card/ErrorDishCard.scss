@@ -35,4 +35,24 @@
   .error-button {
     font-weight: bold;
   }
+
+  .loading-button, .loading-element, .loading-image {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: $dish-card-inner-border-radius;
+  }
+
+  .loading-button {
+    height: 5%;
+    margin-top: $dish-card-spacing;
+  }
+
+  .loading-image {
+    height: 100%;
+  }
+
+  .loading-element {
+    margin-top: $dish-card-spacing;
+    height: 8%;
+  }
 }

@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Skeleton,
   Tab,
   Typography
 } from '@mui/material';
@@ -128,8 +129,13 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       });
   };
 
+  const handleTagSelection = (tag: Tag) => {
+    setSelectedTag(tag);
+    setSelectedType(tag.type);
+  };
+
   const getListOfTagsByType = (type: TagType) => {
-    if (!tagsList) return;
+    if (!tagsList) return getListOfMockupTags(Math.ceil(Math.random() * 5) + 5);
     return tagsList.map((tag) => {
       if (
         (type === 'Other' && !['Cuisine', 'Course', 'Diet'].includes(tag.type)) ||
@@ -138,8 +144,8 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
         return (
           <Box
             key={tag.id}
-            className={`tag ${selectedTag?.id === tag.id && 'selected'}`}
-            onClick={() => setSelectedTag(tag)}>
+            className={`search-list-item ${selectedTag?.id === tag.id && 'selected'}`}
+            onClick={() => handleTagSelection(tag)}>
             {tag.name}
           </Box>
         );
@@ -157,6 +163,17 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       );
     });
     return organizedTags;
+  };
+
+  const getListOfMockupTags = (count: number) => {
+    const arrayOfMockups = [];
+    for (let i = 0; i < count; i++) {
+      const randomWidth = Math.ceil(Math.random() * 50) + 30;
+      arrayOfMockups.push(
+        <Skeleton key={i} className="search-list-item" width={randomWidth} variant="rectangular" />
+      );
+    }
+    return arrayOfMockups;
   };
 
   const getTagTypeSelector = () => {

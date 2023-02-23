@@ -26,7 +26,7 @@ function App() {
   const dismissSnackbar = (id: SnackbarKey) => {
     const { closeSnackbar } = useSnackbar();
     return (
-      <IconButton onClick={() => closeSnackbar(id)}>
+      <IconButton sx={{ color: 'text.secondary' }} onClick={() => closeSnackbar(id)}>
         <HighlightOffRounded />
       </IconButton>
     );
@@ -66,6 +66,9 @@ function App() {
             text: {
               primary: '#444444',
               secondary: '#ffffff'
+            },
+            accent: {
+              main: '#c800ff'
             }
           }
         : {
@@ -82,6 +85,9 @@ function App() {
             text: {
               primary: '#ffffff',
               secondary: '#ffffff'
+            },
+            accent: {
+              main: '#ff9e00'
             }
           })
     },
@@ -119,7 +125,7 @@ function App() {
               maxSnack={5}
               preventDuplicate={true}
               variant="warning"
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
               <RouterProvider router={AppRouter} />
             </SnackbarProvider>
           </QueryClientProvider>

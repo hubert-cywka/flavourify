@@ -35,3 +35,73 @@
   margin-left: auto;
   box-sizing: border-box;
 }
+
+@mixin navbar {
+  width: $navbar-width;
+  position: absolute;
+  box-sizing: border-box;
+  top: $page-offset;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
+}
+
+@mixin tag-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px;
+  font-size: 0.6rem;
+  background-color: $strong-highlighted-background;
+  padding: 5px 10px;
+  border-radius: 50px;
+}
+
+@mixin search-list {
+  position: absolute;
+  max-height: 35vh;
+  top: calc(#{$display-manager-height} + 5px);
+  border-radius: 10px;
+  width: 100%;
+  left: 0;
+
+  .search-list-item {
+    border-top: thin solid $highlighted-background;
+    box-sizing: border-box;
+
+    .list-item-icon {
+      margin-left: auto;
+      font-size: 0.9rem;
+    }
+
+    .list-item-text {
+      display: flex;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 0.8rem;
+      align-items: baseline;
+      width: 100%;
+    }
+
+    .list-item-info {
+      margin-left: 10px;
+      opacity: 0.5;
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@mixin search-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+
+  .search-input {
+    flex-grow: 1;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+}

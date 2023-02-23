@@ -41,14 +41,14 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
   const getQueryResult = () => {
     return Builder.createResult(status)
       .onSuccess(
-        <Box className="scrollable-tags-holder">
-          <ListItem className="selectable-tag" onClick={() => updateDisplayedTag(ALL_TAGS)}>
-            <ListItemText className="selectable-tag-text" disableTypography>
+        <Box className="tag-items-container">
+          <ListItem className="search-list-item" onClick={() => updateDisplayedTag(ALL_TAGS)}>
+            <ListItemText className="list-item-text" disableTypography>
               {ALL_TAGS.name}
             </ListItemText>
             {ALL_TAGS.id === lastViewedDish.tag.id && (
               <ListItemIcon>
-                <DoneRoundedIcon className="selected-tag-icon" sx={{ color: 'text.secondary' }} />
+                <DoneRoundedIcon className="list-item-icon" sx={{ color: 'accent.main' }} />
               </ListItemIcon>
             )}
           </ListItem>
@@ -57,19 +57,16 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
               if (!textFilter || tag.name.toLowerCase().includes(textFilter.toLowerCase()))
                 return (
                   <ListItem
-                    className="selectable-tag"
+                    className="search-list-item"
                     key={tag.id}
                     onClick={() => updateDisplayedTag(tag)}>
-                    <ListItemText className="selectable-tag-text" disableTypography>
+                    <ListItemText className="list-item-text" disableTypography>
                       <Box className="tag-name">{tag.name}</Box>
-                      <Box className="tag-type">{tag.type}</Box>
+                      <Box className="list-item-info">{tag.type}</Box>
                     </ListItemText>
                     {tag.id === lastViewedDish.tag.id && (
                       <ListItemIcon>
-                        <DoneRoundedIcon
-                          className="selected-tag-icon"
-                          sx={{ color: 'text.secondary' }}
-                        />
+                        <DoneRoundedIcon className="list-item-icon" sx={{ color: 'accent.main' }} />
                       </ListItemIcon>
                     )}
                   </ListItem>
@@ -78,8 +75,8 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
         </Box>
       )
       .onError(
-        <ListItem className="selectable-tag">
-          <ListItemText className="selectable-tag-text" disableTypography>
+        <ListItem className="search-list-item">
+          <ListItemText className="list-item-text" disableTypography>
             {NO_TAGS_ERROR}
           </ListItemText>
         </ListItem>
@@ -89,7 +86,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsTagSelectDialogOpen(false)}>
-      <Box className="holder">
+      <Box className="tags-list-container">
         <Box
           className={`displayed-tag-container ${className}`}
           onClick={() => setIsTagSelectDialogOpen((prev) => !prev)}>
@@ -98,17 +95,17 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
         </Box>
 
         {isTagSelectDialogOpen && (
-          <List className="selectable-tags-list" sx={{ bgcolor: 'secondary.main' }}>
+          <List className="search-list" sx={{ bgcolor: 'secondary.main' }}>
             <ListItem className="tags-list-header">
-              <ListItemIcon className="tags-list-header-icon">
+              <ListItemIcon>
                 <SearchRounded sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
               <Input
                 value={textFilter}
                 sx={{ color: 'text.secondary' }}
                 onChange={(e) => setTextFilter(e.target.value)}
-                placeholder="Search tags..."
-                className="tags-search-input"
+                placeholder="Search for tags"
+                className="search-input"
               />
             </ListItem>
             {getQueryResult()}

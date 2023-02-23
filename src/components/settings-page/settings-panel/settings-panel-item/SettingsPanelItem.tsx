@@ -23,7 +23,7 @@ const SettingsPanelItem = ({
       <ListItemText disableTypography>{text}</ListItemText>
       {!inPlace && (
         <ListItemIcon>
-          <NavigateNextRoundedIcon />
+          <NavigateNextRoundedIcon sx={{ color: 'accent.main' }} />
         </ListItemIcon>
       )}
     </ListItem>
