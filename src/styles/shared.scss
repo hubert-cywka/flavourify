@@ -11,6 +11,16 @@
   text-align: center;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
+
+  &:before {
+    background: url('../../public/background.svg');
+    content: "";
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
 }
 
 @mixin appear-animation {
@@ -28,9 +38,9 @@
 }
 
 @mixin dish-card {
-  width: $page-width;
-  height: calc(100 * var(--vh) - #{$navbar-height} - calc(2 * #{$dish-card-spacing}) - calc(2 * #{$page-offset}) - #{$display-manager-height});
-  margin-top: calc(#{$display-manager-height} + #{$page-offset} + #{$dish-card-spacing});
+  width: $dish-card-width;
+  height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
+  margin-top: calc(#{$top-navbar-height} + #{$page-offset} + #{$huge-element-spacing});
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
@@ -51,7 +61,7 @@
   align-items: center;
   justify-content: center;
   margin: 3px;
-  font-size: 0.6rem;
+  font-size: $tiny-font-size;
   background-color: $strong-highlighted-background;
   padding: 5px 10px;
   border-radius: 50px;
@@ -59,8 +69,8 @@
 
 @mixin search-list {
   position: absolute;
-  max-height: 35vh;
-  top: calc(#{$display-manager-height} + 5px);
+  max-height: 60vh;
+  top: calc(#{$top-navbar-height} + 5px);
   border-radius: 10px;
   width: 100%;
   left: 0;
@@ -71,7 +81,7 @@
 
     .list-item-icon {
       margin-left: auto;
-      font-size: 0.9rem;
+      font-size: $standard-font-size;
     }
 
     .list-item-text {
@@ -79,7 +89,7 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      font-size: 0.8rem;
+      font-size: $small-font-size;
       align-items: baseline;
       width: 100%;
     }
@@ -87,7 +97,7 @@
     .list-item-info {
       margin-left: 10px;
       opacity: 0.5;
-      font-size: 0.6rem;
+      font-size: $tiny-font-size;
     }
   }
 }
@@ -104,4 +114,17 @@
     margin: 0 10px;
     font-weight: bold;
   }
+}
+
+@mixin action-button-standard {
+  padding: 10px 25px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50px;
+}
+
+@mixin dish-card-action-button {
+  transform: scale(0.9);
+  @include action-button-standard;
+  margin: 0 auto;
 }

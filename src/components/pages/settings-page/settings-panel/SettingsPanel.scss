@@ -12,10 +12,10 @@
 
   .settings-panel-item {
     border: thin solid $highlighted-background;
-    font-size: 0.9rem;
+    font-size: $standard-font-size;
 
     .icon {
-      font-size: 1.25rem;
+      font-size: $big-font-size;
     }
 
     &:hover {

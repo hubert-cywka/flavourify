@@ -1,29 +1,30 @@
 @import './src/styles/shared';
+@import './src/styles/variables';
 
 @mixin dish-card-container {
   box-sizing: border-box;
   flex-direction: column;
   display: flex;
-  padding: 10px;
+  padding: $standard-element-spacing;
   justify-content: flex-end;
 }
 
 @mixin dish-card-components {
   .ingredients-list, .dish-name {
     background-color: $highlighted-background;
-    border-radius: $dish-card-inner-border-radius;
+    border-radius: $inner-border-radius-5;
     width: 100%;
     box-sizing: border-box;
   }
 
   .field-label {
-    font-size: 0.5rem;
+    font-size: $tiny-font-size;
     margin: 5px auto 0 auto;
     transform: translateY(50%);
 
     &:before, &:after {
-      border-radius: $dish-card-inner-border-radius;
-      border-top: thin solid rgba(128, 128, 128, 0.1);
+      border-radius: $inner-border-radius-5;
+      border-top: thin solid $highlighted-background;
     }
 
     &.no-divider {
@@ -36,8 +37,8 @@
   .dish-name {
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding: 0.5em;
-    font-size: 1.2em;
+    padding: $standard-element-spacing;
+    font-size: $big-font-size;
     font-weight: bold;
     overflow: hidden;
     text-align: center;
@@ -50,17 +51,21 @@
   .image-container {
     position: relative;
     overflow: hidden;
-    border-radius: $dish-card-inner-border-radius;
+    border-radius: $inner-border-radius-5;
 
     .dish-image {
       height: 100%;
-      margin-bottom: 10px;
+      margin-bottom: $standard-element-spacing;
       background-color: $strong-highlighted-background;
     }
   }
 
   .ingredients-list {
     overflow: hidden;
-    padding: 10px;
+    padding: $standard-element-spacing;
+  }
+
+  .dish-recipe {
+    margin-bottom: $standard-element-spacing;
   }
 }

@@ -7,7 +7,7 @@
 
   .edit-panel {
     box-sizing: border-box;
-    border-radius: $dish-card-inner-border-radius;
+    border-radius: $inner-border-radius-5;
     position: absolute;
     top: 15px;
     left: 15px;
@@ -32,15 +32,13 @@
   }
 
   .flip-card-button {
-    width: 100%;
-    border-radius: $dish-card-inner-border-radius;
-    font-weight: bold;
+    @include dish-card-action-button;
   }
 }
 
 .delete-dialog-container {
   .delete-dialog {
-    padding: $dish-card-spacing;
+    padding: $standard-element-spacing;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +46,7 @@
     text-align: center;
 
     .delete-dialog-text {
-      padding: $dish-card-spacing;
+      padding: $standard-element-spacing;
 
       .delete-dialog-warning {
         font-weight: bold;
@@ -56,7 +54,7 @@
     }
 
     .delete-dialog-button {
-      margin: 10px 10px 0 10px;
+      margin: $standard-element-spacing $standard-element-spacing 0 $standard-element-spacing;
     }
   }
 }

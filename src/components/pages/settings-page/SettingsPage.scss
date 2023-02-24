@@ -1,0 +1,15 @@
+@import './src/styles/shared';
+@import './src/styles/variables';
+
+.settings-page-container {
+  @include page-container;
+
+  .settings-panel {
+    width: 90vw;
+    height: calc(100 * var(--vh) - #{$bottom-navbar-height} -  #{$big-element-spacing} - #{$page-offset});
+    margin-bottom: calc(#{$bottom-navbar-height});
+    box-sizing: border-box;
+    border-radius: $outer-border-radius-10;
+    padding: $standard-element-spacing
+  }
+}

@@ -4,6 +4,7 @@ import IngredientsList from '../../../ingredients/ingredients-list/IngredientsLi
 import DishImage from '../../dish-image/DishImage';
 import { DishCardProps } from '../DishCard';
 import DishTags from '../../dish-tags/DishTags';
+import { ArrowForwardRounded } from '@mui/icons-material';
 
 const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
   return (
@@ -11,7 +12,7 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
       <Box className="image-container">
         <DishImage src={dish.img} altText={dish.name} className="dish-image" />
       </Box>
-      <Box className="content-container">
+      <Box className="dish-card-content-container">
         <Divider className="field-label">Name</Divider>
         <Box className="dish-name">{dish.name}</Box>
         <Divider className="field-label no-divider">Available in</Divider>
@@ -23,7 +24,11 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
           amountLimit={5}
         />
       </Box>
-      <Button onClick={flipCallback} variant="contained" className="flip-card-button">
+      <Button
+        onClick={flipCallback}
+        variant="contained"
+        className="flip-card-button"
+        endIcon={<ArrowForwardRounded />}>
         Show recipe
       </Button>
     </Card>

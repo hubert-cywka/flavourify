@@ -1,0 +1,45 @@
+@import './src/styles/variables';
+
+.dish-mini-card-container {
+  display: flex;
+  flex-direction: column;
+
+  .dish-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: $inner-border-radius-5;
+    flex-grow: 1;
+
+    .dish-image {;
+      height: 100%;
+    }
+  }
+
+  .content-container {
+    .dish-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+      padding: $standard-element-spacing;
+      margin: $standard-element-spacing 0;
+    }
+
+    .dish-tags-container, .dish-name {
+      box-sizing: border-box;
+      border-radius: $inner-border-radius-5;
+      background: $white-transparent-background-10;
+      width: 100%;
+    }
+
+    .dish-tags-container {
+
+      .dish-tags {
+        padding: $small-element-spacing;
+
+        .dish-tag-chip {
+          background: $white-transparent-background-35;
+        }
+      }
+    }
+  }
+}

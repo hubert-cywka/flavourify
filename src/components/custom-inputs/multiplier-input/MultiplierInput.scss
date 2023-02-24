@@ -1,16 +1,18 @@
+@import './src/styles/variables';
+
 .multiplier-input-container {
   width: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  border-radius: 10px;
+  border: 1px solid $highlighted-background;
+  border-radius: $outer-border-radius-10;
   overflow: hidden;
 
   .value-field {
-    background-color: rgba(128, 128, 128, 0.1);
-    padding: 5px;
+    background-color: $highlighted-background;
+    padding: $small-element-spacing;
     min-width: 50px;
     height: 100%;
     box-sizing: border-box;
@@ -18,7 +20,7 @@
 
   .buttons-container {
     .increment-button, .decrement-button {
-      padding: 0 5px;
+      padding: 0 $small-element-spacing;
       font-weight: bold;
 
       &.MuiButtonBase-root {

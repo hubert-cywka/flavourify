@@ -2,18 +2,6 @@
 @import './src/styles/shared';
 
 .displayed-tag-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.7rem;
-
-  .displayed-tag-icon {
-    font-size: 1.25rem;
-  }
-}
-
-.tags-list-container {
   .search-list {
     @include search-list;
 
@@ -22,7 +10,7 @@
     }
 
     .tag-items-container {
-      max-height: 30vh;
+      max-height: 55vh;
       overflow-y: auto;
     }
   }

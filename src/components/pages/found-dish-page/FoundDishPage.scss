@@ -6,6 +6,7 @@
 
   .slides-container {
     box-sizing: border-box;
+    z-index: 1;
     height: 100%;
 
     .dish-card {

@@ -2,30 +2,30 @@
 
 .bottom-navbar-container {
   width: $navbar-width;
-  height: $navbar-height;
+  height: $bottom-navbar-height;
   position: absolute;
   box-sizing: border-box;
-  bottom: $page-offset;
+  bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;
 
   .MuiBottomNavigation-root {
-    border-radius: 20px;
+    border-radius: $outer-border-radius-25 $outer-border-radius-25 0 0;
     height: 100%;
     width: 100%;
   }
 
   .navbar-tile {
     box-sizing: border-box;
-    height: $navbar-height;
-    width: $navbar-height;
+    height: $bottom-navbar-height;
+    width: $bottom-navbar-height;
     border-radius: 50%;
 
     .MuiBottomNavigationAction-label {
       font-weight: 600;
-      margin-top: 5px;
-      font-size: 0.7rem;
+      margin-top: $small-element-spacing;
+      font-size: $small-font-size;
     }
 
     .MuiSvgIcon-root {
@@ -34,7 +34,7 @@
 
     &.Mui-selected {
       .MuiSvgIcon-root {
-        transform: scaleX(-1) scale(1.3);
+        transform: scale(1.15);
       }
     }
   }

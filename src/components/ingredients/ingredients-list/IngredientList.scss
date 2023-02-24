@@ -1,12 +1,13 @@
 @import './src/styles/shared';
+@import './src/styles/variables';
 
 .ingredient-list-container {
   width: 100%;
   text-align: center;
 
   .ingredient-tile {
-    height: 3vh;
-    transform: scale(0.9);
+    padding: $small-element-spacing $standard-element-spacing;
+    margin: 3px;
     @include appear-animation;
   }
 
@@ -16,17 +17,17 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: $standard-element-spacing;
 
     .servings-text {
       font-weight: bold;
-      font-size: 0.9rem;
-      margin-right: 10px;
+      font-size: $standard-font-size;
+      margin-right: $standard-element-spacing;
     }
   }
 
   .ingredients-divider {
-    margin: 10px auto;
+    margin: $standard-element-spacing auto;
     width: 90%;
     opacity: 0.5;
   }

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   ClickAwayListener,
   Input,
   List,
@@ -86,13 +87,15 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsTagSelectDialogOpen(false)}>
-      <Box className="tags-list-container">
-        <Box
-          className={`displayed-tag-container ${className}`}
-          onClick={() => setIsTagSelectDialogOpen((prev) => !prev)}>
-          <TagRounded className="displayed-tag-icon" />
+      <Box className="displayed-tag-container" sx={{ color: 'white' }}>
+        <Button
+          sx={{ bgcolor: 'secondary.main' }}
+          variant="contained"
+          className={className}
+          onClick={() => setIsTagSelectDialogOpen((prev) => !prev)}
+          startIcon={<TagRounded />}>
           {tagsList && lastViewedDish.tag.name}
-        </Box>
+        </Button>
 
         {isTagSelectDialogOpen && (
           <List className="search-list" sx={{ bgcolor: 'secondary.main' }}>
@@ -102,6 +105,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
               </ListItemIcon>
               <Input
                 value={textFilter}
+                disableUnderline
                 sx={{ color: 'text.secondary' }}
                 onChange={(e) => setTextFilter(e.target.value)}
                 placeholder="Search for tags"

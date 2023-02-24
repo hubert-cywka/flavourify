@@ -21,30 +21,30 @@
   }
 
   .error-title, .image-container, .error-button {
-    border-radius: $dish-card-inner-border-radius;
-    padding: $dish-card-spacing;
+    border-radius: $inner-border-radius-5;
+    padding: $standard-element-spacing;
     width: 100%;
     box-sizing: border-box;
   }
 
   .error-title, .image-container {
     background-color: $highlighted-background;
-    margin-bottom: $dish-card-spacing;
+    margin-bottom: $standard-element-spacing;
   }
 
   .error-button {
-    font-weight: bold;
+    @include dish-card-action-button;
   }
 
   .loading-button, .loading-element, .loading-image {
     width: 100%;
     box-sizing: border-box;
-    border-radius: $dish-card-inner-border-radius;
+    border-radius: $inner-border-radius-5;
   }
 
   .loading-button {
     height: 5%;
-    margin-top: $dish-card-spacing;
+    margin-top: $standard-element-spacing;
   }
 
   .loading-image {
@@ -52,7 +52,7 @@
   }
 
   .loading-element {
-    margin-top: $dish-card-spacing;
+    margin-top: $standard-element-spacing;
     height: 8%;
   }
 }

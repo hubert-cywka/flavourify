@@ -1,11 +1,38 @@
-$navbar-height: 70px;
-$navbar-width: 95vmin;
+$bottom-navbar-height: 70px;
+$navbar-width: 90vmin;
 $page-width: 90vmin;
-$display-manager-height: 60px;
+$top-navbar-height: 60px;
 
-$page-offset: 10px;
-$dish-card-spacing: 10px;
-$dish-card-inner-border-radius: 5px;
+$page-offset: 30px;
+$small-element-spacing: 5px;
+$standard-element-spacing: 10px;
+$big-element-spacing: 20px;
+$huge-element-spacing: 30px;
+
+$inner-border-radius-5: 5px;
+$outer-border-radius-10: 10px;
+$outer-border-radius-25: 25px;
+$round-border-radius-50: 50px;
 
 $highlighted-background: rgba(128, 128, 128, 0.075);
 $strong-highlighted-background: rgba(128, 128, 128, 0.25);
+
+$white-transparent-background-10: rgba(255, 255, 255, 0.1);
+$white-transparent-background-25: rgba(255, 255, 255, 0.25);
+$white-transparent-background-35: rgba(255, 255, 255, 0.35);
+$white-transparent-background-75: rgba(255, 255, 255, 0.75);
+
+$gradient-transparent-background: linear-gradient(270deg, rgba(121,0,255,0.25) 0%, rgba(255,255,255,0.25) 100%);
+$gradient-transparent-background-soft: linear-gradient(45deg, rgba(183,119,255,0.25) 0%, rgba(255,255,255,0.25) 100%);
+
+$dish-card-width: 85vw;
+$mini-dish-card-height: 60vh;
+$slide-bottom-container-height: 10vh;
+$slide-header-margin: 25px;
+
+$tiny-font-size: 0.6rem;
+$small-font-size: 0.75rem;
+$standard-font-size: 0.9rem;
+$big-font-size: 1.25rem;
+$huge-font-size: 2.5rem;
+$icon-font-size: 3rem;

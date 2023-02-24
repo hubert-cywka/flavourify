@@ -73,7 +73,7 @@ const DishesList = ({ className }: DishesListProps) => {
         );
       });
     },
-    [isFrontSide]
+    [isFrontSide, data]
   );
 
   return QueryResultsBuilder.createResult(status)

@@ -13,7 +13,12 @@ import { Dish } from '../../../../interfaces/Dish';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishRecipe from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
-import { CancelRounded, CheckCircleRounded, DeleteRounded } from '@mui/icons-material';
+import {
+  ArrowBackRounded,
+  CancelRounded,
+  CheckCircleRounded,
+  DeleteRounded
+} from '@mui/icons-material';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
 import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
@@ -172,17 +177,15 @@ const DishCardBack = ({
     }
     getRequestMethod(updatedDish)
       .then(async (res) => {
-        queryClient
-          .invalidateQueries({ queryKey: [DISHES_QUERY], refetchType: 'all' })
-          .finally(() => {
-            if (onQuerySuccess) onQuerySuccess();
-            setIsLoading(false);
-            setDisplayedDish(res);
-            setReadOnly(true);
-            enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, {
-              variant: 'success'
-            });
+        queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
+          if (onQuerySuccess) onQuerySuccess();
+          setIsLoading(false);
+          setDisplayedDish(res);
+          setReadOnly(true);
+          enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, {
+            variant: 'success'
           });
+        });
       })
       .catch(() => {
         enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' });
@@ -200,14 +203,12 @@ const DishCardBack = ({
     setIsLoading(true);
     deleteDish(dish.id)
       .then(async () => {
-        queryClient
-          .invalidateQueries({ queryKey: [DISHES_QUERY], refetchType: 'all' })
-          .finally(() => {
-            setIsDeleteDialogOpen(false);
-            setIsLoading(false);
-            handleFlipCallback();
-            enqueueSnackbar(DISH_DELETE_SUCCESS, { variant: 'success' });
-          });
+        queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
+          setIsDeleteDialogOpen(false);
+          setIsLoading(false);
+          handleFlipCallback();
+          enqueueSnackbar(DISH_DELETE_SUCCESS, { variant: 'success' });
+        });
       })
       .catch(() => {
         enqueueSnackbar(DISH_DELETE_ERROR);
@@ -302,7 +303,11 @@ const DishCardBack = ({
             Submit recipe
           </Button>
         ) : (
-          <Button onClick={handleFlipCallback} variant="contained" className="flip-card-button">
+          <Button
+            onClick={handleFlipCallback}
+            variant="contained"
+            className="flip-card-button"
+            startIcon={<ArrowBackRounded />}>
             Go back
           </Button>
         )}
