@@ -1,14 +1,14 @@
 import './FoundDishPage.scss';
 import { Box } from '@mui/material';
-import DishCard from '../dishes/dish-card/DishCard';
+import DishCard from '../../dishes/dish-card/DishCard';
 import { useQuery } from '@tanstack/react-query';
-import { DISH_QUERY } from '../../constants/QueryConstants';
+import { DISH_QUERY, DISHES_QUERY } from '../../../constants/QueryConstants';
 import { useParams } from 'react-router';
-import { getDish } from '../../services/DishService';
-import Builder from '../../utility/Builder';
+import { getDish } from '../../../services/DishService';
+import Builder from '../../../utility/Builder';
 import { useCallback, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ErrorDishCard from '../dishes/dish-card/error-dish-card/ErrorDishCard';
+import ErrorDishCard from '../../dishes/dish-card/error-dish-card/ErrorDishCard';
 import {
   DISH_SEARCH_DONE_BUTTON,
   DISH_SEARCH_DONE_IMAGE,
@@ -16,14 +16,18 @@ import {
   NO_RECIPES_BUTTON,
   NO_RECIPES_IMAGE,
   NO_RECIPES_TITLE
-} from '../../constants/DishesConstants';
-import appRouter from '../router/AppRouter';
-import TopNavbar from '../navbars/top-navbar/TopNavbar';
+} from '../../../constants/DishesConstants';
+import appRouter from '../../router/AppRouter';
+import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 
 const FoundDishPage = () => {
   const { id } = useParams();
 
-  const { data: dish, status, refetch } = useQuery([DISH_QUERY, { id: id }], () => getDish(id));
+  const {
+    data: dish,
+    status,
+    refetch
+  } = useQuery([DISHES_QUERY, DISH_QUERY, { id: id }], () => getDish(id ? parseInt(id) : 0));
   const [isFrontSide, setFrontSide] = useState(true);
 
   const flipCard = useCallback(() => {

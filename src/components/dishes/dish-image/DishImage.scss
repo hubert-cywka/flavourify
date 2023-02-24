@@ -31,12 +31,12 @@
     width: 80%;
     height: 80%;
     background-color: rgba(0, 0, 0, 0.4);
-    padding: 10px;
-    border-radius: $dish-card-inner-border-radius;
+    padding: $standard-element-spacing;
+    border-radius: $inner-border-radius-5;
 
     .edit-icon {
       color: white;
-      font-size: 3rem;
+      font-size: $icon-font-size;
       margin: 0 auto;
     }
 

@@ -1,47 +1,26 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .top-navbar-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: $display-manager-height;
-  border-radius: 15px;
+  height: $top-navbar-height;
+  background: $gradient-transparent-background;
+  border-radius: 20px $round-border-radius-50 $round-border-radius-50 20px;
 
   .search-bar {
-    flex: 1;
-    height: calc(#{$display-manager-height} - 10px);
-    background-color: $highlighted-background;
-    margin: 5px;
+    flex-grow: 1;
+    height: calc(#{$top-navbar-height} - $standard-element-spacing);
+    background: $white-transparent-background-25;
+    margin: $small-element-spacing;
     box-sizing: border-box;
   }
 
-  .selected-tag {
-    min-width: 70px;
-    height: $display-manager-height;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .back-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    box-sizing: border-box;
-
-    .back-button-label {
-      font-size: 0.8rem;
-    }
-  }
-
-  .MuiToggleButton-root {
+  .back-button, .displayed-tag {
+    @include action-button-standard;
+    white-space: nowrap;
     color: white;
-    height: $display-manager-height;
-
-    &.Mui-selected {
-      opacity: 0.5;
-      color: white;
-    }
+    margin: 0 $standard-element-spacing;
   }
 }

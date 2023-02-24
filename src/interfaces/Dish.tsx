@@ -2,7 +2,7 @@ import { Ingredient } from './Ingredient';
 import { Tag } from './Tag';
 
 export interface Dish {
-  id?: number;
+  id: number;
   name: string;
   img: string;
   ingredients: Ingredient[];

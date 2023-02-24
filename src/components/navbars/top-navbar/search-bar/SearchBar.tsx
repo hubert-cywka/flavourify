@@ -30,6 +30,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
   );
 
   const navigateToSearchResultPage = (id: number) => {
+    setAreSearchResultsDisplayed(false);
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
   };
 
@@ -77,7 +78,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
           <SearchRounded className="search-icon" />
           <Input
             value={textFilter}
-            sx={{ color: 'text.secondary' }}
+            disableUnderline
             onChange={(e) => setTextFilter(e.target.value)}
             onFocus={() => setAreSearchResultsDisplayed(true)}
             placeholder="Search for recipes"
@@ -85,7 +86,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
           />
         </Box>
         {areSearchResultsDisplayed && textFilter.length > 0 && (
-          <List sx={{ bgcolor: 'secondary.main' }} className="search-list">
+          <List sx={{ bgcolor: 'secondary.main', color: 'text.secondary' }} className="search-list">
             {getQueryResults()}
           </List>
         )}

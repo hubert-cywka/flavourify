@@ -1,0 +1,38 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.discover-page-container {
+  @include page-container;
+  justify-content: flex-end;
+
+    .slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: calc(#{$bottom-navbar-height} + #{$big-element-spacing});
+
+      .swiper-pagination {
+        top: 0;
+        position: absolute;
+
+        .swiper-pagination-bullet {
+          display: inline-block;
+          width: 0.75rem;
+          height: 0.75rem;
+          background: $white-transparent-background-35;
+          border-radius: $round-border-radius-50;
+          margin: 0 5px;
+          transition: background-color 0.25s ease-in-out, width 0.25s ease-in-out, height 0.25s ease-in-out;
+
+          &.swiper-pagination-bullet-active {
+            background: $white-transparent-background-75;
+            width: 0.9rem;
+            height: 0.9rem;
+          }
+        }
+      }
+    }
+}

@@ -1,4 +1,5 @@
 @import './src/styles/shared';
+@import './src/styles/variables';
 
 .dish-recipe-container {
   display: flex;
@@ -12,33 +13,33 @@
     align-items: center;
     flex-direction: row;
     width: 100%;
-    padding: 10px;
-    background-color: rgba(128, 128, 128, 0.075);
-    margin-bottom: 5px;
+    padding: $standard-element-spacing;
+    background-color: $highlighted-background;
+    margin-bottom: $small-element-spacing;
     @include appear-animation;
 
     &.add-step {
       text-align: center;
 
       .add-step-text {
-        margin-left: 10px;
+        margin-left: $standard-element-spacing;
         line-height: 100%;
       }
     }
 
     .recipe-step-number {
-      font-size: 1.25rem;
+      font-size: $big-font-size;
       font-weight: bold;
-      padding: 0 10px;
+      padding: 0 $standard-element-spacing;
     }
 
     .recipe-step-text {
-      font-size: 0.75rem;
+      font-size: $small-font-size;
       flex-grow: 1;
     }
 
     .delete-step-button {
-      padding: 0 5px;
+      padding: 0 $small-element-spacing;
       @include appear-animation;
     }
   }

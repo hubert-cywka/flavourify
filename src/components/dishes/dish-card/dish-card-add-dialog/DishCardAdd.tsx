@@ -7,6 +7,7 @@ import {
 } from '../../../../constants/DishesConstants';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
+  id: -1,
   name: DISH_NAME_PLACEHOLDER,
   recipe: [],
   ingredients: [],

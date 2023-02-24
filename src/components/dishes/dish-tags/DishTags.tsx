@@ -70,17 +70,17 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
 
   return (
     <>
-      <Box className={`tags-list-container ${className}`} ref={reference}>
+      <Box className={`dish-tags-list-container ${className}`} ref={reference}>
         {displayedTags.map((category, id) => {
           return (
-            <Box key={category.name + id} className="tag-chip">
+            <Box key={category.name + id} className="dish-tag-chip">
               {category.name}
             </Box>
           );
         })}
         {editable && (
-          <Box className="tag-chip" onClick={() => setIsEditDialogVisible(true)}>
-            <EditRounded className="tags-edit-icon" /> Edit tags
+          <Box className="dish-tag-chip" onClick={() => setIsEditDialogVisible(true)}>
+            <EditRounded className="dish-tags-edit-icon" /> Edit tags
           </Box>
         )}
       </Box>
@@ -88,9 +88,9 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
       <Dialog
         open={isEditDialogVisible}
         onClose={handleTagsEditDialogClose}
-        className="tags-list-dialog">
+        className="dish-tags-list-dialog">
         {tagsList && tagsList.length ? (
-          <FormControl className="tags-select-form">
+          <FormControl className="dish-tags-select-form">
             <Typography className="tags-select-info">{TAGS_SELECTED_INFO}</Typography>
             <Select
               multiple
@@ -101,7 +101,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
               renderValue={(selected) => (
                 <Box sx={{ display: 'flex' }}>
                   {selected.map((tags, id) => (
-                    <Box key={tags + id} className="tag-chip">
+                    <Box key={tags + id} className="dish-tag-chip">
                       {tags}
                     </Box>
                   ))}
@@ -135,7 +135,7 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
             </Box>
           </FormControl>
         ) : (
-          <Box className="tags-select-form">
+          <Box className="dish-tags-select-form">
             <img src={NO_TAGS_IMAGE} className="error-image" />
             <Typography className="tags-select-info">{NO_TAGS_ERROR}</Typography>
           </Box>

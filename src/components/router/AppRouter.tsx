@@ -1,11 +1,11 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
-import LandingPage from '../landing-page/LandingPage';
-import SettingsPage from '../settings-page/SettingsPage';
-import WeekMenuPage from '../week-menu-page/WeekMenuPage';
-import ROUTE from './RoutingConstants';
-import FoundDishPage from '../found-dish-page/FoundDishPage';
+import LandingPage from '../pages/landing-page/LandingPage';
+import SettingsPage from '../pages/settings-page/SettingsPage';
+import WeekMenuPage from '../pages/week-menu-page/WeekMenuPage';
+import FoundDishPage from '../pages/found-dish-page/FoundDishPage';
 import BottomNavbar from '../navbars/bottom-navbar/BottomNavbar';
-import DiscoverPage from '../discover-page/DiscoverPage';
+import DiscoverPage from '../pages/discover-page/DiscoverPage';
+import ROUTE from './RoutingConstants';
 
 const appRouter = createBrowserRouter([
   {

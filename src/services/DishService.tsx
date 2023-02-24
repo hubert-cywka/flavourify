@@ -42,7 +42,17 @@ export const getListOfDishesByName = async (name: string): Promise<DishNameAndId
   return data;
 };
 
-export const getDish = async (dishId: string | undefined): Promise<Dish> => {
+export const getDish = async (dishId: number): Promise<Dish> => {
   const { data } = await apiClient.get<Dish>(`/dishes/${dishId}`);
+  return data;
+};
+
+export const getLatestDish = async (): Promise<Dish> => {
+  const { data } = await apiClient.get<Dish>(`/dishes/latest`);
+  return data;
+};
+
+export const getRandomDishes = async (amount: number): Promise<Dish[]> => {
+  const { data } = await apiClient.get<Dish[]>(`/dishes/random?amount=${amount}`);
   return data;
 };

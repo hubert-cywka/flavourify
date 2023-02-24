@@ -2,13 +2,13 @@ import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { MenuBookRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import { useContext, useState } from 'react';
-import { ColorModeContext } from '../../../contexts/ColorModeContext';
+import { ColorModeContext } from '../../../../contexts/ColorModeContext';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import DishCardAdd from '../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
+import DishCardAdd from '../../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
 import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
-import TagsManagementPanel from '../../tags/tags-management-panel/TagsManagementPanel';
+import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 
 interface SettingsPanelProps {
   className?: string;
