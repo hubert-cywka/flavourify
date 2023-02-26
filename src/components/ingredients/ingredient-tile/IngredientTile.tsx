@@ -82,15 +82,15 @@ const IngredientTile = ({
   return (
     <>
       <Box className={`ingredient-tile-container ${className}`} onClick={openEditDialog}>
-        <Typography className="ingredient-name">{displayedIngredient.name}</Typography>
+        <Box className="ingredient-name">{displayedIngredient.name}</Box>
         {displayedIngredient.quantity && (
           <>
-            <Typography className="ingredient-amount">
+            <Box className="ingredient-amount">
               {multiplier
                 ? displayedIngredient.quantity.amount * multiplier
                 : displayedIngredient.quantity.amount}
-            </Typography>
-            <Typography className="ingredient-unit">{displayedIngredient.quantity.unit}</Typography>
+            </Box>
+            <Box className="ingredient-unit">{displayedIngredient.quantity.unit}</Box>
           </>
         )}
       </Box>

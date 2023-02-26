@@ -1,10 +1,10 @@
 import IngredientTile from '../ingredient-tile/IngredientTile';
-import { Box, Divider, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
 import { Ingredient } from '../../../interfaces/Ingredient';
 import { RefObject, useCallback, useMemo, useState } from 'react';
 import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
-import { AddRounded } from '@mui/icons-material';
+import { AddCircleRounded } from '@mui/icons-material';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import {
@@ -90,7 +90,6 @@ const IngredientsList = ({
               max={MAX_INGREDIENTS_MULTIPLIER}
             />
           </Box>
-          <Divider className="ingredients-divider" />
         </>
       )}
 
@@ -104,8 +103,8 @@ const IngredientsList = ({
       )}
 
       {editable && (
-        <IconButton onClick={addNewIngredient} className="ingredient-tile">
-          <AddRounded />
+        <IconButton onClick={addNewIngredient}>
+          <AddCircleRounded sx={{ color: 'text.primary' }} />
         </IconButton>
       )}
     </Box>

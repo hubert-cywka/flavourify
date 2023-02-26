@@ -2,7 +2,6 @@
 @import './src/styles/shared';
 
 .slide-container {
-
   .header {
     margin: $big-element-spacing 0 $standard-element-spacing 0;
     font-weight: bold;
@@ -15,21 +14,17 @@
   }
 
   .mini-dish-card, .slide-bottom-container {
+    @include translucent-tile;
     width: 85vw;
     margin: 0 auto;
-    padding: $standard-element-spacing;
-    border-radius: $outer-border-radius-10;
-    box-sizing: border-box;
   }
 
   .mini-dish-card {
-    background: $gradient-transparent-background-soft;
     height: $mini-dish-card-height;
     margin-bottom: $standard-element-spacing;
   }
 
   .slide-bottom-container {
-    background: $gradient-transparent-background;
     height: $slide-bottom-container-height;
     display: flex;
     justify-content: center;

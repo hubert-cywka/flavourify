@@ -8,7 +8,6 @@ import { getDish } from '../../../services/DishService';
 import Builder from '../../../utility/Builder';
 import { useCallback, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ErrorDishCard from '../../dishes/dish-card/error-dish-card/ErrorDishCard';
 import {
   DISH_SEARCH_DONE_BUTTON,
   DISH_SEARCH_DONE_IMAGE,
@@ -19,6 +18,7 @@ import {
 } from '../../../constants/DishesConstants';
 import appRouter from '../../router/AppRouter';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
+import ErrorDishCard from '../../dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
 
 const FoundDishPage = () => {
   const { id } = useParams();

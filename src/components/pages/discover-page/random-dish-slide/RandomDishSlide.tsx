@@ -1,6 +1,5 @@
 import Builder from '../../../../utility/Builder';
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import DishMiniCard from '../../../dishes/dish-mini-card/DishMiniCard';
 import { useQuery } from '@tanstack/react-query';
 import { DISHES_QUERY, RANDOM_DISHES_QUERY } from '../../../../constants/QueryConstants';
 import { getRandomDishes } from '../../../../services/DishService';
@@ -8,6 +7,7 @@ import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
 import '../SlidesShared.scss';
 import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded';
+import DishMiniCard from '../../../dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
 
 const RandomDishSlide = () => {
   const { data, status, refetch } = useQuery(

@@ -1,4 +1,4 @@
-import { Box, Button, Card, Divider } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import './DishCardFront.scss';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishImage from '../../dish-image/DishImage';
@@ -8,14 +8,14 @@ import { ArrowForwardRounded } from '@mui/icons-material';
 
 const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
   return (
-    <Card className={`dish-card-front-container ${className}`}>
+    <Box className={`dish-card-front-container ${className}`}>
       <Box className="image-container">
         <DishImage src={dish.img} altText={dish.name} className="dish-image" />
       </Box>
       <Box className="dish-card-content-container">
         <Divider className="field-label">Name</Divider>
         <Box className="dish-name">{dish.name}</Box>
-        <Divider className="field-label no-divider">Available in</Divider>
+        <Divider className="field-label">Available in</Divider>
         <DishTags tags={dish.tags} />
         <Divider className="field-label">Ingredients</Divider>
         <IngredientsList
@@ -31,7 +31,7 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
         endIcon={<ArrowForwardRounded />}>
         Show recipe
       </Button>
-    </Card>
+    </Box>
   );
 };
 

@@ -23,10 +23,16 @@ const MultiplierInput = ({ value, callback, min, max, className }: MultiplierInp
     <Box className={`multiplier-input-container ${className}`}>
       <Box className="value-field">{value}</Box>
       <Box className="buttons-container">
-        <Button className="decrement-button" onClick={() => handleValueChange(-1)}>
+        <Button
+          className="decrement-button"
+          sx={{ color: 'text.primary' }}
+          onClick={() => handleValueChange(-1)}>
           -
         </Button>
-        <Button className="increment-button" onClick={() => handleValueChange(1)}>
+        <Button
+          className="increment-button"
+          sx={{ color: 'text.primary' }}
+          onClick={() => handleValueChange(1)}>
           +
         </Button>
       </Box>

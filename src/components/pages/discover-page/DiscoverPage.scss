@@ -13,6 +13,7 @@
       width: 100%;
       box-sizing: border-box;
       margin-bottom: calc(#{$bottom-navbar-height} + #{$big-element-spacing});
+      overflow: visible;
 
       .swiper-pagination {
         top: 0;

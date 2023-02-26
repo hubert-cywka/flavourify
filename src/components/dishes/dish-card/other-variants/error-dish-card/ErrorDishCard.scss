@@ -1,9 +1,11 @@
-@import '../DishCardShared';
+@import '../../DishCardShared';
 @import './src/styles/variables';
 
 .error-dish-card-container {
   @include dish-card;
   @include dish-card-container;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,14 +24,14 @@
 
   .error-title, .image-container, .error-button {
     border-radius: $inner-border-radius-5;
-    padding: $standard-element-spacing;
+    padding: $small-element-spacing;
     width: 100%;
     box-sizing: border-box;
   }
 
   .error-title, .image-container {
-    background-color: $highlighted-background;
-    margin-bottom: $standard-element-spacing;
+    background-color: $white-transparent-background-10;
+    margin-bottom: $small-element-spacing;
   }
 
   .error-button {
@@ -43,8 +45,10 @@
   }
 
   .loading-button {
-    height: 5%;
-    margin-top: $standard-element-spacing;
+    @include dish-card-action-button;
+    height: 7%;
+    width: 30%;
+    margin-top: $small-element-spacing;
   }
 
   .loading-image {
@@ -52,7 +56,6 @@
   }
 
   .loading-element {
-    margin-top: $standard-element-spacing;
-    height: 8%;
+    height: 23%;
   }
 }

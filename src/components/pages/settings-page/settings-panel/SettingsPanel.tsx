@@ -6,9 +6,9 @@ import { ColorModeContext } from '../../../../contexts/ColorModeContext';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import DishCardAdd from '../../../dishes/dish-card/dish-card-add-dialog/DishCardAdd';
 import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
 import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
+import DishCardAdd from '../../../dishes/dish-card/other-variants/dish-card-add/DishCardAdd';
 
 interface SettingsPanelProps {
   className?: string;

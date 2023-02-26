@@ -2,13 +2,10 @@
 @import './src/styles/variables';
 
 .ingredient-list-container {
-  width: 100%;
   text-align: center;
 
   .ingredient-tile {
-    padding: $small-element-spacing $standard-element-spacing;
-    margin: 3px;
-    @include appear-animation;
+    @include chip;
   }
 
   .servings-container {
@@ -17,18 +14,12 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin-top: $standard-element-spacing;
+    margin: $standard-element-spacing 0;
 
     .servings-text {
       font-weight: bold;
       font-size: $standard-font-size;
       margin-right: $standard-element-spacing;
     }
-  }
-
-  .ingredients-divider {
-    margin: $standard-element-spacing auto;
-    width: 90%;
-    opacity: 0.5;
   }
 }

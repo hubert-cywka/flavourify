@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography, Skeleton } from '@mui/material';
+import { Box, Button, Typography, Skeleton } from '@mui/material';
 import './ErrorDishCard.scss';
 
 interface ErrorDishCardProps {
@@ -11,14 +11,12 @@ interface ErrorDishCardProps {
 
 const ErrorDishCard = ({ img, title, caption, callback, loading }: ErrorDishCardProps) => {
   return (
-    <Card className="error-dish-card-container">
+    <Box className="error-dish-card-container">
       {loading ? (
         <>
           <Box className="image-container">
             <Skeleton variant="rectangular" className="loading-image" />
           </Box>
-          <Skeleton variant="rectangular" className="loading-element" />
-          <Box className="loading-element" />
           <Skeleton variant="rectangular" className="loading-element" />
           <Skeleton variant="rectangular" className="loading-button" />
         </>
@@ -35,7 +33,7 @@ const ErrorDishCard = ({ img, title, caption, callback, loading }: ErrorDishCard
           </Button>
         </>
       )}
-    </Card>
+    </Box>
   );
 };
 

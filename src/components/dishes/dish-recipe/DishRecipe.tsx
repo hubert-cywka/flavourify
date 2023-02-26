@@ -38,7 +38,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
       displayedRecipe.map((step, id) => {
         return (
           <Box key={step + id} className="recipe-step">
-            <Typography sx={{ color: 'primary.main' }} className="recipe-step-number">
+            <Typography sx={{ color: 'text.primary' }} className="recipe-step-number">
               {id + 1}
             </Typography>
             <EditableTextField
@@ -64,7 +64,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
       {!isReadOnly && (
         <Box onClick={addEmptyStep} className="recipe-step add-step">
           <Button sx={{ textTransform: 'none' }}>
-            <AddCircleRoundedIcon />
+            <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
             <Typography className="add-step-text" variant="caption" color="text.primary">
               Add another step
             </Typography>

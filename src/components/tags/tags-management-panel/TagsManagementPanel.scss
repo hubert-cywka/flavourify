@@ -76,7 +76,7 @@
         justify-content: center;
 
         .search-list-item {
-          @include tag-chip;
+          @include chip;
 
           &.selected {
             background-color: $strong-highlighted-background;
