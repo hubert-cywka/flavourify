@@ -1,15 +1,7 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .ingredient-tile-container {
-  font-weight: bold;
-  background-color: $strong-highlighted-background;
-  padding: 0 $standard-element-spacing;
-  border-radius: $round-border-radius-50;
-  box-sizing: border-box;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-
   .ingredient-name, .ingredient-amount, .ingredient-unit {
     font-size: $tiny-font-size;
     width: fit-content;

@@ -1,10 +1,10 @@
-import DishCardBack from '../dish-card-back/DishCardBack';
-import { Dish } from '../../../../interfaces/Dish';
+import DishCardBack from '../../dish-card-back/DishCardBack';
+import { Dish } from '../../../../../interfaces/Dish';
 import {
   DISH_IMAGE_PLACEHOLDER,
   DISH_NAME_PLACEHOLDER,
   DISH_TAGS_DEFAULT
-} from '../../../../constants/DishesConstants';
+} from '../../../../../constants/DishesConstants';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
   id: -1,

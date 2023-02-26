@@ -19,21 +19,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.35;
-  }
-}
-
-@mixin appear-animation {
-  animation: appear 0s ease-in-out;
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
+    opacity: 0.1;
   }
 }
 
@@ -56,15 +42,17 @@
   z-index: 1000;
 }
 
-@mixin tag-chip {
-  display: flex;
+@mixin chip {
+  display: inline-flex;
+  flex-direction: row;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
   margin: 3px;
   font-size: $tiny-font-size;
-  background-color: $strong-highlighted-background;
-  padding: 5px 10px;
-  border-radius: 50px;
+  background-color: $white-transparent-background-35;
+  padding: $small-element-spacing $standard-element-spacing;
+  border-radius: $round-border-radius-50;
 }
 
 @mixin search-list {
@@ -127,4 +115,14 @@
   transform: scale(0.9);
   @include action-button-standard;
   margin: 0 auto;
+}
+
+@mixin translucent-tile {
+  -webkit-box-shadow: 0 0 25px 0 rgba(66, 68, 90, 0.3);
+  -moz-box-shadow: 0 0 25px 0 rgba(66, 68, 90, 0.3);
+  box-shadow: 0 0 25px 0 rgba(66, 68, 90, 0.3);
+  background: $gradient-transparent-background-soft;
+  border-radius: $outer-border-radius-10;
+  padding: $small-element-spacing;
+  box-sizing: border-box;
 }

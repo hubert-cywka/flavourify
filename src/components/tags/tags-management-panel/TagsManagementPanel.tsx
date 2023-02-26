@@ -199,9 +199,33 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       <TabContext value={visibleTab}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleTabChange} centered>
-            <Tab sx={{ color: 'text.primary', textTransform: 'none' }} label="Update" value="1" />
-            <Tab sx={{ color: 'text.primary', textTransform: 'none' }} label="Add" value="2" />
-            <Tab sx={{ color: 'text.primary', textTransform: 'none' }} label="Delete" value="3" />
+            <Tab
+              sx={{
+                color: 'text.primary',
+                textTransform: 'none',
+                '&.Mui-selected': { color: 'accent.main' }
+              }}
+              label="Update"
+              value="1"
+            />
+            <Tab
+              sx={{
+                color: 'text.primary',
+                textTransform: 'none',
+                '&.Mui-selected': { color: 'accent.main' }
+              }}
+              label="Add"
+              value="2"
+            />
+            <Tab
+              sx={{
+                color: 'text.primary',
+                textTransform: 'none',
+                '&.Mui-selected': { color: 'accent.main' }
+              }}
+              label="Delete"
+              value="3"
+            />
           </TabList>
         </Box>
 
@@ -226,6 +250,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                   className="action-button"
                   size="small"
                   variant="outlined"
+                  sx={{ color: 'accent.main' }}
                   startIcon={<CheckCircleOutlineRoundedIcon />}
                   onClick={updateSelectedTag}>
                   Submit
@@ -253,6 +278,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
               className="action-button"
               size="small"
               variant="outlined"
+              sx={{ color: 'accent.main' }}
               startIcon={<AddCircleOutlineRoundedIcon />}
               onClick={createNewTag}>
               Submit
@@ -274,6 +300,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                   className="action-button"
                   size="small"
                   variant="outlined"
+                  sx={{ color: 'accent.main' }}
                   startIcon={<DeleteRounded />}
                   onClick={removeSelectedTag}>
                   Delete

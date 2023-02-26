@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Card,
   CircularProgress,
   Dialog,
   Divider,
@@ -47,6 +46,7 @@ import {
   NAME_EDIT_ERROR,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../../constants/DishesConstants';
+import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -258,7 +258,7 @@ const DishCardBack = ({
 
   return (
     <>
-      <Card className={`dish-card-back-container ${className}`}>
+      <Box className={`dish-card-back-container ${className}`}>
         {!addMode && <Box className="edit-panel">{getEditingPanel}</Box>}
         <Box className="scrollable-dish-details">
           <Box className="image-container">
@@ -270,36 +270,42 @@ const DishCardBack = ({
               reference={imageRef}
             />
           </Box>
-          <Divider className="field-label">Name</Divider>
-          <EditableTextField
-            className="dish-name"
-            isReadOnly={readOnly}
-            value={displayedDish.name}
-            reference={nameRef}
-            max={DISH_NAME_MAX_LENGTH}
-            errorMessage={NAME_EDIT_ERROR}
-          />
-          <Divider className="field-label no-divider">Available in</Divider>
-          <DishTags tags={dish.tags} editable={!readOnly} reference={tagsRef} />
-          <Divider className="field-label">Ingredients</Divider>
-          <IngredientsList
-            className="ingredients-list"
-            ingredients={displayedDish.ingredients}
-            amountLimit={0}
-            withMultiplier={true}
-            editable={!readOnly}
-            reference={ingredientsRef}
-          />
-          <Divider className="field-label">Recipe</Divider>
-          <DishRecipe
-            recipe={displayedDish.recipe}
-            className="dish-recipe"
-            isReadOnly={readOnly}
-            reference={recipeRef}
-          />
+          <Box className="dish-card-content-container">
+            <Divider className="field-label">Name</Divider>
+            <EditableTextField
+              className="dish-name"
+              isReadOnly={readOnly}
+              value={displayedDish.name}
+              reference={nameRef}
+              max={DISH_NAME_MAX_LENGTH}
+              errorMessage={NAME_EDIT_ERROR}
+            />
+            <Divider className="field-label">Available in</Divider>
+            <DishTags tags={dish.tags} editable={!readOnly} reference={tagsRef} />
+            <Divider className="field-label">Ingredients</Divider>
+            <IngredientsList
+              className="ingredients-list"
+              ingredients={displayedDish.ingredients}
+              amountLimit={0}
+              withMultiplier={true}
+              editable={!readOnly}
+              reference={ingredientsRef}
+            />
+            <Divider className="field-label">Recipe</Divider>
+            <DishRecipe
+              recipe={displayedDish.recipe}
+              className="dish-recipe"
+              isReadOnly={readOnly}
+              reference={recipeRef}
+            />
+          </Box>
         </Box>
         {addMode ? (
-          <Button onClick={approveEdit} variant="contained" className="flip-card-button">
+          <Button
+            onClick={approveEdit}
+            variant="contained"
+            className="flip-card-button"
+            endIcon={<PlaylistAddCheckRoundedIcon />}>
             Submit recipe
           </Button>
         ) : (
@@ -311,7 +317,7 @@ const DishCardBack = ({
             Go back
           </Button>
         )}
-      </Card>
+      </Box>
       {isDeleteDialogOpen && (
         <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
           <Box className="delete-dialog">

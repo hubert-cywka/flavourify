@@ -44,7 +44,7 @@
   justify-content: center;
 
   .dish-tag-chip {
-    @include tag-chip;
+    @include chip;
 
     .dish-tags-edit-icon {
       height: 0.6rem;

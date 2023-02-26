@@ -94,10 +94,9 @@ const DishTags = ({ tags, className, editable, reference }: DishTagsProps) => {
             <Typography className="tags-select-info">{TAGS_SELECTED_INFO}</Typography>
             <Select
               multiple
-              className="tags-select-input"
               value={getDisplayedTagsNames()}
               onChange={handleTagsChange}
-              MenuProps={{ className: 'tags-select-menu' }}
+              MenuProps={{ className: 'dish-tags-select-menu' }}
               renderValue={(selected) => (
                 <Box sx={{ display: 'flex' }}>
                   {selected.map((tags, id) => (

@@ -20,6 +20,11 @@
   }
 
   .scrollable-dish-details {
+    .dish-card-content-container {
+      background-color: $white-transparent-background-5;
+      border-radius: $inner-border-radius-5;
+    }
+
     @include dish-card-components;
     overflow-y: auto;
     overflow-x: hidden;

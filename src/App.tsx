@@ -17,7 +17,7 @@ import { HighlightOffRounded } from '@mui/icons-material';
 import { ALL_TAGS } from './constants/TagsConstants';
 
 function App() {
-  const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'light');
+  const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'dark');
   const [lastViewedDish, setLastViewedDish] = useState<lastViewedDishI>({
     tag: ALL_TAGS,
     slide: 0
@@ -59,28 +59,28 @@ function App() {
               dark: '#ff6d00'
             },
             secondary: {
-              main: '#240046',
-              light: '#8700ff',
-              dark: '#140323'
+              main: '#050046',
+              light: '#1900ff',
+              dark: '#030723'
             },
             text: {
               primary: '#444444',
               secondary: '#ffffff'
             },
             accent: {
-              main: '#c800ff'
+              main: '#ff9e00'
             }
           }
         : {
             primary: {
-              main: '#6f1fc0',
-              light: '#9d4edd',
-              dark: '#240046'
+              main: '#07092c',
+              light: '#3138ff',
+              dark: '#070b4c'
             },
             secondary: {
-              main: '#280f2c',
-              light: '#541d5d',
-              dark: '#090309'
+              main: '#050046',
+              light: '#1900ff',
+              dark: '#030723'
             },
             text: {
               primary: '#ffffff',

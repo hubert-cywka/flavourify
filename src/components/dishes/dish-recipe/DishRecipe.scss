@@ -12,11 +12,9 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    width: 100%;
     padding: $standard-element-spacing;
-    background-color: $highlighted-background;
-    margin-bottom: $small-element-spacing;
-    @include appear-animation;
+    background-color: $white-transparent-background-5;
+    margin: 0 $small-element-spacing $small-element-spacing $small-element-spacing;
 
     &.add-step {
       text-align: center;
@@ -40,7 +38,6 @@
 
     .delete-step-button {
       padding: 0 $small-element-spacing;
-      @include appear-animation;
     }
   }
 }

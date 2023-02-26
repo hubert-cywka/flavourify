@@ -11,9 +11,9 @@
   }
 
   .dish-card-content-container {
-    .ingredients-list {
-      margin-bottom: $standard-element-spacing;
-    }
+    border-radius: $inner-border-radius-5;
+    background-color: $white-transparent-background-5;
+    margin: $small-element-spacing 0;
   }
 
   .flip-card-button {

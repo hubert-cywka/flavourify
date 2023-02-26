@@ -2,21 +2,13 @@
 @import './src/styles/variables';
 
 @mixin dish-card-container {
-  box-sizing: border-box;
+  @include translucent-tile;
   flex-direction: column;
   display: flex;
-  padding: $standard-element-spacing;
   justify-content: flex-end;
 }
 
 @mixin dish-card-components {
-  .ingredients-list, .dish-name {
-    background-color: $highlighted-background;
-    border-radius: $inner-border-radius-5;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
   .field-label {
     font-size: $tiny-font-size;
     margin: 5px auto 0 auto;
@@ -24,13 +16,7 @@
 
     &:before, &:after {
       border-radius: $inner-border-radius-5;
-      border-top: thin solid $highlighted-background;
-    }
-
-    &.no-divider {
-      &:before, &:after {
-        border-top: 0;
-      }
+      border-top: thin solid $white-transparent-background-5;
     }
   }
 
@@ -55,7 +41,6 @@
 
     .dish-image {
       height: 100%;
-      margin-bottom: $standard-element-spacing;
       background-color: $strong-highlighted-background;
     }
   }

@@ -32,24 +32,28 @@ const BottomNavbar = () => {
           label="Recipes"
           value={ROUTE.LANDING}
           icon={<ReceiptLongRoundedIcon />}
+          sx={{ '&.Mui-selected': { color: 'accent.main' } }}
         />
         <BottomNavigationAction
           className="navbar-tile"
           label="Discover"
           value={ROUTE.DISCOVER}
           icon={<TravelExploreRoundedIcon />}
+          sx={{ '&.Mui-selected': { color: 'accent.main' } }}
         />
         <BottomNavigationAction
           className="navbar-tile"
           label="Menu"
           value={ROUTE.WEEK_MENU}
           icon={<RestaurantMenuRoundedIcon />}
+          sx={{ '&.Mui-selected': { color: 'accent.main' } }}
         />
         <BottomNavigationAction
           className="navbar-tile"
           label="Settings"
           value={ROUTE.SETTINGS}
           icon={<SettingsApplicationsRoundedIcon />}
+          sx={{ '&.Mui-selected': { color: 'accent.main' } }}
         />
       </BottomNavigation>
     </Box>
