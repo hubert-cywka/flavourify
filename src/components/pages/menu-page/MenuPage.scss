@@ -1,0 +1,30 @@
+@import './src/styles/shared';
+@import './src/styles/variables';
+
+.menu-page-container {
+  @include page-container;
+
+  .menu-plan-container {
+    @include translucent-tile;
+    height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$big-element-spacing});
+    margin-bottom: $bottom-navbar-height;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+
+
+    .summed-ingredients-container {
+      .ingredients-header {
+        margin-top: 10px;
+        font-size: $standard-font-size;
+        font-weight: bold;
+        padding: $standard-element-spacing $standard-element-spacing 0 $standard-element-spacing;
+      }
+
+      .summed-menu-ingredients {
+        overflow-y: auto;
+        flex-grow: 1;
+      }
+    }
+  }
+}

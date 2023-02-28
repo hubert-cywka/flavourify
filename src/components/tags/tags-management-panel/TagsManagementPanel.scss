@@ -75,8 +75,9 @@
         flex-wrap: wrap;
         justify-content: center;
 
-        .search-list-item {
+        .tag-chip {
           @include chip;
+          background-color: $highlighted-background;
 
           &.selected {
             background-color: $strong-highlighted-background;

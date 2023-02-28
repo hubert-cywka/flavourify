@@ -46,7 +46,7 @@ const LatestDishSlide = () => {
         <Button
           endIcon={<MeetingRoomRoundedIcon />}
           variant="contained"
-          sx={{ bgcolor: 'secondary.main', color: 'text.secondary' }}
+          sx={{ bgcolor: 'secondary.main' }}
           className="action-button"
           onClick={() => appRouter.navigate(ROUTE.LANDING)}>
           I am in

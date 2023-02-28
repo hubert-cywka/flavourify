@@ -1,6 +1,7 @@
 import { apiClient } from './ApiClient';
 import { Dish } from '../interfaces/Dish';
 import { ALL_TAGS } from '../constants/TagsConstants';
+import { Ingredient } from '../interfaces/Ingredient';
 
 export interface DishesPage {
   dishes: Dish[];
@@ -54,5 +55,10 @@ export const getLatestDish = async (): Promise<Dish> => {
 
 export const getRandomDishes = async (amount: number): Promise<Dish[]> => {
   const { data } = await apiClient.get<Dish[]>(`/dishes/random?amount=${amount}`);
+  return data;
+};
+
+export const getDishesIngredients = async (ids: number[]): Promise<Ingredient[]> => {
+  const { data } = await apiClient.get<Dish[]>(`/dishes/ingredients?ids=${ids}`);
   return data;
 };

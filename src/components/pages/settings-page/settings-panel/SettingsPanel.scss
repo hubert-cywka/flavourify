@@ -11,7 +11,7 @@
   }
 
   .settings-panel-item {
-    border: thin solid $highlighted-background;
+    border: thin solid $lightly-highlighted-background;
     font-size: $standard-font-size;
 
     .icon {
@@ -19,7 +19,7 @@
     }
 
     &:hover {
-      background-color: $highlighted-background;
+      background-color: $lightly-highlighted-background;
     }
   }
 

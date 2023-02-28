@@ -1,6 +1,6 @@
 import AppRouter from './components/router/AppRouter';
 import { RouterProvider } from 'react-router';
-import { createTheme, IconButton, PaletteMode, ThemeProvider } from '@mui/material';
+import { createTheme, IconButton, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
 import { useLocalStorage } from './utility/hooks/useLocalStorage';
 import { ColorModeContext } from './contexts/ColorModeContext';
 import {
@@ -17,7 +17,11 @@ import { HighlightOffRounded } from '@mui/icons-material';
 import { ALL_TAGS } from './constants/TagsConstants';
 
 function App() {
-  const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', 'dark');
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [colorMode, setColorMode] = useLocalStorage(
+    'COLOR_MODE_STORAGE_KEY',
+    prefersDarkMode ? 'dark' : 'light'
+  );
   const [lastViewedDish, setLastViewedDish] = useState<lastViewedDishI>({
     tag: ALL_TAGS,
     slide: 0
@@ -54,9 +58,9 @@ function App() {
       ...(colorMode === 'light'
         ? {
             primary: {
-              main: '#ff9e00',
-              light: '#ffcc00',
-              dark: '#ff6d00'
+              main: '#6500d3',
+              light: '#c637ff',
+              dark: '#6b0097'
             },
             secondary: {
               main: '#050046',
@@ -64,8 +68,8 @@ function App() {
               dark: '#030723'
             },
             text: {
-              primary: '#444444',
-              secondary: '#ffffff'
+              primary: '#ffffff',
+              secondary: '#444444'
             },
             accent: {
               main: '#ff9e00'
@@ -73,12 +77,12 @@ function App() {
           }
         : {
             primary: {
-              main: '#07092c',
+              main: '#06093e',
               light: '#3138ff',
               dark: '#070b4c'
             },
             secondary: {
-              main: '#050046',
+              main: '#03002a',
               light: '#1900ff',
               dark: '#030723'
             },

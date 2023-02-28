@@ -6,12 +6,12 @@
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  border: 1px solid $highlighted-background;
+  border: 1px solid $lightly-highlighted-background;
   border-radius: $outer-border-radius-10;
   overflow: hidden;
 
   .value-field {
-    background-color: $highlighted-background;
+    background-color: $lightly-highlighted-background;
     padding: $small-element-spacing;
     min-width: 50px;
     height: 100%;

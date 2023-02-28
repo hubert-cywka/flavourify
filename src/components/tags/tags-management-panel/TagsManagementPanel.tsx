@@ -144,7 +144,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
         return (
           <Box
             key={tag.id}
-            className={`search-list-item ${selectedTag?.id === tag.id && 'selected'}`}
+            className={`tag-chip ${selectedTag?.id === tag.id && 'selected'}`}
             onClick={() => handleTagSelection(tag)}>
             {tag.name}
           </Box>
@@ -170,7 +170,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
     for (let i = 0; i < count; i++) {
       const randomWidth = Math.ceil(Math.random() * 50) + 30;
       arrayOfMockups.push(
-        <Skeleton key={i} className="search-list-item" width={randomWidth} variant="rectangular" />
+        <Skeleton key={i} className="tag-chip" width={randomWidth} variant="rectangular" />
       );
     }
     return arrayOfMockups;
@@ -181,11 +181,15 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       <FormControl size="small" className="tag-type-selector">
         <Select
           value={selectedType}
-          sx={{ fontSize: '0.8rem' }}
+          sx={{ fontSize: '0.8rem', color: 'text.secondary' }}
           onChange={handleTagTypeChange}
           inputRef={tagTypeRef}>
           {TAG_TYPES.map((type, id) => (
-            <MenuItem key={id} className="tag-type-menu-item" value={type}>
+            <MenuItem
+              key={id}
+              sx={{ color: 'text.secondary' }}
+              className="tag-type-menu-item"
+              value={type}>
               {type}
             </MenuItem>
           ))}
@@ -201,7 +205,6 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
           <TabList onChange={handleTabChange} centered>
             <Tab
               sx={{
-                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -210,7 +213,6 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             />
             <Tab
               sx={{
-                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -219,7 +221,6 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             />
             <Tab
               sx={{
-                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -240,6 +241,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
               <>
                 <Box className="tag-inputs-container">
                   <Input
+                    sx={{ color: 'text.secondary' }}
                     inputRef={tagNameRef}
                     className="tag-name-input"
                     placeholder={selectedTag?.name}
@@ -271,7 +273,12 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
           </Box>
           <Box className="tags-tab-content">
             <Box className="tag-inputs-container">
-              <Input inputRef={tagNameRef} className="tag-name-input" placeholder="New tag name" />
+              <Input
+                sx={{ color: 'text.secondary' }}
+                inputRef={tagNameRef}
+                className="tag-name-input"
+                placeholder="New tag name"
+              />
               {getTagTypeSelector()}
             </Box>
             <Button

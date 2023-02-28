@@ -1,0 +1,78 @@
+@import './src/styles/shared';
+@import './src/styles/variables';
+
+.menu-list-container {
+  display: flex;
+  flex-direction: column;
+
+  .menu-list-header {
+    @include translucent-tile;
+    background: $white-transparent-background-10;
+    margin-bottom: $small-element-spacing;
+    padding: $standard-element-spacing 0;
+    display: flex;
+    font-weight: bold;
+
+    .menu-list-header-date {
+      width: 20%;
+    }
+
+    .menu-list-header-dish {
+      width: 80%;
+    }
+  }
+
+ .menu-list-columns {
+   display: flex;
+   flex-direction: row;
+
+   .menu-plan-dates-column, .menu-plan-names-column {
+
+     .menu-plan-date, .menu-plan-dish {
+       @include translucent-tile;
+       margin-bottom: $small-element-spacing;
+       display: flex;
+       justify-content: center;
+       font-weight: bold;
+       height: 7vh;
+     }
+   }
+
+   .menu-plan-dates-column {
+     width: 20%;
+
+     .menu-plan-date {
+       flex-direction: column;
+
+       .menu-plan-date-day {
+         font-size: $big-font-size;
+       }
+       .menu-plan-date-month {
+         font-size: $small-font-size;
+       }
+     }
+   }
+
+   .menu-plan-names-column {
+     width: 80%;
+     z-index: 1;
+
+     .menu-plan-dish {
+       background: $white-transparent-background-10;
+       margin-left: $small-element-spacing;
+       align-items: center;
+
+       .menu-plan-dish-name {
+         margin-left: $standard-element-spacing;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         font-weight: 500;
+       }
+
+       .menu-plan-dish-delete-button {
+         margin-left: auto;
+       }
+     }
+   }
+ }
+}

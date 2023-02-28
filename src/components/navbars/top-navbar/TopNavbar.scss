@@ -2,11 +2,12 @@
 @import './src/styles/shared';
 
 .top-navbar-container {
+  @include translucent-tile;
+  padding: 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: $top-navbar-height;
-  background: $gradient-transparent-background;
   border-radius: 20px $round-border-radius-50 $round-border-radius-50 20px;
 
   .search-bar {
