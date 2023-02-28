@@ -38,3 +38,6 @@ export const DISH_EMPTY_RECIPE_ERROR = 'You have to add at least 1 recipe step.'
 export const DISH_WRONG_TAGS_COUNT_ERROR = 'Please add valid amount of tags.';
 export const DISH_NOT_CHANGED_NAME_ERROR =
   'Please, find any original name. Placeholder value is not allowed.';
+
+export const DISH_ADD_TO_MENU_ERROR = 'You have already menu for whole next week!';
+export const DISH_ADD_TO_MENU_SUCCESS = 'Dish added to menu!';

@@ -14,7 +14,8 @@ $outer-border-radius-10: 10px;
 $outer-border-radius-25: 25px;
 $round-border-radius-50: 50px;
 
-$highlighted-background: rgba(128, 128, 128, 0.03);
+$lightly-highlighted-background: rgba(128, 128, 128, 0.03);
+$highlighted-background: rgba(128, 128, 128, 0.1);
 $strong-highlighted-background: rgba(128, 128, 128, 0.25);
 
 $white-transparent-background-1: rgba(255, 255, 255, 0.01);
@@ -38,3 +39,6 @@ $standard-font-size: 0.9rem;
 $big-font-size: 1.25rem;
 $huge-font-size: 2.5rem;
 $icon-font-size: 3rem;
+
+$shadow: 0 0 25px 0 rgba(20, 20, 20, 0.1);
+$button-shadow: 0 8px 5px -5px rgba(20, 20, 20, 0.1);

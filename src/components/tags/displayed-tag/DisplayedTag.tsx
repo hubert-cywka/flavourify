@@ -101,12 +101,11 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
           <List className="search-list" sx={{ bgcolor: 'secondary.main' }}>
             <ListItem className="tags-list-header">
               <ListItemIcon>
-                <SearchRounded sx={{ color: 'text.secondary' }} />
+                <SearchRounded sx={{ color: 'text.primary' }} />
               </ListItemIcon>
               <Input
                 value={textFilter}
                 disableUnderline
-                sx={{ color: 'text.secondary' }}
                 onChange={(e) => setTextFilter(e.target.value)}
                 placeholder="Search for tags"
                 className="search-input"

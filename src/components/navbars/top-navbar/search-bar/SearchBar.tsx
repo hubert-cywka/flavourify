@@ -86,7 +86,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
           />
         </Box>
         {areSearchResultsDisplayed && textFilter.length > 0 && (
-          <List sx={{ bgcolor: 'secondary.main', color: 'text.secondary' }} className="search-list">
+          <List sx={{ bgcolor: 'secondary.main' }} className="search-list">
             {getQueryResults()}
           </List>
         )}

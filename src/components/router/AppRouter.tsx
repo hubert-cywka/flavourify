@@ -1,7 +1,7 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import LandingPage from '../pages/landing-page/LandingPage';
 import SettingsPage from '../pages/settings-page/SettingsPage';
-import WeekMenuPage from '../pages/week-menu-page/WeekMenuPage';
+import MenuPage from '../pages/menu-page/MenuPage';
 import FoundDishPage from '../pages/found-dish-page/FoundDishPage';
 import BottomNavbar from '../navbars/bottom-navbar/BottomNavbar';
 import DiscoverPage from '../pages/discover-page/DiscoverPage';
@@ -26,7 +26,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: ROUTE.WEEK_MENU,
-        element: <WeekMenuPage />
+        element: <MenuPage />
       },
       {
         path: ROUTE.FOUND_DISH,

@@ -52,7 +52,7 @@ const RandomDishSlide = () => {
         <Button
           endIcon={<TipsAndUpdatesRoundedIcon />}
           variant="contained"
-          sx={{ bgcolor: 'secondary.main', color: 'text.secondary' }}
+          sx={{ bgcolor: 'secondary.main' }}
           className="action-button"
           onClick={() => refetch()}>
           Inspire

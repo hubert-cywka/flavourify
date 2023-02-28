@@ -37,7 +37,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
   return (
     <List
       className={`settings-panel-container ${className}`}
-      sx={{ bgcolor: 'background.paper', color: 'text.primary' }}>
+      sx={{ bgcolor: 'background.paper', color: 'text.secondary' }}>
       <ListItem className="settings-panel-header">
         <ListItemIcon>
           {displayedSetting ? <WestRoundedIcon onClick={goBackToSettings} /> : <SettingsRounded />}

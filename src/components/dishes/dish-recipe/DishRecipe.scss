@@ -14,6 +14,7 @@
     flex-direction: row;
     padding: $standard-element-spacing;
     background-color: $white-transparent-background-5;
+    border-radius: $inner-border-radius-5;
     margin: 0 $small-element-spacing $small-element-spacing $small-element-spacing;
 
     &.add-step {

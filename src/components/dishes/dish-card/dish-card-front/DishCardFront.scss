@@ -8,6 +8,15 @@
 
   .image-container {
     flex-grow: 1;
+
+    .add-to-menu-button {
+      position: absolute;
+      z-index: 10;
+      left: $small-element-spacing;
+      top: $small-element-spacing;
+      background-color: #222222;
+      color: white;
+    }
   }
 
   .dish-card-content-container {

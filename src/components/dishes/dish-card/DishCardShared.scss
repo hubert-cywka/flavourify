@@ -12,6 +12,7 @@
   .field-label {
     font-size: $tiny-font-size;
     margin: 5px auto 0 auto;
+    padding: 0 $small-element-spacing;
     transform: translateY(50%);
 
     &:before, &:after {

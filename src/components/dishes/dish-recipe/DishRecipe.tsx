@@ -49,7 +49,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
             />
             {!isReadOnly && (
               <IconButton className="delete-step-button" onClick={() => removeStep(id)}>
-                <HighlightOffRoundedIcon />
+                <HighlightOffRoundedIcon sx={{ color: 'text.primary' }} />
               </IconButton>
             )}
           </Box>
