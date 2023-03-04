@@ -26,6 +26,7 @@
     }
 
     @include dish-card-components;
+    border-radius: $inner-border-radius-5;
     overflow-y: auto;
     overflow-x: hidden;
     flex-grow: 1;

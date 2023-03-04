@@ -18,7 +18,7 @@ import {
   CheckCircleRounded,
   DeleteRounded
 } from '@mui/icons-material';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
 import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
@@ -38,13 +38,16 @@ import {
   DISH_DELETE_ERROR,
   DISH_DELETE_SUCCESS,
   DISH_UPDATE_ERROR,
+  DISH_UPDATE_ERROR_IMAGE,
   DISH_UPDATE_SUCCESS,
+  DISH_UPDATE_SUCCESS_IMAGE,
   IMAGE_COMPRESSION_ERROR,
   NAME_EDIT_ERROR,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../../constants/DishesConstants';
 import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 import TagsList from '../../../tags/tags-list/TagsList';
+import StatusScreen from '../../../status-screen/StatusScreen';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -61,6 +64,7 @@ const DishCardBack = ({
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [status, setStatus] = useState<'success' | 'error' | 'idle'>('idle');
   const [readOnly, setReadOnly] = useState<boolean>(!addMode);
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -71,22 +75,22 @@ const DishCardBack = ({
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const enterEditMode = useCallback(() => {
+  const enterEditMode = () => {
     setReadOnly(false);
-  }, []);
+  };
 
-  const cancelEdit = useCallback(() => {
+  const cancelEdit = () => {
     setDisplayedDish(structuredClone(dish));
     setReadOnly(true);
-  }, [dish]);
+  };
 
-  const updateName = useCallback(() => {
+  const updateName = () => {
     return nameRef?.current?.firstChild
       ? (nameRef.current.firstChild as HTMLInputElement).value
       : displayedDish.name;
-  }, [displayedDish]);
+  };
 
-  const updateRecipe = useCallback(() => {
+  const updateRecipe = () => {
     if (!recipeRef?.current?.children) return displayedDish.recipe;
 
     const newRecipe: string[] = [];
@@ -97,9 +101,9 @@ const DishCardBack = ({
     }
 
     return newRecipe;
-  }, [displayedDish]);
+  };
 
-  const updateTags = useCallback(async () => {
+  const updateTags = async () => {
     if (!tagsRef?.current?.children) return displayedDish.tags;
 
     const newTags: string[] = [];
@@ -110,9 +114,9 @@ const DishCardBack = ({
 
     const tagsList = await getTags(false);
     return getCompleteTagsFromTagNames(newTags, tagsList);
-  }, [displayedDish]);
+  };
 
-  const updateIngredients = useCallback(() => {
+  const updateIngredients = () => {
     if (!ingredientsRef?.current?.children) return displayedDish.ingredients;
 
     const newIngredients: Ingredient[] = [];
@@ -136,9 +140,9 @@ const DishCardBack = ({
     }
 
     return newIngredients;
-  }, [displayedDish]);
+  };
 
-  const updateDishImage = useCallback(async (): Promise<string> => {
+  const updateDishImage = async (): Promise<string> => {
     if (!imageRef?.current) return displayedDish.img;
     try {
       return await getCompressedImageUrl(imageRef.current.src);
@@ -146,9 +150,9 @@ const DishCardBack = ({
       enqueueSnackbar(IMAGE_COMPRESSION_ERROR);
       return displayedDish.img;
     }
-  }, [displayedDish]);
+  };
 
-  const createUpdatedDishRecipe = useCallback(async (): Promise<Dish> => {
+  const createUpdatedDishRecipe = async (): Promise<Dish> => {
     return {
       ...displayedDish,
       name: updateName(),
@@ -157,13 +161,13 @@ const DishCardBack = ({
       tags: await updateTags(),
       img: await updateDishImage()
     };
-  }, [displayedDish]);
+  };
 
   const getRequestMethod = (dishToSend: Dish) => {
     return addMode ? addDish(dishToSend) : updateDish(dishToSend);
   };
 
-  const approveEdit = useCallback(async () => {
+  const approveEdit = async () => {
     setIsLoading(true);
     const updatedDish = await createUpdatedDishRecipe();
     const validationFailedReason = validateDishFields(updatedDish);
@@ -175,20 +179,17 @@ const DishCardBack = ({
     getRequestMethod(updatedDish)
       .then(async (res) => {
         queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
-          if (onQuerySuccess) onQuerySuccess();
-          enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, {
-            variant: 'success'
-          });
           setReadOnly(true);
           setIsLoading(false);
+          setStatus('success');
           setDisplayedDish(res);
         });
       })
       .catch(() => {
-        enqueueSnackbar(DISH_UPDATE_ERROR, { variant: 'error' });
         setIsLoading(false);
+        setStatus('error');
       });
-  }, [displayedDish]);
+  };
 
   const handleFlipCallback = () => {
     cancelEdit();
@@ -213,7 +214,7 @@ const DishCardBack = ({
       });
   };
 
-  const getEditingPanel = useMemo(() => {
+  const getEditingPanel = () => {
     if (isLoading) {
       return <CircularProgress sx={{ color: 'accent.main' }} className="action-button" />;
     } else if (readOnly) {
@@ -249,12 +250,48 @@ const DishCardBack = ({
         </>
       );
     }
-  }, [isLoading, readOnly]);
+  };
+
+  const getStatusScreen = () => {
+    switch (status) {
+      case 'success':
+        return (
+          <StatusScreen
+            header={'Success!'}
+            open={status === 'success'}
+            info={addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS}
+            svg={DISH_UPDATE_SUCCESS_IMAGE}
+            status={'success'}
+            close={() => {
+              setStatus('idle');
+              if (onQuerySuccess) onQuerySuccess();
+            }}
+          />
+        );
+
+      case 'error':
+        return (
+          <StatusScreen
+            header={'Oops!'}
+            open={status === 'error'}
+            info={DISH_UPDATE_ERROR}
+            svg={DISH_UPDATE_ERROR_IMAGE}
+            buttonText={'Retry'}
+            status={'error'}
+            close={() => setStatus('idle')}
+            buttonOnClick={() => {
+              setStatus('idle');
+              approveEdit();
+            }}
+          />
+        );
+    }
+  };
 
   return (
     <>
       <Box className={`dish-card-back-container ${className}`}>
-        {!addMode && <Box className="edit-panel">{getEditingPanel}</Box>}
+        {!addMode && <Box className="edit-panel">{getEditingPanel()}</Box>}
         <Box className="scrollable-dish-details">
           <Box className="image-container">
             <DishImage
@@ -315,6 +352,9 @@ const DishCardBack = ({
           </Button>
         )}
       </Box>
+
+      {getStatusScreen()}
+
       {isDeleteDialogOpen && (
         <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
           <Box className="delete-dialog">

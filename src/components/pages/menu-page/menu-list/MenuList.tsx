@@ -16,8 +16,12 @@ import ROUTE from '../../../router/RoutingConstants';
 import appRouter from '../../../router/AppRouter';
 import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
 import { queryClient } from '../../../../services/QueryClient';
-import { NO_TAGS_IMAGE } from '../../../../constants/TagsConstants';
 import { AnimatePresence, motion } from 'framer-motion';
+import {
+  EMPTY_MENU_ERROR,
+  EMPTY_MENU_IMAGE,
+  EMPTY_MENU_INFO
+} from '../../../../constants/DishesConstants';
 
 interface MenuListProps {
   className?: string;
@@ -136,11 +140,9 @@ const MenuList = ({ className }: MenuListProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
-            <img src={NO_TAGS_IMAGE} className="empty-menu-image" />
-            <Typography className="empty-menu-header">Menu is empty.</Typography>
-            <Typography className="empty-menu-info">
-              Find wonderful recipes and add them to your weekly menu!
-            </Typography>
+            <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
+            <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
+            <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
             <Button
               variant="secondaryContained"
               className="action-button"
