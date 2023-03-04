@@ -5,7 +5,7 @@ import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import './BottomNavbar.scss';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
 const BottomNavbar = () => {
@@ -17,6 +17,10 @@ const BottomNavbar = () => {
     setPath(newPath);
     navigate(newPath);
   };
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location]);
 
   return (
     <Box className="bottom-navbar-container">
