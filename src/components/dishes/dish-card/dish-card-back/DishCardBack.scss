@@ -38,6 +38,7 @@
 
   .flip-card-button {
     @include dish-card-action-button;
+    margin-top: $small-element-spacing;
   }
 }
 
@@ -59,6 +60,7 @@
     }
 
     .delete-dialog-button {
+      @include action-button-standard;
       margin: $standard-element-spacing $standard-element-spacing 0 $standard-element-spacing;
     }
   }

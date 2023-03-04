@@ -4,8 +4,12 @@
 .ingredient-list-container {
   text-align: center;
 
-  .ingredient-tile {
-    @include chip;
+  .ingredient-tile-container {
+    display: inline-flex;
+
+    .ingredient-tile {
+      @include chip;
+    }
   }
 
   .servings-container {

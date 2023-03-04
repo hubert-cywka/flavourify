@@ -25,16 +25,13 @@ import { queryClient } from '../../../../services/QueryClient';
 import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
-import { DISHES_QUERY, TAGS_QUERY } from '../../../../constants/QueryConstants';
+import { DISHES_QUERY } from '../../../../constants/QueryConstants';
 import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
 import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import DishTags from '../../dish-tags/DishTags';
 import { validateDishFields } from '../../../../utility/validateDishFields';
 import { getCompleteTagsFromTagNames } from '../../../../utility/getCompleteTagsFromTagNames';
-import { useQuery } from '@tanstack/react-query';
-import { Tag } from '../../../../interfaces/Tag';
 import { getTags } from '../../../../services/TagsService';
 import {
   DISH_ADD_SUCCESS,
@@ -47,6 +44,7 @@ import {
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../../constants/DishesConstants';
 import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
+import TagsList from '../../../tags/tags-list/TagsList';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -60,8 +58,6 @@ const DishCardBack = ({
   addMode,
   onQuerySuccess
 }: DishCardBackProps) => {
-  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
-
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -96,15 +92,15 @@ const DishCardBack = ({
     const newRecipe: string[] = [];
     const newRecipeArray = Array.from(recipeRef.current.children);
     for (let i = 0; i < newRecipeArray.length - 1; i++) {
-      const step = (newRecipeArray[i].children[1].firstChild as HTMLInputElement).value;
+      const step = (newRecipeArray[i].children[0].children[1].firstChild as HTMLInputElement).value;
       if (step.length) newRecipe.push(step);
     }
 
     return newRecipe;
   }, [displayedDish]);
 
-  const updateTags = useCallback(() => {
-    if (!tagsRef?.current?.children || !tagsList) return displayedDish.tags;
+  const updateTags = useCallback(async () => {
+    if (!tagsRef?.current?.children) return displayedDish.tags;
 
     const newTags: string[] = [];
     const newTagsArray = Array.from(tagsRef.current.children);
@@ -112,6 +108,7 @@ const DishCardBack = ({
       newTags.push((newTagsArray[i] as HTMLDivElement).innerHTML);
     }
 
+    const tagsList = await getTags(false);
     return getCompleteTagsFromTagNames(newTags, tagsList);
   }, [displayedDish]);
 
@@ -122,11 +119,11 @@ const DishCardBack = ({
     const newIngredientsArray = Array.from(ingredientsRef.current.children).slice(0, -1);
 
     for (const element of newIngredientsArray) {
-      const newName = element.children[0].innerHTML;
+      const newName = element.children[0].children[0].innerHTML;
       if (newName === NEW_INGREDIENT_PLACEHOLDER) continue;
 
-      const newAmount = element.children[1]?.innerHTML;
-      const newUnit = element.children[2]?.innerHTML;
+      const newAmount = element.children[0].children[1]?.innerHTML;
+      const newUnit = element.children[0].children[2]?.innerHTML;
 
       if (newAmount && newUnit) {
         newIngredients.push({
@@ -157,7 +154,7 @@ const DishCardBack = ({
       name: updateName(),
       recipe: updateRecipe(),
       ingredients: updateIngredients(),
-      tags: updateTags(),
+      tags: await updateTags(),
       img: await updateDishImage()
     };
   }, [displayedDish]);
@@ -179,12 +176,12 @@ const DishCardBack = ({
       .then(async (res) => {
         queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
           if (onQuerySuccess) onQuerySuccess();
-          setIsLoading(false);
-          setDisplayedDish(res);
-          setReadOnly(true);
           enqueueSnackbar(addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS, {
             variant: 'success'
           });
+          setReadOnly(true);
+          setIsLoading(false);
+          setDisplayedDish(res);
         });
       })
       .catch(() => {
@@ -218,18 +215,18 @@ const DishCardBack = ({
 
   const getEditingPanel = useMemo(() => {
     if (isLoading) {
-      return <CircularProgress className="action-button" />;
+      return <CircularProgress sx={{ color: 'accent.main' }} className="action-button" />;
     } else if (readOnly) {
       return (
         <>
           <IconButton
-            sx={{ color: 'primary.light' }}
+            sx={{ color: 'accent.main' }}
             className="action-button"
             onClick={enterEditMode}>
             <EditIconRounded />
           </IconButton>
           <IconButton
-            sx={{ color: 'primary.light' }}
+            sx={{ color: 'accent.main' }}
             className="action-button"
             onClick={() => setIsDeleteDialogOpen(true)}>
             <DeleteRounded />
@@ -239,14 +236,12 @@ const DishCardBack = ({
     } else {
       return (
         <>
-          <IconButton
-            sx={{ color: 'primary.light' }}
-            className="action-button"
-            onClick={cancelEdit}>
+          <IconButton sx={{ color: 'accent.main' }} className="action-button" onClick={cancelEdit}>
             <CancelRounded />
           </IconButton>
           <IconButton
-            sx={{ color: 'primary.light' }}
+            disabled={isLoading}
+            sx={{ color: 'accent.main' }}
             className="action-button"
             onClick={approveEdit}>
             <CheckCircleRounded />
@@ -279,9 +274,10 @@ const DishCardBack = ({
               reference={nameRef}
               max={DISH_NAME_MAX_LENGTH}
               errorMessage={NAME_EDIT_ERROR}
+              sx={{ color: 'text.primary' }}
             />
             <Divider className="field-label">Available in</Divider>
-            <DishTags tags={dish.tags} editable={!readOnly} reference={tagsRef} />
+            <TagsList tags={dish.tags} editable={!readOnly} reference={tagsRef} />
             <Divider className="field-label">Ingredients</Divider>
             <IngredientsList
               className="ingredients-list"
@@ -303,15 +299,16 @@ const DishCardBack = ({
         {addMode ? (
           <Button
             onClick={approveEdit}
-            variant="contained"
+            variant="successContained"
             className="flip-card-button"
+            disabled={isLoading}
             endIcon={<PlaylistAddCheckRoundedIcon />}>
             Submit recipe
           </Button>
         ) : (
           <Button
             onClick={handleFlipCallback}
-            variant="contained"
+            variant="secondaryContained"
             className="flip-card-button"
             startIcon={<ArrowBackRounded />}>
             Go back
@@ -335,7 +332,7 @@ const DishCardBack = ({
               </Button>
               <Button
                 className="delete-dialog-button"
-                variant="contained"
+                variant="errorContained"
                 onClick={removeDish}
                 startIcon={<DeleteRounded />}>
                 Confirm

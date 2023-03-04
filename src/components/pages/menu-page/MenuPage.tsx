@@ -8,7 +8,7 @@ import { getDishesIngredients } from '../../../services/DishService';
 import { getMenu } from '../../../services/MenuService';
 
 const MenuPage = () => {
-  const { data } = useQuery([MENU_INGREDIENTS_QUERY], () =>
+  const { data, status } = useQuery([MENU_INGREDIENTS_QUERY], () =>
     getDishesIngredients(getMenu().map((dish) => dish.id))
   );
 
@@ -21,18 +21,18 @@ const MenuPage = () => {
       }}>
       <Box className="menu-plan-container">
         <MenuList className="menu-plan" />
-        <Box className="summed-ingredients-container">
-          <Typography className="ingredients-header" sx={{ color: 'text.primary' }}>
-            Needed ingredients:
-          </Typography>
-          {data && (
+        {data && status === 'success' && (
+          <Box className="summed-ingredients-container">
+            <Typography className="ingredients-header" sx={{ color: 'text.primary' }}>
+              Needed ingredients:
+            </Typography>
             <IngredientsList
               className="summed-menu-ingredients"
               ingredients={data}
               amountLimit={0}
             />
-          )}
-        </Box>
+          </Box>
+        )}
       </Box>
     </Box>
   );

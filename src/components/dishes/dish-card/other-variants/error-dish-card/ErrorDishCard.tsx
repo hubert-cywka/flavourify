@@ -28,7 +28,7 @@ const ErrorDishCard = ({ img, title, caption, callback, loading }: ErrorDishCard
           <Typography variant="h6" className="error-title">
             {title}
           </Typography>
-          <Button onClick={callback} variant="contained" className="error-button">
+          <Button onClick={callback} variant="secondaryContained" className="error-button">
             {caption}
           </Button>
         </>

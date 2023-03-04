@@ -1,7 +1,7 @@
 import { Dish } from '../../../../../interfaces/Dish';
 import { CardMedia, Box } from '@mui/material';
 import './DishMiniCard.scss';
-import DishTags from '../../../dish-tags/DishTags';
+import TagsList from '../../../../tags/tags-list/TagsList';
 
 interface DishMiniCardProps {
   dish: Dish;
@@ -18,7 +18,7 @@ const DishMiniCard = ({ dish, className, onClick }: DishMiniCardProps) => {
       <Box className="content-container">
         <Box className="dish-name">{dish.name}</Box>
         <Box className="dish-tags-container">
-          <DishTags className="dish-tags" tags={dish.tags} />
+          <TagsList className="dish-tags" tags={dish.tags} />
         </Box>
       </Box>
     </Box>

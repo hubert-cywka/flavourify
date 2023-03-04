@@ -4,6 +4,8 @@
 .displayed-tag-container {
   .search-list {
     @include search-list;
+    overflow: hidden;
+    padding-bottom: $big-element-spacing;
 
     .tags-list-header {
       @include search-bar;

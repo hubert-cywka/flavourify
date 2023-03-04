@@ -119,3 +119,15 @@
   padding: $small-element-spacing;
   box-sizing: border-box;
 }
+
+@mixin info-header {
+  text-align: center;
+  font-size: $big-font-size;
+  font-weight: 550;
+}
+
+@mixin info-description {
+  text-align: justify;
+  font-size: $small-font-size;
+  font-weight: 450;
+}

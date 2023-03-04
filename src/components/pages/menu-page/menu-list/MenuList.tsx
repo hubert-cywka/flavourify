@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 import './MenuList.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
@@ -11,11 +11,13 @@ import {
   DropResult
 } from '@hello-pangea/dnd';
 import { getMenu, MenuItem, removeFromMenu, updateMenu } from '../../../../services/MenuService';
-import { DeleteRounded, ManageSearchRounded } from '@mui/icons-material';
+import { ArrowForwardRounded, DeleteRounded, ManageSearchRounded } from '@mui/icons-material';
 import ROUTE from '../../../router/RoutingConstants';
 import appRouter from '../../../router/AppRouter';
 import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
 import { queryClient } from '../../../../services/QueryClient';
+import { NO_TAGS_IMAGE } from '../../../../constants/TagsConstants';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface MenuListProps {
   className?: string;
@@ -102,28 +104,54 @@ const MenuList = ({ className }: MenuListProps) => {
   };
 
   return (
-    <Box className={`menu-list-container ${className}`}>
-      <Box className="menu-list-header">
-        <Box className="menu-list-header-date">Date</Box>
-        <Box className="menu-list-header-dish">Dish</Box>
-      </Box>
-      <Box className="menu-list-columns">
-        <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="list">
-            {(provided: DroppableProvided) => (
-              <Box
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="menu-plan-names-column">
-                {getMenuItemBoxes()}
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </Box>
-    </Box>
+    <>
+      {displayedMenu && displayedMenu.length ? (
+        <Box className={`menu-list-container ${className}`}>
+          <Box className="menu-list-header">
+            <Box className="menu-list-header-date">Date</Box>
+            <Box className="menu-list-header-dish">Dish</Box>
+          </Box>
+          <Box className="menu-list-columns">
+            <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="list">
+                {(provided: DroppableProvided) => (
+                  <Box
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="menu-plan-names-column">
+                    {getMenuItemBoxes()}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </Box>
+        </Box>
+      ) : (
+        <AnimatePresence>
+          <motion.div
+            className={`menu-list-container empty-menu-list-container ${className}`}
+            key={'Empty menu list'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}>
+            <img src={NO_TAGS_IMAGE} className="empty-menu-image" />
+            <Typography className="empty-menu-header">Menu is empty.</Typography>
+            <Typography className="empty-menu-info">
+              Find wonderful recipes and add them to your weekly menu!
+            </Typography>
+            <Button
+              variant="secondaryContained"
+              className="action-button"
+              endIcon={<ArrowForwardRounded />}
+              onClick={() => appRouter.navigate(ROUTE.LANDING)}>
+              Find recipes
+            </Button>
+          </motion.div>
+        </AnimatePresence>
+      )}
+    </>
   );
 };
 

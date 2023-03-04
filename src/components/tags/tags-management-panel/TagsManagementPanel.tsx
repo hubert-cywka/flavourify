@@ -7,7 +7,6 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  Skeleton,
   Tab,
   Typography
 } from '@mui/material';
@@ -17,14 +16,12 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { SyntheticEvent, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { createTag, deleteTag, getTags, updateTag } from '../../../services/TagsService';
-import { useQuery } from '@tanstack/react-query';
+import { createTag, deleteTag, updateTag } from '../../../services/TagsService';
 import { Tag, TagType } from '../../../interfaces/Tag';
 import { DeleteRounded } from '@mui/icons-material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import './TagsManagementPanel.scss';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { queryClient } from '../../../services/QueryClient';
 import {
   TAG_ADD_ERROR,
@@ -43,14 +40,13 @@ import {
   TAG_UPDATE_SUCCESS
 } from '../../../constants/TagsConstants';
 import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../constants/NumberConstants';
+import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 
 interface TagsManagementPanelProps {
   className?: string;
 }
 
 const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
-  const { data: tagsList } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
-
   const [selectedType, setSelectedType] = useState<TagType>('Other');
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
   const [visibleTab, setVisibleTab] = useState('1');
@@ -134,48 +130,6 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
     setSelectedType(tag.type);
   };
 
-  const getListOfTagsByType = (type: TagType) => {
-    if (!tagsList) return getListOfMockupTags(Math.ceil(Math.random() * 5) + 5);
-    return tagsList.map((tag) => {
-      if (
-        (type === 'Other' && !['Cuisine', 'Course', 'Diet'].includes(tag.type)) ||
-        tag.type === type
-      )
-        return (
-          <Box
-            key={tag.id}
-            className={`tag-chip ${selectedTag?.id === tag.id && 'selected'}`}
-            onClick={() => handleTagSelection(tag)}>
-            {tag.name}
-          </Box>
-        );
-    });
-  };
-
-  const getListOfTags = () => {
-    const organizedTags: ReactJSXElement[] = [];
-    TAG_TYPES.forEach((type, id) => {
-      organizedTags.push(
-        <Box key={id}>
-          <Divider className="tags-divider">{type}</Divider>
-          <Box className="tags-container">{getListOfTagsByType(type)}</Box>
-        </Box>
-      );
-    });
-    return organizedTags;
-  };
-
-  const getListOfMockupTags = (count: number) => {
-    const arrayOfMockups = [];
-    for (let i = 0; i < count; i++) {
-      const randomWidth = Math.ceil(Math.random() * 50) + 30;
-      arrayOfMockups.push(
-        <Skeleton key={i} className="tag-chip" width={randomWidth} variant="rectangular" />
-      );
-    }
-    return arrayOfMockups;
-  };
-
   const getTagTypeSelector = () => {
     return (
       <FormControl size="small" className="tag-type-selector">
@@ -251,8 +205,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                 <Button
                   className="action-button"
                   size="small"
-                  variant="outlined"
-                  sx={{ color: 'accent.main' }}
+                  variant="successContained"
                   startIcon={<CheckCircleOutlineRoundedIcon />}
                   onClick={updateSelectedTag}>
                   Submit
@@ -261,7 +214,10 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             ) : (
               <Box className="selected-tag">Select tag you want to update</Box>
             )}
-            {getListOfTags()}
+            <CompleteTagsList
+              onTagSelect={handleTagSelection}
+              selectedTags={selectedTag ? [selectedTag] : null}
+            />
           </Box>
         </TabPanel>
 
@@ -284,8 +240,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             <Button
               className="action-button"
               size="small"
-              variant="outlined"
-              sx={{ color: 'accent.main' }}
+              variant="successContained"
               startIcon={<AddCircleOutlineRoundedIcon />}
               onClick={createNewTag}>
               Submit
@@ -306,8 +261,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                 <Button
                   className="action-button"
                   size="small"
-                  variant="outlined"
-                  sx={{ color: 'accent.main' }}
+                  variant="errorContained"
                   startIcon={<DeleteRounded />}
                   onClick={removeSelectedTag}>
                   Delete
@@ -316,7 +270,10 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             ) : (
               <Box className="selected-tag">Select tag you want to delete</Box>
             )}
-            {getListOfTags()}
+            <CompleteTagsList
+              onTagSelect={handleTagSelection}
+              selectedTags={selectedTag ? [selectedTag] : null}
+            />
           </Box>
         </TabPanel>
       </TabContext>

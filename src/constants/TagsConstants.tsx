@@ -25,11 +25,16 @@ export const TAG_UPDATE_SUCCESS = 'Tag updated successfully';
 export const TAG_UPDATE_INFO =
   'Select one tag from list by clicking on it and update its name. All dishes with this tag will be updated accordingly.';
 
-export const TAGS_SELECTED_INFO = `Please select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags that describes this dish best.`;
+export const TAGS_SELECTED_INFO = `Please select at least ${MIN_TAGS_NUMBER} tag, up to ${MAX_TAGS_NUMBER} tags that describes this dish best. Select or deselect tag by clicking on it.`;
 export const TAGS_SELECTED_ERROR = `You have to select ${MIN_TAGS_NUMBER} - ${MAX_TAGS_NUMBER} tags.`;
+export const TAGS_SELECT_IMAGE = '/tags-select.svg';
 
-export const NO_TAGS_IMAGE = './no-tags.svg';
+export const NO_TAGS_IMAGE = '/no-tags.svg';
 export const NO_TAGS_ERROR = 'No tags are currently available. Sorry.';
+export const EMPTY_TAGS_LIST_ERROR =
+  'List of tags is empty. You have to add few tags you can choose from.';
+export const TAGS_LIST_FETCH_ERROR =
+  'List of tags could not be downloaded from server. Try to reload them again.';
 
 export const TAG_TYPES: TagType[] = ['Cuisine', 'Course', 'Diet', 'Other'];
 export const ALL_TAGS: Tag = { name: 'All', id: -1, type: 'Other' };

@@ -9,8 +9,10 @@ export const NAME_EDIT_ERROR = `Name of dish can have only ${DISH_NAME_MAX_LENGT
 export const INGREDIENT_EDIT_ERROR = `Ingredient name can only be ${INGREDIENT_NAME_MAX_LENGTH} characters long`;
 export const IMAGE_EDIT_ERROR =
   'You have to upload file in .png or .jpeg format. It will be scaled down if necessary.';
+export const INGREDIENT_EDIT_IMAGE = '/ingredient-edit.svg';
 
 export const IMAGE_EDIT_INFO = 'Upload picture of your dish in .png or .jpg format.';
+export const INGREDIENT_EDIT_INFO = `Select name of ingredient (maximum ${INGREDIENT_NAME_MAX_LENGTH} characters). You can also toggle ingredient quantity, set new quantity amount and unit or remove ingredient completely.`;
 
 export const DISH_SEARCH_DONE_IMAGE = '/all-done.svg';
 export const DISH_SEARCH_DONE_TITLE = 'Got everything you needed?';
