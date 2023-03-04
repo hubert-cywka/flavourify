@@ -8,7 +8,7 @@ interface StatusScreenProps {
   info: string;
   open: boolean;
   close: () => void;
-  svg: string;
+  imgSource: string;
   status: 'success' | 'error';
   buttonText?: string;
   buttonOnClick?: () => void;
@@ -17,7 +17,7 @@ interface StatusScreenProps {
 const StatusScreen = ({
   header,
   info,
-  svg,
+  imgSource,
   status,
   buttonText,
   buttonOnClick,
@@ -35,7 +35,7 @@ const StatusScreen = ({
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}>
-              <img className="status-screen-image" src={svg} />
+              <img className="status-screen-image" src={imgSource} />
               <Typography
                 className="status-screen-header"
                 sx={{ color: status === 'success' ? 'accent.success' : 'accent.error' }}>

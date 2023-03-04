@@ -260,7 +260,7 @@ const DishCardBack = ({
             header={'Success!'}
             open={status === 'success'}
             info={addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS}
-            svg={DISH_UPDATE_SUCCESS_IMAGE}
+            imgSource={DISH_UPDATE_SUCCESS_IMAGE}
             status={'success'}
             close={() => {
               setStatus('idle');
@@ -275,7 +275,7 @@ const DishCardBack = ({
             header={'Oops!'}
             open={status === 'error'}
             info={DISH_UPDATE_ERROR}
-            svg={DISH_UPDATE_ERROR_IMAGE}
+            imgSource={DISH_UPDATE_ERROR_IMAGE}
             buttonText={'Retry'}
             status={'error'}
             close={() => setStatus('idle')}
