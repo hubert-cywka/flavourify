@@ -58,23 +58,28 @@ const DishesList = ({ className }: DishesListProps) => {
     if (swiperRef) swiperRef.slideTo(0);
   }, [swiperRef]);
 
-  const prepareDishesSlides = useCallback(
-    (dishPages: DishesPage[]) => {
-      const extractedDishes: Dish[] = [];
-      dishPages.forEach((page) => {
-        extractedDishes.push(...page.dishes);
-      });
+  const prepareDishesSlides = (dishPages: DishesPage[]) => {
+    const extractedDishes: Dish[] = [];
+    dishPages.forEach((page) => {
+      extractedDishes.push(...page.dishes);
+    });
 
-      return extractedDishes.map((dish) => {
-        return (
-          <SwiperSlide key={dish.id} virtualIndex={dish.id}>
-            <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
-          </SwiperSlide>
-        );
-      });
-    },
-    [isFrontSide, data]
-  );
+    return extractedDishes.map((dish) => {
+      return (
+        <SwiperSlide key={dish.id} virtualIndex={dish.id}>
+          <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
+        </SwiperSlide>
+      );
+    });
+  };
+
+  const prefetchNextPage = async () => {
+    if (!swiperRef) return;
+    if ((swiperRef.activeIndex % swiperRef.slides.length) + 1 === swiperRef.slides.length) {
+      console.log('Fetching next');
+      await fetchNextPage();
+    }
+  };
 
   return QueryResultsBuilder.createResult(status)
     .onSuccess(
@@ -82,20 +87,14 @@ const DishesList = ({ className }: DishesListProps) => {
         {data && (
           <Swiper
             modules={[Virtual, EffectCreative]}
-            effect="creative"
-            creativeEffect={{
-              prev: { translate: [0, '-120%', -500] },
-              next: { translate: [0, '120%', -500] }
-            }}
             allowSlidePrev={isFrontSide}
             allowSlideNext={isFrontSide}
             initialSlide={lastViewedDish.slide}
             onSwiper={setSwiperRef}
-            onReachEnd={() => fetchNextPage()}
+            onSlideChange={prefetchNextPage}
             onReachBeginning={() => fetchPreviousPage()}
             onSlideChangeTransitionEnd={updateLastViewedDish}
             slidesPerView={1}
-            direction="vertical"
             virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}
             className={`dishes-list-container ${className}`}>
             {prepareDishesSlides(data.pages)}

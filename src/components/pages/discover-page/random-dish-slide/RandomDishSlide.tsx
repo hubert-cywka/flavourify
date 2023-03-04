@@ -1,4 +1,3 @@
-import Builder from '../../../../utility/Builder';
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { DISHES_QUERY, RANDOM_DISHES_QUERY } from '../../../../constants/QueryConstants';
@@ -10,7 +9,7 @@ import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded
 import DishMiniCard from '../../../dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
 
 const RandomDishSlide = () => {
-  const { data, status, refetch } = useQuery(
+  const { data, refetch, isFetching } = useQuery(
     [DISHES_QUERY, RANDOM_DISHES_QUERY],
     () => getRandomDishes(1),
     {
@@ -22,37 +21,26 @@ const RandomDishSlide = () => {
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
   };
 
-  const buildRandomDishCards = () => {
-    return Builder.createResult(status)
-      .onSuccess(
-        <Box>
-          {data && (
-            <>
-              <Typography className="caption">Loved by many. One of many.</Typography>
-              <DishMiniCard
-                className="mini-dish-card"
-                dish={data[0]}
-                onClick={() => navigateToRecipe(data[0].id)}
-              />
-            </>
-          )}
-        </Box>
-      )
-      .onError(<Skeleton variant="rectangular" className="mini-dish-card" />)
-      .onLoading(<Skeleton variant="rectangular" className="mini-dish-card" />)
-      .build();
-  };
-
   return (
     <Box className="slide-container">
       <Typography className="header">Be inspired.</Typography>
-      {buildRandomDishCards()}
+      <Typography className="caption">Loved by many. One of many.</Typography>
+      <Box>
+        {data && !isFetching ? (
+          <DishMiniCard
+            className="mini-dish-card"
+            dish={data[0]}
+            onClick={() => navigateToRecipe(data[0].id)}
+          />
+        ) : (
+          <Skeleton variant="rectangular" className="mini-dish-card" />
+        )}
+      </Box>
       <Box className="slide-bottom-container">
         <Typography className="bottom-caption">Get inspired, again.</Typography>
         <Button
           endIcon={<TipsAndUpdatesRoundedIcon />}
-          variant="contained"
-          sx={{ bgcolor: 'secondary.main' }}
+          variant="secondaryContained"
           className="action-button"
           onClick={() => refetch()}>
           Inspire

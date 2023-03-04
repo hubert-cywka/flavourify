@@ -45,8 +45,7 @@ const LatestDishSlide = () => {
         <Typography className="bottom-caption">Check all our recipes.</Typography>
         <Button
           endIcon={<MeetingRoomRoundedIcon />}
-          variant="contained"
-          sx={{ bgcolor: 'secondary.main' }}
+          variant="secondaryContained"
           className="action-button"
           onClick={() => appRouter.navigate(ROUTE.LANDING)}>
           I am in

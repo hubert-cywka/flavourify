@@ -1,4 +1,4 @@
-import { Input } from '@mui/material';
+import { Input, SxProps } from '@mui/material';
 import React, { RefObject, useCallback, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { useSnackbar } from 'notistack';
@@ -12,6 +12,7 @@ interface EditableTextFieldProps {
   max?: number;
   errorMessage?: string;
   type?: 'text' | 'number';
+  sx?: SxProps;
 }
 
 const EditableTextField = ({
@@ -22,7 +23,8 @@ const EditableTextField = ({
   multiline,
   max,
   errorMessage,
-  type
+  type,
+  sx
 }: EditableTextFieldProps) => {
   const [displayedValue, setDisplayedValue] = useState<string>(value);
   const { enqueueSnackbar } = useSnackbar();
@@ -71,7 +73,7 @@ const EditableTextField = ({
         multiline={multiline}
         className={className}
         disableUnderline={true}
-        sx={{ color: 'text.primary' }}
+        sx={{ color: 'text.secondary', ...sx }}
         value={displayedValue}
         onBlur={checkIfEmpty}
         onChange={(e) => handleChange(e)}

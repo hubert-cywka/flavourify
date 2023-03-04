@@ -5,6 +5,8 @@ import { RefObject, useCallback, useMemo, useState } from 'react';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
+import { AnimatePresence, motion } from 'framer-motion';
+import { RECIPE_ADD_STEP_MOTION } from '../../../constants/MotionKeyConstants';
 
 interface DishRecipeProps {
   recipe: string[];
@@ -18,7 +20,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
 
   useUpdateEffect(() => {
     setDisplayedRecipe(recipe);
-  }, [isReadOnly]);
+  }, [isReadOnly, recipe]);
 
   const addEmptyStep = useCallback(() => {
     displayedRecipe.push('');
@@ -28,7 +30,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
   const removeStep = useCallback(
     (id: number) => {
       displayedRecipe.splice(id, 1);
-      setDisplayedRecipe(displayedRecipe.slice());
+      setDisplayedRecipe(Array.from(displayedRecipe));
     },
     [displayedRecipe]
   );
@@ -44,6 +46,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
             <EditableTextField
               className="recipe-step-text"
               value={step}
+              sx={{ color: 'text.primary' }}
               isReadOnly={isReadOnly}
               multiline={true}
             />
@@ -60,17 +63,34 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
 
   return (
     <Box className={`dish-recipe-container ${className}`} ref={reference}>
-      {getRecipeSteps}
-      {!isReadOnly && (
-        <Box onClick={addEmptyStep} className="recipe-step add-step">
-          <Button sx={{ textTransform: 'none' }}>
-            <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
-            <Typography className="add-step-text" variant="caption" color="text.primary">
-              Add another step
-            </Typography>
-          </Button>
-        </Box>
-      )}
+      <AnimatePresence>
+        {getRecipeSteps.map((step, id) => (
+          <motion.div
+            key={id}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'fit-content' }}
+            exit={{ opacity: 0, height: 0 }}>
+            {step}
+          </motion.div>
+        ))}
+
+        {!isReadOnly && (
+          <motion.div
+            key={RECIPE_ADD_STEP_MOTION}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'fit-content' }}
+            exit={{ opacity: 0, height: 0 }}>
+            <Box onClick={addEmptyStep} className="recipe-step add-step">
+              <Button sx={{ textTransform: 'none' }}>
+                <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
+                <Typography className="add-step-text" variant="caption" color="text.primary">
+                  Add another step
+                </Typography>
+              </Button>
+            </Box>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Box>
   );
 };

@@ -5,6 +5,33 @@
   display: flex;
   flex-direction: column;
 
+  &.empty-menu-list-container {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+
+    .empty-menu-image {
+      width: 90%;
+      margin-bottom: $standard-element-spacing;
+      z-index: 10;
+    }
+
+    .empty-menu-header {
+      @include info-header;
+      margin-bottom: $standard-element-spacing;
+    }
+
+    .empty-menu-info {
+      @include info-description;
+      margin-bottom: $huge-element-spacing;
+      font-size: $standard-font-size;
+    }
+
+    .action-button {
+      @include action-button-standard;
+    }
+  }
+
   .menu-list-header {
     @include translucent-tile;
     background: $white-transparent-background-10;
@@ -27,7 +54,6 @@
    flex-direction: row;
 
    .menu-plan-dates-column, .menu-plan-names-column {
-
      .menu-plan-date, .menu-plan-dish {
        @include translucent-tile;
        margin-bottom: $small-element-spacing;

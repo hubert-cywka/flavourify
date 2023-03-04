@@ -1,4 +1,4 @@
-import { Dialog, Card, Typography, Box, Button, Divider } from '@mui/material';
+import { Dialog, Typography, Box, Button } from '@mui/material';
 import './IngredientTile.scss';
 import { type Ingredient } from '../../../interfaces/Ingredient';
 import { useState, useRef, useCallback } from 'react';
@@ -12,7 +12,16 @@ import {
   INGREDIENT_NAME_MAX_LENGTH,
   INGREDIENT_UNIT_MAX_LENGTH
 } from '../../../constants/NumberConstants';
-import { INGREDIENT_EDIT_ERROR } from '../../../constants/DishesConstants';
+import {
+  INGREDIENT_EDIT_ERROR,
+  INGREDIENT_EDIT_IMAGE,
+  INGREDIENT_EDIT_INFO
+} from '../../../constants/DishesConstants';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  INGREDIENT_EDIT_IMAGE_MOTION,
+  INGREDIENT_QUANTITY_ROWS_MOTION
+} from '../../../constants/MotionKeyConstants';
 
 interface IngredientTileProps {
   ingredient: Ingredient;
@@ -96,68 +105,87 @@ const IngredientTile = ({
       </Box>
 
       <Dialog open={open} onClose={closeEditDialog}>
-        <Card className="ingredients-edit-dialog">
-          <Box className="ingredients-edit-dialog-row">
-            <Typography className="field-name-label">Name:</Typography>
-            <EditableTextField
-              className="editable-text-field"
-              value={displayedIngredient.name}
-              reference={nameRef}
-              max={INGREDIENT_NAME_MAX_LENGTH}
-              errorMessage={INGREDIENT_EDIT_ERROR}
-            />
+        <Box
+          className="ingredients-edit-dialog"
+          sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
+          <AnimatePresence>
+            <motion.div
+              key={INGREDIENT_EDIT_IMAGE_MOTION}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'fit-content' }}
+              exit={{ opacity: 0, height: 0 }}>
+              <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
+            </motion.div>
+          </AnimatePresence>
+          <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
+          <Typography className="ingredients-edit-info-description">
+            {INGREDIENT_EDIT_INFO}
+          </Typography>
+          <Box className="ingredients-edit-form">
+            <Box className="ingredients-edit-form-row">
+              <Typography className="field-name-label">Name:</Typography>
+              <EditableTextField
+                className="editable-text-field"
+                value={displayedIngredient.name}
+                reference={nameRef}
+                max={INGREDIENT_NAME_MAX_LENGTH}
+                errorMessage={INGREDIENT_EDIT_ERROR}
+              />
+            </Box>
+            <AnimatePresence>
+              {!!displayedIngredient.quantity && (
+                <motion.div
+                  key={INGREDIENT_QUANTITY_ROWS_MOTION}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'fit-content' }}
+                  exit={{ opacity: 0, height: 0 }}>
+                  <Box className="ingredients-edit-form-row">
+                    <Typography className="field-name-label">Amount:</Typography>
+                    <EditableTextField
+                      className="editable-text-field"
+                      value={displayedIngredient.quantity.amount.toString()}
+                      reference={amountRef}
+                      max={INGREDIENT_COUNT_MAX_LENGTH}
+                      type="number"
+                    />
+                  </Box>
+                  <Box className="ingredients-edit-form-row">
+                    <Typography className="field-name-label">Unit:</Typography>
+                    <EditableTextField
+                      className="editable-text-field"
+                      value={displayedIngredient.quantity.unit}
+                      reference={unitRef}
+                      max={INGREDIENT_UNIT_MAX_LENGTH}
+                    />
+                  </Box>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <Box className="ingredients-edit-form-row">
+              <Button
+                variant="errorContained"
+                onClick={handleDelete}
+                className="action-button"
+                startIcon={<HighlightOffRoundedIcon />}>
+                Delete
+              </Button>
+              <Button
+                variant="contained"
+                onClick={toggleQuantity}
+                className="action-button"
+                startIcon={<MonitorWeightRoundedIcon />}>
+                Quantity
+              </Button>
+              <Button
+                variant="successContained"
+                onClick={updateIngredient}
+                className="action-button"
+                startIcon={<CheckCircleOutlineRoundedIcon />}>
+                Save
+              </Button>
+            </Box>
           </Box>
-          {!!displayedIngredient.quantity && (
-            <>
-              <Box className="ingredients-edit-dialog-row">
-                <Typography className="field-name-label">Amount:</Typography>
-                <EditableTextField
-                  className="editable-text-field"
-                  value={displayedIngredient.quantity.amount.toString()}
-                  reference={amountRef}
-                  max={INGREDIENT_COUNT_MAX_LENGTH}
-                  type="number"
-                />
-              </Box>
-              <Box className="ingredients-edit-dialog-row">
-                <Typography className="field-name-label">Unit:</Typography>
-                <EditableTextField
-                  className="editable-text-field"
-                  value={displayedIngredient.quantity.unit}
-                  reference={unitRef}
-                  max={INGREDIENT_UNIT_MAX_LENGTH}
-                />
-              </Box>
-            </>
-          )}
-          <Divider className="divider" />
-          <Box className="ingredients-edit-dialog-row">
-            <Button
-              size="small"
-              variant="contained"
-              onClick={handleDelete}
-              className="action-button"
-              startIcon={<HighlightOffRoundedIcon />}>
-              Delete
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              onClick={toggleQuantity}
-              className="action-button"
-              startIcon={<MonitorWeightRoundedIcon />}>
-              Toggle quantity
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              onClick={updateIngredient}
-              className="action-button"
-              startIcon={<CheckCircleOutlineRoundedIcon />}>
-              Confirm
-            </Button>
-          </Box>
-        </Card>
+        </Box>
       </Dialog>
     </>
   );

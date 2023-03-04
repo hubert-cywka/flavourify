@@ -1,6 +1,14 @@
 import AppRouter from './components/router/AppRouter';
 import { RouterProvider } from 'react-router';
-import { createTheme, IconButton, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
+import {
+  createTheme,
+  darken,
+  IconButton,
+  lighten,
+  PaletteMode,
+  ThemeProvider,
+  useMediaQuery
+} from '@mui/material';
 import { useLocalStorage } from './utility/hooks/useLocalStorage';
 import { ColorModeContext } from './contexts/ColorModeContext';
 import {
@@ -15,6 +23,16 @@ import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDis
 import { useState } from 'react';
 import { HighlightOffRounded } from '@mui/icons-material';
 import { ALL_TAGS } from './constants/TagsConstants';
+
+declare module '@mui/material/Button' {
+  // eslint-disable-next-line no-unused-vars
+  interface ButtonPropsVariantOverrides {
+    errorContained: true;
+    successContained: true;
+    accentContained: true;
+    secondaryContained: true;
+  }
+}
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -72,7 +90,9 @@ function App() {
               secondary: '#444444'
             },
             accent: {
-              main: '#ff9e00'
+              main: '#ff9e00',
+              success: '#5ee3a3',
+              error: '#e54f4f'
             }
           }
         : {
@@ -91,7 +111,9 @@ function App() {
               secondary: '#ffffff'
             },
             accent: {
-              main: '#ff9e00'
+              main: '#ff9e00',
+              success: '#5ee3a3',
+              error: '#e54f4f'
             }
           })
     },
@@ -106,7 +128,37 @@ function App() {
           root: {
             textTransform: 'none'
           }
-        }
+        },
+        variants: [
+          {
+            props: { variant: 'errorContained' },
+            style: {
+              backgroundColor: '#e54f4f',
+              ':hover': { backgroundColor: darken('#e54f4f', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'successContained' },
+            style: {
+              backgroundColor: '#5ee3a3',
+              ':hover': { backgroundColor: darken('#5ee3a3', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'accentContained' },
+            style: {
+              backgroundColor: '#ff9e00',
+              ':hover': { backgroundColor: darken('#ff9e00', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'secondaryContained' },
+            style: {
+              backgroundColor: '#03003a',
+              ':hover': { backgroundColor: lighten('#03003a', 0.1) }
+            }
+          }
+        ]
       },
       MuiPaper: {
         styleOverrides: {
@@ -126,7 +178,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <SnackbarProvider
               action={(key) => dismissSnackbar(key)}
-              maxSnack={5}
+              maxSnack={3}
               preventDuplicate={true}
               variant="warning"
               anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>

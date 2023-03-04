@@ -1,0 +1,84 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.tags-list-dialog {
+  .tags-select-form {
+    padding: $standard-element-spacing $huge-element-spacing;
+    text-align: center;
+    overflow: hidden;
+
+    .error-image {
+      width: 50vw;
+      margin-bottom: $big-element-spacing;
+    }
+
+    .tags-select-info-image {
+      max-height: 25vh;
+      margin-bottom: $small-element-spacing;
+    }
+
+    .selected-tags-text {
+      font-size: $standard-font-size;
+      font-weight: 500;
+    }
+
+    .tags-select-info-description {
+      @include info-description;
+      margin-bottom: $big-element-spacing;
+    }
+
+    .tags-select-info-header {
+      @include info-header;
+      margin-bottom: $standard-element-spacing;
+    }
+
+    .selected-tags {
+      .tag-chip {
+        background-color: $strong-highlighted-background;
+        font-weight: 500;
+      }
+    }
+
+    .complete-tags-list {
+      max-height: 35vh;
+      overflow-y: auto;
+
+      .tag-chip {
+        @include chip;
+        font-weight: 500;
+        background-color: transparent;
+
+        &.selected {
+          background-color: $strong-highlighted-background;
+        }
+      }
+    }
+
+    .tags-select-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .action-button {
+      margin: $huge-element-spacing auto 0 auto;
+      @include action-button-standard;
+    }
+  }
+}
+
+.tags-list-container, .tags-list-dialog {
+  padding: $standard-element-spacing;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .tag-chip {
+    @include chip;
+
+    .tags-edit-icon {
+      height: 0.6rem;
+      margin-right: $small-element-spacing;
+    }
+  }
+}

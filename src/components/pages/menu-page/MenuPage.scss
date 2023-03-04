@@ -12,8 +12,9 @@
     display: flex;
     flex-direction: column;
 
-
     .summed-ingredients-container {
+      flex-grow: 1;
+
       .ingredients-header {
         margin-top: 10px;
         font-size: $standard-font-size;

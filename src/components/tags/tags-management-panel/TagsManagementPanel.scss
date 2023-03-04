@@ -61,28 +61,8 @@
       }
 
       .action-button {
+        @include action-button-standard;
         margin: 10px auto;
-        width: fit-content;
-      }
-
-      .tags-divider {
-        font-size: $tiny-font-size;
-        margin-top: 25px;
-      }
-
-      .tags-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        .tag-chip {
-          @include chip;
-          background-color: $highlighted-background;
-
-          &.selected {
-            background-color: $strong-highlighted-background;
-          }
-        }
       }
     }
   }
