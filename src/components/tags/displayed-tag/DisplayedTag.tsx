@@ -18,6 +18,7 @@ import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import Builder from '../../../utility/Builder';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
+import { DISHES_QUERY, TAGS_WITH_CONTENT_QUERY } from '../../../constants/QueryConstants';
 
 interface DisplayedTagProps {
   className?: string;
@@ -27,10 +28,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
   const [isTagSelectDialogOpen, setIsTagSelectDialogOpen] = useState<boolean>(false);
   const { data: tagsList, status } = useQuery<Tag[]>({
     queryFn: () => getTags(true),
-    queryKey: [],
-    cacheTime: 0,
-    staleTime: 0,
-    refetchOnWindowFocus: 'always'
+    queryKey: [DISHES_QUERY, TAGS_WITH_CONTENT_QUERY]
   });
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const [textFilter, setTextFilter] = useState('');

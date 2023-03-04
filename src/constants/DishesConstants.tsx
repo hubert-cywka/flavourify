@@ -43,3 +43,10 @@ export const DISH_NOT_CHANGED_NAME_ERROR =
 
 export const DISH_ADD_TO_MENU_ERROR = 'You have already menu for whole next week!';
 export const DISH_ADD_TO_MENU_SUCCESS = 'Dish added to menu!';
+
+export const DISH_UPDATE_SUCCESS_IMAGE = '/dish-update-success.svg';
+export const DISH_UPDATE_ERROR_IMAGE = '/dish-update-error.svg';
+
+export const EMPTY_MENU_IMAGE = '/pizza-share.svg';
+export const EMPTY_MENU_ERROR = 'Menu is empty.';
+export const EMPTY_MENU_INFO = 'Find wonderful recipes and add them to your weekly menu!';

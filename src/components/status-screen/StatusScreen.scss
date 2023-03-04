@@ -1,0 +1,45 @@
+@import "/src/styles/shared";
+@import "/src/styles/variables";
+
+.status-screen-popup {
+  @include page-container;
+  background-color: rgb(20, 20, 20);
+
+  .status-screen-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .status-screen-image {
+      height: 30vh;
+      margin-bottom: $big-element-spacing;
+    }
+
+    .status-screen-header {
+      @include info-header;
+      font-size: $huge-font-size;
+      margin-bottom: $small-element-spacing;
+    }
+
+    .status-screen-info {
+      @include info-description;
+      font-size: $big-font-size;
+      margin-bottom: $big-element-spacing;
+      text-align: center;
+      width: 70vw;
+    }
+
+    .status-screen-buttons {
+      display: flex;
+      flex-direction: row;
+
+      .status-screen-button {
+        @include action-button-standard;
+        margin: $standard-element-spacing;
+      }
+    }
+  }
+}
