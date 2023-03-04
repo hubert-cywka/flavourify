@@ -16,7 +16,6 @@ import ROUTE from '../../../router/RoutingConstants';
 import appRouter from '../../../router/AppRouter';
 import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
 import { queryClient } from '../../../../services/QueryClient';
-import { AnimatePresence, motion } from 'framer-motion';
 import {
   EMPTY_MENU_ERROR,
   EMPTY_MENU_IMAGE,
@@ -133,25 +132,18 @@ const MenuList = ({ className }: MenuListProps) => {
           </Box>
         </Box>
       ) : (
-        <AnimatePresence>
-          <motion.div
-            className={`menu-list-container empty-menu-list-container ${className}`}
-            key={'Empty menu list'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
-            <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
-            <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
-            <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
-            <Button
-              variant="secondaryContained"
-              className="action-button"
-              endIcon={<ArrowForwardRounded />}
-              onClick={() => appRouter.navigate(ROUTE.LANDING)}>
-              Find recipes
-            </Button>
-          </motion.div>
-        </AnimatePresence>
+        <Box className={`menu-list-container empty-menu-list-container ${className}`}>
+          <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
+          <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
+          <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
+          <Button
+            variant="secondaryContained"
+            className="action-button"
+            endIcon={<ArrowForwardRounded />}
+            onClick={() => appRouter.navigate(ROUTE.LANDING)}>
+            Find recipes
+          </Button>
+        </Box>
       )}
     </>
   );

@@ -19,6 +19,8 @@ import {
 import appRouter from '../../router/AppRouter';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import ErrorDishCard from '../../dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FOUND_DISH_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
 
 const FoundDishPage = () => {
   const { id } = useParams();
@@ -70,14 +72,18 @@ const FoundDishPage = () => {
   };
 
   return (
-    <Box
-      className="found-dish-page-container"
-      sx={{
-        bgcolor: 'primary.main',
-        color: 'text.primary'
-      }}>
-      <TopNavbar className="top-navbar" singleDishVariant />
-      {getQueryResults()}
+    <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
+      <AnimatePresence>
+        <motion.div
+          className="found-dish-page-container"
+          key={FOUND_DISH_PAGE_MOTION}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}>
+          <TopNavbar className="top-navbar" singleDishVariant />
+          {getQueryResults()}
+        </motion.div>
+      </AnimatePresence>
     </Box>
   );
 };
