@@ -5,31 +5,37 @@ import { Pagination } from 'swiper';
 import 'swiper/swiper.css';
 import RandomDishSlide from './random-dish-slide/RandomDishSlide';
 import LatestDishSlide from './latest-dish-slide/LatestDishSlide';
+import { AnimatePresence, motion } from 'framer-motion';
+import { DISCOVER_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
 
 const DiscoverPage = () => {
   return (
-    <Box
-      className="discover-page-container"
-      sx={{
-        bgcolor: 'primary.main',
-        color: 'text.primary'
-      }}>
-      <Swiper
-        className="slide"
-        modules={[Pagination]}
-        pagination={{
-          clickable: true,
-          type: 'bullets',
-          enabled: true
-        }}>
-        <SwiperSlide>
-          <LatestDishSlide />
-        </SwiperSlide>
+    <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
+      <AnimatePresence>
+        <motion.div
+          className="discover-page-container"
+          key={DISCOVER_PAGE_MOTION}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}>
+          <Swiper
+            className="slide"
+            modules={[Pagination]}
+            pagination={{
+              clickable: true,
+              type: 'bullets',
+              enabled: true
+            }}>
+            <SwiperSlide>
+              <LatestDishSlide />
+            </SwiperSlide>
 
-        <SwiperSlide>
-          <RandomDishSlide />
-        </SwiperSlide>
-      </Swiper>
+            <SwiperSlide>
+              <RandomDishSlide />
+            </SwiperSlide>
+          </Swiper>
+        </motion.div>
+      </AnimatePresence>
     </Box>
   );
 };

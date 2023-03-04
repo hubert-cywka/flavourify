@@ -1,18 +1,22 @@
 import { Box } from '@mui/material';
 import './SettingsPage.scss';
 import SettingsPanel from './settings-panel/SettingsPanel';
+import { SETTINGS_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
+import { AnimatePresence, motion } from 'framer-motion';
 export const SettingsPage = () => {
   return (
-    <>
-      <Box
-        className="settings-page-container"
-        sx={{
-          bgcolor: 'primary.main',
-          color: 'text.primary'
-        }}>
-        <SettingsPanel className="settings-panel" />
-      </Box>
-    </>
+    <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
+      <AnimatePresence>
+        <motion.div
+          className="settings-page-container"
+          key={SETTINGS_PAGE_MOTION}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}>
+          <SettingsPanel className="settings-panel" />
+        </motion.div>
+      </AnimatePresence>
+    </Box>
   );
 };
 
