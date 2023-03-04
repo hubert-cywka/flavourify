@@ -253,39 +253,34 @@ const DishCardBack = ({
   };
 
   const getStatusScreen = () => {
-    switch (status) {
-      case 'success':
-        return (
-          <StatusScreen
-            header={'Success!'}
-            open={status === 'success'}
-            info={addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS}
-            imgSource={DISH_UPDATE_SUCCESS_IMAGE}
-            status={'success'}
-            close={() => {
-              setStatus('idle');
-              if (onQuerySuccess) onQuerySuccess();
-            }}
-          />
-        );
-
-      case 'error':
-        return (
-          <StatusScreen
-            header={'Oops!'}
-            open={status === 'error'}
-            info={DISH_UPDATE_ERROR}
-            imgSource={DISH_UPDATE_ERROR_IMAGE}
-            buttonText={'Retry'}
-            status={'error'}
-            close={() => setStatus('idle')}
-            buttonOnClick={() => {
-              setStatus('idle');
-              approveEdit();
-            }}
-          />
-        );
-    }
+    return (
+      <>
+        <StatusScreen
+          header={'Success!'}
+          open={status === 'success'}
+          info={addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS}
+          imgSource={DISH_UPDATE_SUCCESS_IMAGE}
+          status={'success'}
+          close={() => {
+            setStatus('idle');
+            if (onQuerySuccess) onQuerySuccess();
+          }}
+        />
+        <StatusScreen
+          header={'Oops!'}
+          open={status === 'error'}
+          info={DISH_UPDATE_ERROR}
+          imgSource={DISH_UPDATE_ERROR_IMAGE}
+          buttonText={'Retry'}
+          status={'error'}
+          close={() => setStatus('idle')}
+          buttonOnClick={() => {
+            setStatus('idle');
+            approveEdit();
+          }}
+        />
+      </>
+    );
   };
 
   return (
