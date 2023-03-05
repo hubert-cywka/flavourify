@@ -63,13 +63,13 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
 
   return (
     <Box className={`dish-recipe-container ${className}`} ref={reference}>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {getRecipeSteps.map((step, id) => (
           <motion.div
             key={id}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'fit-content' }}
-            exit={{ opacity: 0, height: 0 }}>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}>
             {step}
           </motion.div>
         ))}
@@ -77,9 +77,9 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
         {!isReadOnly && (
           <motion.div
             key={RECIPE_ADD_STEP_MOTION}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'fit-content' }}
-            exit={{ opacity: 0, height: 0 }}>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}>
             <Box onClick={addEmptyStep} className="recipe-step add-step">
               <Button sx={{ textTransform: 'none' }}>
                 <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />

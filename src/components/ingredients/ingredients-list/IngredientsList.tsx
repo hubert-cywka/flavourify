@@ -85,7 +85,7 @@ const IngredientsList = ({
 
   return (
     <Box className={`ingredient-list-container ${className}`} ref={reference}>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {withMultiplier && !editable && (
           <>
             <Box className="servings-container">

@@ -76,7 +76,6 @@ const DishesList = ({ className }: DishesListProps) => {
   const prefetchNextPage = async () => {
     if (!swiperRef) return;
     if ((swiperRef.activeIndex % swiperRef.slides.length) + 1 === swiperRef.slides.length) {
-      console.log('Fetching next');
       await fetchNextPage();
     }
   };
@@ -90,6 +89,7 @@ const DishesList = ({ className }: DishesListProps) => {
             allowSlidePrev={isFrontSide}
             allowSlideNext={isFrontSide}
             initialSlide={lastViewedDish.slide}
+            direction="vertical"
             onSwiper={setSwiperRef}
             onSlideChange={prefetchNextPage}
             onReachBeginning={() => fetchPreviousPage()}
