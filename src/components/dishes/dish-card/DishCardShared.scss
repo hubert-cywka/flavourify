@@ -2,7 +2,6 @@
 @import './src/styles/variables';
 
 @mixin dish-card-container {
-  @include translucent-tile;
   flex-direction: column;
   display: flex;
   justify-content: flex-end;

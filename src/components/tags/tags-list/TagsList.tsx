@@ -101,7 +101,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
           sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
           {tagsList && tagsList.length ? (
             <>
-              <AnimatePresence>
+              <AnimatePresence initial={false}>
                 <motion.div
                   key={TAGS_SELECT_IMAGE_MOTION}
                   initial={{ opacity: 0, height: 0 }}

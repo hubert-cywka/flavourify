@@ -42,6 +42,7 @@ const FoundDishPage = () => {
         <Swiper
           allowSlideNext={isFrontSide}
           allowSlidePrev={isFrontSide}
+          direction="vertical"
           className="slides-container">
           {dish && (
             <SwiperSlide>
