@@ -12,40 +12,57 @@
   }
 }
 
-.ingredients-edit-dialog {
+.ingredients-edit-form {
   padding: $standard-element-spacing $huge-element-spacing;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  overflow: hidden;
 
-  .ingredients-edit-info-image {
-    height: 30vh;
-    margin-bottom: $standard-element-spacing;
-  }
-
-  .ingredients-edit-info-header {
-    @include info-header;
-    margin-bottom: $standard-element-spacing;
-  }
-
-  .ingredients-edit-info-description {
-    @include info-description;
-    margin-bottom: $huge-element-spacing;
-  }
-
-  .ingredients-edit-form {
+  .ingredients-edit-buttons {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .action-button {
+      @include action-button-standard;
+      margin: $big-element-spacing $small-element-spacing 0;
+    }
+  }
+
+  .ingredients-edit-form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+
+    .ingredients-edit-info-image {
+      height: 30vh;
+      margin-bottom: $standard-element-spacing;
+    }
+
+    .ingredients-edit-info-header {
+      @include info-header;
+      margin-bottom: $standard-element-spacing;
+    }
+
+    .ingredients-edit-info-description {
+      @include info-description;
+      margin-bottom: $huge-element-spacing;
+    }
+
+    .ingredient-quantity-rows {
+      width: 100%;
+    }
 
     .ingredients-edit-form-row {
       width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
-
-      .action-button {
-        @include action-button-standard;
-        margin: $big-element-spacing $small-element-spacing 0;
-      }
+      justify-content: flex-start;
 
       .field-name-label {
         margin-right: $standard-element-spacing;
