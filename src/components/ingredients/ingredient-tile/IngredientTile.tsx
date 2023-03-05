@@ -106,22 +106,22 @@ const IngredientTile = ({
 
       <Dialog open={open} onClose={closeEditDialog}>
         <Box
-          className="ingredients-edit-dialog"
+          className="ingredients-edit-form"
           sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
-          <AnimatePresence>
-            <motion.div
-              key={INGREDIENT_EDIT_IMAGE_MOTION}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'fit-content' }}
-              exit={{ opacity: 0, height: 0 }}>
-              <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
-            </motion.div>
-          </AnimatePresence>
-          <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
-          <Typography className="ingredients-edit-info-description">
-            {INGREDIENT_EDIT_INFO}
-          </Typography>
-          <Box className="ingredients-edit-form">
+          <Box className="ingredients-edit-form-content">
+            <AnimatePresence>
+              <motion.div
+                key={INGREDIENT_EDIT_IMAGE_MOTION}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'fit-content' }}
+                exit={{ opacity: 0, height: 0 }}>
+                <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
+              </motion.div>
+            </AnimatePresence>
+            <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
+            <Typography className="ingredients-edit-info-description">
+              {INGREDIENT_EDIT_INFO}
+            </Typography>
             <Box className="ingredients-edit-form-row">
               <Typography className="field-name-label">Name:</Typography>
               <EditableTextField
@@ -135,6 +135,7 @@ const IngredientTile = ({
             <AnimatePresence>
               {!!displayedIngredient.quantity && (
                 <motion.div
+                  className="ingredient-quantity-rows"
                   key={INGREDIENT_QUANTITY_ROWS_MOTION}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'fit-content' }}
@@ -161,29 +162,29 @@ const IngredientTile = ({
                 </motion.div>
               )}
             </AnimatePresence>
-            <Box className="ingredients-edit-form-row">
-              <Button
-                variant="errorContained"
-                onClick={handleDelete}
-                className="action-button"
-                startIcon={<HighlightOffRoundedIcon />}>
-                Delete
-              </Button>
-              <Button
-                variant="contained"
-                onClick={toggleQuantity}
-                className="action-button"
-                startIcon={<MonitorWeightRoundedIcon />}>
-                Quantity
-              </Button>
-              <Button
-                variant="successContained"
-                onClick={updateIngredient}
-                className="action-button"
-                startIcon={<CheckCircleOutlineRoundedIcon />}>
-                Save
-              </Button>
-            </Box>
+          </Box>
+          <Box className="ingredients-edit-buttons">
+            <Button
+              variant="errorContained"
+              onClick={handleDelete}
+              className="action-button"
+              startIcon={<HighlightOffRoundedIcon />}>
+              Delete
+            </Button>
+            <Button
+              variant="accentContained"
+              onClick={toggleQuantity}
+              className="action-button"
+              startIcon={<MonitorWeightRoundedIcon />}>
+              Quantity
+            </Button>
+            <Button
+              variant="successContained"
+              onClick={updateIngredient}
+              className="action-button"
+              startIcon={<CheckCircleOutlineRoundedIcon />}>
+              Save
+            </Button>
           </Box>
         </Box>
       </Dialog>

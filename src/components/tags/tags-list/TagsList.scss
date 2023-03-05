@@ -6,64 +6,76 @@
     padding: $standard-element-spacing $huge-element-spacing;
     text-align: center;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
-    .error-image {
-      width: 50vw;
-      margin-bottom: $big-element-spacing;
-    }
+    .tags-select-form-content {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-    .tags-select-info-image {
-      max-height: 25vh;
-      margin-bottom: $small-element-spacing;
-    }
+      .error-image {
+        width: 50vw;
+        margin-bottom: $big-element-spacing;
+      }
 
-    .selected-tags-text {
-      font-size: $standard-font-size;
-      font-weight: 500;
-    }
+      .tags-select-info-image {
+        max-height: 25vh;
+        width: 50vw;
+        margin-bottom: $small-element-spacing;
+      }
 
-    .tags-select-info-description {
-      @include info-description;
-      margin-bottom: $big-element-spacing;
-    }
-
-    .tags-select-info-header {
-      @include info-header;
-      margin-bottom: $standard-element-spacing;
-    }
-
-    .selected-tags {
-      .tag-chip {
-        background-color: $strong-highlighted-background;
+      .selected-tags-text {
+        font-size: $standard-font-size;
         font-weight: 500;
       }
-    }
 
-    .complete-tags-list {
-      max-height: 35vh;
-      overflow-y: auto;
+      .tags-select-info-description {
+        @include info-description;
+        width: 90%;
+        font-size: $standard-font-size;
+        margin-bottom: $standard-element-spacing;
+      }
 
-      .tag-chip {
-        @include chip;
-        font-weight: 500;
-        background-color: transparent;
+      .tags-select-info-header {
+        @include info-header;
+        width: 80%;
+        font-size: $big-font-size;
+        margin-bottom: $big-element-spacing;
+      }
 
-        &.selected {
+      .selected-tags {
+        .tag-chip {
           background-color: $strong-highlighted-background;
+          font-weight: 500;
+        }
+      }
+
+      .complete-tags-list {
+        .tag-chip {
+          @include chip;
+          font-weight: 500;
+          background-color: transparent;
+
+          &.selected {
+            background-color: $strong-highlighted-background;
+          }
         }
       }
     }
+  }
 
-    .tags-select-buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    }
+  .tags-select-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
-    .action-button {
-      margin: $huge-element-spacing auto 0 auto;
-      @include action-button-standard;
-    }
+  .action-button {
+    margin: $huge-element-spacing auto 0 auto;
+    @include action-button-standard;
   }
 }
 

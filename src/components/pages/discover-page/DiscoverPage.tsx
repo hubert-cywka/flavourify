@@ -19,18 +19,17 @@ const DiscoverPage = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}>
           <Swiper
-            className="slide"
             modules={[Pagination]}
             pagination={{
               clickable: true,
               type: 'bullets',
               enabled: true
             }}>
-            <SwiperSlide>
+            <SwiperSlide className="slide">
               <LatestDishSlide />
             </SwiperSlide>
 
-            <SwiperSlide>
+            <SwiperSlide className="slide">
               <RandomDishSlide />
             </SwiperSlide>
           </Swiper>

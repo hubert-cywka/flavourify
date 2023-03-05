@@ -96,12 +96,12 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
         open={isEditDialogVisible}
         onClose={handleTagsEditDialogClose}
         className="tags-list-dialog">
-        <Box
-          className="tags-select-form"
-          sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
-          {tagsList && tagsList.length ? (
-            <>
-              <AnimatePresence initial={false}>
+        {tagsList && tagsList.length ? (
+          <Box
+            sx={{ bgcolor: 'background.default', color: 'text.secondary' }}
+            className="tags-select-form">
+            <Box className="tags-select-form-content">
+              <AnimatePresence>
                 <motion.div
                   key={TAGS_SELECT_IMAGE_MOTION}
                   initial={{ opacity: 0, height: 0 }}
@@ -128,59 +128,61 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
                 onTagSelect={handleTagSelection}
                 selectedTags={displayedTags}
               />
-              <Box className="tags-select-buttons">
-                <Button
-                  className="action-button"
-                  variant="errorContained"
-                  startIcon={<SettingsBackupRestoreRoundedIcon />}
-                  onClick={() => setDisplayedTags(DISH_TAGS_DEFAULT)}>
-                  Unselect all
-                </Button>
-                <Button
-                  className="action-button"
-                  variant="successContained"
-                  startIcon={<CheckCircleOutlineRounded />}
-                  onClick={handleTagsEditDialogClose}>
-                  Save
-                </Button>
-              </Box>
-            </>
-          ) : (
-            <>
+            </Box>
+            <Box className="tags-select-buttons">
+              <Button
+                className="action-button"
+                variant="errorContained"
+                startIcon={<SettingsBackupRestoreRoundedIcon />}
+                onClick={() => setDisplayedTags(DISH_TAGS_DEFAULT)}>
+                Unselect all
+              </Button>
+              <Button
+                className="action-button"
+                variant="successContained"
+                startIcon={<CheckCircleOutlineRounded />}
+                onClick={handleTagsEditDialogClose}>
+                Save
+              </Button>
+            </Box>
+          </Box>
+        ) : (
+          <Box
+            className="tags-select-form"
+            sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
+            <Box className="tags-select-form-content">
               <img src={NO_TAGS_IMAGE} className="error-image" />
               <Typography className="tags-select-info-header">{NO_TAGS_ERROR}</Typography>
-              <Box>
-                {tagsList ? (
-                  <>
-                    <Typography className="tags-select-info-description">
-                      {EMPTY_TAGS_LIST_ERROR}
-                    </Typography>
-                    <Button
-                      className="action-button"
-                      variant="contained"
-                      startIcon={<ArrowForwardRounded />}
-                      onClick={() => appRouter.navigate(ROUTE.SETTINGS)}>
-                      Go to settings
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Typography className="tags-select-info-description">
-                      {TAGS_LIST_FETCH_ERROR}
-                    </Typography>
-                    <Button
-                      className="action-button"
-                      variant="contained"
-                      startIcon={<RestartAltRounded />}
-                      onClick={() => refetch()}>
-                      Reload
-                    </Button>
-                  </>
-                )}
-              </Box>
-            </>
-          )}
-        </Box>
+              {tagsList ? (
+                <>
+                  <Typography className="tags-select-info-description">
+                    {EMPTY_TAGS_LIST_ERROR}
+                  </Typography>
+                  <Button
+                    className="action-button"
+                    variant="accentContained"
+                    startIcon={<ArrowForwardRounded />}
+                    onClick={() => appRouter.navigate(ROUTE.SETTINGS)}>
+                    Go to settings
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Typography className="tags-select-info-description">
+                    {TAGS_LIST_FETCH_ERROR}
+                  </Typography>
+                  <Button
+                    className="action-button"
+                    variant="accentContained"
+                    startIcon={<RestartAltRounded />}
+                    onClick={() => refetch()}>
+                    Reload
+                  </Button>
+                </>
+              )}
+            </Box>
+          </Box>
+        )}
       </Dialog>
     </>
   );
