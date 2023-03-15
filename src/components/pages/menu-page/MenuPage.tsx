@@ -35,7 +35,6 @@ const MenuPage = () => {
                 Needed ingredients:
               </Typography>
               <IngredientsList
-                withMultiplier
                 className="summed-menu-ingredients"
                 ingredients={data}
                 amountLimit={0}
