@@ -92,7 +92,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
           className={className}
           onClick={() => setIsTagSelectDialogOpen((prev) => !prev)}
           startIcon={<TagRounded />}>
-          {tagsList && lastViewedDish.tag.name}
+          {tagsList && lastViewedDish.tag.name ? lastViewedDish.tag.name : ALL_TAGS.name}
         </Button>
 
         {isTagSelectDialogOpen && (

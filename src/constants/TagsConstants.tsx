@@ -14,6 +14,7 @@ export const TAG_DELETE_INFO =
 
 export const TAG_ADD_ERROR_LENGTH = `Failed to add tag. Name has to be at least ${TAG_NAME_MIN_LENGTH} characters long, up to maximum ${TAG_NAME_MAX_LENGTH} characters.`;
 export const TAG_ADD_ERROR = 'Failed to add tag. Please try again later';
+export const TAG_ADD_ERROR_CONFLICT = 'Tag with same name already exists.';
 export const TAG_ADD_SUCCESS = 'Tag added successfully';
 export const TAG_ADD_REQUIREMENTS = `Name has to be at least ${TAG_NAME_MIN_LENGTH} characters long, up to maximum ${TAG_NAME_MAX_LENGTH} characters.`;
 export const TAG_ADD_INFO =
