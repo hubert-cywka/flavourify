@@ -13,7 +13,7 @@ import {
 } from '../../../constants/DishesConstants';
 import { DishesPage, getDishesPage } from '../../../services/DishService';
 import DishCard from '../dish-card/DishCard';
-import QueryResultsBuilder from '../../../utility/Builder';
+import Builder from '../../../utility/Builder';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box } from '@mui/material';
 import SwiperRef, { EffectCreative, Virtual } from 'swiper';
@@ -80,7 +80,7 @@ const DishesList = ({ className }: DishesListProps) => {
     }
   };
 
-  return QueryResultsBuilder.createResult(status)
+  return Builder.createResult(status)
     .onSuccess(
       <>
         {data && (

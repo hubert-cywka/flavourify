@@ -6,6 +6,7 @@ import {
   DISH_TAGS_DEFAULT
 } from '../../../../../constants/DishesConstants';
 import { Box } from '@mui/material';
+import './DishCardAdd.scss';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
   id: -1,
@@ -24,12 +25,12 @@ interface DishCardAddDialogProps {
 const DishCardAdd = ({ onClose, className }: DishCardAddDialogProps) => {
   return (
     <Box
-      sx={{ bgcolor: '#111111', color: 'text.primary', borderRadius: '10px' }}
+      sx={{ color: 'text.primary', bgcolor: 'primary.main', borderRadius: '10px' }}
       className={className}>
       <DishCardBack
         dish={EMPTY_DISH_PLACEHOLDER}
         addMode={true}
-        className={className}
+        className={`dish-card-add-container ${className}`}
         onQuerySuccess={onClose}
       />
     </Box>
