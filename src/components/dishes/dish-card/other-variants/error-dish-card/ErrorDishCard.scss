@@ -34,6 +34,10 @@
     margin-bottom: $small-element-spacing;
   }
 
+  .error-title {
+    padding: 8% 0;
+  }
+
   .error-button {
     @include dish-card-action-button;
   }

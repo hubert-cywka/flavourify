@@ -25,6 +25,7 @@ import './TagsManagementPanel.scss';
 import { queryClient } from '../../../services/QueryClient';
 import {
   TAG_ADD_ERROR,
+  TAG_ADD_ERROR_CONFLICT,
   TAG_ADD_ERROR_LENGTH,
   TAG_ADD_INFO,
   TAG_ADD_REQUIREMENTS,
@@ -41,6 +42,7 @@ import {
 } from '../../../constants/TagsConstants';
 import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../constants/NumberConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
+import { AxiosError, HttpStatusCode } from 'axios';
 
 interface TagsManagementPanelProps {
   className?: string;
@@ -50,6 +52,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
   const [selectedType, setSelectedType] = useState<TagType>('Other');
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
   const [visibleTab, setVisibleTab] = useState('1');
+  const [isFetching, setIsFetching] = useState(false);
 
   const tagNameRef = useRef<HTMLInputElement>(null);
   const tagTypeRef = useRef<HTMLInputElement>(null);
@@ -82,27 +85,38 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       return;
     }
 
+    setIsFetching(true);
     createTag(name, getType())
       .then(() => {
         enqueueSnackbar(TAG_ADD_SUCCESS, { variant: 'success' });
+        setIsFetching(false);
         if (tagNameRef.current) tagNameRef.current.value = '';
         queryClient.invalidateQueries([TAGS_QUERY]);
       })
-      .catch(() => {
-        enqueueSnackbar(TAG_ADD_ERROR, { variant: 'error' });
+      .catch((err: AxiosError) => {
+        console.log(err);
+        if (err.response?.status === HttpStatusCode.Conflict) {
+          enqueueSnackbar(TAG_ADD_ERROR_CONFLICT, { variant: 'error' });
+        } else {
+          enqueueSnackbar(TAG_ADD_ERROR, { variant: 'error' });
+        }
+        setIsFetching(false);
       });
   };
 
   const removeSelectedTag = () => {
     if (!selectedTag) return;
+    setIsFetching(true);
     deleteTag(selectedTag.id)
       .then(() => {
         enqueueSnackbar(TAG_DELETE_SUCCESS, { variant: 'success' });
+        setIsFetching(false);
         queryClient.invalidateQueries([TAGS_QUERY]);
         setSelectedTag(null);
       })
       .catch(() => {
         enqueueSnackbar(TAG_DELETE_ERROR, { variant: 'error' });
+        setIsFetching(false);
       });
   };
 
@@ -114,14 +128,17 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       return;
     }
 
+    setIsFetching(true);
     updateTag({ name: name, type: getType(), id: selectedTag.id })
       .then(() => {
         enqueueSnackbar(TAG_UPDATE_SUCCESS, { variant: 'success' });
+        setIsFetching(false);
         queryClient.invalidateQueries([TAGS_QUERY]);
         setSelectedTag(null);
       })
       .catch(() => {
         enqueueSnackbar(TAG_UPDATE_ERROR, { variant: 'error' });
+        setIsFetching(false);
       });
   };
 
@@ -203,6 +220,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                   {getTagTypeSelector()}
                 </Box>
                 <Button
+                  disabled={isFetching}
                   className="action-button"
                   size="small"
                   variant="successContained"
@@ -238,6 +256,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
               {getTagTypeSelector()}
             </Box>
             <Button
+              disabled={isFetching}
               className="action-button"
               size="small"
               variant="successContained"

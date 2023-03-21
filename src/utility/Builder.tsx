@@ -1,12 +1,12 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { CircularProgress } from '@mui/material';
 
-class QueryResultsBuilder {
+class Builder {
   private readonly _status: string = 'loading';
 
   success: ReactJSXElement = (<></>);
   error: ReactJSXElement = (<></>);
-  loading: ReactJSXElement = (<CircularProgress color="secondary" />);
+  loading: ReactJSXElement = (<CircularProgress sx={{ color: 'accent.main' }} />);
 
   constructor(status: string) {
     this._status = status;
@@ -17,7 +17,7 @@ class QueryResultsBuilder {
       throw new Error(
         "Status must be defined. Possible values: 'success', 'loading'. Any other value will be treated as 'error'."
       );
-    return new QueryResultsBuilder(status);
+    return new Builder(status);
   }
 
   onSuccess(result: ReactJSXElement) {
@@ -46,4 +46,4 @@ class QueryResultsBuilder {
   }
 }
 
-export default QueryResultsBuilder;
+export default Builder;
