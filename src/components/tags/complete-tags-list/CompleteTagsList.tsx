@@ -2,7 +2,7 @@ import { Tag, TagType } from '../../../interfaces/Tag';
 import { Box, Divider, Skeleton } from '@mui/material';
 import './CompleteTagsList.scss';
 import { useQuery } from '@tanstack/react-query';
-import { TAGS_QUERY } from '../../../constants/QueryConstants';
+import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { TAG_TYPES } from '../../../constants/TagsConstants';
 
@@ -13,7 +13,7 @@ interface CompleteTagsListProps {
 }
 
 const CompleteTagsList = ({ className, onTagSelect, selectedTags }: CompleteTagsListProps) => {
-  const { data: tags } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
+  const { data: tags } = useQuery<Tag[]>([TAGS_QUERY, ALL_TAGS_QUERY], () => getTags(false));
 
   const isTagSelected = (tagToCheck: Tag): boolean => {
     return !!selectedTags?.find((tag: Tag) => tag.id === tagToCheck.id);

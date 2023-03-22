@@ -17,10 +17,13 @@ import {
 } from './utility/viewportSizeVariable';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
-import { SnackbarKey, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { apiURL } from './services/ApiClient';
+import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -45,18 +48,19 @@ function App() {
   });
 
   useEffect(() => {
-    let offlineAlertId: SnackbarKey;
-    window.addEventListener('online', () => {
-      closeSnackbar(offlineAlertId);
-      enqueueSnackbar('Connection is back', { variant: 'success' });
-    });
-
-    window.addEventListener('offline', () => {
-      offlineAlertId = enqueueSnackbar('Connection is down', {
-        variant: 'error',
-        autoHideDuration: null
-      });
-    });
+    const interval = setInterval(async () => {
+      fetch(apiURL, { method: 'HEAD' })
+        .then(() => {
+          closeSnackbar();
+        })
+        .catch(() => {
+          enqueueSnackbar(APP_OFFLINE_ALERT, {
+            variant: 'error',
+            autoHideDuration: null
+          });
+        });
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const updateLastViewedDish = (lastViewed: lastViewedDishI) => {
@@ -181,6 +185,7 @@ function App() {
         value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish: lastViewedDish }}>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
             <RouterProvider router={AppRouter} />
           </QueryClientProvider>
         </ThemeProvider>
