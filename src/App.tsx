@@ -3,7 +3,6 @@ import { RouterProvider } from 'react-router';
 import {
   createTheme,
   darken,
-  IconButton,
   lighten,
   PaletteMode,
   ThemeProvider,
@@ -18,10 +17,9 @@ import {
 } from './utility/viewportSizeVariable';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
-import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
+import { SnackbarKey, useSnackbar } from 'notistack';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
-import { useState } from 'react';
-import { HighlightOffRounded } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
 
 declare module '@mui/material/Button' {
@@ -36,6 +34,7 @@ declare module '@mui/material/Button' {
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [colorMode, setColorMode] = useLocalStorage(
     'COLOR_MODE_STORAGE_KEY',
     prefersDarkMode ? 'dark' : 'light'
@@ -45,14 +44,20 @@ function App() {
     slide: 0
   });
 
-  const dismissSnackbar = (id: SnackbarKey) => {
-    const { closeSnackbar } = useSnackbar();
-    return (
-      <IconButton sx={{ color: 'text.secondary' }} onClick={() => closeSnackbar(id)}>
-        <HighlightOffRounded />
-      </IconButton>
-    );
-  };
+  useEffect(() => {
+    let offlineAlertId: SnackbarKey;
+    window.addEventListener('online', () => {
+      closeSnackbar(offlineAlertId);
+      enqueueSnackbar('Connection is back', { variant: 'success' });
+    });
+
+    window.addEventListener('offline', () => {
+      offlineAlertId = enqueueSnackbar('Connection is down', {
+        variant: 'error',
+        autoHideDuration: null
+      });
+    });
+  }, []);
 
   const updateLastViewedDish = (lastViewed: lastViewedDishI) => {
     setLastViewedDish(lastViewed);
@@ -176,14 +181,7 @@ function App() {
         value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish: lastViewedDish }}>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
-            <SnackbarProvider
-              action={(key) => dismissSnackbar(key)}
-              maxSnack={3}
-              preventDuplicate={true}
-              variant="warning"
-              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
-              <RouterProvider router={AppRouter} />
-            </SnackbarProvider>
+            <RouterProvider router={AppRouter} />
           </QueryClientProvider>
         </ThemeProvider>
       </lastViewedDishContext.Provider>
