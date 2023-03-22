@@ -27,7 +27,7 @@
 
     .action-button {
       @include action-button-standard;
-      margin: $big-element-spacing $small-element-spacing 0;
+      margin: $small-element-spacing;
     }
   }
 
