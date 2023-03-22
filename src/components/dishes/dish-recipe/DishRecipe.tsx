@@ -7,6 +7,7 @@ import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { AnimatePresence, motion } from 'framer-motion';
 import { RECIPE_ADD_STEP_MOTION } from '../../../constants/MotionKeyConstants';
+import { DEFAULT_RECIPE_STEP } from '../../../constants/DishesConstants';
 
 interface DishRecipeProps {
   recipe: string[];
@@ -23,7 +24,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
   }, [isReadOnly, recipe]);
 
   const addEmptyStep = useCallback(() => {
-    displayedRecipe.push('');
+    displayedRecipe.push(DEFAULT_RECIPE_STEP);
     setDisplayedRecipe(displayedRecipe.slice());
   }, [displayedRecipe]);
 
@@ -44,6 +45,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
               {id + 1}
             </Typography>
             <EditableTextField
+              autoFocus={step === DEFAULT_RECIPE_STEP}
               className="recipe-step-text"
               value={step}
               sx={{ color: 'text.primary' }}

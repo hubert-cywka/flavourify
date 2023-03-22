@@ -13,6 +13,7 @@ interface EditableTextFieldProps {
   errorMessage?: string;
   type?: 'text' | 'number';
   sx?: SxProps;
+  autoFocus?: boolean;
 }
 
 const EditableTextField = ({
@@ -24,7 +25,8 @@ const EditableTextField = ({
   max,
   errorMessage,
   type,
-  sx
+  sx,
+  autoFocus
 }: EditableTextFieldProps) => {
   const [displayedValue, setDisplayedValue] = useState<string>(value);
   const { enqueueSnackbar } = useSnackbar();
@@ -66,9 +68,14 @@ const EditableTextField = ({
     }
   }, [displayedValue]);
 
+  const scrollIntoView = useCallback(() => {
+    if (reference?.current) reference.current.scrollIntoView({ behavior: 'smooth' });
+  }, [reference]);
+
   return (
     <>
       <Input
+        autoFocus={autoFocus}
         ref={reference}
         multiline={multiline}
         className={className}
@@ -76,6 +83,7 @@ const EditableTextField = ({
         sx={{ color: 'text.secondary', ...sx }}
         value={displayedValue}
         onBlur={checkIfEmpty}
+        onFocus={scrollIntoView}
         onChange={(e) => handleChange(e)}
         onMouseDown={(e) => allowEdit(e)}></Input>
     </>
