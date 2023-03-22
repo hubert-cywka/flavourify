@@ -9,10 +9,12 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import {
   INGREDIENT_COUNT_MAX_LENGTH,
+  INGREDIENT_DEFAULT_AMOUNT,
   INGREDIENT_NAME_MAX_LENGTH,
   INGREDIENT_UNIT_MAX_LENGTH
 } from '../../../constants/NumberConstants';
 import {
+  INGREDIENT_DEFAULT_UNIT,
   INGREDIENT_EDIT_ERROR,
   INGREDIENT_EDIT_IMAGE,
   INGREDIENT_EDIT_INFO
@@ -40,7 +42,6 @@ const IngredientTile = ({
 }: IngredientTileProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [displayedIngredient, setDisplayedIngredient] = useState(ingredient);
-  const [hasQuantity, setHasQuantity] = useState<boolean>(!!displayedIngredient.quantity);
   const nameRef = useRef<HTMLDivElement>(null);
   const amountRef = useRef<HTMLDivElement>(null);
   const unitRef = useRef<HTMLDivElement>(null);
@@ -63,14 +64,17 @@ const IngredientTile = ({
   }, [deleteCallback]);
 
   const toggleQuantity = () => {
-    setHasQuantity((prevState) => {
-      if (!prevState) {
-        setDisplayedIngredient({ ...displayedIngredient, quantity: { amount: 0, unit: 'pcs' } });
-      } else {
-        setDisplayedIngredient({ name: displayedIngredient.name });
-      }
-      return !prevState;
-    });
+    if (!displayedIngredient.quantity) {
+      setDisplayedIngredient({
+        ...displayedIngredient,
+        quantity: { amount: INGREDIENT_DEFAULT_AMOUNT, unit: INGREDIENT_DEFAULT_UNIT }
+      });
+      (amountRef?.current?.firstChild as HTMLInputElement)?.focus();
+    } else {
+      setDisplayedIngredient({ name: displayedIngredient.name });
+      (nameRef?.current?.firstChild as HTMLInputElement)?.focus();
+    }
+    return !displayedIngredient.quantity;
   };
 
   const updateIngredient = () => {
@@ -78,7 +82,11 @@ const IngredientTile = ({
       ? (nameRef.current.firstChild as HTMLInputElement).value
       : displayedIngredient.name;
 
-    if (hasQuantity && amountRef?.current?.firstChild && unitRef?.current?.firstChild) {
+    if (
+      displayedIngredient.quantity &&
+      amountRef?.current?.firstChild &&
+      unitRef?.current?.firstChild
+    ) {
       const newAmount = parseFloat((amountRef.current.firstChild as HTMLInputElement).value);
       const newUnit = (unitRef.current.firstChild as HTMLInputElement).value;
       setDisplayedIngredient({ name: newName, quantity: { amount: newAmount, unit: newUnit } });
@@ -125,6 +133,7 @@ const IngredientTile = ({
             <Box className="ingredients-edit-form-row">
               <Typography className="field-name-label">Name:</Typography>
               <EditableTextField
+                autoFocus
                 className="editable-text-field"
                 value={displayedIngredient.name}
                 reference={nameRef}
@@ -143,6 +152,7 @@ const IngredientTile = ({
                   <Box className="ingredients-edit-form-row">
                     <Typography className="field-name-label">Amount:</Typography>
                     <EditableTextField
+                      autoFocus={displayedIngredient.quantity.amount === INGREDIENT_DEFAULT_AMOUNT}
                       className="editable-text-field"
                       value={displayedIngredient.quantity.amount.toString()}
                       reference={amountRef}
