@@ -11,7 +11,7 @@ import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../../../constants/NumberConst
 import { useSnackbar } from 'notistack';
 import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackupRestoreRounded';
 import { useQuery } from '@tanstack/react-query';
-import { TAGS_QUERY } from '../../../constants/QueryConstants';
+import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { Tag } from '../../../interfaces/Tag';
 import {
@@ -38,7 +38,9 @@ interface TagsListProps {
 }
 
 const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
-  const { data: tagsList, refetch } = useQuery<Tag[]>([TAGS_QUERY], () => getTags(false));
+  const { data: tagsList, refetch } = useQuery<Tag[]>([TAGS_QUERY, ALL_TAGS_QUERY], () =>
+    getTags(false)
+  );
   const [displayedTags, setDisplayedTags] = useState<Tag[]>(tags);
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
