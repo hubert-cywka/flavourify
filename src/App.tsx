@@ -21,7 +21,6 @@ import { useSnackbar } from 'notistack';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { apiClient, apiURL } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
@@ -57,7 +56,8 @@ function App() {
           enqueueSnackbar(APP_OFFLINE_ALERT, {
             variant: 'error',
             autoHideDuration: null,
-            key: OFFLINE_STATUS_NOTIFICATION_KEY
+            key: OFFLINE_STATUS_NOTIFICATION_KEY,
+            action: <></>
           });
         });
     }, 3000);
@@ -186,7 +186,6 @@ function App() {
         value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish: lastViewedDish }}>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
             <RouterProvider router={AppRouter} />
           </QueryClientProvider>
         </ThemeProvider>
