@@ -22,8 +22,9 @@ import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDis
 import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { apiURL } from './services/ApiClient';
+import { apiClient, apiURL } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
+import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -49,14 +50,14 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      fetch(apiURL, { method: 'HEAD' })
-        .then(() => {
-          closeSnackbar();
-        })
+      apiClient
+        .head(apiURL, { method: 'HEAD', timeout: 1000 })
+        .then(() => closeSnackbar(OFFLINE_STATUS_NOTIFICATION_KEY))
         .catch(() => {
           enqueueSnackbar(APP_OFFLINE_ALERT, {
             variant: 'error',
-            autoHideDuration: null
+            autoHideDuration: null,
+            key: OFFLINE_STATUS_NOTIFICATION_KEY
           });
         });
     }, 3000);

@@ -1,1 +1,1 @@
-export const APP_OFFLINE_ALERT = 'Connection is down, server not available.';
+export const APP_OFFLINE_ALERT = 'No connection, server is not available!';
