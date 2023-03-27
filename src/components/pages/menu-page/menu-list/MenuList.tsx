@@ -117,7 +117,7 @@ const MenuList = ({ className }: MenuListProps) => {
           <Box className="menu-list-columns">
             <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="list">
+              <Droppable droppableId="menu-list">
                 {(provided: DroppableProvided) => (
                   <Box
                     ref={provided.innerRef}

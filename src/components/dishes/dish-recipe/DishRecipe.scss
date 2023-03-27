@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding: $standard-element-spacing;
+    padding: $small-element-spacing;
     background-color: $white-transparent-background-5;
     border-radius: $inner-border-radius-5;
     margin: 0 $small-element-spacing $small-element-spacing $small-element-spacing;
@@ -26,6 +26,16 @@
       }
     }
 
+    .recipe-step-reorder-buttons {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      .recipe-step-reorder-button {
+        transform: scale(1.25);
+      }
+    }
+
     .recipe-step-number {
       font-size: $big-font-size;
       font-weight: bold;
@@ -34,6 +44,7 @@
 
     .recipe-step-text {
       font-size: $small-font-size;
+      padding: $standard-element-spacing $small-element-spacing;
       flex-grow: 1;
     }
 

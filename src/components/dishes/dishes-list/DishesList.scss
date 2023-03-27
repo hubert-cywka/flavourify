@@ -3,7 +3,6 @@
 
 .dishes-list-container {
   box-sizing: border-box;
-  height: 100%;
 
   .dish-card {
     @include dish-card;

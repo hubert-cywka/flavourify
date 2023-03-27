@@ -10,7 +10,7 @@ import {
 import './DishCardBack.scss';
 import { Dish } from '../../../../interfaces/Dish';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
-import DishRecipe from '../../dish-recipe/DishRecipe';
+import DishRecipe, { getUpdatedRecipe } from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
 import {
   ArrowBackRounded,
@@ -89,20 +89,6 @@ const DishCardBack = ({
       ? (nameRef.current.firstChild as HTMLInputElement).value
       : displayedDish.name;
   };
-
-  const updateRecipe = () => {
-    if (!recipeRef?.current?.children) return displayedDish.recipe;
-
-    const newRecipe: string[] = [];
-    const newRecipeArray = Array.from(recipeRef.current.children);
-    for (let i = 0; i < newRecipeArray.length - 1; i++) {
-      const step = (newRecipeArray[i].children[0].children[1].firstChild as HTMLInputElement).value;
-      if (step.length) newRecipe.push(step);
-    }
-
-    return newRecipe;
-  };
-
   const updateTags = async () => {
     if (!tagsRef?.current?.children) return displayedDish.tags;
 
@@ -156,7 +142,7 @@ const DishCardBack = ({
     return {
       ...displayedDish,
       name: updateName(),
-      recipe: updateRecipe(),
+      recipe: getUpdatedRecipe(recipeRef, displayedDish.recipe),
       ingredients: updateIngredients(),
       tags: await updateTags(),
       img: await updateDishImage()
