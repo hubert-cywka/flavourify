@@ -1,6 +1,7 @@
 import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
 
-export const apiURL = 'https://32bf-212-51-207-126.eu.ngrok.io';
+//export const apiURL = 'https://fd04-212-51-207-126.eu.ngrok.io';
+export const apiURL = 'http://localhost:6868';
 
 export const apiClient = axios.create({
   baseURL: apiURL

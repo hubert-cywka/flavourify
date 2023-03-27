@@ -16,9 +16,6 @@
 @mixin dish-card {
   width: $dish-card-width;
   height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
-  margin-top: calc(#{$top-navbar-height} + #{$page-offset} + #{$huge-element-spacing});
-  margin-right: auto;
-  margin-left: auto;
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
