@@ -2,7 +2,7 @@ import { DISH_NAME_MAX_LENGTH, INGREDIENT_NAME_MAX_LENGTH } from './NumberConsta
 
 export const DEFAULT_RECIPE_STEP = '';
 export const INGREDIENT_DEFAULT_UNIT = 'pcs';
-export const NEW_INGREDIENT_PLACEHOLDER = 'New ingredient';
+export const NEW_INGREDIENT_PLACEHOLDER = 'Edit me!';
 export const DISH_NAME_PLACEHOLDER = 'Your dish name';
 export const DISH_IMAGE_PLACEHOLDER = '/no-recipes.svg';
 export const DISH_TAGS_DEFAULT = [];
