@@ -46,23 +46,30 @@ function App() {
     tag: ALL_TAGS,
     slide: 0
   });
+  const [shouldDisplayAlert, setShouldDisplayAlert] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(async () => {
       apiClient
-        .head(apiURL, { method: 'HEAD', timeout: 1000 })
-        .then(() => closeSnackbar(OFFLINE_STATUS_NOTIFICATION_KEY))
+        .head(apiURL, { method: 'HEAD', timeout: 1500 })
+        .then(() => {
+          closeSnackbar(OFFLINE_STATUS_NOTIFICATION_KEY);
+          setShouldDisplayAlert(false);
+        })
         .catch(() => {
-          enqueueSnackbar(APP_OFFLINE_ALERT, {
-            variant: 'error',
-            autoHideDuration: null,
-            key: OFFLINE_STATUS_NOTIFICATION_KEY,
-            action: <></>
-          });
+          if (shouldDisplayAlert) {
+            enqueueSnackbar(APP_OFFLINE_ALERT, {
+              variant: 'error',
+              autoHideDuration: null,
+              key: OFFLINE_STATUS_NOTIFICATION_KEY,
+              action: <></>
+            });
+          }
+          setShouldDisplayAlert(true);
         });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [shouldDisplayAlert]);
 
   const updateLastViewedDish = (lastViewed: lastViewedDishI) => {
     setLastViewedDish(lastViewed);
