@@ -23,6 +23,31 @@ interface IngredientsListProps {
   reference?: RefObject<any>;
 }
 
+export const getUpdatedIngredients = (ref: RefObject<any>, placeholder: Ingredient[]) => {
+  if (!ref?.current?.children) return placeholder;
+
+  const newIngredients: Ingredient[] = [];
+  const ingredientTiles = Array.from(ref.current.children).slice(0, -1) as HTMLElement[];
+
+  for (const element of ingredientTiles) {
+    const newName = element.children[0].children[0].innerHTML;
+    if (newName === NEW_INGREDIENT_PLACEHOLDER) continue;
+    const newAmount = element.children[0].children[1]?.innerHTML;
+    const newUnit = element.children[0].children[2]?.innerHTML;
+
+    if (newAmount && newUnit) {
+      newIngredients.push({
+        name: newName,
+        quantity: { amount: parseFloat(newAmount), unit: newUnit }
+      });
+    } else {
+      newIngredients.push({ name: newName });
+    }
+  }
+
+  return newIngredients;
+};
+
 const IngredientsList = ({
   ingredients,
   amountLimit,
@@ -47,18 +72,19 @@ const IngredientsList = ({
     return displayedIngredients.length - amountLimit;
   }, [displayedIngredients, amountLimit]);
 
-  const addNewIngredient = useCallback(() => {
-    displayedIngredients.push({ name: NEW_INGREDIENT_PLACEHOLDER });
-    setDisplayedIngredients(displayedIngredients.slice());
-  }, [displayedIngredients]);
+  const addNewIngredient = () => {
+    if (!reference) return;
+    const updatedIngredients = getUpdatedIngredients(reference, displayedIngredients);
+    updatedIngredients.push({ name: NEW_INGREDIENT_PLACEHOLDER });
+    setDisplayedIngredients(updatedIngredients.slice());
+  };
 
-  const deleteIngredient = useCallback(
-    (id: number) => {
-      displayedIngredients.splice(id, 1);
-      setDisplayedIngredients(displayedIngredients.slice());
-    },
-    [displayedIngredients]
-  );
+  const deleteIngredient = (id: number) => {
+    if (!reference) return;
+    const updatedIngredients = getUpdatedIngredients(reference, displayedIngredients);
+    updatedIngredients.splice(id, 1);
+    setDisplayedIngredients(updatedIngredients.slice());
+  };
 
   const parsedIngredientsList = useMemo(
     (): ReactJSXElement[] =>

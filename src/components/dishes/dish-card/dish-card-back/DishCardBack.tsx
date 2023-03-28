@@ -9,7 +9,9 @@ import {
 } from '@mui/material';
 import './DishCardBack.scss';
 import { Dish } from '../../../../interfaces/Dish';
-import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
+import IngredientsList, {
+  getUpdatedIngredients
+} from '../../../ingredients/ingredients-list/IngredientsList';
 import DishRecipe, { getUpdatedRecipe } from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
 import {
@@ -22,7 +24,6 @@ import { useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
 import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
-import { Ingredient } from '../../../../interfaces/Ingredient';
 import DishImage from '../../dish-image/DishImage';
 import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { DISHES_QUERY } from '../../../../constants/QueryConstants';
@@ -42,8 +43,7 @@ import {
   DISH_UPDATE_SUCCESS,
   DISH_UPDATE_SUCCESS_IMAGE,
   IMAGE_COMPRESSION_ERROR,
-  NAME_EDIT_ERROR,
-  NEW_INGREDIENT_PLACEHOLDER
+  NAME_EDIT_ERROR
 } from '../../../../constants/DishesConstants';
 import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 import TagsList from '../../../tags/tags-list/TagsList';
@@ -102,32 +102,6 @@ const DishCardBack = ({
     return getCompleteTagsFromTagNames(newTags, tagsList);
   };
 
-  const updateIngredients = () => {
-    if (!ingredientsRef?.current?.children) return displayedDish.ingredients;
-
-    const newIngredients: Ingredient[] = [];
-    const newIngredientsArray = Array.from(ingredientsRef.current.children).slice(0, -1);
-
-    for (const element of newIngredientsArray) {
-      const newName = element.children[0].children[0].innerHTML;
-      if (newName === NEW_INGREDIENT_PLACEHOLDER) continue;
-
-      const newAmount = element.children[0].children[1]?.innerHTML;
-      const newUnit = element.children[0].children[2]?.innerHTML;
-
-      if (newAmount && newUnit) {
-        newIngredients.push({
-          name: newName,
-          quantity: { amount: parseFloat(newAmount), unit: newUnit }
-        });
-      } else {
-        newIngredients.push({ name: newName });
-      }
-    }
-
-    return newIngredients;
-  };
-
   const updateDishImage = async (): Promise<string> => {
     if (!imageRef?.current) return displayedDish.img;
     try {
@@ -143,7 +117,7 @@ const DishCardBack = ({
       ...displayedDish,
       name: updateName(),
       recipe: getUpdatedRecipe(recipeRef, displayedDish.recipe),
-      ingredients: updateIngredients(),
+      ingredients: getUpdatedIngredients(ingredientsRef, displayedDish.ingredients),
       tags: await updateTags(),
       img: await updateDishImage()
     };
