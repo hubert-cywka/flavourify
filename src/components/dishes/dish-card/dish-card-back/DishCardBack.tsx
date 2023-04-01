@@ -48,6 +48,7 @@ import {
 import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 import TagsList from '../../../tags/tags-list/TagsList';
 import StatusScreen from '../../../status-screen/StatusScreen';
+import { hasAdminPermission } from '../../../../services/AuthService';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -246,7 +247,7 @@ const DishCardBack = ({
   return (
     <>
       <Box className={`dish-card-back-container ${className}`}>
-        {!addMode && <Box className="edit-panel">{getEditingPanel()}</Box>}
+        {!addMode && hasAdminPermission() && <Box className="edit-panel">{getEditingPanel()}</Box>}
         <Box className="scrollable-dish-details">
           <Box className="image-container">
             <DishImage

@@ -1,0 +1,96 @@
+@import "/src/styles/shared";
+@import "/src/styles/variables";
+
+.authentication-page-container {
+  @include page-container;
+
+  .sign-in-slide {
+    background: #270070;
+  }
+
+  .sign-up-slide {
+    background: #09001e;
+  }
+
+  .sign-in-slide, .sign-up-slide {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .sign-up-info {
+      font-size: $small-font-size;
+      background: $white-transparent-background-5;
+      border-radius: $outer-border-radius-10;
+      width: 80vw;
+      padding: $standard-element-spacing;
+      margin: 0 auto;
+      height: 3vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.success {
+       color: rgba(22, 255, 105, 0.8);
+      }
+
+      &.error {
+        color: rgba(255, 0, 67, 0.8);
+      }
+
+      &.info {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .sign-in-image {
+      flex-grow: 1;
+      max-height: 50vh;
+    }
+
+    .sign-up-image {
+      flex-grow: 1;
+      max-height: 30vh;
+    }
+
+    .authentication-input {
+      background: $white-transparent-background-10;
+      padding: $standard-element-spacing;
+      border-radius: $outer-border-radius-10;
+      width: 80vw;
+      margin: $small-element-spacing auto 0 auto;
+      font-size: $standard-font-size;
+
+      .authentication-input-icon {
+        margin-right: $standard-element-spacing;
+      }
+    }
+
+    .authentication-panel-header {
+      font-size: $huge-font-size;
+      font-weight: bold;
+      margin-top: $standard-element-spacing;
+    }
+
+    .authentication-panel-caption {
+      margin: $small-element-spacing auto $big-element-spacing;
+      width: 70%;
+    }
+
+    .authentication-button {
+      width: 80vw;
+      box-sizing: border-box;
+      padding: $standard-element-spacing;
+      margin: 0 auto;
+      font-weight: bold;
+    }
+
+    .authentication-panel-redirect {
+      margin: $small-element-spacing auto;
+      font-size: $small-font-size;
+      font-weight: bold;
+    }
+  }
+}

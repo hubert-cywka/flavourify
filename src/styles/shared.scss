@@ -3,7 +3,8 @@
 @mixin page-container {
   width: calc(100 * var(--vw));
   height: calc(100 * var(--vh));
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

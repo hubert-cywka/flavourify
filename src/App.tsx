@@ -21,9 +21,10 @@ import { useSnackbar } from 'notistack';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
-import { apiClient, apiURL } from './services/ApiClient';
+import { apiClient, apiURL, setupInterceptors } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
+import { useUpdateEffect } from './utility/hooks/useUpdateEffect';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -47,6 +48,10 @@ function App() {
     slide: 0
   });
   const [shouldDisplayAlert, setShouldDisplayAlert] = useState(false);
+
+  useUpdateEffect(() => {
+    setupInterceptors();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -150,6 +155,7 @@ function App() {
           {
             props: { variant: 'errorContained' },
             style: {
+              color: '#222222',
               backgroundColor: '#e54f4f',
               ':hover': { backgroundColor: darken('#e54f4f', 0.15) }
             }
@@ -157,6 +163,7 @@ function App() {
           {
             props: { variant: 'successContained' },
             style: {
+              color: '#222222',
               backgroundColor: '#5ee3a3',
               ':hover': { backgroundColor: darken('#5ee3a3', 0.15) }
             }
@@ -164,6 +171,7 @@ function App() {
           {
             props: { variant: 'accentContained' },
             style: {
+              color: '#222222',
               backgroundColor: '#ff9e00',
               ':hover': { backgroundColor: darken('#ff9e00', 0.15) }
             }
@@ -171,6 +179,7 @@ function App() {
           {
             props: { variant: 'secondaryContained' },
             style: {
+              color: '#ffffff',
               backgroundColor: '#03003a',
               ':hover': { backgroundColor: lighten('#03003a', 0.1) }
             }

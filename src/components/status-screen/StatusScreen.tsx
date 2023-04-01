@@ -10,6 +10,7 @@ interface StatusScreenProps {
   close: () => void;
   imgSource: string;
   status: 'success' | 'error';
+  closeText?: string;
   buttonText?: string;
   buttonOnClick?: () => void;
 }
@@ -19,6 +20,7 @@ const StatusScreen = ({
   info,
   imgSource,
   status,
+  closeText,
   buttonText,
   buttonOnClick,
   close,
@@ -55,7 +57,7 @@ const StatusScreen = ({
                   variant={status === 'success' ? 'successContained' : 'errorContained'}
                   className="status-screen-button"
                   onClick={close}>
-                  OK
+                  {closeText ? closeText : 'OK'}
                 </Button>
               </Box>
             </motion.div>
