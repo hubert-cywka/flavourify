@@ -1,5 +1,5 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { MenuBookRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
+import { LogoutRounded, MenuBookRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import { useContext, useState } from 'react';
 import { ColorModeContext } from '../../../../contexts/ColorModeContext';
@@ -9,6 +9,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
 import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 import DishCardAdd from '../../../dishes/dish-card/other-variants/dish-card-add/DishCardAdd';
+import { hasAdminPermission, signOutUser } from '../../../../services/AuthService';
 
 interface SettingsPanelProps {
   className?: string;
@@ -49,6 +50,24 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
         <Box className="displayed-setting">{displayedSetting}</Box>
       ) : (
         <>
+          {hasAdminPermission() && (
+            <>
+              <SettingsPanelItem
+                icon={<MenuBookRounded className="icon" />}
+                text="Add new dish"
+                className="settings-panel-item"
+                callback={displayDishAddPanel}
+              />
+
+              <SettingsPanelItem
+                icon={<TagRounded className="icon" />}
+                text="Manage tags"
+                className="settings-panel-item"
+                callback={displayTagsManagementPanel}
+              />
+            </>
+          )}
+
           <SettingsPanelItem
             icon={<Brightness4RoundedIcon className="icon" />}
             text="Toggle color mode"
@@ -58,17 +77,11 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           />
 
           <SettingsPanelItem
-            icon={<MenuBookRounded className="icon" />}
-            text="Add new dish"
+            icon={<LogoutRounded className="icon" />}
+            text="Logout"
             className="settings-panel-item"
-            callback={displayDishAddPanel}
-          />
-
-          <SettingsPanelItem
-            icon={<TagRounded className="icon" />}
-            text="Manage tags"
-            className="settings-panel-item"
-            callback={displayTagsManagementPanel}
+            callback={signOutUser}
+            inPlace
           />
         </>
       )}

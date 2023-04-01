@@ -35,6 +35,7 @@
     .status-screen-buttons {
       display: flex;
       flex-direction: row;
+      font-weight: bold;
 
       .status-screen-button {
         @include action-button-standard;
