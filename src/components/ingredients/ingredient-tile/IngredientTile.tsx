@@ -1,6 +1,6 @@
 import { Dialog, Typography, Box, Button } from '@mui/material';
 import './IngredientTile.scss';
-import { type Ingredient } from '../../../interfaces/Ingredient';
+import { type Ingredient } from '../../../types/interfaces/Ingredient';
 import { useState, useRef, useCallback } from 'react';
 import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';

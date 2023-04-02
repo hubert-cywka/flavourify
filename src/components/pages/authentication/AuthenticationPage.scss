@@ -18,16 +18,26 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+
+    .sign-up-info, .authentication-input, .authentication-button {
+      padding: $standard-element-spacing;
+      border-radius: $inner-border-radius-5;
+      width: 80vw;
+    }
+
+    .sign-up-info, .authentication-panel-redirect {
+      font-size: $small-font-size;
+    }
+
+    .sign-up-info, .authentication-button, .authentication-panel-redirect {
+      font-weight: bold;
+    }
 
     .sign-up-info {
-      font-size: $small-font-size;
       background: $white-transparent-background-5;
-      border-radius: $outer-border-radius-10;
-      width: 80vw;
-      padding: $standard-element-spacing;
-      margin: 0 auto;
       height: 3vh;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37,7 +47,7 @@
       }
 
       &.error {
-        color: rgba(255, 0, 67, 0.8);
+        color: rgba(255, 0, 0, 0.8);
       }
 
       &.info {
@@ -46,20 +56,15 @@
     }
 
     .sign-in-image {
-      flex-grow: 1;
       max-height: 50vh;
     }
 
     .sign-up-image {
-      flex-grow: 1;
       max-height: 30vh;
     }
 
     .authentication-input {
       background: $white-transparent-background-10;
-      padding: $standard-element-spacing;
-      border-radius: $outer-border-radius-10;
-      width: 80vw;
       margin: $small-element-spacing auto 0 auto;
       font-size: $standard-font-size;
 
@@ -69,28 +74,22 @@
     }
 
     .authentication-panel-header {
-      font-size: $huge-font-size;
       font-weight: bold;
+      font-size: $huge-font-size;
       margin-top: $standard-element-spacing;
     }
 
     .authentication-panel-caption {
       margin: $small-element-spacing auto $big-element-spacing;
-      width: 70%;
+      width: 70vw;
     }
 
     .authentication-button {
-      width: 80vw;
-      box-sizing: border-box;
-      padding: $standard-element-spacing;
-      margin: 0 auto;
-      font-weight: bold;
+      margin: $standard-element-spacing auto;
     }
 
     .authentication-panel-redirect {
-      margin: $small-element-spacing auto;
-      font-size: $small-font-size;
-      font-weight: bold;
+      margin: 0 auto;
     }
   }
 }

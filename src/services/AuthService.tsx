@@ -1,20 +1,15 @@
-import { SignUpRequest } from '../interfaces/SignUpRequest';
 import { apiClient } from './ApiClient';
-import { User } from '../interfaces/User';
-import { SignInRequest } from '../interfaces/SignInRequest';
-import { SignInResponse } from '../interfaces/SignInResponse';
+import { User } from '../types/interfaces/User';
+import { SignInRequest } from '../types/interfaces/SignInRequest';
+import { SignInResponse } from '../types/interfaces/SignInResponse';
 import appRouter from '../components/router/AppRouter';
 import ROUTE from '../components/router/RoutingConstants';
-import { TokenRefreshResponse } from '../interfaces/TokenRefreshResponse';
+import { TokenRefreshResponse } from '../types/interfaces/TokenRefreshResponse';
 import jwtDecode from 'jwt-decode';
+import { USER_ROLE } from '../types/enums/UserRole';
 
-export const AUTH_KEY = 'AUTH_TOKEN';
-export const AUTH_REFRESH_KEY = 'AUTH_REFRESH_TOKEN';
-
-enum USER_ROLE { // eslint-disable-line no-unused-vars
-  ADMIN = 'ROLE_ADMIN', // eslint-disable-line no-unused-vars
-  USER = 'ROLE_USER' // eslint-disable-line no-unused-vars
-}
+const AUTH_KEY = 'AUTH_TOKEN';
+const AUTH_REFRESH_KEY = 'AUTH_REFRESH_TOKEN';
 
 export function getAuthToken(): string | null {
   return window.sessionStorage.getItem(AUTH_KEY);
@@ -64,11 +59,6 @@ function cleanupOnSignOut() {
   clearAuthToken();
   clearRefreshToken();
 }
-
-export const createUser = async (userData: SignUpRequest) => {
-  const { data } = await apiClient.post<User>(`/auth/signup`, userData);
-  return data;
-};
 
 export const signInUser = async (userData: SignInRequest) => {
   const { data } = await apiClient.post<SignInResponse>(`/auth/signin`, userData);

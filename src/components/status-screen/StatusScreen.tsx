@@ -5,24 +5,24 @@ import { STATUS_SCREEN_MOTION } from '../../constants/MotionKeyConstants';
 
 interface StatusScreenProps {
   header: string;
-  info: string;
+  caption: string;
   open: boolean;
   close: () => void;
   imgSource: string;
   status: 'success' | 'error';
-  closeText?: string;
   buttonText?: string;
-  buttonOnClick?: () => void;
+  secondButtonText?: string;
+  secondButtonOnClick?: () => void;
 }
 
 const StatusScreen = ({
   header,
-  info,
+  caption,
   imgSource,
   status,
-  closeText,
+  secondButtonText,
   buttonText,
-  buttonOnClick,
+  secondButtonOnClick,
   close,
   open
 }: StatusScreenProps) => {
@@ -43,21 +43,21 @@ const StatusScreen = ({
                 sx={{ color: status === 'success' ? 'accent.success' : 'accent.error' }}>
                 {header}
               </Typography>
-              <Typography className="status-screen-info">{info}</Typography>
+              <Typography className="status-screen-info">{caption}</Typography>
               <Box className="status-screen-buttons">
-                {buttonOnClick && (
+                {secondButtonOnClick && (
                   <Button
                     variant={'accentContained'}
                     className="status-screen-button"
-                    onClick={buttonOnClick}>
-                    {buttonText}
+                    onClick={secondButtonOnClick}>
+                    {secondButtonText}
                   </Button>
                 )}
                 <Button
                   variant={status === 'success' ? 'successContained' : 'errorContained'}
                   className="status-screen-button"
                   onClick={close}>
-                  {closeText ? closeText : 'OK'}
+                  {buttonText ? buttonText : 'OK'}
                 </Button>
               </Box>
             </motion.div>

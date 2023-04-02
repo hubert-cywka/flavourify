@@ -15,7 +15,6 @@ export const apiClient = axios.create({
 });
 
 export const setupInterceptors = () => {
-  console.log('started listening...');
   apiClient.interceptors.request.use((request: AxiosRequestConfig) => {
     let headers: AxiosHeaders = new AxiosHeaders();
     Object.assign(headers, request.headers);

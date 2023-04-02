@@ -1,4 +1,4 @@
-import { Tag, TagType } from '../../../interfaces/Tag';
+import { Tag, TagType } from '../../../types/interfaces/Tag';
 import { Box, Divider, Skeleton } from '@mui/material';
 import './CompleteTagsList.scss';
 import { useQuery } from '@tanstack/react-query';

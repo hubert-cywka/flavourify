@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Tag } from '../interfaces/Tag';
+import { Tag } from '../types/interfaces/Tag';
 
 export interface lastViewedDishI {
   tag: Tag;

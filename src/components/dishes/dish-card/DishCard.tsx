@@ -1,6 +1,6 @@
 import DishCardFront from './dish-card-front/DishCardFront';
 import DishCardBack from './dish-card-back/DishCardBack';
-import { Dish } from '../../../interfaces/Dish';
+import { Dish } from '../../../types/interfaces/Dish';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box } from '@mui/material';
 import { useSnackbar } from 'notistack';

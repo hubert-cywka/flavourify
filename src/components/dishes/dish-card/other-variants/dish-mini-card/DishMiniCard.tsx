@@ -1,4 +1,4 @@
-import { Dish } from '../../../../../interfaces/Dish';
+import { Dish } from '../../../../../types/interfaces/Dish';
 import { CardMedia, Box } from '@mui/material';
 import './DishMiniCard.scss';
 import TagsList from '../../../../tags/tags-list/TagsList';

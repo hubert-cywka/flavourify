@@ -17,7 +17,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { SyntheticEvent, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { createTag, deleteTag, updateTag } from '../../../services/TagsService';
-import { Tag, TagType } from '../../../interfaces/Tag';
+import { Tag, TagType } from '../../../types/interfaces/Tag';
 import { DeleteRounded } from '@mui/icons-material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';

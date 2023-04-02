@@ -1,7 +1,7 @@
 import { apiClient } from './ApiClient';
-import { Dish } from '../interfaces/Dish';
+import { Dish } from '../types/interfaces/Dish';
 import { ALL_TAGS } from '../constants/TagsConstants';
-import { Ingredient } from '../interfaces/Ingredient';
+import { Ingredient } from '../types/interfaces/Ingredient';
 
 export interface DishesPage {
   dishes: Dish[];

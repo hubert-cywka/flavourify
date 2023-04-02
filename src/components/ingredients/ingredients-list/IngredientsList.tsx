@@ -1,7 +1,7 @@
 import IngredientTile from '../ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
-import { Ingredient } from '../../../interfaces/Ingredient';
+import { Ingredient } from '../../../types/interfaces/Ingredient';
 import { RefObject, useCallback, useMemo, useState } from 'react';
 import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
 import { AddCircleRounded } from '@mui/icons-material';

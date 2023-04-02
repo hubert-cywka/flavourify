@@ -1,4 +1,4 @@
-import { Dish } from '../interfaces/Dish';
+import { Dish } from '../types/interfaces/Dish';
 import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../constants/NumberConstants';
 import {
   DISH_EMPTY_INGREDIENTS_ERROR,

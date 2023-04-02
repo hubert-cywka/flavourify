@@ -12,7 +12,7 @@ import { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SearchRounded, TagRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
-import { Tag } from '../../../interfaces/Tag';
+import { Tag } from '../../../types/interfaces/Tag';
 import { getTags } from '../../../services/TagsService';
 import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import Builder from '../../../utility/Builder';
