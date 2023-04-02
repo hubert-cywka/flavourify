@@ -4,7 +4,7 @@ import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
-import { createUser } from '../../../../services/AuthService';
+import { createUser } from '../../../../services/UserService';
 import { AxiosError } from 'axios';
 import StatusScreen from '../../../status-screen/StatusScreen';
 import { useMutation } from '@tanstack/react-query';
@@ -46,9 +46,11 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
   const [passwordError, setPasswordError] = useState('');
   const [repeatedPasswordError, setRepeatedPasswordError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
-  const [displayedInfo, setDisplayedInfo] = useState(SIGN_UP_INITIAL_INFO);
-  const [displayedInfoType, setDisplayedInfoType] = useState<'error' | 'success' | 'info'>('info');
-  const [isStatusDisplayed, setIsStatusDisplayed] = useState(false);
+  const [displayedMessage, setDisplayedMessage] = useState(SIGN_UP_INITIAL_INFO);
+  const [hasSignedUp, setHasSignedUp] = useState(false);
+  const [displayedMessageType, setDisplayedMessageType] = useState<'error' | 'success' | 'info'>(
+    'info'
+  );
   const { mutateAsync: createNewUser, status } = useMutation(
     ['SIGN_UP_QUERY_KEY'],
     () => createUser({ username: nickname, email: email, password: password }),
@@ -60,7 +62,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
           setSignUpError(SIGN_UP_UNEXPECTED_ERROR);
         }
       },
-      onSuccess: () => setIsStatusDisplayed(true)
+      onSuccess: () => setHasSignedUp(true)
     }
   );
 
@@ -86,8 +88,8 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
 
   const clearDisplayedInfoIfPossible = () => {
     if (isDataCorrect()) {
-      setDisplayedInfoType('success');
-      setDisplayedInfo(SIGN_UP_REQUIREMENTS_MET);
+      setDisplayedMessageType('success');
+      setDisplayedMessage(SIGN_UP_REQUIREMENTS_MET);
     }
   };
 
@@ -126,44 +128,34 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
     }
   };
 
+  const setError = (error: string) => {
+    setDisplayedMessageType('error');
+    setDisplayedMessage(error);
+  };
+
+  const setInfo = (info: string) => {
+    setDisplayedMessageType('info');
+    setDisplayedMessage(info);
+  };
+
   const displayEmailInfo = () => {
-    if (emailError) {
-      setDisplayedInfoType('error');
-      setDisplayedInfo(emailError);
-    } else {
-      setDisplayedInfoType('info');
-      setDisplayedInfo(EMAIL_REQUIREMENTS);
-    }
+    if (emailError) setError(emailError);
+    else setInfo(EMAIL_REQUIREMENTS);
   };
 
   const displayNicknameInfo = () => {
-    if (nicknameError) {
-      setDisplayedInfoType('error');
-      setDisplayedInfo(nicknameError);
-    } else {
-      setDisplayedInfoType('info');
-      setDisplayedInfo(NICKNAME_REQUIREMENTS);
-    }
+    if (nicknameError) setError(nicknameError);
+    else setInfo(NICKNAME_REQUIREMENTS);
   };
 
   const displayPasswordInfo = () => {
-    if (passwordError) {
-      setDisplayedInfoType('error');
-      setDisplayedInfo(passwordError);
-    } else {
-      setDisplayedInfoType('info');
-      setDisplayedInfo(PASSWORD_REQUIREMENTS);
-    }
+    if (passwordError) setError(passwordError);
+    else setInfo(PASSWORD_REQUIREMENTS);
   };
 
   const displayRepeatedPasswordInfo = () => {
-    if (repeatedPasswordError) {
-      setDisplayedInfoType('error');
-      setDisplayedInfo(repeatedPassword);
-    } else {
-      setDisplayedInfoType('info');
-      setDisplayedInfo(REPEAT_PASSWORD_REQUIREMENTS);
-    }
+    if (repeatedPasswordError) setError(repeatedPassword);
+    else setInfo(REPEAT_PASSWORD_REQUIREMENTS);
   };
 
   return (
@@ -175,8 +167,8 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
           Create new account and gain access to wonderful recipes!
         </Typography>
       </Box>
-      {!!displayedInfo && (
-        <Box className={`sign-up-info ${displayedInfoType}`}>{displayedInfo}</Box>
+      {!!displayedMessage && (
+        <Box className={`sign-up-info ${displayedMessageType}`}>{displayedMessage}</Box>
       )}
       <ClickAwayListener onClickAway={clearDisplayedInfoIfPossible}>
         <Box>
@@ -264,12 +256,12 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
 
       <StatusScreen
         header={'Success!'}
-        open={isStatusDisplayed}
-        info={SIGN_UP_SUCCESS}
+        open={hasSignedUp}
+        caption={SIGN_UP_SUCCESS}
         imgSource={SIGN_UP_SUCCESS_IMAGE}
         status={'success'}
         close={() => {
-          setIsStatusDisplayed(false);
+          setHasSignedUp(false);
           slideToSignIn();
         }}
       />

@@ -1,5 +1,5 @@
 import DishCardBack from '../../dish-card-back/DishCardBack';
-import { Dish } from '../../../../../interfaces/Dish';
+import { Dish } from '../../../../../types/interfaces/Dish';
 import {
   DISH_IMAGE_PLACEHOLDER,
   DISH_NAME_PLACEHOLDER,

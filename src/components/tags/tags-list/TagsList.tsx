@@ -13,7 +13,7 @@ import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackup
 import { useQuery } from '@tanstack/react-query';
 import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
-import { Tag } from '../../../interfaces/Tag';
+import { Tag } from '../../../types/interfaces/Tag';
 import {
   EMPTY_TAGS_LIST_ERROR,
   NO_TAGS_ERROR,

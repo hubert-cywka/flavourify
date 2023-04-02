@@ -1,4 +1,4 @@
-import { Tag, TagType } from '../interfaces/Tag';
+import { Tag, TagType } from '../types/interfaces/Tag';
 import { apiClient } from './ApiClient';
 
 export const getTags = async (onlyWithContent?: boolean): Promise<Tag[]> => {

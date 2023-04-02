@@ -2,7 +2,17 @@ import AppRouter from '../../router/AppRouter';
 import StatusScreen from '../../status-screen/StatusScreen';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import { ERROR_403_IMAGE, ERROR_404_IMAGE, ERROR_500_IMAGE } from '../../../constants/AppConstants';
+import {
+  ERROR_403_CAPTION,
+  ERROR_403_HEADER,
+  ERROR_403_IMAGE,
+  ERROR_404_CAPTION,
+  ERROR_404_HEADER,
+  ERROR_404_IMAGE,
+  ERROR_500_CAPTION,
+  ERROR_500_HEADER,
+  ERROR_500_IMAGE
+} from '../../../constants/AppConstants';
 import { hasUserPermission } from '../../../services/AuthService';
 import { Navigate } from 'react-router';
 
@@ -22,22 +32,22 @@ const ErrorPage = () => {
   const getErrorHeader = (): string => {
     switch (error.status) {
       case 403:
-        return 'Forbidden.';
+        return ERROR_403_HEADER;
       case 404:
-        return 'Page not found.';
+        return ERROR_404_HEADER;
       default:
-        return 'Something went wrong';
+        return ERROR_500_HEADER;
     }
   };
 
   const getErrorInfo = (): string => {
     switch (error.status) {
       case 403:
-        return 'You are not allowed to access this resource.';
+        return ERROR_403_CAPTION;
       case 404:
-        return 'This page does not exist. You should not be here.';
+        return ERROR_404_CAPTION;
       default:
-        return 'It is our fault, sorry. Please try again later';
+        return ERROR_500_CAPTION;
     }
   };
 
@@ -47,12 +57,12 @@ const ErrorPage = () => {
         <StatusScreen
           open={true}
           close={() => appRouter.navigate(-1)}
-          closeText={'Go back'}
-          buttonOnClick={() => appRouter.navigate(ROUTE.LANDING)}
-          buttonText={'Go to home page'}
+          buttonText={'Go back'}
+          secondButtonOnClick={() => appRouter.navigate(ROUTE.LANDING)}
+          secondButtonText={'Go to home page'}
           header={getErrorHeader()}
           imgSource={getErrorImageSrc()}
-          info={getErrorInfo()}
+          caption={getErrorInfo()}
           status={'error'}></StatusScreen>
       );
     } else {
@@ -60,10 +70,10 @@ const ErrorPage = () => {
         <StatusScreen
           open={true}
           close={() => appRouter.navigate(ROUTE.AUTH)}
-          closeText={'Sign in'}
+          buttonText={'Sign in'}
           header={getErrorHeader()}
           imgSource={getErrorImageSrc()}
-          info={getErrorInfo()}
+          caption={getErrorInfo()}
           status={'error'}></StatusScreen>
       );
     }

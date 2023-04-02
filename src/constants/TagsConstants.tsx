@@ -1,4 +1,4 @@
-import { Tag, TagType } from '../interfaces/Tag';
+import { Tag, TagType } from '../types/interfaces/Tag';
 import {
   MAX_TAGS_NUMBER,
   MIN_TAGS_NUMBER,
