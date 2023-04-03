@@ -113,6 +113,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
   };
 
   const validatePassword = () => {
+    validateRepeatedPassword();
     if (password.length < PASSWORD_MINIMUM_LENGTH) {
       setPasswordError(WRONG_PASSWORD);
     } else {
@@ -154,12 +155,12 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
   };
 
   const displayRepeatedPasswordInfo = () => {
-    if (repeatedPasswordError) setError(repeatedPassword);
+    if (repeatedPasswordError) setError(repeatedPasswordError);
     else setInfo(REPEAT_PASSWORD_REQUIREMENTS);
   };
 
   return (
-    <Box className="sign-up-slide">
+    <Box className="authentication-slide">
       <img src={SIGN_UP_IMAGE} className="sign-up-image" />
       <Box>
         <Typography className="authentication-panel-header">Nice to meet you!</Typography>

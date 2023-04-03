@@ -1,8 +1,8 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .settings-panel-container {
-  display: flex;
-  flex-direction: column;
+  @include content-container;
 
   .settings-panel-header {
     box-sizing: border-box;
@@ -24,6 +24,7 @@
   }
 
   .displayed-setting {
+    width: 100%;
     flex-grow: 1;
     overflow: hidden;
 

@@ -5,6 +5,7 @@ import App from './App';
 import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
 import { IconButton } from '@mui/material';
 import { HighlightOffRounded } from '@mui/icons-material';
+import { setupInterceptors } from './services/ApiClient';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const dismissSnackbar = (id: SnackbarKey) => {
@@ -15,6 +16,8 @@ const dismissSnackbar = (id: SnackbarKey) => {
     </IconButton>
   );
 };
+
+setupInterceptors();
 
 root.render(
   <React.StrictMode>

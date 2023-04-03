@@ -5,6 +5,7 @@
   @include page-container;
 
   .slides-container {
+    @include content-container;
     box-sizing: border-box;
     z-index: 1;
     height: 100%;

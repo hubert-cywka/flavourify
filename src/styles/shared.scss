@@ -4,7 +4,7 @@
   width: calc(100 * var(--vw));
   height: calc(100 * var(--vh));
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,7 @@
 @mixin dish-card {
   width: $dish-card-width;
   height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
+  margin: 0 auto;
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
@@ -132,4 +133,13 @@
   text-align: justify;
   font-size: $small-font-size;
   font-weight: 450;
+}
+
+@mixin content-container {
+  max-width: $max-page-width;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }

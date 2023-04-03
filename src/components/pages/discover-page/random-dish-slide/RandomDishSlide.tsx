@@ -25,7 +25,7 @@ const RandomDishSlide = () => {
     <Box className="slide-container">
       <Typography className="header">Be inspired.</Typography>
       <Typography className="caption">Loved by many. One of many.</Typography>
-      <Box>
+      <Box className="mini-dish-card-container">
         {data && !isFetching ? (
           <DishMiniCard
             className="mini-dish-card"

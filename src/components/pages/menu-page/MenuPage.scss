@@ -5,6 +5,7 @@
   @include page-container;
 
   .menu-plan-container {
+    @include content-container;
     @include translucent-tile;
     height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$big-element-spacing});
     margin-bottom: $bottom-navbar-height;

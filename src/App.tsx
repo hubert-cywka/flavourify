@@ -21,10 +21,9 @@ import { useSnackbar } from 'notistack';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { useEffect, useState } from 'react';
 import { ALL_TAGS } from './constants/TagsConstants';
-import { apiClient, apiURL, setupInterceptors } from './services/ApiClient';
+import { apiClient, apiURL } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
-import { useUpdateEffect } from './utility/hooks/useUpdateEffect';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -48,10 +47,6 @@ function App() {
     slide: 0
   });
   const [shouldDisplayAlert, setShouldDisplayAlert] = useState(false);
-
-  useUpdateEffect(() => {
-    setupInterceptors();
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {

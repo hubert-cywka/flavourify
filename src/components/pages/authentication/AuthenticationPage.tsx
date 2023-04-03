@@ -23,10 +23,10 @@ const AuthenticationPage = () => {
         slidesPerView={1}
         onSwiper={setSwiperRef}
         allowTouchMove={false}>
-        <SwiperSlide>
+        <SwiperSlide className="sign-in-slide">
           <SignInSlide slideToSignUp={swapSlide} />
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="sign-up-slide">
           <SignUpSlide slideToSignIn={swapSlide} />
         </SwiperSlide>
       </Swiper>
