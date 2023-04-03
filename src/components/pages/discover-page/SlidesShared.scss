@@ -2,6 +2,8 @@
 @import './src/styles/shared';
 
 .slide-container {
+  @include content-container;
+
   .header {
     margin: $big-element-spacing 0 $standard-element-spacing 0;
     font-weight: bold;
@@ -15,8 +17,12 @@
 
   .mini-dish-card, .slide-bottom-container {
     @include translucent-tile;
-    width: 85vw;
+    width: 85%;
     margin: 0 auto;
+  }
+
+  .mini-dish-card-container {
+    width: 100%;
   }
 
   .mini-dish-card {

@@ -1,4 +1,4 @@
-import { Box, Button, Input, Typography } from '@mui/material';
+import { Box, Button, FormControl, Input, Typography } from '@mui/material';
 import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
 import { useState } from 'react';
@@ -37,7 +37,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
   );
 
   return (
-    <Box className="sign-in-slide">
+    <Box className="authentication-slide">
       <img src={SIGN_IN_IMAGE} className="sign-in-image" />
       <Box>
         <Typography className="authentication-panel-header">Hello again!</Typography>
@@ -45,7 +45,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
           Welcome back, you have been missed!
         </Typography>
       </Box>
-      <Box>
+      <FormControl className="authentication-input-row">
         <Input
           startAdornment={
             <AlternateEmailRoundedIcon
@@ -58,6 +58,8 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
           placeholder="E-mail"
           className="authentication-input"
         />
+      </FormControl>
+      <FormControl className="authentication-input-row">
         <Input
           startAdornment={
             <KeyRoundedIcon
@@ -71,7 +73,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
           placeholder="Password"
           className="authentication-input"
         />
-      </Box>
+      </FormControl>
       <Button
         disabled={status === 'loading'}
         variant={signInError ? 'errorContained' : 'successContained'}

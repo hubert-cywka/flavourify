@@ -1,6 +1,10 @@
-.dish-card {
-  .dish-card-side {
-    width: 100%;
-    height: 100%;
+.draggable-dish-card {
+  width: 100%;
+
+  .dish-card {
+    .dish-card-side {
+      width: 100%;
+      height: 100%;
+    }
   }
 }

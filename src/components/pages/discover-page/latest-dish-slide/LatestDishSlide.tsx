@@ -19,7 +19,7 @@ const LatestDishSlide = () => {
   const buildLatestDishCard = () => {
     return Builder.createResult(status)
       .onSuccess(
-        <Box>
+        <Box className="mini-dish-card-container">
           {data && (
             <>
               <Typography className="caption">Our latest addition.</Typography>

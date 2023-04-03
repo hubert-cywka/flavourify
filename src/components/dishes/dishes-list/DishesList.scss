@@ -2,7 +2,7 @@
 @import './src/styles/shared';
 
 .dishes-list-container {
-  box-sizing: border-box;
+  @include content-container;
 
   .dish-card {
     @include dish-card;

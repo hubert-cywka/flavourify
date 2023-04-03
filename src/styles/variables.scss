@@ -28,7 +28,7 @@ $white-transparent-background-75: rgba(255, 255, 255, 0.75);
 $gradient-transparent-background: linear-gradient(270deg, rgba(121,0,255,0.25) 0%, rgba(255, 255, 255, 0.25) 100%);
 $gradient-transparent-background-soft: linear-gradient(270deg, rgba(183,119,255,0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
 
-$dish-card-width: 85vw;
+$dish-card-width: 85%;
 $mini-dish-card-height: 60vh;
 $slide-bottom-container-height: 10vh;
 $slide-header-margin: 25px;
@@ -42,3 +42,5 @@ $icon-font-size: 3rem;
 
 $shadow: 0 0 25px 0 rgba(20, 20, 20, 0.1);
 $button-shadow: 0 8px 5px -5px rgba(20, 20, 20, 0.1);
+
+$max-page-width: calc(75 * var(--vh));

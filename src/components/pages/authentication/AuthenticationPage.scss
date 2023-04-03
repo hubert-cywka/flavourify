@@ -12,18 +12,16 @@
     background: #09001e;
   }
 
-  .sign-in-slide, .sign-up-slide {
-    width: 100%;
+  .authentication-slide {
+    @include content-container;
     height: 100%;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
 
     .sign-up-info, .authentication-input, .authentication-button {
       padding: $standard-element-spacing;
       border-radius: $inner-border-radius-5;
-      width: 80vw;
+      width: 80%;
     }
 
     .sign-up-info, .authentication-panel-redirect {
@@ -36,11 +34,12 @@
 
     .sign-up-info {
       background: $white-transparent-background-5;
-      height: 3vh;
+      box-sizing: border-box;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 6.5%;
 
       &.success {
        color: rgba(22, 255, 105, 0.8);
@@ -63,13 +62,17 @@
       max-height: 30vh;
     }
 
-    .authentication-input {
-      background: $white-transparent-background-10;
-      margin: $small-element-spacing auto 0 auto;
-      font-size: $standard-font-size;
+    .authentication-input-row {
+      width: 100%;
 
-      .authentication-input-icon {
-        margin-right: $standard-element-spacing;
+      .authentication-input {
+        background: $white-transparent-background-10;
+        margin: $small-element-spacing auto 0 auto;
+        font-size: $standard-font-size;
+
+        .authentication-input-icon {
+          margin-right: $standard-element-spacing;
+        }
       }
     }
 
@@ -81,7 +84,7 @@
 
     .authentication-panel-caption {
       margin: $small-element-spacing auto $big-element-spacing;
-      width: 70vw;
+      width: 70%;
     }
 
     .authentication-button {
@@ -89,7 +92,7 @@
     }
 
     .authentication-panel-redirect {
-      margin: 0 auto;
+      margin: 0 auto $big-element-spacing auto;
     }
   }
 }
