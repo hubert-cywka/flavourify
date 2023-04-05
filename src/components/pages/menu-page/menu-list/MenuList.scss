@@ -9,29 +9,39 @@
   &.empty-menu-list-container {
     flex-grow: 1;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    overflow-y: auto;
 
     .empty-menu-image {
-      width: 90%;
-      margin-bottom: $standard-element-spacing;
+      max-width: 80%;
+      margin: auto 0;
       z-index: 10;
     }
 
-    .empty-menu-header {
-      @include info-header;
+    .empty-menu-content {
       margin-bottom: $standard-element-spacing;
-      width: 70%;
-    }
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-    .empty-menu-info {
-      @include info-description;
-      width: 80%;
-      margin-bottom: $huge-element-spacing;
-      font-size: $standard-font-size;
-    }
+      .empty-menu-header {
+        @include info-header;
+        font-weight: bold;
+        margin-bottom: $standard-element-spacing;
+        width: 70%;
+      }
 
-    .action-button {
-      @include action-button-standard;
+      .empty-menu-info {
+        text-align: center;
+        width: 80%;
+        margin-bottom: $huge-element-spacing;
+        font-size: $standard-font-size;
+      }
+
+      .action-button {
+        @include action-button-standard;
+      }
     }
   }
 

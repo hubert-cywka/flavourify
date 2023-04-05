@@ -134,15 +134,17 @@ const MenuList = ({ className }: MenuListProps) => {
       ) : (
         <Box className={`menu-list-container empty-menu-list-container ${className}`}>
           <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
-          <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
-          <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
-          <Button
-            variant="secondaryContained"
-            className="action-button"
-            endIcon={<ArrowForwardRounded />}
-            onClick={() => appRouter.navigate(ROUTE.LANDING)}>
-            Find recipes
-          </Button>
+          <Box className="empty-menu-content">
+            <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
+            <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
+            <Button
+              variant="secondaryContained"
+              className="action-button"
+              endIcon={<ArrowForwardRounded />}
+              onClick={() => appRouter.navigate(ROUTE.LANDING)}>
+              Find recipes
+            </Button>
+          </Box>
         </Box>
       )}
     </>
