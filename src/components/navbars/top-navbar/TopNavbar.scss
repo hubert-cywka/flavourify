@@ -12,7 +12,7 @@
 
   .search-bar {
     flex-grow: 1;
-    height: calc(#{$top-navbar-height} - $standard-element-spacing);
+    height: calc(#{$top-navbar-height} - #{$standard-element-spacing});
     background: $white-transparent-background-25;
     margin: $small-element-spacing;
     box-sizing: border-box;
