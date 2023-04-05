@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(async () => {
       apiClient
-        .head(apiURL, { method: 'HEAD', timeout: 1500 })
+        .head(apiURL, { method: 'HEAD', timeout: 3500 })
         .then(() => {
           closeSnackbar(OFFLINE_STATUS_NOTIFICATION_KEY);
           setShouldDisplayAlert(false);

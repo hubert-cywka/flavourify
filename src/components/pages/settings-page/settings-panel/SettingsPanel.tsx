@@ -1,6 +1,7 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { LogoutRounded, MenuBookRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
+import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import { useContext, useState } from 'react';
 import { ColorModeContext } from '../../../../contexts/ColorModeContext';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
@@ -10,6 +11,7 @@ import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
 import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 import DishCardAdd from '../../../dishes/dish-card/other-variants/dish-card-add/DishCardAdd';
 import { hasAdminPermission, signOutUser } from '../../../../services/AuthService';
+import UsersManagementPanel from '../../../users/users-management-panel/UsersManagementPanel';
 
 interface SettingsPanelProps {
   className?: string;
@@ -33,6 +35,11 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
   const displayTagsManagementPanel = () => {
     setDisplayedSetting(<TagsManagementPanel className="tags-management-panel" />);
     setDisplayedSettingName('Manage tags');
+  };
+
+  const displayUsersManagementPanel = () => {
+    setDisplayedSetting(<UsersManagementPanel className="users-management-panel" />);
+    setDisplayedSettingName('Manage users');
   };
 
   return (
@@ -64,6 +71,13 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
                 text="Manage tags"
                 className="settings-panel-item"
                 callback={displayTagsManagementPanel}
+              />
+
+              <SettingsPanelItem
+                icon={<PeopleRoundedIcon className="icon" />}
+                text="Manage users"
+                className="settings-panel-item"
+                callback={displayUsersManagementPanel}
               />
             </>
           )}

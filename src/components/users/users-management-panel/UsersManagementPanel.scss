@@ -1,0 +1,39 @@
+@import '/src/styles/shared';
+@import '/src/styles/variables';
+
+.users-management-panel {
+  overflow-y: auto;
+  height: 100%;
+
+  .users-not-found-image {
+    margin-top: auto;
+    max-height: 50%;
+    max-width: 75%;
+  }
+
+  .users-not-found-text {
+    font-weight: bold;
+    font-size: $standard-font-size;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .user-details-row {
+    background: $highlighted-background;
+    padding: $standard-element-spacing;
+    box-sizing: border-box;
+    border-radius: $inner-border-radius-5;
+    margin: $small-element-spacing 0;
+    width: 100%;
+  }
+
+  .users-management-info, .users-management-warning {
+    width: 90%;
+    margin: $standard-element-spacing auto;
+    font-size: $small-font-size;
+  }
+
+  .users-management-warning {
+    font-weight: bold;
+  }
+}

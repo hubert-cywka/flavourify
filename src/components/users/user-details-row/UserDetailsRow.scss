@@ -1,0 +1,50 @@
+@import '/src/styles/shared';
+@import '/src/styles/variables';
+
+.user-details-row-container {
+  .user-details-row-content {
+    font-size: $standard-font-size;
+    align-items: center;
+    display: flex;
+
+    .user-info {
+      text-align: left;
+
+      .user-username {
+        font-weight: bold;
+      }
+
+      .user-email {
+        font-size: $small-font-size;
+      }
+    }
+
+    .user-role {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: $small-font-size;
+      margin-right: $standard-element-spacing;
+      width: 10%;
+    }
+
+    .expand-management-options-button {
+      margin-left: auto;
+    }
+
+    .user-username, .user-email, .user-role {
+      margin-left: $standard-element-spacing;
+    }
+  }
+
+  .user-manage-row {
+    overflow: hidden;
+
+    .action-button {
+      @include action-button-standard;
+      padding: $small-element-spacing $big-element-spacing;
+      margin: $standard-element-spacing $small-element-spacing 0;
+    }
+  }
+}

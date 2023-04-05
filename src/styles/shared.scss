@@ -98,6 +98,7 @@
 }
 
 @mixin action-button-standard {
+  font-weight: bold;
   -webkit-box-shadow: $button-shadow;
   -moz-box-shadow: $button-shadow;
   box-shadow: $button-shadow;
