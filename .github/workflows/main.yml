@@ -28,8 +28,6 @@ jobs:
       - run: npm run test --coverage
       - name: TestCoverage
         id: testCoverage
-        uses: raulanatol/jest-coverage-comment-action@main
+        uses: dkershner6/jest-coverage-commenter-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          use-existing-reports: true
-
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
