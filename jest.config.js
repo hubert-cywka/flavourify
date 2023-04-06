@@ -8,7 +8,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       tsConfig: {
-        allowJs: true ///...ss
+        allowJs: true ///...sss
       }
     }
   }
