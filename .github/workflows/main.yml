@@ -8,6 +8,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      pull-requests: write
+
     strategy:
       matrix:
         node-version: [18.x]
@@ -25,8 +28,6 @@ jobs:
       - name: TestCoverage
         id: testCoverage
         uses: raulanatol/jest-coverage-comment-action@main
-        permissions:
-          pull-requests: write
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           use-existing-reports: true
