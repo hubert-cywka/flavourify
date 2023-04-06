@@ -24,10 +24,9 @@ jobs:
       - run: npm run test
       - name: TestCoverage
         id: testCoverage
-        uses: anuraag016/Jest-Coverage-Diff@master
+        uses: ziishaned/jest-reporter-action@v0.0.1
         with:
-         fullCoverageDiff: false // defaults to false, if made true whole coverage report is commented with the diff
-         runCommand: "npm jest --coverage --collectCoverage=true --coverageDirectory='./' --coverageReporters='json-summary'"
-         delta: 0.5
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-command: "npm jest --coverage --collectCoverage=true"
 
 
