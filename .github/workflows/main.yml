@@ -26,7 +26,7 @@ jobs:
         uses: adRise/jest-cov-reporter@main
         with:
           branch-coverage-report-path: ./coverage/coverage-final.json
-          base-coverage-report-path: ./coverage/master-coverage-final.json
+          base-coverage-report-path: ./coverage/coverage-final.json
           delta: 0.3
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           fullCoverageDiff: true
