@@ -21,15 +21,13 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run build --if-present
-      - run: npm run test -- --coverage --watchAll=false
-      - name: Comment with Test Coverage
-        uses: adRise/jest-cov-reporter@main
+      - run: npm run test
+      - name: TestCoverage
+        id: testCoverage
+        uses: anuraag016/Jest-Coverage-Diff@master
         with:
-          branch-coverage-report-path: ./coverage/coverage-final.json
-          base-coverage-report-path: ./coverage/coverage-final.json
-          delta: 0.3
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
-          fullCoverageDiff: true
-          useSameComment: true
+         fullCoverageDiff: false // defaults to false, if made true whole coverage report is commented with the diff
+         runCommand: "npm jest --coverage --collectCoverage=true --coverageDirectory='./' --coverageReporters='json-summary'"
+         delta: 0.5
 
 
