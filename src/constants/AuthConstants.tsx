@@ -24,3 +24,6 @@ export const SIGN_UP_INITIAL_INFO = 'Please fill registration form.';
 export const SIGN_IN_IMAGE = '/sign-in.svg';
 export const SIGN_UP_IMAGE = '/sign-up.svg';
 export const SIGN_UP_SUCCESS_IMAGE = '/sign-up-success.svg';
+
+export const REDIRECT_TO_SIGN_UP = 'I want to create new account.';
+export const REDIRECT_TO_SIGN_IN = 'I already have an account.';
