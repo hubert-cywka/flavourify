@@ -48,14 +48,14 @@ const StatusScreen = ({
                 {secondButtonOnClick && (
                   <Button
                     variant={'accentContained'}
-                    className="status-screen-button"
+                    className="status-screen-secondary-button"
                     onClick={secondButtonOnClick}>
                     {secondButtonText}
                   </Button>
                 )}
                 <Button
                   variant={status === 'success' ? 'successContained' : 'errorContained'}
-                  className="status-screen-button"
+                  className="status-screen-primary-button"
                   onClick={close}>
                   {buttonText ? buttonText : 'OK'}
                 </Button>

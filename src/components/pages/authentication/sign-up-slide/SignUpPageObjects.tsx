@@ -22,7 +22,7 @@ export class SignUpPageObjects {
   }
 
   get closeSuccessScreenButton(): Promise<Element> {
-    return screen.findByTestId(/status-screen-button(?!\S)/);
+    return screen.findByTestId(/status-screen-primary-button(?!\S)/);
   }
 
   get signUpButton(): Promise<Element> {

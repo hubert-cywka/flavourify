@@ -37,7 +37,7 @@
       flex-direction: row;
       font-weight: bold;
 
-      .status-screen-button {
+      .status-screen-primary-button, .status-screen-secondary-button {
         @include action-button-standard;
         margin: $standard-element-spacing;
       }
