@@ -25,7 +25,8 @@ import {
   WRONG_EMAIL,
   WRONG_PASSWORD,
   SIGN_UP_REQUIREMENTS_MET,
-  SIGN_UP_INITIAL_INFO
+  SIGN_UP_INITIAL_INFO,
+  REDIRECT_TO_SIGN_IN
 } from '../../../../constants/AuthConstants';
 import {
   NICKNAME_MAXIMUM_LENGTH,
@@ -51,26 +52,23 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
   const [displayedMessageType, setDisplayedMessageType] = useState<'error' | 'success' | 'info'>(
     'info'
   );
-  const { mutateAsync: createNewUser, status } = useMutation(
-    ['SIGN_UP_QUERY_KEY'],
-    () => createUser({ username: nickname, email: email, password: password }),
-    {
-      onError: (err: AxiosError) => {
-        if (err?.response?.status === 409) {
-          setSignUpError(EMAIL_ALREADY_EXISTS);
-        } else {
-          setSignUpError(SIGN_UP_UNEXPECTED_ERROR);
-        }
-      },
-      onSuccess: () => setHasSignedUp(true)
-    }
+  const { mutateAsync: createNewUser, status } = useMutation(['SIGN_UP_QUERY_KEY'], () =>
+    createUser({ username: nickname, email: email, password: password })
   );
 
   const signUp = async () => {
     if (!isDataCorrect()) {
       setSignUpError(INVALID_SIGN_UP_DATA);
     } else {
-      await createNewUser();
+      await createNewUser()
+        .then(() => setHasSignedUp(true))
+        .catch((err: AxiosError) => {
+          if (err?.response?.status === 409) {
+            setSignUpError(EMAIL_ALREADY_EXISTS);
+          } else {
+            setSignUpError(SIGN_UP_UNEXPECTED_ERROR);
+          }
+        });
     }
   };
 
@@ -185,6 +183,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
               onChange={(event) => setNickname(event.target.value.trim())}
               onFocus={displayNicknameInfo}
               onBlur={validateNickname}
+              aria-label="username"
               placeholder="How should we call you?"
               className="authentication-input"
             />
@@ -201,6 +200,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
               onFocus={displayEmailInfo}
               onChange={(event) => setEmail(event.target.value.trim())}
               onBlur={validateEmail}
+              aria-label="email"
               placeholder="Enter your e-mail"
               className="authentication-input"
             />
@@ -217,6 +217,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
               onChange={(event) => setPassword(event.target.value.trim())}
               onBlur={validatePassword}
               type="password"
+              aria-label="create password"
               placeholder="Create password"
               disableUnderline
               className="authentication-input"
@@ -234,6 +235,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
               onChange={(event) => setRepeatedPassword(event.target.value.trim())}
               onBlur={validateRepeatedPassword}
               type="password"
+              aria-label="repeat password"
               placeholder="Repeat password"
               disableUnderline
               className="authentication-input"
@@ -252,7 +254,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
         sx={{ color: 'accent.success' }}
         className="authentication-panel-redirect"
         onClick={slideToSignIn}>
-        I already have an account.
+        {REDIRECT_TO_SIGN_IN}
       </Typography>
 
       <StatusScreen

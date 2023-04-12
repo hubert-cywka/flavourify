@@ -3,6 +3,7 @@ import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
 import { useState } from 'react';
 import {
+  REDIRECT_TO_SIGN_UP,
   SIGN_IN_IMAGE,
   SIGN_UP_UNEXPECTED_ERROR,
   USER_NOT_FOUND
@@ -20,21 +21,21 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
   const [signInError, setSignInError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { mutateAsync: signIn, status } = useMutation(
-    ['SIGN_IN_QUERY_KEY'],
-    () => signInUser({ email: email, password: password }),
-    {
-      onError: (err: AxiosError) => {
-        console.log(err);
+  const { mutateAsync: signIn, status } = useMutation(['SIGN_IN_QUERY_KEY'], () =>
+    signInUser({ email: email, password: password })
+  );
+
+  const handleSignIn = () => {
+    signIn()
+      .then(() => appRouter.navigate(ROUTE.LANDING))
+      .catch((err: AxiosError) => {
         if (err?.response?.status === 401) {
           setSignInError(USER_NOT_FOUND);
         } else {
           setSignInError(SIGN_UP_UNEXPECTED_ERROR);
         }
-      },
-      onSuccess: () => appRouter.navigate(ROUTE.LANDING)
-    }
-  );
+      });
+  };
 
   return (
     <Box className="authentication-slide">
@@ -53,6 +54,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
               sx={{ color: signInError ? 'accent.error' : 'accent.main' }}
             />
           }
+          aria-label="email"
           disableUnderline
           onChange={(event) => setEmail(event.target.value.trim())}
           placeholder="E-mail"
@@ -68,6 +70,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
             />
           }
           onChange={(event) => setPassword(event.target.value.trim())}
+          aria-label="password"
           disableUnderline
           type="password"
           placeholder="Password"
@@ -78,14 +81,14 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
         disabled={status === 'loading'}
         variant={signInError ? 'errorContained' : 'successContained'}
         className="authentication-button"
-        onClick={signInError ? () => setSignInError('') : () => signIn()}>
+        onClick={signInError ? () => setSignInError('') : handleSignIn}>
         {signInError ? signInError : status === 'loading' ? 'Entering...' : 'Enter'}
       </Button>
       <Typography
         sx={{ color: 'accent.success' }}
         className="authentication-panel-redirect"
         onClick={slideToSignUp}>
-        I want to create new account.
+        {REDIRECT_TO_SIGN_UP}
       </Typography>
     </Box>
   );

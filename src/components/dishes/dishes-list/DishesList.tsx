@@ -1,5 +1,4 @@
 import './DishesList.scss';
-import 'swiper/scss';
 import { Dish } from '../../../types/interfaces/Dish';
 import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import { DISHES_QUERY } from '../../../constants/QueryConstants';
