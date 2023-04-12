@@ -3,6 +3,7 @@ import { USER_ROLE } from '../types/enums/UserRole';
 import { SignUpRequest } from '../types/interfaces/SignUpRequest';
 import { SignInRequest } from '../types/interfaces/SignInRequest';
 import { SignInResponse } from '../types/interfaces/SignInResponse';
+import { ERROR_403_IMAGE } from './AppConstants';
 
 export const MOCK_USER: User = {
   username: 'mock_username',
@@ -30,3 +31,7 @@ export const MOCK_SIGN_IN_RESPONSE: SignInResponse = {
 };
 
 export const MOCK_INPUT_VALUE = 'mock_value';
+
+export const MOCK_CAPTION = 'mock_caption';
+export const MOCK_HEADER = 'mock_header';
+export const MOCK_IMG_SOURCE = ERROR_403_IMAGE;
