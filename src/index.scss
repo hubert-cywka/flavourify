@@ -19,6 +19,24 @@ body {
     }
 }
 
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #ffc400 rgba(0, 0, 0, 0);
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #ffc400;
+    border-radius: 10px;
+}
+
 .swiper {
     width: 100%;
     height: 100%;

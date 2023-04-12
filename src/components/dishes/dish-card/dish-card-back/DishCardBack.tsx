@@ -263,6 +263,7 @@ const DishCardBack = ({
             <EditableTextField
               className="dish-name"
               isReadOnly={readOnly}
+              preventScroll
               value={displayedDish.name}
               reference={nameRef}
               max={DISH_NAME_MAX_LENGTH}

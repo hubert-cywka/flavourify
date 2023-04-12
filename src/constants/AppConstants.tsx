@@ -8,3 +8,5 @@ export const ERROR_500_HEADER = 'Something went wrong';
 export const ERROR_403_CAPTION = 'You are not allowed to access this resource.';
 export const ERROR_404_CAPTION = 'This page does not exist. You should not be here.';
 export const ERROR_500_CAPTION = 'It is our fault, sorry. Please try again later';
+export const FIELD_CANNOT_BE_EMPTY = 'This field can not be empty.';
+export const VALUE_MUST_BE_NUMBER = 'This value must be a valid number.';

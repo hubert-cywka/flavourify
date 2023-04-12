@@ -2,6 +2,7 @@ import { Input, SxProps } from '@mui/material';
 import React, { RefObject, useCallback, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { useSnackbar } from 'notistack';
+import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from '../../../constants/AppConstants';
 
 interface EditableTextFieldProps {
   isReadOnly?: boolean;
@@ -14,6 +15,7 @@ interface EditableTextFieldProps {
   type?: 'text' | 'number';
   sx?: SxProps;
   autoFocus?: boolean;
+  preventScroll?: boolean;
 }
 
 const EditableTextField = ({
@@ -26,7 +28,8 @@ const EditableTextField = ({
   errorMessage,
   type,
   sx,
-  autoFocus
+  autoFocus,
+  preventScroll
 }: EditableTextFieldProps) => {
   const [displayedValue, setDisplayedValue] = useState<string>(value);
   const { enqueueSnackbar } = useSnackbar();
@@ -53,7 +56,7 @@ const EditableTextField = ({
           errorMessage ? errorMessage : `This value can be only ${max} characters long.`
         );
       } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
-        enqueueSnackbar('This value must be a valid number.');
+        enqueueSnackbar(VALUE_MUST_BE_NUMBER);
       } else {
         setDisplayedValue(e.target.value);
       }
@@ -63,30 +66,29 @@ const EditableTextField = ({
 
   const checkIfEmpty = useCallback(() => {
     if (!displayedValue.length) {
-      enqueueSnackbar('This field can not be empty.');
+      enqueueSnackbar(FIELD_CANNOT_BE_EMPTY);
       setDisplayedValue(value);
     }
   }, [displayedValue]);
 
   const scrollIntoView = useCallback(() => {
-    if (reference?.current) reference.current.scrollIntoView({ behavior: 'smooth' });
-  }, [reference]);
+    if (reference?.current && preventScroll === false)
+      reference.current.scrollIntoView({ behavior: 'smooth' });
+  }, [reference, preventScroll]);
 
   return (
-    <>
-      <Input
-        autoFocus={autoFocus}
-        ref={reference}
-        multiline={multiline}
-        className={className}
-        disableUnderline={true}
-        sx={{ color: 'text.secondary', ...sx }}
-        value={displayedValue}
-        onBlur={checkIfEmpty}
-        onFocus={scrollIntoView}
-        onChange={(e) => handleChange(e)}
-        onMouseDown={(e) => allowEdit(e)}></Input>
-    </>
+    <Input
+      autoFocus={autoFocus}
+      ref={reference}
+      multiline={multiline}
+      className={className}
+      disableUnderline={true}
+      sx={{ color: 'text.secondary', ...sx }}
+      value={displayedValue}
+      onBlur={checkIfEmpty}
+      onFocus={scrollIntoView}
+      onChange={(e) => handleChange(e)}
+      onMouseDown={(e) => allowEdit(e)}></Input>
   );
 };
 
