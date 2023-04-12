@@ -13,6 +13,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/QueryClient';
 import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
 import { ALL_TAGS } from './constants/TagsConstants';
+import { AlertProvider } from './AlertProvider';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 interface AppProviderProps {
@@ -150,7 +151,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
       <lastViewedDishContext.Provider
         value={{ setLastViewedDish: updateLastViewedDish, lastViewedDish: lastViewedDish }}>
         <ThemeProvider theme={theme}>
-          <QueryClientProvider client={queryClient}> {children} </QueryClientProvider>
+          <AlertProvider>
+            <QueryClientProvider client={queryClient}> {children} </QueryClientProvider>
+          </AlertProvider>
         </ThemeProvider>
       </lastViewedDishContext.Provider>
     </ColorModeContext.Provider>

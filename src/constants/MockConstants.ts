@@ -28,3 +28,5 @@ export const MOCK_SIGN_IN_RESPONSE: SignInResponse = {
   roles: USER_ROLE.USER,
   username: 'mock-username'
 };
+
+export const MOCK_INPUT_VALUE = 'mock_value';

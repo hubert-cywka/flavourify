@@ -4,7 +4,7 @@ import { getAuthToken, refreshToken, signOutUser } from './AuthService';
 import AppRouter from '../components/router/AppRouter';
 
 //export const apiURL = 'https://fd04-212-51-207-126.eu.ngrok.io';
-export const apiURL = 'http://10.8.2.27:8080';
+export const apiURL = 'http://localhost:8080';
 
 export const apiClient = axios.create({
   baseURL: apiURL,
