@@ -1,11 +1,11 @@
 @import './variables';
 
 @mixin page-container {
-  width: calc(100 * var(--vw));
+  width: 100vw;
+  box-sizing: border-box;
   height: calc(100 * var(--vh));
   overflow-x: hidden;
-  overflow-y: scroll;
-  box-sizing: border-box;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

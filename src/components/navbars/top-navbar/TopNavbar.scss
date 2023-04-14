@@ -3,6 +3,7 @@
 
 .top-navbar-container {
   @include translucent-tile;
+  max-width: calc(#{$max-page-width} + #{$big-element-spacing});
   padding: 0;
   display: flex;
   justify-content: flex-start;
