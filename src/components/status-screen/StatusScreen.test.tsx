@@ -13,6 +13,9 @@ const prepareMockupPage = async (page: ReactJSXElement) => {
 const StatusScreenPO = new StatusScreenPageObjects();
 const mockClose = jest.fn();
 const mockSecondAction = jest.fn();
+const waitForAnimationToEnd = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 300));
+};
 
 describe('Testing <StatusScreen /> component with one button', () => {
   beforeEach(async () => {
@@ -26,6 +29,7 @@ describe('Testing <StatusScreen /> component with one button', () => {
         status={'success'}
       />
     );
+    await waitForAnimationToEnd();
   });
 
   test('should display valid header text', async () => {
@@ -64,6 +68,7 @@ describe('Testing <StatusScreen /> component with two buttons and overwritten te
         status={'error'}
       />
     );
+    await waitForAnimationToEnd();
   });
 
   test('should display image, header, caption and 2 buttons', async () => {
@@ -74,7 +79,7 @@ describe('Testing <StatusScreen /> component with two buttons and overwritten te
     expect(await StatusScreenPO.image).toBeVisible();
   });
 
-  test('should call onClose callback on primary button click', async () => {
+  test('should call secondary button callback on click', async () => {
     await StatusScreenPO.clickSecondaryButton();
     expect(mockSecondAction).toHaveBeenCalled();
   });

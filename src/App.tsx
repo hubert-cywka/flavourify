@@ -5,7 +5,7 @@ import {
   setCustomViewportSizeVariableUpdater,
   setCustomViewportWidthVariable
 } from './utility/viewportSizeVariable';
-import { useSnackbar } from 'notistack';
+import { closeSnackbar, enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { apiClient, apiURL } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
@@ -23,7 +23,6 @@ declare module '@mui/material/Button' {
 }
 
 function App() {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [shouldDisplayAlert, setShouldDisplayAlert] = useState(false);
 
   useEffect(() => {
@@ -38,8 +37,8 @@ function App() {
           if (shouldDisplayAlert) {
             enqueueSnackbar(APP_OFFLINE_ALERT, {
               variant: 'error',
-              autoHideDuration: null,
               key: OFFLINE_STATUS_NOTIFICATION_KEY,
+              persist: true,
               action: <></>
             });
           }

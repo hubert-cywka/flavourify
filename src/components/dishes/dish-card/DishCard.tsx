@@ -44,7 +44,11 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
   });
 
   return (
-    <motion.div drag={'x'} dragConstraints={{ left: 0, right: 0 }} className="draggable-dish-card">
+    <motion.div
+      drag={'x'}
+      dragConstraints={{ left: 25, right: 25 }}
+      dragSnapToOrigin={true}
+      className="draggable-dish-card">
       <Box {...swipeHandlers} className="dish-card">
         <AnimatePresence initial={false} mode={'popLayout'}>
           {isFrontSide && (
