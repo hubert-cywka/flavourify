@@ -137,7 +137,9 @@
 }
 
 @mixin content-container {
-  max-width: $max-page-width;
+  @media (min-width: 800px) {
+    max-width: $max-page-width;
+  }
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

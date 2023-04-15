@@ -4,14 +4,20 @@
 .found-dish-page-container {
   @include page-container;
 
-  .slides-container {
+  .slide-container {
     @include content-container;
+    display: flex;
+    justify-content: center;
     box-sizing: border-box;
     z-index: 1;
     height: 100%;
 
-    .dish-card {
-      @include dish-card;
+    .found-dish-container {
+      touch-action: none;
+
+      .dish-card {
+        @include dish-card;
+      }
     }
   }
 

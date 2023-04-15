@@ -1,10 +1,5 @@
 import AppRouter from './components/router/AppRouter';
 import { RouterProvider } from 'react-router';
-import {
-  setCustomViewportHeightVariable,
-  setCustomViewportSizeVariableUpdater,
-  setCustomViewportWidthVariable
-} from './utility/viewportSizeVariable';
 import { closeSnackbar, enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { apiClient, apiURL } from './services/ApiClient';
@@ -47,10 +42,6 @@ function App() {
     }, 3000);
     return () => clearInterval(interval);
   }, [shouldDisplayAlert]);
-
-  setCustomViewportWidthVariable();
-  setCustomViewportHeightVariable();
-  setCustomViewportSizeVariableUpdater();
 
   return (
     <AppProvider>

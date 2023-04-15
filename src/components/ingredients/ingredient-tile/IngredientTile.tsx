@@ -120,9 +120,9 @@ const IngredientTile = ({
             <AnimatePresence>
               <motion.div
                 key={INGREDIENT_EDIT_IMAGE_MOTION}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'fit-content' }}
-                exit={{ opacity: 0, height: 0 }}>
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: '80%' }}
+                exit={{ opacity: 0, width: 0 }}>
                 <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
               </motion.div>
             </AnimatePresence>
@@ -134,7 +134,6 @@ const IngredientTile = ({
               <Typography className="field-name-label">Name:</Typography>
               <EditableTextField
                 sx={{ color: 'text.primary' }}
-                autoFocus
                 className="editable-text-field"
                 value={displayedIngredient.name}
                 reference={nameRef}

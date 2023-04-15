@@ -19,3 +19,8 @@ export const MAX_MENU_SIZE = 14;
 export const NICKNAME_MINIMUM_LENGTH = 3;
 export const NICKNAME_MAXIMUM_LENGTH = 25;
 export const PASSWORD_MINIMUM_LENGTH = 8;
+
+export const SWIPE_DOWN_BOUND = 100;
+export const SWIPE_UP_BOUND = -100;
+export const SWIPE_LEFT_BOUND = -100;
+export const SWIPE_RIGHT_BOUND = 100;

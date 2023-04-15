@@ -21,6 +21,10 @@
       width: 90%;
     }
 
+    .menu-ingredients-container {
+      will-change: transform;
+    }
+
     .toggle-ingredients-visibility-button {
       position: absolute;
       bottom: 0;

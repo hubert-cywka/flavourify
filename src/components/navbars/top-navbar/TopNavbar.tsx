@@ -5,15 +5,16 @@ import SearchBar from './search-bar/SearchBar';
 import { ArrowBackRounded } from '@mui/icons-material';
 import appRouter from '../../router/AppRouter';
 
-interface DisplayManagerProps {
+interface TopNavbarProps {
   className?: string;
   singleDishVariant?: boolean;
+  searchValue?: string;
 }
 
-const TopNavbar = ({ className, singleDishVariant }: DisplayManagerProps) => {
+const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps) => {
   return (
     <Box className={`top-navbar-container ${className}`}>
-      <SearchBar className="search-bar" />
+      <SearchBar searchValue={searchValue} className="search-bar" />
       {!singleDishVariant ? (
         <DisplayedTag className="displayed-tag" />
       ) : (

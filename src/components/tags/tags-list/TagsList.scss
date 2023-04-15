@@ -23,9 +23,9 @@
       }
 
       .tags-select-info-image {
-        max-height: 25vh;
-        width: 50vw;
-        margin-bottom: $small-element-spacing;
+        width: 80%;
+        display: block;
+        margin: 0 auto $small-element-spacing;
       }
 
       .selected-tags-text {

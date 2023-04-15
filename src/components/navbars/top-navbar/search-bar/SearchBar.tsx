@@ -19,9 +19,10 @@ import ROUTE from '../../../router/RoutingConstants';
 
 interface SearchBarProps {
   className?: string;
+  searchValue?: string;
 }
 
-const SearchBar = ({ className }: SearchBarProps) => {
+const SearchBar = ({ className, searchValue }: SearchBarProps) => {
   const [textFilter, setTextFilter] = useState('');
   const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState<boolean>(false);
 
@@ -81,7 +82,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
             disableUnderline
             onChange={(e) => setTextFilter(e.target.value)}
             onFocus={() => setAreSearchResultsDisplayed(true)}
-            placeholder="Search for recipes"
+            placeholder={searchValue ? searchValue : 'Search for recipes'}
             className="search-input"
           />
         </Box>

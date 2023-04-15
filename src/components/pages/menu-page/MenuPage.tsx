@@ -79,9 +79,9 @@ const MenuPage = () => {
               <motion.div
                 className="menu-ingredients-container"
                 key={SUMMED_INGREDIENTS_MOTION}
-                initial={{ height: 0 }}
-                animate={{ height: '100%' }}
-                exit={{ height: 0 }}
+                initial={{ translateY: '100%' }}
+                animate={{ translateY: 0 }}
+                exit={{ translateY: '100%' }}
                 transition={{ bounce: 0, duration: 0.3 }}>
                 <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
                   <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />

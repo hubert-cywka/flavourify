@@ -177,7 +177,12 @@ const DishCardBack = ({
 
   const getEditingPanel = () => {
     if (isLoading) {
-      return <CircularProgress sx={{ color: 'accent.main' }} className="action-button" />;
+      return (
+        <CircularProgress
+          sx={{ color: 'accent.main', padding: '10px 0px' }}
+          className="action-button"
+        />
+      );
     } else if (readOnly) {
       return (
         <>

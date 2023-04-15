@@ -29,8 +29,8 @@ $gradient-transparent-background: linear-gradient(270deg, rgba(121,0,255,0.25) 0
 $gradient-transparent-background-soft: linear-gradient(270deg, rgba(183,119,255,0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
 
 $dish-card-width: 85%;
-$mini-dish-card-height: 60vh;
-$slide-bottom-container-height: 10vh;
+$mini-dish-card-height: calc(60 * var(--vh));
+$slide-bottom-container-height: calc(10 * var(--vh));
 $slide-header-margin: 25px;
 
 $tiny-font-size: 0.6rem;
@@ -40,7 +40,6 @@ $big-font-size: 1.25rem;
 $huge-font-size: 2.5rem;
 $icon-font-size: 3rem;
 $small-icon-font-size: 1.75rem;
-
 
 $shadow: 0 0 25px 0 rgba(20, 20, 20, 0.1);
 $strong-shadow: 0px 8px 15px 0px rgba(29, 29, 29, 0.5);
