@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import './MenuList.scss';
+import './MenuPlan.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import {
   DragDropContext,
@@ -23,13 +23,13 @@ import {
   MENU_PLAN_INFO
 } from '../../../../constants/DishesConstants';
 
-interface MenuListProps {
+interface MenuPlanProps {
   menu: MenuItem[];
   onMenuChange: (menu: MenuItem[]) => void; // eslint-disable-line no-unused-vars
   className?: string;
 }
 
-const MenuList = ({ className, menu, onMenuChange }: MenuListProps) => {
+const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
   const reorderMenuList = (list: MenuItem[], startIndex: number, endIndex: number) => {
     const reorderedList = Array.from(list);
     const [movedElement] = reorderedList.splice(startIndex, 1);
@@ -106,11 +106,11 @@ const MenuList = ({ className, menu, onMenuChange }: MenuListProps) => {
   return (
     <>
       {menu && menu.length ? (
-        <Box className={`menu-list-container ${className}`}>
+        <Box className={`menu-plan-container ${className}`}>
           <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
           <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
 
-          <Box className="menu-list-columns">
+          <Box className="menu-plan-columns">
             <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="menu-list">
@@ -128,7 +128,7 @@ const MenuList = ({ className, menu, onMenuChange }: MenuListProps) => {
           </Box>
         </Box>
       ) : (
-        <Box className={`menu-list-container empty-menu-list-container ${className}`}>
+        <Box className={`menu-plan-container empty-menu-plan-container ${className}`}>
           <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
           <Box className="empty-menu-content">
             <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
@@ -147,4 +147,4 @@ const MenuList = ({ className, menu, onMenuChange }: MenuListProps) => {
   );
 };
 
-export default MenuList;
+export default MenuPlan;

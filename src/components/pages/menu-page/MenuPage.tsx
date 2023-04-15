@@ -1,13 +1,13 @@
 import { Box, Button, CircularProgress, IconButton } from '@mui/material';
 import './MenuPage.scss';
-import MenuList from './menu-list/MenuList';
+import MenuPlan from './menu-plan/MenuPlan';
 import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
 import { useQuery } from '@tanstack/react-query';
 import { MENU_INGREDIENTS_QUERY } from '../../../constants/QueryConstants';
 import { getDishesIngredients } from '../../../services/DishService';
 import { getMenu } from '../../../services/MenuService';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MENU_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
+import { MENU_PAGE_MOTION, SUMMED_INGREDIENTS_MOTION } from '../../../constants/MotionKeyConstants';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import { useState } from 'react';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
@@ -58,12 +58,12 @@ const MenuPage = () => {
       <TopNavbar className="top-navbar" />
       <AnimatePresence>
         <motion.div
-          className="menu-plan-container"
+          className="menu-container"
           key={MENU_PAGE_MOTION}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}>
-          <MenuList menu={menu} onMenuChange={setMenu} className="menu-plan" />
+          <MenuPlan menu={menu} onMenuChange={setMenu} className="menu" />
 
           {!!menu.length && (
             <IconButton className="toggle-ingredients-visibility-button" onClick={swapSlide}>
@@ -78,6 +78,7 @@ const MenuPage = () => {
             {areIngredientsVisible && (
               <motion.div
                 className="menu-ingredients-container"
+                key={SUMMED_INGREDIENTS_MOTION}
                 initial={{ height: 0 }}
                 animate={{ height: '100%' }}
                 exit={{ height: 0 }}
