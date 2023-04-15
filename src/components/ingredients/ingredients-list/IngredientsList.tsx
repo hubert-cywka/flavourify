@@ -130,10 +130,12 @@ const IngredientsList = ({
         {parsedIngredientsList}
 
         {amountLimit > 0 && amountLimit < displayedIngredients.length && (
-          <IngredientTile
-            className="ingredient-tile"
-            ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
-          />
+          <Box className="ingredient-tile-container">
+            <IngredientTile
+              className="ingredient-tile"
+              ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
+            />
+          </Box>
         )}
 
         {editable && (

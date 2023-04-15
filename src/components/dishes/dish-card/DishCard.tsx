@@ -16,6 +16,7 @@ import {
   DISH_BACK_SIDE_MOTION,
   DISH_FRONT_SIDE_MOTION
 } from '../../../constants/MotionKeyConstants';
+import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
 
 export interface DishCardProps {
   dish: Dish;
@@ -27,7 +28,7 @@ export interface DishCardProps {
 const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const addDishToMenu = (dish: Dish) => {
+  const addDishToMenu = () => {
     if (!isFrontSide) return;
     if (getMenu().length >= MAX_MENU_SIZE) enqueueSnackbar(DISH_ADD_TO_MENU_ERROR);
     else {
@@ -37,7 +38,7 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
   };
 
   const swipeHandlers = useSwipeable({
-    onSwipedRight: () => addDishToMenu(dish),
+    onSwipedRight: addDishToMenu,
     delta: 50,
     swipeDuration: 250,
     trackMouse: true
@@ -59,6 +60,7 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
               animate={{ translateX: 0, opacity: 1 }}
               exit={{ translateX: '120%', opacity: 0 }}
               transition={{ bounce: 0, duration: 0.3 }}>
+              <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
               <DishCardFront flipCallback={flipCallback} dish={dish} className="dish-card-side" />
             </motion.div>
           )}

@@ -1,5 +1,4 @@
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import { useState } from 'react';
 import './MenuList.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import {
@@ -19,16 +18,18 @@ import { queryClient } from '../../../../services/QueryClient';
 import {
   EMPTY_MENU_ERROR,
   EMPTY_MENU_IMAGE,
-  EMPTY_MENU_INFO
+  EMPTY_MENU_INFO,
+  MENU_PLAN_HEADER,
+  MENU_PLAN_INFO
 } from '../../../../constants/DishesConstants';
 
 interface MenuListProps {
+  menu: MenuItem[];
+  onMenuChange: (menu: MenuItem[]) => void; // eslint-disable-line no-unused-vars
   className?: string;
 }
 
-const MenuList = ({ className }: MenuListProps) => {
-  const [displayedMenu, setDisplayedMenu] = useState(getMenu());
-
+const MenuList = ({ className, menu, onMenuChange }: MenuListProps) => {
   const reorderMenuList = (list: MenuItem[], startIndex: number, endIndex: number) => {
     const reorderedList = Array.from(list);
     const [movedElement] = reorderedList.splice(startIndex, 1);
@@ -38,7 +39,7 @@ const MenuList = ({ className }: MenuListProps) => {
 
   const removeFromList = (index: number) => {
     removeFromMenu(index);
-    setDisplayedMenu(getMenu());
+    onMenuChange(getMenu());
     queryClient.refetchQueries([MENU_INGREDIENTS_QUERY]);
   };
 
@@ -47,7 +48,7 @@ const MenuList = ({ className }: MenuListProps) => {
   };
 
   const getDateBoxes = (): ReactJSXElement[] => {
-    return displayedMenu.map((item, id) => (
+    return menu.map((item, id) => (
       <Box key={id} className="menu-plan-date">
         {getParsedDate(item.date)}
       </Box>
@@ -55,7 +56,7 @@ const MenuList = ({ className }: MenuListProps) => {
   };
 
   const getMenuItemBoxes = (): ReactJSXElement[] => {
-    return displayedMenu.map((item, id) => (
+    return menu.map((item, id) => (
       <Draggable
         key={item.id + item.name + item.date.toString()}
         draggableId={item.id + item.name + item.date.toString()}
@@ -83,13 +84,9 @@ const MenuList = ({ className }: MenuListProps) => {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
 
-    const reorderedMenu = reorderMenuList(
-      displayedMenu,
-      result.source.index,
-      result.destination.index
-    );
+    const reorderedMenu = reorderMenuList(menu, result.source.index, result.destination.index);
     updateMenu(reorderedMenu);
-    setDisplayedMenu(getMenu());
+    onMenuChange(getMenu());
   }
 
   const getParsedDate = (dateToParse: Date) => {
@@ -108,12 +105,11 @@ const MenuList = ({ className }: MenuListProps) => {
 
   return (
     <>
-      {displayedMenu && displayedMenu.length ? (
+      {menu && menu.length ? (
         <Box className={`menu-list-container ${className}`}>
-          <Box className="menu-list-header">
-            <Box className="menu-list-header-date">Date</Box>
-            <Box className="menu-list-header-dish">Dish</Box>
-          </Box>
+          <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
+          <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
+
           <Box className="menu-list-columns">
             <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
             <DragDropContext onDragEnd={onDragEnd}>

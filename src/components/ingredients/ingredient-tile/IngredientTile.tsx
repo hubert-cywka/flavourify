@@ -115,7 +115,7 @@ const IngredientTile = ({
       <Dialog open={open} onClose={closeEditDialog}>
         <Box
           className="ingredients-edit-form"
-          sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
+          sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}>
           <Box className="ingredients-edit-form-content">
             <AnimatePresence>
               <motion.div
@@ -133,6 +133,7 @@ const IngredientTile = ({
             <Box className="ingredients-edit-form-row">
               <Typography className="field-name-label">Name:</Typography>
               <EditableTextField
+                sx={{ color: 'text.primary' }}
                 autoFocus
                 className="editable-text-field"
                 value={displayedIngredient.name}
@@ -152,6 +153,7 @@ const IngredientTile = ({
                   <Box className="ingredients-edit-form-row">
                     <Typography className="field-name-label">Amount:</Typography>
                     <EditableTextField
+                      sx={{ color: 'text.primary' }}
                       autoFocus={displayedIngredient.quantity.amount === INGREDIENT_DEFAULT_AMOUNT}
                       className="editable-text-field"
                       value={displayedIngredient.quantity.amount.toString()}
@@ -163,6 +165,7 @@ const IngredientTile = ({
                   <Box className="ingredients-edit-form-row">
                     <Typography className="field-name-label">Unit:</Typography>
                     <EditableTextField
+                      sx={{ color: 'text.primary' }}
                       className="editable-text-field"
                       value={displayedIngredient.quantity.unit}
                       reference={unitRef}

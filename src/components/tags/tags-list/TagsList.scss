@@ -36,15 +36,15 @@
       .tags-select-info-description {
         @include info-description;
         width: 90%;
-        font-size: $standard-font-size;
-        margin-bottom: $standard-element-spacing;
+        font-size: $small-font-size;
+        margin-bottom: $big-element-spacing;
       }
 
       .tags-select-info-header {
         @include info-header;
         width: 80%;
         font-size: $big-font-size;
-        margin-bottom: $big-element-spacing;
+        margin-bottom: $small-element-spacing;
       }
 
       .selected-tags {

@@ -14,7 +14,7 @@ export const MAX_TAGS_NUMBER = 4;
 export const TAG_NAME_MIN_LENGTH = 3;
 export const TAG_NAME_MAX_LENGTH = 20;
 
-export const MAX_MENU_SIZE = 7;
+export const MAX_MENU_SIZE = 14;
 
 export const NICKNAME_MINIMUM_LENGTH = 3;
 export const NICKNAME_MAXIMUM_LENGTH = 25;

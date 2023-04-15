@@ -1,4 +1,4 @@
-@import '../../DishCardShared';
+@import '../../DishCardShared.scss';
 @import './src/styles/variables';
 
 .error-dish-card-container {
@@ -11,6 +11,8 @@
   align-items: center;
   align-content: center;
   justify-content: center;
+
+  @include dish-card-components;
 
   .image-container {
     flex-grow: 1;
@@ -30,12 +32,13 @@
   }
 
   .error-title, .image-container {
-    background-color: $white-transparent-background-10;
-    margin-bottom: $small-element-spacing;
+    background-color: $white-transparent-background-5;
   }
 
   .error-title {
     padding: 8% 0;
+    font-weight: bold;
+    margin-bottom: $small-element-spacing;
   }
 
   .error-button {
