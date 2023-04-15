@@ -100,7 +100,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
         className="tags-list-dialog">
         {tagsList && tagsList.length ? (
           <Box
-            sx={{ bgcolor: 'background.default', color: 'text.secondary' }}
+            sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}
             className="tags-select-form">
             <Box className="tags-select-form-content">
               <AnimatePresence>
@@ -129,6 +129,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
                 className="complete-tags-list"
                 onTagSelect={handleTagSelection}
                 selectedTags={displayedTags}
+                sx={{ color: 'text.primary' }}
               />
             </Box>
             <Box className="tags-select-buttons">
@@ -151,7 +152,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
         ) : (
           <Box
             className="tags-select-form"
-            sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>
+            sx={{ bgcolor: 'background.default', color: 'text.primary' }}>
             <Box className="tags-select-form-content">
               <img src={NO_TAGS_IMAGE} className="error-image" />
               <Typography className="tags-select-info-header">{NO_TAGS_ERROR}</Typography>

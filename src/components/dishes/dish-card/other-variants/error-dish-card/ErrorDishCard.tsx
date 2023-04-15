@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Skeleton } from '@mui/material';
+import { Box, Button, Typography, Skeleton, Divider } from '@mui/material';
 import './ErrorDishCard.scss';
 
 interface ErrorDishCardProps {
@@ -25,6 +25,7 @@ const ErrorDishCard = ({ img, title, caption, callback, loading }: ErrorDishCard
           <Box className="image-container">
             <img src={img} alt={title} className="error-image" />
           </Box>
+          <Divider className="field-label">Ooops!</Divider>
           <Typography variant="h6" className="error-title">
             {title}
           </Typography>

@@ -43,7 +43,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
             primary: {
               main: '#6500d3',
               light: '#c637ff',
-              dark: '#6b0097'
+              dark: '#5a00ba'
             },
             secondary: {
               main: '#050046',
@@ -64,7 +64,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
             primary: {
               main: '#06093e',
               light: '#3138ff',
-              dark: '#070b4c'
+              dark: '#000235'
             },
             secondary: {
               main: '#03002a',

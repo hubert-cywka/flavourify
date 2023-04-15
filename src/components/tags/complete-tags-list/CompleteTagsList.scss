@@ -2,9 +2,17 @@
 @import './src/styles/shared';
 
 .all-tags-list-container {
+  width: 100%;
+
   .tags-divider {
     font-size: $tiny-font-size;
     margin-top: $big-element-spacing;
+    margin-bottom: $small-element-spacing;
+    width: 100%;
+
+    &:before, &:after {
+      border-top: thin solid $strong-highlighted-background;
+    }
   }
 
   .tags-container {

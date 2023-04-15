@@ -1,5 +1,5 @@
 import { Tag, TagType } from '../../../types/interfaces/Tag';
-import { Box, Divider, Skeleton } from '@mui/material';
+import { Box, Divider, Skeleton, SxProps } from '@mui/material';
 import './CompleteTagsList.scss';
 import { useQuery } from '@tanstack/react-query';
 import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
@@ -10,9 +10,10 @@ interface CompleteTagsListProps {
   className?: string;
   onTagSelect: (tag: Tag) => void; // eslint-disable-line no-unused-vars
   selectedTags: Tag[] | null;
+  sx?: SxProps;
 }
 
-const CompleteTagsList = ({ className, onTagSelect, selectedTags }: CompleteTagsListProps) => {
+const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: CompleteTagsListProps) => {
   const { data: tags } = useQuery<Tag[]>([TAGS_QUERY, ALL_TAGS_QUERY], () => getTags(false));
 
   const isTagSelected = (tagToCheck: Tag): boolean => {
@@ -49,7 +50,7 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags }: CompleteTags
   };
 
   return (
-    <Box className={`all-tags-list-container ${className}`} sx={{ color: 'text.secondary' }}>
+    <Box className={`all-tags-list-container ${className}`} sx={sx}>
       {TAG_TYPES.map((type, id) => (
         <Box key={id}>
           <Divider className="tags-divider">{type}</Divider>
