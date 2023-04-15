@@ -1,35 +1,46 @@
 import { Box } from '@mui/material';
 import './AuthenticationPage.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { useState } from 'react';
-import SwiperRef from 'swiper';
 import SignInSlide from './sign-in-slide/SignInSlide';
 import SignUpSlide from './sign-up-slide/SignUpSlide';
+import { AnimatePresence, motion } from 'framer-motion';
+import { SIGN_IN_SLIDE_MOTION, SIGN_UP_SLIDE_MOTION } from '../../../constants/MotionKeyConstants';
 
 const AuthenticationPage = () => {
-  const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
+  const [isSignInVisible, setIsSignInVisible] = useState<boolean>(true);
 
   const swapSlide = () => {
-    swiperRef?.slideNext();
+    setIsSignInVisible((prev) => !prev);
   };
 
   return (
     <Box
       sx={{ bgcolor: 'primary.main', color: 'text.primary' }}
       className="authentication-page-container">
-      <Swiper
-        direction="horizontal"
-        loop
-        slidesPerView={1}
-        onSwiper={setSwiperRef}
-        allowTouchMove={false}>
-        <SwiperSlide className="sign-in-slide">
-          <SignInSlide slideToSignUp={swapSlide} />
-        </SwiperSlide>
-        <SwiperSlide className="sign-up-slide">
-          <SignUpSlide slideToSignIn={swapSlide} />
-        </SwiperSlide>
-      </Swiper>
+      <AnimatePresence initial={false} mode={'popLayout'}>
+        {isSignInVisible && (
+          <motion.div
+            key={SIGN_IN_SLIDE_MOTION}
+            className="sign-in-slide"
+            initial={{ translateX: '-120%' }}
+            animate={{ translateX: 0 }}
+            exit={{ translateX: '-120%' }}
+            transition={{ bounce: 0 }}>
+            <SignInSlide slideToSignUp={swapSlide} />
+          </motion.div>
+        )}
+        {!isSignInVisible && (
+          <motion.div
+            key={SIGN_UP_SLIDE_MOTION}
+            className="sign-up-slide"
+            initial={{ translateX: '120%' }}
+            animate={{ translateX: 0 }}
+            exit={{ translateX: '120%' }}
+            transition={{ bounce: 0, duration: 0.3 }}>
+            <SignUpSlide slideToSignIn={swapSlide} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Box>
   );
 };

@@ -106,9 +106,9 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
               <AnimatePresence>
                 <motion.div
                   key={TAGS_SELECT_IMAGE_MOTION}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'fit-content' }}
-                  exit={{ opacity: 0, height: 0 }}>
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: '80%' }}
+                  exit={{ opacity: 0, width: 0 }}>
                   <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
                 </motion.div>
               </AnimatePresence>
@@ -138,7 +138,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
                 variant="errorContained"
                 startIcon={<SettingsBackupRestoreRoundedIcon />}
                 onClick={() => setDisplayedTags(DISH_TAGS_DEFAULT)}>
-                Unselect all
+                Clear
               </Button>
               <Button
                 className="action-button"

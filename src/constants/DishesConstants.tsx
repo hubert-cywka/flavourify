@@ -16,10 +16,7 @@ export const INGREDIENT_EDIT_IMAGE = '/ingredient-edit.svg';
 export const IMAGE_EDIT_INFO = 'Upload picture of your dish in .png or .jpg format.';
 export const INGREDIENT_EDIT_INFO = `Select name of ingredient (maximum ${INGREDIENT_NAME_MAX_LENGTH} characters). You can also toggle ingredient quantity, set new quantity amount and unit or remove ingredient completely.`;
 
-export const DISH_SEARCH_DONE_IMAGE = '/all-done.svg';
-export const DISH_SEARCH_DONE_TITLE = 'Got everything you needed?';
-export const DISH_SEARCH_DONE_BUTTON = 'Go back to previous page';
-
+export const DISH_SEARCH_DONE = 'Swipe once again to see more recipes.';
 export const NO_RECIPES_IMAGE = '/no-recipes.svg';
 export const NO_RECIPES_TITLE = 'Could not find any recipes!';
 export const NO_RECIPES_BUTTON = 'Reload recipes';

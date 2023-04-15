@@ -41,8 +41,9 @@
     overflow-y: auto;
 
     .ingredients-edit-info-image {
-      height: 30vh;
-      margin-bottom: $standard-element-spacing;
+      width: 80%;
+      display: block;
+      margin: 0 auto $standard-element-spacing;
     }
 
     .ingredients-edit-info-header {
