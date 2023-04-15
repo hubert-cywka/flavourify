@@ -1,13 +1,13 @@
 @import './src/styles/shared';
 @import './src/styles/variables';
 
-.menu-list-container {
+.menu-plan-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 
-  &.empty-menu-list-container {
+  &.empty-menu-plan-container {
     flex-grow: 1;
     align-items: center;
     justify-content: space-evenly;
@@ -59,7 +59,7 @@
     opacity: 0.9;
   }
 
- .menu-list-columns {
+ .menu-plan-columns {
    margin-bottom: calc(#{$small-icon-font-size} + #{$big-element-spacing});
    flex-grow: 1;
    overflow-y: auto;
