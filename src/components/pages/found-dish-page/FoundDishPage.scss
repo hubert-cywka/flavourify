@@ -5,7 +5,7 @@
   @include page-container;
 
   .slide-container {
-    @include content-container;
+    @include content-container(100);
     display: flex;
     justify-content: center;
     box-sizing: border-box;

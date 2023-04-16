@@ -2,7 +2,7 @@
 @import './src/styles/shared';
 
 .settings-panel-container {
-  @include content-container;
+  @include content-container(100);
 
   .settings-panel-header {
     box-sizing: border-box;

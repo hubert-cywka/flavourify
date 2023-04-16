@@ -5,7 +5,7 @@
   @include page-container;
 
   .settings-panel {
-    width: 90vw;
+    width: 90%;
     height: calc(100 * var(--vh) - #{$bottom-navbar-height} -  #{$big-element-spacing} - #{$page-offset});
     margin-bottom: calc(#{$bottom-navbar-height});
     box-sizing: border-box;

@@ -19,7 +19,7 @@
   }
 
   .authentication-slide {
-    @include content-container;
+    @include content-container(100);
     height: 100%;
     overflow-y: auto;
     justify-content: center;

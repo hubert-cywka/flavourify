@@ -2,7 +2,7 @@
 @import './src/styles/shared';
 
 .slide-container {
-  @include content-container;
+  @include content-container(100);
 
   .header {
     margin: $big-element-spacing 0 $standard-element-spacing 0;
