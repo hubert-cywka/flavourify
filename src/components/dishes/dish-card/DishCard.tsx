@@ -20,6 +20,7 @@ import { useDrag } from '@use-gesture/react';
 import { useState } from 'react';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
 import { to } from 'react-spring';
+import { Box, Dialog } from '@mui/material';
 
 export interface DishCardProps {
   dish: Dish;
@@ -66,11 +67,11 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
       {...swipeHandlers()}
       style={{ x, transform: to([rotation], transform) }}
       className="dish-card">
-      <AnimatePresence initial={false} mode={'popLayout'}>
-        {isFrontSide && (
+      <AnimatePresence initial={false} mode="popLayout">
+        {isFrontSide ? (
           <motion.div
             key={DISH_FRONT_SIDE_MOTION}
-            className="dish-card-side"
+            className="dish-card-motion"
             initial={{ translateX: '120%', opacity: 0 }}
             animate={{ translateX: 0, opacity: 1 }}
             exit={{ translateX: '120%', opacity: 0 }}
@@ -78,17 +79,25 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
             <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
             <DishCardFront flipCallback={flipCallback} dish={dish} className="dish-card-side" />
           </motion.div>
-        )}
-        {!isFrontSide && (
-          <motion.div
-            key={DISH_BACK_SIDE_MOTION}
-            className="dish-card-side"
-            initial={{ translateX: '-120%', opacity: 0 }}
-            animate={{ translateX: 0, opacity: 1 }}
-            exit={{ translateX: '-120%', opacity: 0 }}
-            transition={{ bounce: 0, duration: 0.3 }}>
-            <DishCardBack flipCallback={flipCallback} dish={dish} className="dish-card-side" />
-          </motion.div>
+        ) : (
+          <Dialog
+            open={true}
+            PaperProps={{
+              sx: { background: 'none', boxShadow: 'none' },
+              className: 'dish-card-back-dialog'
+            }}>
+            <motion.div
+              key={DISH_BACK_SIDE_MOTION}
+              className="dish-card-motion"
+              initial={{ translateX: '-120%', opacity: 0 }}
+              animate={{ translateX: 0, opacity: 1 }}
+              exit={{ translateX: '-120%', opacity: 0 }}
+              transition={{ bounce: 0, duration: 0.3 }}>
+              <Box sx={{ bgcolor: 'primary.main' }}>
+                <DishCardBack flipCallback={flipCallback} dish={dish} className="dish-card-side" />
+              </Box>
+            </motion.div>
+          </Dialog>
         )}
       </AnimatePresence>
     </animated.div>

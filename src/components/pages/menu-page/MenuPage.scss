@@ -9,7 +9,7 @@
   }
 
   .menu-container {
-    @include content-container;
+    @include content-container(100);
     height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$standard-element-spacing} - #{$page-offset} - #{$top-navbar-height});
     margin-top: calc(#{$top-navbar-height} + #{$standard-element-spacing} + #{$page-offset});
     margin-bottom: $bottom-navbar-height;

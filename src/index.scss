@@ -50,7 +50,7 @@ body {
     box-sizing: border-box;
     position: relative;
     overflow: visible !important;
-    overflow-y: hidden;
+    overflow-y: clip !important;
 
     .swiper-slide {
         display: flex;

@@ -21,14 +21,11 @@ const LatestDishSlide = () => {
       .onSuccess(
         <Box className="mini-dish-card-container">
           {data && (
-            <>
-              <Typography className="caption">Our latest addition.</Typography>
-              <DishMiniCard
-                onClick={() => navigateToRecipe(data.id)}
-                className="mini-dish-card"
-                dish={data}
-              />
-            </>
+            <DishMiniCard
+              onClick={() => navigateToRecipe(data.id)}
+              className="mini-dish-card"
+              dish={data}
+            />
           )}
         </Box>
       )
@@ -40,6 +37,7 @@ const LatestDishSlide = () => {
   return (
     <Box className="slide-container">
       <Typography className="header">Discover new.</Typography>
+      <Typography className="caption">Our latest addition.</Typography>
       {buildLatestDishCard()}
       <Box className="slide-bottom-container">
         <Typography className="bottom-caption">Check all our recipes.</Typography>

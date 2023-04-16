@@ -136,13 +136,15 @@
   font-weight: 450;
 }
 
-@mixin content-container {
+@mixin content-container($desktop-width-percentage) {
+  width: 100%;
   @media (min-width: 800px) {
-    max-width: $max-page-width;
+    max-width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
+    width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
   }
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  margin: 0 auto;
 }

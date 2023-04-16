@@ -6,6 +6,11 @@ import { apiClient, apiURL } from './services/ApiClient';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
 import AppProvider from './AppProvider';
+import {
+  setCustomViewportHeightVariable,
+  setCustomViewportSizeVariableUpdater,
+  setCustomViewportWidthVariable
+} from './utility/viewportSizeVariable';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -33,8 +38,7 @@ function App() {
             enqueueSnackbar(APP_OFFLINE_ALERT, {
               variant: 'error',
               key: OFFLINE_STATUS_NOTIFICATION_KEY,
-              persist: true,
-              action: <></>
+              persist: true
             });
           }
           setShouldDisplayAlert(true);
@@ -42,6 +46,10 @@ function App() {
     }, 3000);
     return () => clearInterval(interval);
   }, [shouldDisplayAlert]);
+
+  setCustomViewportWidthVariable();
+  setCustomViewportHeightVariable();
+  setCustomViewportSizeVariableUpdater();
 
   return (
     <AppProvider>

@@ -46,9 +46,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
               dark: '#5a00ba'
             },
             secondary: {
-              main: '#050046',
-              light: '#1900ff',
-              dark: '#030723'
+              main: '#0F0425',
+              light: '#1E0849',
+              dark: '#42176b'
             },
             text: {
               primary: '#ffffff',
@@ -62,14 +62,14 @@ const AppProvider = ({ children }: AppProviderProps) => {
           }
         : {
             primary: {
-              main: '#06093e',
-              light: '#3138ff',
-              dark: '#000235'
+              main: '#19063e',
+              light: '#2D0C6E',
+              dark: '#0F0425'
             },
             secondary: {
-              main: '#03002a',
-              light: '#1900ff',
-              dark: '#030723'
+              main: '#0F0425',
+              light: '#1E0849',
+              dark: '#281356'
             },
             text: {
               primary: '#ffffff',

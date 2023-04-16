@@ -2,7 +2,7 @@
 @import './src/styles/shared';
 
 .dishes-list-container {
-  @include content-container;
+  @include content-container(100);
 
   .dish-card {
     @include dish-card;
