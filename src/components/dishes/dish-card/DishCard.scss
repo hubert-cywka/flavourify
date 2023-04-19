@@ -3,6 +3,7 @@
 
 .dish-card-motion {
   will-change: transform;
+  width: 100%;
 }
 
 .dish-card-back-dialog {
@@ -19,6 +20,7 @@
 
 .dish-card {
   touch-action: none;
+  overflow: hidden;
 
   .dish-card-side {
     width: 100%;

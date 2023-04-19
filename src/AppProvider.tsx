@@ -41,9 +41,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
       ...(colorMode === 'light'
         ? {
             primary: {
-              main: '#6500d3',
+              main: '#5a00bc',
               light: '#c637ff',
-              dark: '#5a00ba'
+              dark: '#420087'
             },
             secondary: {
               main: '#0F0425',
@@ -62,7 +62,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
           }
         : {
             primary: {
-              main: '#19063e',
+              main: '#100037',
               light: '#2D0C6E',
               dark: '#0F0425'
             },
@@ -86,6 +86,13 @@ const AppProvider = ({ children }: AppProviderProps) => {
       MuiButtonBase: {
         defaultProps: {
           disableRipple: true
+        }
+      },
+      MuiCircularProgress: {
+        styleOverrides: {
+          root: {
+            color: '#ff9e00'
+          }
         }
       },
       MuiButton: {
@@ -123,7 +130,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
             props: { variant: 'secondaryContained' },
             style: {
               color: '#ffffff',
-              backgroundColor: '#03003a',
+              backgroundColor: '#100037',
               ':hover': { backgroundColor: lighten('#03003a', 0.1) }
             }
           }

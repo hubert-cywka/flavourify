@@ -3,6 +3,7 @@
 .bottom-navbar-container {
   width: $navbar-width;
   height: $bottom-navbar-height;
+  max-width: calc(#{$max-page-width} + #{$big-element-spacing});
   position: absolute;
   box-sizing: border-box;
   bottom: 0;

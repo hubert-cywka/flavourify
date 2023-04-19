@@ -15,7 +15,6 @@
       z-index: 10;
       width: 100%;
       box-sizing: border-box;
-      overflow: hidden;
       height: calc(var(--vh) * 100 - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$standard-element-spacing});
       margin-bottom: $bottom-navbar-height + $standard-element-spacing;
     }

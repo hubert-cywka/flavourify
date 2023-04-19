@@ -213,9 +213,9 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
                 <Box className="tag-inputs-container">
                   <Input
                     sx={{ color: 'text.secondary' }}
+                    defaultValue={selectedTag?.name}
                     inputRef={tagNameRef}
                     className="tag-name-input"
-                    placeholder={selectedTag?.name}
                   />
                   {getTagTypeSelector()}
                 </Box>

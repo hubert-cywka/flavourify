@@ -161,10 +161,8 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
     <Box className="authentication-slide">
       <img src={SIGN_UP_IMAGE} className="sign-up-image" />
       <Box>
-        <Typography className="authentication-panel-header">Nice to meet you!</Typography>
-        <Typography className="authentication-panel-caption">
-          Create new account and gain access to wonderful recipes!
-        </Typography>
+        <Typography className="authentication-panel-header">Hi!</Typography>
+        <Typography className="authentication-panel-caption">Nice to meet you!</Typography>
       </Box>
       {!!displayedMessage && (
         <Box className={`sign-up-info ${displayedMessageType}`}>{displayedMessage}</Box>

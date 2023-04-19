@@ -14,9 +14,11 @@
 
     .found-dish-container {
       touch-action: none;
+      width: 100%;
 
       .dish-card {
         @include dish-card;
+        touch-action: none;
       }
     }
   }

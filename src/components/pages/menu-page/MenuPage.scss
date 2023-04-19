@@ -45,8 +45,8 @@
     }
 
     .menu-ingredients-container {
+      @include shadow($shadow);
       position: absolute;
-      box-shadow: $shadow;
       bottom: 0;
       display: flex;
       flex-direction: column;

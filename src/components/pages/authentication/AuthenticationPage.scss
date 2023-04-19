@@ -11,7 +11,7 @@
   }
 
   .sign-in-slide {
-    background: #270070;
+    background: #3f0f8e;
   }
 
   .sign-up-slide {
@@ -45,7 +45,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 6.5%;
 
       &.success {
        color: rgba(22, 255, 105, 0.8);
@@ -61,11 +60,11 @@
     }
 
     .sign-in-image {
-      max-width: 80vw;
+      max-width: 75%;
     }
 
     .sign-up-image {
-      max-width: 50vw;
+      max-width: 50%;
     }
 
     .authentication-input-row {
@@ -85,12 +84,10 @@
     .authentication-panel-header {
       font-weight: bold;
       font-size: $huge-font-size;
-      margin-top: $standard-element-spacing;
     }
 
     .authentication-panel-caption {
-      margin: $small-element-spacing auto $big-element-spacing;
-      width: 70%;
+      margin: 0 auto $standard-element-spacing;
     }
 
     .authentication-button {

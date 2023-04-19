@@ -7,7 +7,7 @@ import { ArrowForwardRounded } from '@mui/icons-material';
 
 import TagsList from '../../../tags/tags-list/TagsList';
 
-const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
+const DishCardFront = ({ dish, className, callback }: DishCardProps) => {
   return (
     <Box className={`dish-card-front-container ${className}`}>
       <Box className="image-container">
@@ -26,7 +26,7 @@ const DishCardFront = ({ dish, className, flipCallback }: DishCardProps) => {
         />
       </Box>
       <Button
-        onClick={flipCallback}
+        onClick={callback}
         variant="secondaryContained"
         className="flip-card-button"
         endIcon={<ArrowForwardRounded />}>

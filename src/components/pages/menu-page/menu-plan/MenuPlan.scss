@@ -59,58 +59,62 @@
     opacity: 0.9;
   }
 
- .menu-plan-columns {
-   margin-bottom: calc(#{$small-icon-font-size} + #{$big-element-spacing});
-   flex-grow: 1;
+ .menu-plan {
    overflow-y: auto;
-   display: flex;
-   flex-direction: row;
+   flex-grow: 1;
+   margin-bottom: calc(#{$small-icon-font-size} + #{$big-element-spacing});
+   border-radius: $outer-border-radius-10;
 
-   .menu-plan-dates-column, .menu-plan-names-column {
-     .menu-plan-date, .menu-plan-dish {
-       @include translucent-tile;
-       margin-bottom: $small-element-spacing;
-       display: flex;
-       justify-content: center;
-       font-weight: bold;
-       height: 6.5vh;
-     }
-   }
+   .menu-plan-columns {
+     display: flex;
+     flex-direction: row;
 
-   .menu-plan-dates-column {
-     width: 20%;
-
-     .menu-plan-date {
-       flex-direction: column;
-
-       .menu-plan-date-day {
-         font-size: $big-font-size;
-       }
-       .menu-plan-date-month {
-         font-size: $small-font-size;
+     .menu-plan-dates-column, .menu-plan-names-column {
+       .menu-plan-date, .menu-plan-dish {
+         @include translucent-tile;
+         margin-bottom: $small-element-spacing;
+         display: flex;
+         justify-content: center;
+         font-weight: bold;
+         height: 6.5vh;
        }
      }
-   }
 
-   .menu-plan-names-column {
-     width: 80%;
-     z-index: 1;
+     .menu-plan-dates-column {
+       width: 20%;
 
-     .menu-plan-dish {
-       margin-left: $small-element-spacing;
-       background: $white-transparent-background-5;
-       align-items: center;
+       .menu-plan-date {
+         flex-direction: column;
 
-       .menu-plan-dish-name {
-         margin-left: $standard-element-spacing;
-         font-size: $small-font-size;
-         text-overflow: ellipsis;
-         overflow: hidden;
-         font-weight: 500;
+         .menu-plan-date-day {
+           font-size: $big-font-size;
+         }
+         .menu-plan-date-month {
+           font-size: $small-font-size;
+         }
        }
+     }
 
-       .menu-plan-dish-delete-button {
-         margin-left: auto;
+     .menu-plan-names-column {
+       width: 80%;
+       z-index: 1;
+
+       .menu-plan-dish {
+         margin-left: $small-element-spacing;
+         background: $white-transparent-background-5;
+         align-items: center;
+
+         .menu-plan-dish-name {
+           margin-left: $standard-element-spacing;
+           font-size: $small-font-size;
+           text-overflow: ellipsis;
+           overflow: hidden;
+           font-weight: 500;
+         }
+
+         .menu-plan-dish-delete-button {
+           margin-left: auto;
+         }
        }
      }
    }

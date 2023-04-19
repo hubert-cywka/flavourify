@@ -2,13 +2,36 @@
 @import './src/styles/shared';
 
 .displayed-tag-container {
+  .displayed-tag {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: $standard-element-spacing;
+
+    .displayed-tag-icon {
+      @include navbar-icon;
+      margin: 0 $standard-element-spacing;
+    }
+
+    .displayed-tag-name {
+      white-space: nowrap;
+      font-size: $small-font-size;
+    }
+  }
+
   .search-list {
     @include search-list;
     overflow: hidden;
     padding-bottom: $big-element-spacing;
 
+    .search-icon {
+      font-size: $big-font-size;
+    }
+
     .tags-list-header {
       @include search-bar;
+      margin-left: $standard-element-spacing;
     }
 
     .tag-items-container {

@@ -9,7 +9,11 @@
   justify-content: flex-start;
   align-items: center;
   height: $top-navbar-height;
-  border-radius: 20px $round-border-radius-50 $round-border-radius-50 20px;
+  border-radius: $round-border-radius-50;
+
+  .top-navbar-button {
+    overflow: hidden;
+  }
 
   .search-bar {
     flex-grow: 1;
@@ -19,10 +23,8 @@
     box-sizing: border-box;
   }
 
-  .back-button, .displayed-tag {
-    @include action-button-standard;
-    white-space: nowrap;
-    color: white;
-    margin: 0 $standard-element-spacing;
+  .back-button {
+    @include navbar-icon;
+    margin: 0 $big-element-spacing 0 $standard-element-spacing;
   }
 }

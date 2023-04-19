@@ -7,15 +7,15 @@
 
   .edit-panel {
     box-sizing: border-box;
-    border-radius: $inner-border-radius-5;
+    border-radius: $round-border-radius-50;
     position: absolute;
     top: 15px;
     left: 15px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.65);
     z-index: 100;
 
     .action-button {
-      margin: 0 10px;
+      margin: 0 $standard-element-spacing;
     }
   }
 
@@ -57,6 +57,7 @@
 
       .delete-dialog-warning {
         font-weight: bold;
+        margin-bottom: $standard-element-spacing;
       }
     }
 
