@@ -61,7 +61,7 @@
       }
 
       .action-button {
-        @include action-button-standard;
+        @include dish-card-action-button;
         margin: 10px auto;
       }
     }

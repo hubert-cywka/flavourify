@@ -6,7 +6,7 @@ import { DISH_QUERY, DISHES_QUERY } from '../../../constants/QueryConstants';
 import { useParams } from 'react-router';
 import { getDish } from '../../../services/DishService';
 import Builder from '../../../utility/Builder';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import {
   DISH_SEARCH_DONE,
   NO_RECIPES_BUTTON,
@@ -32,13 +32,8 @@ const FoundDishPage = () => {
     status,
     refetch
   } = useQuery([DISHES_QUERY, DISH_QUERY, { id: id }], () => getDish(id ? parseInt(id) : 0));
-  const [isFrontSide, setFrontSide] = useState(true);
   const [swipesCount, setSwipesCount] = useState(0);
   const [swipeTriggered, setSwipeTriggered] = useState(false);
-
-  const flipCard = useCallback(() => {
-    setFrontSide((prevState) => !prevState);
-  }, []);
 
   const [{ y }, api] = useSpring(() => ({ y: 0 }));
   const swipeHandlers = useDrag(
@@ -68,7 +63,7 @@ const FoundDishPage = () => {
     return Builder.createResult(status)
       .onSuccess(
         <animated.div {...swipeHandlers()} style={{ y }} className="found-dish-container">
-          {dish && <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />}
+          {dish && <DishCard dish={dish} />}
         </animated.div>
       )
       .onError(

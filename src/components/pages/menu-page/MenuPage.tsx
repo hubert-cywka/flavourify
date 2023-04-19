@@ -18,6 +18,7 @@ import {
   NO_INGREDIENTS_ERROR
 } from '../../../constants/DishesConstants';
 import Builder from '../../../utility/Builder';
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 const MenuPage = () => {
   const [menu, setMenu] = useState(getMenu());
@@ -38,8 +39,9 @@ const MenuPage = () => {
         <Box className="no-ingredients">
           <Box className="no-ingredients-error">{NO_INGREDIENTS_ERROR}</Box>
           <Button
+            endIcon={<RefreshRoundedIcon />}
             className="refetch-ingredients-button"
-            variant="secondaryContained"
+            variant="accentContained"
             onClick={() => refetch()}>
             Retry
           </Button>

@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
 import { getTags } from '../../../services/TagsService';
 import { TAG_TYPES } from '../../../constants/TagsConstants';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 interface CompleteTagsListProps {
   className?: string;
@@ -22,12 +23,13 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
 
   const getListOfTagsByType = (type: TagType) => {
     if (!tags) return getListOfMockupTags(Math.ceil(Math.random() * 5) + 5);
-    return tags.map((tag) => {
+    const organizedTagChips: ReactJSXElement[] = [];
+    tags.forEach((tag) => {
       if (
         (type === 'Other' && !['Cuisine', 'Course', 'Diet'].includes(tag.type)) ||
         tag.type === type
       )
-        return (
+        organizedTagChips.push(
           <Box
             key={tag.id}
             className={`tag-chip ${isTagSelected(tag) && 'selected'}`}
@@ -36,6 +38,7 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
           </Box>
         );
     });
+    return organizedTagChips;
   };
 
   const getListOfMockupTags = (count: number) => {
@@ -53,8 +56,12 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
     <Box className={`all-tags-list-container ${className}`} sx={sx}>
       {TAG_TYPES.map((type, id) => (
         <Box key={id}>
-          <Divider className="tags-divider">{type}</Divider>
-          <Box className="tags-container">{getListOfTagsByType(type)}</Box>
+          {!!getListOfTagsByType(type).length && (
+            <>
+              <Divider className="tags-divider">{type}</Divider>
+              <Box className="tags-container">{getListOfTagsByType(type)}</Box>
+            </>
+          )}
         </Box>
       ))}
     </Box>

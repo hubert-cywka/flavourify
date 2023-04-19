@@ -3,7 +3,7 @@ $navbar-width: 90vmin;
 $page-width: 90vmin;
 $top-navbar-height: 60px;
 
-$page-offset: 30px;
+$page-offset: 20px;
 $small-element-spacing: 5px;
 $standard-element-spacing: 10px;
 $big-element-spacing: 20px;
@@ -41,8 +41,11 @@ $huge-font-size: 2.5rem;
 $icon-font-size: 3rem;
 $small-icon-font-size: 1.75rem;
 
-$shadow: 0 0 25px 0 rgba(20, 20, 20, 0.1);
+$shadow: 0 8 25px 0 rgba(20, 20, 20, 0.1);
 $strong-shadow: 0px 8px 15px 0px rgba(29, 29, 29, 0.5);
 $button-shadow: 0 8px 5px -5px rgba(20, 20, 20, 0.1);
+
+$firm-shadow: 0px 0px 10px 0px rgba(29, 29, 29, 0.5);
+
 
 $max-page-width: calc(64 * var(--vh));

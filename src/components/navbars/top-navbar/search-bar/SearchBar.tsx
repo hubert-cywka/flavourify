@@ -16,13 +16,16 @@ import { getListOfDishesByName } from '../../../../services/DishService';
 import Builder from '../../../../utility/Builder';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
+import { motion } from 'framer-motion';
 
 interface SearchBarProps {
   className?: string;
   searchValue?: string;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
-const SearchBar = ({ className, searchValue }: SearchBarProps) => {
+const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) => {
   const [textFilter, setTextFilter] = useState('');
   const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState<boolean>(false);
 
@@ -76,8 +79,12 @@ const SearchBar = ({ className, searchValue }: SearchBarProps) => {
     <ClickAwayListener onClickAway={() => setAreSearchResultsDisplayed(false)}>
       <Box className="dish-names-list-container">
         <Box className={`search-bar-container ${className}`}>
-          <SearchRounded className="search-icon" />
+          <motion.div animate={{ marginRight: textFilter.length ? '5px' : '0' }}>
+            <SearchRounded className="search-icon" sx={{ color: 'primary.main' }} />
+          </motion.div>
           <Input
+            onBlur={onBlur}
+            onFocusCapture={onFocus}
             value={textFilter}
             disableUnderline
             onChange={(e) => setTextFilter(e.target.value)}

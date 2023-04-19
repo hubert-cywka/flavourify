@@ -22,10 +22,10 @@ const AuthenticationPage = () => {
           <motion.div
             key={SIGN_IN_SLIDE_MOTION}
             className="sign-in-slide"
-            initial={{ translateX: '-120%' }}
+            initial={{ translateX: '-100%' }}
             animate={{ translateX: 0 }}
-            exit={{ translateX: '-120%' }}
-            transition={{ bounce: 0 }}>
+            exit={{ translateX: '-100%' }}
+            transition={{ bounce: 0, duration: 0.3 }}>
             <SignInSlide slideToSignUp={swapSlide} />
           </motion.div>
         )}
@@ -33,9 +33,9 @@ const AuthenticationPage = () => {
           <motion.div
             key={SIGN_UP_SLIDE_MOTION}
             className="sign-up-slide"
-            initial={{ translateX: '120%' }}
+            initial={{ translateX: '100%' }}
             animate={{ translateX: 0 }}
-            exit={{ translateX: '120%' }}
+            exit={{ translateX: '100%' }}
             transition={{ bounce: 0, duration: 0.3 }}>
             <SignUpSlide slideToSignIn={swapSlide} />
           </motion.div>

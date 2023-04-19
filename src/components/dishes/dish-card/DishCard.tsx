@@ -24,14 +24,15 @@ import { Box, Dialog } from '@mui/material';
 
 export interface DishCardProps {
   dish: Dish;
-  isFrontSide?: boolean;
-  flipCallback?: () => void;
+  isLocked?: boolean;
+  callback?: () => void;
   className?: string;
 }
 
-const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
+const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [swipeTriggered, setSwipeTriggered] = useState(false);
+  const [isFrontSide, setIsFrontSide] = useState(true);
 
   const [{ x, rotation }, api] = useSpring(() => ({ x: 0, rotation: 0 }));
   const swipeHandlers = useDrag(
@@ -52,12 +53,17 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
   );
 
   const addDishToMenu = () => {
-    if (!isFrontSide) return;
+    if (isLocked) return;
     if (getMenu().length >= MAX_MENU_SIZE) enqueueSnackbar(DISH_ADD_TO_MENU_ERROR);
     else {
       addToMenu(dish);
       enqueueSnackbar(DISH_ADD_TO_MENU_SUCCESS, { variant: 'success', preventDuplicate: false });
     }
+  };
+
+  const handleCallback = () => {
+    setIsFrontSide((prev) => !prev);
+    if (callback) callback();
   };
 
   const transform = (r: number) => `perspective(1500px) rotateY(${r}deg) rotateZ(${r}deg)`;
@@ -77,7 +83,7 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
             exit={{ translateX: '120%', opacity: 0 }}
             transition={{ bounce: 0, duration: 0.3 }}>
             <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
-            <DishCardFront flipCallback={flipCallback} dish={dish} className="dish-card-side" />
+            <DishCardFront callback={handleCallback} dish={dish} className="dish-card-side" />
           </motion.div>
         ) : (
           <Dialog
@@ -94,7 +100,7 @@ const DishCard = ({ dish, flipCallback, isFrontSide }: DishCardProps) => {
               exit={{ translateX: '-120%', opacity: 0 }}
               transition={{ bounce: 0, duration: 0.3 }}>
               <Box sx={{ bgcolor: 'primary.main' }}>
-                <DishCardBack flipCallback={flipCallback} dish={dish} className="dish-card-side" />
+                <DishCardBack callback={handleCallback} dish={dish} className="dish-card-side" />
               </Box>
             </motion.div>
           </Dialog>

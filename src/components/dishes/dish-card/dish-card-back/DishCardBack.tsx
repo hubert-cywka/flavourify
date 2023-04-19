@@ -58,7 +58,7 @@ interface DishCardBackProps extends DishCardProps {
 const DishCardBack = ({
   dish,
   className,
-  flipCallback,
+  callback,
   addMode,
   onQuerySuccess
 }: DishCardBackProps) => {
@@ -154,7 +154,7 @@ const DishCardBack = ({
 
   const handleFlipCallback = () => {
     cancelEdit();
-    if (flipCallback) flipCallback();
+    if (callback) callback();
   };
 
   const removeDish = () => {
@@ -187,13 +187,13 @@ const DishCardBack = ({
       return (
         <>
           <IconButton
-            sx={{ color: 'accent.main' }}
+            sx={{ color: 'accent.success' }}
             className="action-button"
             onClick={enterEditMode}>
             <EditIconRounded />
           </IconButton>
           <IconButton
-            sx={{ color: 'accent.main' }}
+            sx={{ color: 'accent.error' }}
             className="action-button"
             onClick={() => setIsDeleteDialogOpen(true)}>
             <DeleteRounded />
@@ -203,12 +203,12 @@ const DishCardBack = ({
     } else {
       return (
         <>
-          <IconButton sx={{ color: 'accent.main' }} className="action-button" onClick={cancelEdit}>
+          <IconButton sx={{ color: 'accent.error' }} className="action-button" onClick={cancelEdit}>
             <CancelRounded />
           </IconButton>
           <IconButton
             disabled={isLoading}
-            sx={{ color: 'accent.main' }}
+            sx={{ color: 'accent.success' }}
             className="action-button"
             onClick={approveEdit}>
             <CheckCircleRounded />
@@ -319,7 +319,7 @@ const DishCardBack = ({
 
       {isDeleteDialogOpen && (
         <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
-          <Box className="delete-dialog">
+          <Box className="delete-dialog" sx={{ bgcolor: 'primary.dark' }}>
             <Box className="delete-dialog-text">
               <Typography>Do you really want to delete this dish recipe?</Typography>
               <Typography className="delete-dialog-warning">This is irreversible.</Typography>
@@ -327,7 +327,7 @@ const DishCardBack = ({
             <Box>
               <Button
                 className="delete-dialog-button"
-                variant="contained"
+                variant="accentContained"
                 onClick={() => setIsDeleteDialogOpen(false)}
                 startIcon={<HighlightOffRoundedIcon />}>
                 Cancel

@@ -8,6 +8,12 @@
     @include search-bar;
   }
 
+  .search-icon {
+    @include navbar-icon;
+    margin-top: 1px;
+    margin-left: $small-element-spacing;
+  }
+
   .search-list {
     @include search-list;
     overflow-y: auto;

@@ -17,6 +17,7 @@
 
   .mini-dish-card, .slide-bottom-container {
     @include translucent-tile;
+    @include shadow($strong-shadow);
     width: 85%;
     margin: 0 auto;
   }

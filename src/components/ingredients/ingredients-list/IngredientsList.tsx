@@ -139,7 +139,7 @@ const IngredientsList = ({
         )}
 
         {editable && (
-          <IconButton onClick={addNewIngredient}>
+          <IconButton onClick={addNewIngredient} className="add-ingredient-button">
             <AddCircleRounded sx={{ color: 'text.primary' }} />
           </IconButton>
         )}

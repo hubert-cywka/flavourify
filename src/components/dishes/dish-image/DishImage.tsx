@@ -71,7 +71,9 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
         loading="lazy"
         alt={altText}
         ref={reference}
-        image={displayedImageSrc}></CardMedia>
+        image={displayedImageSrc}
+        draggable={false}
+      />
     </label>
   );
 };

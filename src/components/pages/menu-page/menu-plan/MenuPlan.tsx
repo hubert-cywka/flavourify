@@ -10,7 +10,7 @@ import {
   DropResult
 } from '@hello-pangea/dnd';
 import { getMenu, MenuItem, removeFromMenu, updateMenu } from '../../../../services/MenuService';
-import { ArrowForwardRounded, DeleteRounded, ManageSearchRounded } from '@mui/icons-material';
+import { ArrowForwardRounded, ClearRounded, ManageSearchRounded } from '@mui/icons-material';
 import ROUTE from '../../../router/RoutingConstants';
 import appRouter from '../../../router/AppRouter';
 import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
@@ -72,7 +72,7 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
             </IconButton>
             <Box className="menu-plan-dish-name">{item.name}</Box>
             <IconButton className="menu-plan-dish-delete-button" onClick={() => removeFromList(id)}>
-              <DeleteRounded sx={{ color: 'accent.main' }} />
+              <ClearRounded sx={{ color: 'accent.main' }} />
             </IconButton>
           </Box>
         )}
@@ -110,21 +110,23 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
           <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
           <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
 
-          <Box className="menu-plan-columns">
-            <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="menu-list">
-                {(provided: DroppableProvided) => (
-                  <Box
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className="menu-plan-names-column">
-                    {getMenuItemBoxes()}
-                    {provided.placeholder}
-                  </Box>
-                )}
-              </Droppable>
-            </DragDropContext>
+          <Box className="menu-plan">
+            <Box className="menu-plan-columns">
+              <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="menu-list">
+                  {(provided: DroppableProvided) => (
+                    <Box
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="menu-plan-names-column">
+                      {getMenuItemBoxes()}
+                      {provided.placeholder}
+                    </Box>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </Box>
           </Box>
         </Box>
       ) : (

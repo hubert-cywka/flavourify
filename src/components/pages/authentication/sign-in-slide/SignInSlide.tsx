@@ -42,9 +42,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
       <img src={SIGN_IN_IMAGE} className="sign-in-image" />
       <Box>
         <Typography className="authentication-panel-header">Hello again!</Typography>
-        <Typography className="authentication-panel-caption">
-          Welcome back, you have been missed!
-        </Typography>
+        <Typography className="authentication-panel-caption">You have been missed!</Typography>
       </Box>
       <FormControl className="authentication-input-row">
         <Input

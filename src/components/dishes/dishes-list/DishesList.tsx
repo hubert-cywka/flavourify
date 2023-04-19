@@ -26,7 +26,7 @@ interface DishesListProps {
 
 const DishesList = ({ className }: DishesListProps) => {
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
-  const [isFrontSide, setFrontSide] = useState(true);
+  const [isLocked, setIsLocked] = useState(false);
   const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
 
   const { data, fetchNextPage, hasNextPage, fetchPreviousPage, isFetching, status, refetch } =
@@ -45,8 +45,8 @@ const DishesList = ({ className }: DishesListProps) => {
       }
     );
 
-  const flipCard = useCallback(() => {
-    setFrontSide((prevState) => !prevState);
+  const switchLock = useCallback(() => {
+    setIsLocked((prevState) => !prevState);
   }, []);
 
   const updateLastViewedDish = useCallback(() => {
@@ -66,7 +66,7 @@ const DishesList = ({ className }: DishesListProps) => {
     return extractedDishes.map((dish) => {
       return (
         <SwiperSlide key={dish.id} virtualIndex={dish.id}>
-          <DishCard dish={dish} flipCallback={flipCard} isFrontSide={isFrontSide} />
+          <DishCard dish={dish} callback={switchLock} isLocked={isLocked} />
         </SwiperSlide>
       );
     });
@@ -85,8 +85,8 @@ const DishesList = ({ className }: DishesListProps) => {
         {data && (
           <Swiper
             modules={[Virtual, EffectCreative]}
-            allowSlidePrev={isFrontSide}
-            allowSlideNext={isFrontSide}
+            allowSlidePrev={!isLocked}
+            allowSlideNext={!isLocked}
             initialSlide={lastViewedDish.slide}
             direction="vertical"
             onSwiper={setSwiperRef}
