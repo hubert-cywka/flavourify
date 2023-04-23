@@ -52,8 +52,10 @@ const createMockServerHandler = (status: number) => {
   });
 };
 
-export const signInMockServer = {
-  HTTP_401: setupServer(createMockServerHandler(401)),
-  HTTP_500: setupServer(createMockServerHandler(500)),
-  HTTP_200: setupServer(createMockServerHandler(200))
+export const signInMockServerHandlers = {
+  HTTP_401: [createMockServerHandler(401)],
+  HTTP_500: [createMockServerHandler(500)],
+  HTTP_200: [createMockServerHandler(200)]
 };
+
+export const signInMockServer = setupServer(...signInMockServerHandlers.HTTP_200);

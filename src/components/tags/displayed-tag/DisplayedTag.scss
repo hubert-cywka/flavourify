@@ -2,6 +2,8 @@
 @import './src/styles/shared';
 
 .displayed-tag-container {
+  cursor: pointer;
+
   .displayed-tag {
     display: flex;
     justify-content: center;

@@ -48,7 +48,11 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
       sx={{ bgcolor: 'background.paper', color: 'text.secondary' }}>
       <ListItem className="settings-panel-header">
         <ListItemIcon>
-          {displayedSetting ? <WestRoundedIcon onClick={goBackToSettings} /> : <SettingsRounded />}
+          {displayedSetting ? (
+            <WestRoundedIcon sx={{ cursor: 'pointer' }} onClick={goBackToSettings} />
+          ) : (
+            <SettingsRounded />
+          )}
         </ListItemIcon>
         <ListItemText disableTypography>{displayedSettingName}</ListItemText>
       </ListItem>
