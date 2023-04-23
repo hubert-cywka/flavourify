@@ -17,78 +17,84 @@ const waitForAnimationToEnd = async () => {
   await new Promise((resolve) => setTimeout(resolve, 300));
 };
 
-describe('Testing <StatusScreen /> component with one button', () => {
-  beforeEach(async () => {
-    await prepareMockupPage(
-      <StatusScreen
-        caption={MOCK_CAPTION}
-        close={mockClose}
-        header={MOCK_HEADER}
-        imgSource={MOCK_IMG_SOURCE}
-        open={true}
-        status={'success'}
-      />
-    );
-    await waitForAnimationToEnd();
+describe('Testing <StatusScreen /> component', () => {
+  describe('Testing variant with without additional callbacks', () => {
+    beforeEach(async () => {
+      await prepareMockupPage(
+        <StatusScreen
+          caption={MOCK_CAPTION}
+          close={mockClose}
+          header={MOCK_HEADER}
+          imgSource={MOCK_IMG_SOURCE}
+          open={true}
+          status={'success'}
+        />
+      );
+      await waitForAnimationToEnd();
+    });
+
+    describe('Testing layout', () => {
+      test('should display valid header text', async () => {
+        expect(await StatusScreenPO.header).toHaveTextContent(MOCK_HEADER);
+      });
+
+      test('should display valid caption text', async () => {
+        expect(await StatusScreenPO.caption).toHaveTextContent(MOCK_CAPTION);
+      });
+
+      test('should display image, header, caption and button', async () => {
+        expect(await StatusScreenPO.header).toBeVisible();
+        expect(await StatusScreenPO.caption).toBeVisible();
+        expect(await StatusScreenPO.primaryButton).toBeVisible();
+        expect(await StatusScreenPO.image).toBeVisible();
+      });
+    });
+
+    describe('Testing interactions', () => {
+      test('should call onClose callback on primary button click', async () => {
+        await StatusScreenPO.clickPrimaryButton();
+        expect(mockClose).toHaveBeenCalled();
+      });
+    });
   });
 
-  test('should display valid header text', async () => {
-    expect(await StatusScreenPO.header).toHaveTextContent(MOCK_HEADER);
-  });
+  describe('Testing extended variant', () => {
+    beforeEach(async () => {
+      await prepareMockupPage(
+        <StatusScreen
+          caption={MOCK_CAPTION}
+          close={mockClose}
+          header={MOCK_HEADER}
+          imgSource={MOCK_IMG_SOURCE}
+          secondButtonOnClick={mockSecondAction}
+          secondButtonText={MOCK_CAPTION}
+          buttonText={MOCK_CAPTION}
+          open={true}
+          status={'error'}
+        />
+      );
+      await waitForAnimationToEnd();
+    });
 
-  test('should display valid caption text', async () => {
-    expect(await StatusScreenPO.caption).toHaveTextContent(MOCK_CAPTION);
-  });
+    describe('Testing layout', () => {
+      test('should display additional button', async () => {
+        expect(await StatusScreenPO.secondaryButton).toBeVisible();
+      });
 
-  test('should call onClose callback on primary button click', async () => {
-    await StatusScreenPO.clickPrimaryButton();
-    expect(mockClose).toHaveBeenCalled();
-  });
+      test('should display valid primary button text', async () => {
+        expect(await StatusScreenPO.primaryButton).toHaveTextContent(MOCK_CAPTION);
+      });
 
-  test('should display image, header, caption and button', async () => {
-    expect(await StatusScreenPO.header).toBeVisible();
-    expect(await StatusScreenPO.caption).toBeVisible();
-    expect(await StatusScreenPO.primaryButton).toBeVisible();
-    expect(await StatusScreenPO.image).toBeVisible();
-  });
-});
+      test('should display valid secondary button text', async () => {
+        expect(await StatusScreenPO.secondaryButton).toHaveTextContent(MOCK_CAPTION);
+      });
+    });
 
-describe('Testing <StatusScreen /> component with two buttons and overwritten text', () => {
-  beforeEach(async () => {
-    await prepareMockupPage(
-      <StatusScreen
-        caption={MOCK_CAPTION}
-        close={mockClose}
-        header={MOCK_HEADER}
-        imgSource={MOCK_IMG_SOURCE}
-        secondButtonOnClick={mockSecondAction}
-        secondButtonText={MOCK_CAPTION}
-        buttonText={MOCK_CAPTION}
-        open={true}
-        status={'error'}
-      />
-    );
-    await waitForAnimationToEnd();
-  });
-
-  test('should display image, header, caption and 2 buttons', async () => {
-    expect(await StatusScreenPO.header).toBeVisible();
-    expect(await StatusScreenPO.caption).toBeVisible();
-    expect(await StatusScreenPO.primaryButton).toBeVisible();
-    expect(await StatusScreenPO.secondaryButton).toBeVisible();
-    expect(await StatusScreenPO.image).toBeVisible();
-  });
-
-  test('should call secondary button callback on click', async () => {
-    await StatusScreenPO.clickSecondaryButton();
-    expect(mockSecondAction).toHaveBeenCalled();
-  });
-
-  test('should display valid primary button text', async () => {
-    expect(await StatusScreenPO.primaryButton).toHaveTextContent(MOCK_CAPTION);
-  });
-
-  test('should display valid secondary button text', async () => {
-    expect(await StatusScreenPO.secondaryButton).toHaveTextContent(MOCK_CAPTION);
+    describe('Testing interactions', () => {
+      test('should call secondary button callback on click', async () => {
+        await StatusScreenPO.clickSecondaryButton();
+        expect(mockSecondAction).toHaveBeenCalled();
+      });
+    });
   });
 });

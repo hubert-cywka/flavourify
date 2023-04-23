@@ -11,6 +11,7 @@
   }
 
   .settings-panel-item {
+    cursor: pointer;
     border: thin solid $lightly-highlighted-background;
     font-size: $standard-font-size;
 
@@ -19,7 +20,7 @@
     }
 
     &:hover {
-      background-color: $lightly-highlighted-background;
+      background-color: $highlighted-background;
     }
   }
 

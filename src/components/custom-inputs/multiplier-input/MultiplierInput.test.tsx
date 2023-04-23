@@ -20,47 +20,51 @@ describe('Testing <MultiplierInput /> component', () => {
     mockValue = 1;
   });
 
-  test('should display value and 2 buttons', async () => {
-    await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
-    expect(await MultiplierInputPO.valueField).toBeVisible();
-    expect(await MultiplierInputPO.plusButton).toBeVisible();
-    expect(await MultiplierInputPO.minusButton).toBeVisible();
+  describe('Testing layout', () => {
+    test('should display value and 2 buttons', async () => {
+      await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
+      expect(await MultiplierInputPO.valueField).toBeVisible();
+      expect(await MultiplierInputPO.plusButton).toBeVisible();
+      expect(await MultiplierInputPO.minusButton).toBeVisible();
+    });
+
+    test('should display current value', async () => {
+      await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
+      expect(await MultiplierInputPO.valueField).toHaveTextContent(`${mockValue}`);
+    });
   });
 
-  test('should display current value', async () => {
-    await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
-    expect(await MultiplierInputPO.valueField).toHaveTextContent(`${mockValue}`);
-  });
+  describe('Testing interactions', () => {
+    test('should allow to increase counter', async () => {
+      const initialValue = mockValue;
+      await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
+      await MultiplierInputPO.increaseCounter();
+      expect(mockValue).toBe(initialValue + 1);
+    });
 
-  test('should allow to increase counter', async () => {
-    const initialValue = mockValue;
-    await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
-    await MultiplierInputPO.increaseCounter();
-    expect(mockValue).toBe(initialValue + 1);
-  });
+    test('should allow to decrease counter', async () => {
+      const initialValue = mockValue;
+      await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
+      await MultiplierInputPO.decreaseCounter();
+      expect(mockValue).toBe(initialValue - 1);
+    });
 
-  test('should allow to decrease counter', async () => {
-    const initialValue = mockValue;
-    await prepareMockupPage(<MultiplierInput value={mockValue} callback={mockUpdateValue} />);
-    await MultiplierInputPO.decreaseCounter();
-    expect(mockValue).toBe(initialValue - 1);
-  });
+    test('should not allow to set number above upper limit', async () => {
+      const initialValue = mockValue;
+      await prepareMockupPage(
+        <MultiplierInput value={mockValue} callback={mockUpdateValue} max={mockValue} />
+      );
+      await MultiplierInputPO.increaseCounter();
+      expect(mockValue).toBe(initialValue);
+    });
 
-  test('should allow to set upper number limit', async () => {
-    const initialValue = mockValue;
-    await prepareMockupPage(
-      <MultiplierInput value={mockValue} callback={mockUpdateValue} max={mockValue} />
-    );
-    await MultiplierInputPO.increaseCounter();
-    expect(mockValue).toBe(initialValue);
-  });
-
-  test('should allow to set lower number limit', async () => {
-    const initialValue = mockValue;
-    await prepareMockupPage(
-      <MultiplierInput value={mockValue} callback={mockUpdateValue} min={mockValue} />
-    );
-    await MultiplierInputPO.decreaseCounter();
-    expect(mockValue).toBe(initialValue);
+    test('should not allow to set number below lower limit', async () => {
+      const initialValue = mockValue;
+      await prepareMockupPage(
+        <MultiplierInput value={mockValue} callback={mockUpdateValue} min={mockValue} />
+      );
+      await MultiplierInputPO.decreaseCounter();
+      expect(mockValue).toBe(initialValue);
+    });
   });
 });
