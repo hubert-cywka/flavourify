@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/flavourify/static/css/main.ec94f777.css",
-    "main.js": "/flavourify/static/js/main.8cfa9471.js",
+    "main.js": "/flavourify/static/js/main.42f89b0b.js",
     "index.html": "/flavourify/index.html"
   },
   "entrypoints": [
     "static/css/main.ec94f777.css",
-    "static/js/main.8cfa9471.js"
+    "static/js/main.42f89b0b.js"
   ]
 }
