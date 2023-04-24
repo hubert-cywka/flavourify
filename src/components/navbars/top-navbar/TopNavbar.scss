@@ -3,7 +3,9 @@
 
 .top-navbar-container {
   @include translucent-tile;
-  max-width: calc(#{$max-page-width} + #{$big-element-spacing});
+  @media (orientation: landscape) {
+    max-width: calc(#{$max-page-width} + #{$big-element-spacing});
+  }
   padding: 0;
   display: flex;
   justify-content: flex-start;
@@ -24,6 +26,7 @@
   }
 
   .back-button {
+    cursor: pointer;
     @include navbar-icon;
     margin: 0 $big-element-spacing 0 $standard-element-spacing;
   }

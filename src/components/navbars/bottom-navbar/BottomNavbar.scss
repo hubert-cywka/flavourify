@@ -26,16 +26,17 @@
     .MuiBottomNavigationAction-label {
       font-weight: 600;
       margin-top: $small-element-spacing;
-      font-size: $small-font-size;
+      font-size: $tiny-font-size;
     }
 
     .MuiSvgIcon-root {
+      transform: scale(0.8);
       transition: transform 0.3s;
     }
 
     &.Mui-selected {
       .MuiSvgIcon-root {
-        transform: scale(1.15);
+        transform: scale(1);
       }
     }
   }

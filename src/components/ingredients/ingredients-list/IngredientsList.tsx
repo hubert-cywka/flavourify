@@ -97,7 +97,10 @@ const IngredientsList = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
             <IngredientTile
-              className="ingredient-tile"
+              className={`ingredient-tile ${
+                ingredient.name === NEW_INGREDIENT_PLACEHOLDER && 'new-ingredient-tile'
+              }`}
+              opened={ingredient.name === NEW_INGREDIENT_PLACEHOLDER}
               editable={editable}
               ingredient={ingredient}
               multiplier={editable ? 1 : multiplier}

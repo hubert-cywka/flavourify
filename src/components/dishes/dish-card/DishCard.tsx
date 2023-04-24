@@ -57,7 +57,10 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
     if (getMenu().length >= MAX_MENU_SIZE) enqueueSnackbar(DISH_ADD_TO_MENU_ERROR);
     else {
       addToMenu(dish);
-      enqueueSnackbar(DISH_ADD_TO_MENU_SUCCESS, { variant: 'success', preventDuplicate: false });
+      enqueueSnackbar(dish.name + DISH_ADD_TO_MENU_SUCCESS, {
+        variant: 'success',
+        preventDuplicate: false
+      });
     }
   };
 

@@ -23,8 +23,7 @@ const RandomDishSlide = () => {
 
   return (
     <Box className="slide-container">
-      <Typography className="header">Be inspired.</Typography>
-      <Typography className="caption">Loved by many. One of many.</Typography>
+      <Typography className="header">Inspire.</Typography>
       <Box className="mini-dish-card-container">
         {data && !isFetching ? (
           <DishMiniCard

@@ -12,6 +12,7 @@
   @include shadow($strong-shadow);
 
   .custom-alert {
+    box-sizing: border-box;
     min-width: calc(#{$max-page-width} * 0.85);
     flex-grow: 1;
     flex-wrap: nowrap;
@@ -43,11 +44,13 @@
       }
 
       .alert-text {
+        box-sizing: border-box;
         width: 90%;
         flex-grow: 1;
       }
 
       .alert-icon {
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,14 +60,13 @@
         padding: $small-element-spacing;
         height: 100%;
         aspect-ratio: 1;
-        box-sizing: border-box;
       }
     }
 
     .alert-buttons {
       box-sizing: border-box;
       padding: $standard-element-spacing;
-      margin: auto auto;
+      margin: auto $standard-element-spacing auto auto;
     }
   }
 }

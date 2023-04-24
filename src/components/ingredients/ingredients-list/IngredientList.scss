@@ -9,6 +9,11 @@
 
     .ingredient-tile {
       @include chip;
+
+      &.new-ingredient-tile {
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        box-sizing: border-box;
+      }
     }
   }
 

@@ -31,6 +31,7 @@ interface IngredientTileProps {
   editable?: boolean;
   multiplier?: number;
   deleteCallback?: () => void;
+  opened?: boolean;
 }
 
 const IngredientTile = ({
@@ -38,9 +39,10 @@ const IngredientTile = ({
   className,
   editable,
   multiplier,
-  deleteCallback
+  deleteCallback,
+  opened
 }: IngredientTileProps) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(!!opened);
   const [displayedIngredient, setDisplayedIngredient] = useState(ingredient);
   const nameRef = useRef<HTMLDivElement>(null);
   const amountRef = useRef<HTMLDivElement>(null);
