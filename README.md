@@ -2,5 +2,5 @@
 
 Whole frontend and backend created by myself.
 
-Currently deployed at [flavourify.netlify.app](flavourify.netlify.app).\
+Currently deployed at [flavourify.netlify.app](https://flavourify.netlify.app).\
 Soon to be available as android apk.
