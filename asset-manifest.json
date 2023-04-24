@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/flavourify/static/css/main.ec94f777.css",
-    "main.js": "/flavourify/static/js/main.dc33ae6c.js",
-    "index.html": "/flavourify/index.html"
+    "main.css": "/static/css/main.ec94f777.css",
+    "main.js": "/static/js/main.dc33ae6c.js",
+    "index.html": "/index.html"
   },
   "entrypoints": [
     "static/css/main.ec94f777.css",
