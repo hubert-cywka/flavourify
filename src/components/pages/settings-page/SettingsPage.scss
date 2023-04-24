@@ -10,6 +10,7 @@
     margin-bottom: calc(#{$bottom-navbar-height});
     box-sizing: border-box;
     border-radius: $outer-border-radius-10;
-    padding: $standard-element-spacing
+    padding: $standard-element-spacing;
+    overflow-y: auto;
   }
 }

@@ -1,15 +1,16 @@
 @import './src/styles/variables';
+@import './src/styles/shared';
 
 .bottom-navbar-container {
   width: $navbar-width;
   height: $bottom-navbar-height;
-  max-width: calc(#{$max-page-width} + #{$big-element-spacing});
+  @include navbar-max-width;
   position: absolute;
   box-sizing: border-box;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  z-index: 1000;
+  z-index: 10;
 
   .MuiBottomNavigation-root {
     border-radius: $outer-border-radius-25 $outer-border-radius-25 0 0;
