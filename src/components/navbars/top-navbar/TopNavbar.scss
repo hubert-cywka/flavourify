@@ -20,7 +20,14 @@
     .back-button, .add-dish-button {
       cursor: pointer;
       @include navbar-icon;
+    }
+
+    .back-button {
       margin: 0 $big-element-spacing 0 $standard-element-spacing;
+    }
+
+    .add-dish-button {
+      margin: 0 $big-element-spacing 0 0;
     }
   }
 

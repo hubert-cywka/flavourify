@@ -8,6 +8,7 @@ import appRouter from '../../router/AppRouter';
 import { motion } from 'framer-motion';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
+import { hasAdminPermission } from '../../../services/AuthService';
 
 interface TopNavbarProps {
   className?: string;
@@ -27,11 +28,13 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
         {!singleDishVariant ? (
           <>
             <DisplayedTag className="displayed-tag" />
-            <AddRoundedIcon
-              sx={{ color: 'secondary.main' }}
-              className="add-dish-button"
-              onClick={() => setIsDishAddDialogVisible(true)}
-            />
+            {hasAdminPermission() && (
+              <AddRoundedIcon
+                sx={{ color: 'secondary.main' }}
+                className="add-dish-button"
+                onClick={() => setIsDishAddDialogVisible(true)}
+              />
+            )}
           </>
         ) : (
           <ArrowBackRounded
