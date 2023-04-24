@@ -10,9 +10,11 @@
     align-content: center;
     align-items: center;
     padding: $standard-element-spacing;
+    box-sizing: border-box;
 
     .displayed-tag-icon {
       @include navbar-icon;
+      box-sizing: border-box;
       margin: 0 $standard-element-spacing;
     }
 

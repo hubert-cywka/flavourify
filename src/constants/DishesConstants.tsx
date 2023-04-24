@@ -41,7 +41,7 @@ export const DISH_NOT_CHANGED_NAME_ERROR =
   'Please, find any original name. Placeholder value is not allowed.';
 
 export const DISH_ADD_TO_MENU_ERROR = `You already have menu for whole next ${MAX_MENU_SIZE} days!`;
-export const DISH_ADD_TO_MENU_SUCCESS = 'Dish added to menu!';
+export const DISH_ADD_TO_MENU_SUCCESS = ' added to menu!';
 
 export const DISH_UPDATE_SUCCESS_IMAGE = '/dish-update-success.svg';
 export const DISH_UPDATE_ERROR_IMAGE = '/dish-update-error.svg';

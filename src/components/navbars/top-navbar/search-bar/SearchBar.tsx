@@ -8,7 +8,7 @@ import {
   ListItemText
 } from '@mui/material';
 import { NavigateNextRounded, SearchRounded } from '@mui/icons-material';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './SearchBar.scss';
 import { useQuery } from '@tanstack/react-query';
 import { DISHES_NAMES_QUERY } from '../../../../constants/QueryConstants';
@@ -28,6 +28,7 @@ interface SearchBarProps {
 const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) => {
   const [textFilter, setTextFilter] = useState('');
   const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { data, status } = useQuery([DISHES_NAMES_QUERY, { name: textFilter }], () =>
     getListOfDishesByName(textFilter)
@@ -36,6 +37,11 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
   const navigateToSearchResultPage = (id: number) => {
     setAreSearchResultsDisplayed(false);
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
+  };
+
+  const setFocusOnInput = () => {
+    if (!inputRef || !inputRef.current) return;
+    inputRef.current.focus();
   };
 
   const getQueryResults = () => {
@@ -80,9 +86,14 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
       <Box className="dish-names-list-container">
         <Box className={`search-bar-container ${className}`}>
           <motion.div animate={{ marginRight: textFilter.length ? '5px' : '0' }}>
-            <SearchRounded className="search-icon" sx={{ color: 'primary.main' }} />
+            <SearchRounded
+              className="search-icon"
+              sx={{ color: 'primary.main' }}
+              onClick={setFocusOnInput}
+            />
           </motion.div>
           <Input
+            inputRef={inputRef}
             onBlur={onBlur}
             onFocusCapture={onFocus}
             value={textFilter}

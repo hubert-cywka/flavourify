@@ -5,14 +5,9 @@
   @include content-container(100);
 
   .header {
-    margin: $big-element-spacing 0 $standard-element-spacing 0;
+    margin: $big-element-spacing 0 0 0;
     font-weight: bold;
     font-size: $huge-font-size;
-  }
-
-  .caption {
-    font-size: $big-font-size;
-    font-weight: bold;
   }
 
   .mini-dish-card, .slide-bottom-container {
@@ -41,6 +36,7 @@
     .bottom-caption {
       font-weight: bold;
       padding: $standard-element-spacing;
+      font-size: $small-font-size;
       width: 50%;
     }
 

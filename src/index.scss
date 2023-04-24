@@ -24,6 +24,10 @@ body {
     display: none;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 @media (min-width: 900px) {
     * {
         scrollbar-width: auto;

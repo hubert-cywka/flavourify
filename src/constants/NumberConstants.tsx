@@ -1,5 +1,5 @@
 export const DISH_NAME_MAX_LENGTH = 35;
-export const INGREDIENT_NAME_MAX_LENGTH = 20;
+export const INGREDIENT_NAME_MAX_LENGTH = 30;
 export const INGREDIENT_COUNT_MAX_LENGTH = 5;
 export const INGREDIENT_UNIT_MAX_LENGTH = 10;
 

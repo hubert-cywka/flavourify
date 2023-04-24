@@ -138,7 +138,7 @@
 
 @mixin content-container($desktop-width-percentage) {
   width: 100%;
-  @media (min-width: 800px) {
+  @media (orientation: landscape) {
     max-width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
     width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
   }
