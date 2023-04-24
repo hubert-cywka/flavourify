@@ -50,10 +50,13 @@
 
 @mixin search-list {
   position: absolute;
-  max-height: 60vh;
+  max-height: calc(var(--vh) * 75 - #{$top-navbar-height} - #{$bottom-navbar-height});
   top: calc(#{$top-navbar-height} + #{$small-element-spacing});
   border-radius: $standard-element-spacing;
+  padding: $standard-element-spacing;
+  box-sizing: border-box;
   width: 100%;
+  overflow-y: auto;
   left: 0;
 
   .search-list-item {
@@ -138,7 +141,7 @@
 
 @mixin content-container($desktop-width-percentage) {
   width: 100%;
-  @media (orientation: landscape) {
+  @media (orientation: landscape) and (min-width: 910px) {
     max-width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
     width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
   }
@@ -161,4 +164,10 @@
   background: $white-transparent-background-75;
   box-sizing: border-box;
   @include shadow($firm-shadow);
+}
+
+@mixin navbar-max-width {
+  @media (orientation: landscape) and (min-width: 910px)  {
+    max-width: calc(#{$max-page-width} + #{$big-element-spacing});
+  }
 }

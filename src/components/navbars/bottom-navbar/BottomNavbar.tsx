@@ -34,16 +34,16 @@ const BottomNavbar = () => {
         />
         <BottomNavigationAction
           className="navbar-tile"
-          label="Discover"
-          value={ROUTE.DISCOVER}
-          icon={<TravelExploreRoundedIcon />}
+          label="Menu"
+          value={ROUTE.WEEK_MENU}
+          icon={<RestaurantMenuRoundedIcon />}
           sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
         />
         <BottomNavigationAction
           className="navbar-tile"
-          label="Menu"
-          value={ROUTE.WEEK_MENU}
-          icon={<RestaurantMenuRoundedIcon />}
+          label="Discover"
+          value={ROUTE.DISCOVER}
+          icon={<TravelExploreRoundedIcon />}
           sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
         />
         <BottomNavigationAction

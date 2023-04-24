@@ -26,7 +26,6 @@
 
   .search-list {
     @include search-list;
-    overflow: hidden;
     padding-bottom: $big-element-spacing;
 
     .search-icon {
@@ -39,7 +38,7 @@
     }
 
     .tag-items-container {
-      max-height: 55vh;
+      position: relative;
       overflow-y: auto;
     }
   }
