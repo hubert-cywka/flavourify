@@ -11,8 +11,17 @@
   height: $top-navbar-height;
   border-radius: $round-border-radius-50;
 
-  .top-navbar-button {
+  .top-navbar-buttons {
+    display: flex;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
+
+    .back-button, .add-dish-button {
+      cursor: pointer;
+      @include navbar-icon;
+      margin: 0 $big-element-spacing 0 $standard-element-spacing;
+    }
   }
 
   .search-bar {
@@ -21,11 +30,5 @@
     background: $white-transparent-background-20;
     margin: $small-element-spacing;
     box-sizing: border-box;
-  }
-
-  .back-button {
-    cursor: pointer;
-    @include navbar-icon;
-    margin: 0 $big-element-spacing 0 $standard-element-spacing;
   }
 }

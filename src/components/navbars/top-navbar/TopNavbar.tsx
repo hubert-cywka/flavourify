@@ -6,6 +6,8 @@ import { ArrowBackRounded } from '@mui/icons-material';
 import { useState } from 'react';
 import appRouter from '../../router/AppRouter';
 import { motion } from 'framer-motion';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
 
 interface TopNavbarProps {
   className?: string;
@@ -15,14 +17,22 @@ interface TopNavbarProps {
 
 const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps) => {
   const [isFocusOnSearchBar, setIsFocusOnSearchBar] = useState(false);
+  const [isDishAddDialogVisible, setIsDishAddDialogVisible] = useState(false);
 
-  const getButton = () => {
+  const getButtons = () => {
     return (
       <motion.div
-        className="top-navbar-button"
+        className="top-navbar-buttons"
         animate={{ width: isFocusOnSearchBar ? 0 : 'fit-content' }}>
         {!singleDishVariant ? (
-          <DisplayedTag className="displayed-tag" />
+          <>
+            <DisplayedTag className="displayed-tag" />
+            <AddRoundedIcon
+              sx={{ color: 'secondary.main' }}
+              className="add-dish-button"
+              onClick={() => setIsDishAddDialogVisible(true)}
+            />
+          </>
         ) : (
           <ArrowBackRounded
             className="back-button"
@@ -35,16 +45,23 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   };
 
   return (
-    <Box className={`top-navbar-container ${className}`}>
-      <SearchBar
-        searchValue={searchValue}
-        className="search-bar"
-        onBlur={() => setIsFocusOnSearchBar(false)}
-        onFocus={() => setIsFocusOnSearchBar(true)}
-      />
+    <>
+      <Box className={`top-navbar-container ${className}`}>
+        <SearchBar
+          searchValue={searchValue}
+          className="search-bar"
+          onBlur={() => setIsFocusOnSearchBar(false)}
+          onFocus={() => setIsFocusOnSearchBar(true)}
+        />
 
-      {getButton()}
-    </Box>
+        {getButtons()}
+      </Box>
+
+      <DishCardAddDialog
+        open={isDishAddDialogVisible}
+        onClose={() => setIsDishAddDialogVisible(false)}
+      />
+    </>
   );
 };
 

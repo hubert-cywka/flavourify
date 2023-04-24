@@ -1,5 +1,5 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { LogoutRounded, MenuBookRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
+import { LogoutRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import { useContext, useState } from 'react';
@@ -9,7 +9,6 @@ import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
 import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
-import DishCardAdd from '../../../dishes/dish-card/other-variants/dish-card-add/DishCardAdd';
 import { hasAdminPermission, signOutUser } from '../../../../services/AuthService';
 import UsersManagementPanel from '../../../users/users-management-panel/UsersManagementPanel';
 
@@ -25,11 +24,6 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
   const goBackToSettings = () => {
     setDisplayedSetting(null);
     setDisplayedSettingName('Settings');
-  };
-
-  const displayDishAddPanel = () => {
-    setDisplayedSetting(<DishCardAdd className="dish-card-add" onClose={goBackToSettings} />);
-    setDisplayedSettingName('Add new dish');
   };
 
   const displayTagsManagementPanel = () => {
@@ -63,13 +57,6 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
         <>
           {hasAdminPermission() && (
             <>
-              <SettingsPanelItem
-                icon={<MenuBookRounded className="icon" />}
-                text="Add new dish"
-                className="settings-panel-item"
-                callback={displayDishAddPanel}
-              />
-
               <SettingsPanelItem
                 icon={<TagRounded className="icon" />}
                 text="Manage tags"
