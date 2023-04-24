@@ -15,7 +15,7 @@
     .displayed-tag-icon {
       @include navbar-icon;
       box-sizing: border-box;
-      margin: 0 $standard-element-spacing;
+      margin-left: $standard-element-spacing;
     }
 
     .displayed-tag-name {

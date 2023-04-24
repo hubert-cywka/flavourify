@@ -1,0 +1,13 @@
+@import '/src/styles/shared';
+
+.dish-card-back-dialog {
+  overflow: hidden;
+  top: $standard-element-spacing;
+  @include content-container(85);
+
+  .dish-card-side {
+    @include dish-card;
+    width: 100%;
+    margin: 0;
+  }
+}
