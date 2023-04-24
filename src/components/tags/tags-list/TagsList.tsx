@@ -77,16 +77,29 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
     }
   };
 
+  const compareByName = (a: Tag, b: Tag) => {
+    if (a.name > b.name) return 1;
+    if (a.name < b.name) return -1;
+    return 0;
+  };
+
+  const getListOfTags = () => {
+    return displayedTags
+      .slice()
+      .sort(compareByName)
+      .map((tag, id) => {
+        return (
+          <Box key={tag.name + id} className="tag-chip">
+            {tag.name}
+          </Box>
+        );
+      });
+  };
+
   return (
     <>
       <Box className={`tags-list-container ${className}`} ref={reference}>
-        {displayedTags.map((category, id) => {
-          return (
-            <Box key={category.name + id} className="tag-chip">
-              {category.name}
-            </Box>
-          );
-        })}
+        {getListOfTags()}
         {editable && (
           <Box className="tag-chip" onClick={() => setIsEditDialogVisible(true)}>
             <EditRounded className="tags-edit-icon" /> Edit tags
