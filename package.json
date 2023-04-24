@@ -2,7 +2,6 @@
   "name": "flavourify",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hejs22.github.io/flavourify",
   "dependencies": {
     "@capacitor/android": "4.6.3",
     "@capacitor/core": "^4.6.3",
