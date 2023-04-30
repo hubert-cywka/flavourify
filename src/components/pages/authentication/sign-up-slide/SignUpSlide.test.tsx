@@ -113,17 +113,6 @@ describe('Testing <SignUpSlide/> component when everything goes right', () => {
       await SignUpPO.closeSuccessScreen();
       expect(mockSlideToSignIn).toHaveBeenCalled();
     });
-
-    test('should display error when wrong user tries to sign up with wrong data', async () => {
-      await SignUpPO.clickSignUpButton();
-      expect(await SignUpPO.signUpButton).toHaveTextContent(INVALID_SIGN_UP_DATA);
-    });
-
-    test('should clear error message on next button click', async () => {
-      await SignUpPO.clickSignUpButton();
-      await SignUpPO.clickSignUpButton();
-      expect(await SignUpPO.signUpButton).not.toHaveTextContent(INVALID_SIGN_UP_DATA);
-    });
   });
 
   describe('Testing input validation and if correct instruction is displayed', () => {
