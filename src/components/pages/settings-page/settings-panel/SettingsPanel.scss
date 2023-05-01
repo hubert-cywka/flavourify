@@ -7,8 +7,10 @@
 
   .settings-panel-header {
     box-sizing: border-box;
-    padding-bottom: 30px;
+    padding-bottom: $big-element-spacing;
+    margin-bottom: $standard-element-spacing;
     font-weight: bold;
+    @include shadow($button-shadow);
   }
 
   .settings-panel-item {

@@ -21,7 +21,7 @@ const ProfileEditPanel = ({ className }: EditProfilePanelProps) => {
 
   return (
     <Box className={`profile-edit-panel ${className}`}>
-      <UserInfo />
+      <UserInfo editableProfilePicture />
 
       <TabContext value={visibleTab}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

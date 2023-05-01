@@ -32,11 +32,3 @@ export const SIGN_UP_SUCCESS_IMAGE = '/sign-up-success.svg';
 
 export const REDIRECT_TO_SIGN_UP = 'I want to create new account.';
 export const REDIRECT_TO_SIGN_IN = 'I already have an account.';
-
-export const PASSWORD_CHANGE_SUCCESS = 'Password changed successfully.';
-export const PASSWORD_CHANGE_UNEXPECTED_ERROR = 'Failed to change password. Try again later.';
-export const PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR =
-  'Failed to change password. Current password is incorrect.';
-
-export const USERNAME_CHANGE_SUCCESS = 'Username changed successfully.';
-export const USERNAME_CHANGE_UNEXPECTED_ERROR = 'Failed to change username. Try again later.';

@@ -50,11 +50,11 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
         <ListItemIcon>
           {displayedSetting ? (
             <WestRoundedIcon
-              sx={{ cursor: 'pointer', color: 'text.primary' }}
+              sx={{ cursor: 'pointer', color: 'accent.main' }}
               onClick={goBackToSettings}
             />
           ) : (
-            <SettingsRounded sx={{ color: 'text.primary' }} />
+            <SettingsRounded sx={{ color: 'accent.main' }} />
           )}
         </ListItemIcon>
         <ListItemText disableTypography>{displayedSettingName}</ListItemText>
@@ -67,7 +67,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           <UserInfo className="user-info-container" />
 
           <SettingsPanelItem
-            icon={<AccountCircleRoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
+            icon={<AccountCircleRoundedIcon className="icon" sx={{ color: 'accent.main' }} />}
             text="Edit profile"
             className="settings-panel-item"
             callback={displayProfileEditPanel}
@@ -76,14 +76,14 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           {hasAdminPermission() && (
             <>
               <SettingsPanelItem
-                icon={<TagRounded className="icon" sx={{ color: 'text.primary' }} />}
+                icon={<TagRounded className="icon" sx={{ color: 'accent.main' }} />}
                 text="Manage tags"
                 className="settings-panel-item"
                 callback={displayTagsManagementPanel}
               />
 
               <SettingsPanelItem
-                icon={<PeopleRoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
+                icon={<PeopleRoundedIcon className="icon" sx={{ color: 'accent.main' }} />}
                 text="Manage users"
                 className="settings-panel-item"
                 callback={displayUsersManagementPanel}
@@ -92,7 +92,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           )}
 
           <SettingsPanelItem
-            icon={<Brightness4RoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
+            icon={<Brightness4RoundedIcon className="icon" sx={{ color: 'accent.main' }} />}
             text="Toggle color mode"
             className="settings-panel-item"
             callback={toggleColorMode}
@@ -100,7 +100,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           />
 
           <SettingsPanelItem
-            icon={<LogoutRounded className="icon" sx={{ color: 'text.primary' }} />}
+            icon={<LogoutRounded className="icon" sx={{ color: 'accent.main' }} />}
             text="Logout"
             className="settings-panel-item"
             callback={signOutUser}

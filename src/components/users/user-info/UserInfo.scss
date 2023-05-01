@@ -1,4 +1,5 @@
 @import "../../../styles/variables";
+@import "../../../styles/shared";
 
 .user-info {
   width: 100%;
@@ -9,20 +10,13 @@
   padding: $big-element-spacing 0;
 
   .user-info-picture {
-    width: $icon-font-size;
-    height: $icon-font-size;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
+    width: calc(3 * #{$icon-font-size});
+    height: calc(3 * #{$icon-font-size});
     font-size: $big-font-size;
-    border-radius: $round-border-radius-50;
-    background: $gradient-transparent-background-soft;
     margin: 0 auto $big-element-spacing;
-    pointer-events: none;
   }
 
-  .user-info-username, .user-info-email, .user-info-role {
+  .user-info-username, .user-info-email {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -35,10 +29,6 @@
 
   .user-info-email {
     margin-top: $small-element-spacing;
-    font-size: $standard-font-size;
-  }
-
-  .user-info-role {
     font-size: $small-font-size;
   }
 }

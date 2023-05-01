@@ -106,7 +106,7 @@ const DishCardBack = ({
   const updateDishImage = async (): Promise<string> => {
     if (!imageRef?.current) return displayedDish.img;
     try {
-      return await getCompressedImageUrl(imageRef.current.src);
+      return await getCompressedImageUrl(imageRef.current.src, 0.8);
     } catch {
       enqueueSnackbar(IMAGE_COMPRESSION_ERROR);
       return displayedDish.img;
