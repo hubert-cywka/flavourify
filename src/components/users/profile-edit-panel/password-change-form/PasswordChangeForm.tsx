@@ -7,7 +7,7 @@ import {
   PASSWORD_CHANGE_SUCCESS,
   PASSWORD_CHANGE_UNEXPECTED_ERROR,
   PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR
-} from '../../../../constants/AuthConstants';
+} from '../../../../constants/UserConstants';
 import { AxiosError } from 'axios';
 import * as yup from 'yup';
 import {
@@ -17,7 +17,7 @@ import {
 } from '../../../../constants/ValidationSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { changeMyPassword } from '../../../../services/UserService';
-import '../ChangeFormShared.scss';
+import '../ProfileEditFormShared.scss';
 import { queryClient } from '../../../../services/QueryClient';
 import { USER_DETAILS_QUERY } from '../../../../constants/QueryConstants';
 
@@ -94,7 +94,9 @@ const PasswordChangeForm = ({ className }: PasswordChangeFormProps) => {
   };
 
   return (
-    <form className={`change-form ${className}`} onSubmit={handleSubmit(handlePasswordChange)}>
+    <form
+      className={`profile-edit-form ${className}`}
+      onSubmit={handleSubmit(handlePasswordChange)}>
       <Typography className="form-input-label">Current password</Typography>
       <Input
         sx={{ borderColor: errors.currentPassword ? 'error.main' : 'rgba(255, 255, 255, 0.5)' }}

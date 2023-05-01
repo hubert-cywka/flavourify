@@ -1,0 +1,44 @@
+@import "./src/styles/shared";
+@import "./src/styles/variables";
+
+.profile-picture-container {
+  position: relative;
+
+  .image-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 20;
+    opacity: 0;
+  }
+
+  .profile-picture-clipper {
+    background: $gradient-transparent-background-soft;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .profile-picture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .edit-icon {
+    position: absolute;
+    font-size: $huge-font-size;
+    bottom: 0;
+    right: 0;
+    @include shadow($strong-shadow);
+    border-radius: 100%;
+    padding: $small-element-spacing;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}

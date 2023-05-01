@@ -1,4 +1,4 @@
-import { Box, Divider, Skeleton, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
 import { USERS_QUERY } from '../../../constants/QueryConstants';
@@ -57,7 +57,6 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
 
   return (
     <Box className={`users-management-panel ${className} `}>
-      <Divider />
       <Typography className="users-management-warning">{USER_EDIT_WARNING}</Typography>
       <Typography className="users-management-info">{USER_EDIT_INFO}</Typography>
       {buildUserDetailsRows()}

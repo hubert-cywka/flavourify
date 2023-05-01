@@ -34,6 +34,11 @@ export const changeMyUsername = async (newUsername: string) => {
   return data;
 };
 
+export const changeMyProfilePicture = async (newPicture: string) => {
+  const { data } = await apiClient.put(`/users/me/picture`, { newPicture: newPicture });
+  return data;
+};
+
 export const getUserDetails = async () => {
   const { data } = await apiClient.get<User>(`/users/me`);
   return data;

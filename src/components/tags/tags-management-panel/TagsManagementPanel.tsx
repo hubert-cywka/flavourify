@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   FormControl,
   Input,
   MenuItem,
@@ -205,7 +204,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
         </Box>
 
         <TabPanel value="1" className="tags-tab-panel">
-          <Divider className="divider">Update existing tag</Divider>
+          <Box className="divider">Update existing tag</Box>
           <Box className="tags-tab-text">
             <Typography className="info">{TAG_UPDATE_INFO}</Typography>
             <Typography className="info requirements">{TAG_ADD_REQUIREMENTS}</Typography>
@@ -242,7 +241,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
         </TabPanel>
 
         <TabPanel value="2" className="tags-tab-panel">
-          <Divider className="divider">Add new tag</Divider>
+          <Box className="divider">Add new tag</Box>
           <Box className="tags-tab-text">
             <Typography className="info">{TAG_ADD_INFO}</Typography>
             <Typography className="info requirements">{TAG_ADD_REQUIREMENTS}</Typography>
@@ -265,7 +264,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
         </TabPanel>
 
         <TabPanel value="3" className="tags-tab-panel">
-          <Divider className="divider">Delete tag</Divider>
+          <Box className="divider">Delete tag</Box>
           <Box className="tags-tab-text">
             <Typography className="info">{TAG_DELETE_INFO}</Typography>
             <Typography className="info requirements">{TAG_DELETE_WARNING}</Typography>

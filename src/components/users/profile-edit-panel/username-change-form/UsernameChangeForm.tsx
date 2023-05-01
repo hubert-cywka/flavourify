@@ -6,11 +6,11 @@ import { useSnackbar } from 'notistack';
 import {
   USERNAME_CHANGE_SUCCESS,
   USERNAME_CHANGE_UNEXPECTED_ERROR
-} from '../../../../constants/AuthConstants';
+} from '../../../../constants/UserConstants';
 import * as yup from 'yup';
 import { getNicknameValidationSchema } from '../../../../constants/ValidationSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import '../ChangeFormShared.scss';
+import '../ProfileEditFormShared.scss';
 import { changeMyUsername } from '../../../../services/UserService';
 import { queryClient } from '../../../../services/QueryClient';
 import { USER_DETAILS_QUERY } from '../../../../constants/QueryConstants';
@@ -72,7 +72,9 @@ const UsernameChangeForm = ({ className }: UsernameChangeFormProps) => {
   };
 
   return (
-    <form className={`change-form ${className}`} onSubmit={handleSubmit(handleUsernameChange)}>
+    <form
+      className={`profile-edit-form ${className}`}
+      onSubmit={handleSubmit(handleUsernameChange)}>
       <Typography className="form-input-label">New username</Typography>
       <Input
         sx={{ borderColor: errors.username ? 'error.main' : 'rgba(255, 255, 255, 0.5)' }}
