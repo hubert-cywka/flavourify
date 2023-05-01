@@ -8,7 +8,7 @@ export const SettingsPage = () => {
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
       <AnimatePresence>
         <motion.div
-          className="settings-page-container"
+          className="settings-container"
           key={SETTINGS_PAGE_MOTION}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

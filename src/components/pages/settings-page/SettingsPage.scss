@@ -1,7 +1,7 @@
 @import './src/styles/shared';
 @import './src/styles/variables';
 
-.settings-page-container {
+.settings-container {
   @include page-container;
 
   .settings-panel {

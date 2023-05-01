@@ -1,0 +1,55 @@
+@import "../../../styles/variables";
+@import "../../../styles/shared";
+
+.change-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  .form-buttons-container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+    .form-button {
+      @include action-button-standard;
+
+      &.form-clear-button {
+        margin-left: auto;
+        margin-right: $standard-element-spacing;
+      }
+    }
+  }
+
+  .form-input, .form-buttons-container, .form-helper-text, .form-input-label {
+    width: 90%;
+  }
+
+  .form-input {
+    border-radius: $outer-border-radius-10;
+    padding: $small-element-spacing $standard-element-spacing;
+    font-size: $small-font-size;
+    border-width: thin;
+    border-style: solid;
+
+    &:-webkit-autofill {
+      -webkit-background-clip: text;
+      -webkit-box-shadow: none;
+    }
+  }
+
+  .form-helper-text {
+    margin-bottom: $standard-element-spacing;
+    font-size: $small-font-size;
+  }
+
+  .form-input-label {
+    margin: $small-element-spacing 0 $small-element-spacing $standard-element-spacing;
+    font-size: $small-font-size;
+    font-weight: bold;
+    text-align: left;
+  }
+}

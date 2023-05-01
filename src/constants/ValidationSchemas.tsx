@@ -5,10 +5,11 @@ import {
   NICKNAME_REQUIRED,
   NICKNAME_TOO_LONG,
   NICKNAME_TOO_SHORT,
-  PASSWORD_REQUIRED,
+  NEW_PASSWORD_REQUIRED,
   PASSWORDS_NOT_MATCHING,
   WRONG_EMAIL,
-  WRONG_PASSWORD
+  WRONG_PASSWORD,
+  CURRENT_PASSWORD_REQUIRED
 } from './AuthConstants';
 import {
   NICKNAME_MAXIMUM_LENGTH,
@@ -26,8 +27,11 @@ export const getNicknameValidationSchema = () =>
 export const getEmailValidationSchema = () =>
   yup.string().required(EMAIL_REQUIRED).email(WRONG_EMAIL);
 
-export const getPasswordValidationSchema = () =>
-  yup.string().required(PASSWORD_REQUIRED).min(PASSWORD_MINIMUM_LENGTH, WRONG_PASSWORD);
+export const getCurrentPasswordValidationSchema = () =>
+  yup.string().required(CURRENT_PASSWORD_REQUIRED);
+
+export const getNewPasswordValidationSchema = () =>
+  yup.string().required(NEW_PASSWORD_REQUIRED).min(PASSWORD_MINIMUM_LENGTH, WRONG_PASSWORD);
 
 export const getConfirmPasswordValidationSchema = (passwordFieldName: string) =>
   yup

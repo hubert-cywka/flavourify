@@ -75,7 +75,7 @@
   }
 
   .action-button {
-    margin: $huge-element-spacing auto 0 auto;
+    margin: $huge-element-spacing $small-element-spacing 0;
     @include action-button-standard;
   }
 }

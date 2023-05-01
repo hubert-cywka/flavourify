@@ -20,3 +20,21 @@ export const updateUserRole = async (userId: number, role: string) => {
   const { data } = await apiClient.patch(`/users/${userId}`, role);
   return data;
 };
+
+export const changeMyPassword = async (currentPassword: string, newPassword: string) => {
+  const { data } = await apiClient.put(`/users/me/password`, {
+    currentPassword: currentPassword,
+    newPassword: newPassword
+  });
+  return data;
+};
+
+export const changeMyUsername = async (newUsername: string) => {
+  const { data } = await apiClient.put(`/users/me/username`, { newUsername: newUsername });
+  return data;
+};
+
+export const getUserDetails = async () => {
+  const { data } = await apiClient.get<User>(`/users/me`);
+  return data;
+};

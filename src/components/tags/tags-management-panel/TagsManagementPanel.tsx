@@ -152,7 +152,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
       <FormControl size="small" className="tag-type-selector">
         <Select
           value={selectedType}
-          sx={{ fontSize: '0.8rem', color: 'text.secondary' }}
+          sx={{ fontSize: '0.8rem' }}
           onChange={handleTagTypeChange}
           inputRef={tagTypeRef}>
           {TAG_TYPES.map((type, id) => (
@@ -176,6 +176,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
           <TabList onChange={handleTabChange} centered>
             <Tab
               sx={{
+                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -184,6 +185,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             />
             <Tab
               sx={{
+                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -192,6 +194,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
             />
             <Tab
               sx={{
+                color: 'text.primary',
                 textTransform: 'none',
                 '&.Mui-selected': { color: 'accent.main' }
               }}
@@ -212,7 +215,6 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
               <>
                 <Box className="tag-inputs-container">
                   <Input
-                    sx={{ color: 'text.secondary' }}
                     defaultValue={selectedTag?.name}
                     inputRef={tagNameRef}
                     className="tag-name-input"
@@ -247,12 +249,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
           </Box>
           <Box className="tags-tab-content">
             <Box className="tag-inputs-container">
-              <Input
-                sx={{ color: 'text.secondary' }}
-                inputRef={tagNameRef}
-                className="tag-name-input"
-                placeholder="New tag name"
-              />
+              <Input inputRef={tagNameRef} className="tag-name-input" placeholder="New tag name" />
               {getTagTypeSelector()}
             </Box>
             <Button

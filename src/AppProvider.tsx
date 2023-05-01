@@ -133,6 +133,46 @@ const AppProvider = ({ children }: AppProviderProps) => {
               backgroundColor: '#100037',
               ':hover': { backgroundColor: lighten('#03003a', 0.1) }
             }
+          },
+          {
+            props: { variant: 'errorOutlined' },
+            style: {
+              color: '#e54f4f',
+              borderColor: '#e54f4f',
+              borderStyle: 'solid',
+              borderWidth: 'thin',
+              ':hover': { borderColor: darken('#e54f4f', 0.15), color: darken('#e54f4f', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'successOutlined' },
+            style: {
+              color: '#5ee3a3',
+              borderColor: '#5ee3a3',
+              borderStyle: 'solid',
+              borderWidth: 'thin',
+              ':hover': { borderColor: darken('#5ee3a3', 0.15), color: darken('#5ee3a3', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'accentOutlined' },
+            style: {
+              color: '#ff9e00',
+              borderColor: '#ff9e00',
+              borderStyle: 'solid',
+              borderWidth: 'thin',
+              ':hover': { borderColor: darken('#ff9e00', 0.15), color: darken('#ff9e00', 0.15) }
+            }
+          },
+          {
+            props: { variant: 'secondaryOutlined' },
+            style: {
+              color: '#100037',
+              borderColor: '#100037',
+              borderStyle: 'solid',
+              borderWidth: 'thin',
+              ':hover': { borderColor: lighten('#03003a', 0.1), color: lighten('#03003a', 0.1) }
+            }
           }
         ]
       },

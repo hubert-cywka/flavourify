@@ -29,7 +29,7 @@ import {
   getConfirmPasswordValidationSchema,
   getEmailValidationSchema,
   getNicknameValidationSchema,
-  getPasswordValidationSchema
+  getNewPasswordValidationSchema
 } from '../../../../constants/ValidationSchemas';
 
 type SignUpInputs = {
@@ -54,7 +54,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
   const signUpValidationSchema = yup.object({
     nickname: getNicknameValidationSchema(),
     email: getEmailValidationSchema(),
-    password: getPasswordValidationSchema(),
+    password: getNewPasswordValidationSchema(),
     confirmPassword: getConfirmPasswordValidationSchema('password')
   });
 

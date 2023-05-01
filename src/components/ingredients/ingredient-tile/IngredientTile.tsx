@@ -179,21 +179,21 @@ const IngredientTile = ({
           </Box>
           <Box className="ingredients-edit-buttons">
             <Button
-              variant="errorContained"
+              variant="errorOutlined"
               onClick={handleDelete}
               className="action-button"
               startIcon={<HighlightOffRoundedIcon />}>
               Delete
             </Button>
             <Button
-              variant="accentContained"
+              variant="accentOutlined"
               onClick={toggleQuantity}
               className="action-button"
               startIcon={<MonitorWeightRoundedIcon />}>
               Quantity
             </Button>
             <Button
-              variant="successContained"
+              variant="successOutlined"
               onClick={updateIngredient}
               className="action-button"
               startIcon={<CheckCircleOutlineRoundedIcon />}>

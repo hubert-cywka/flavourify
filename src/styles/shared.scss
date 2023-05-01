@@ -103,18 +103,19 @@
 }
 
 @mixin action-button-standard {
+  box-sizing: border-box;
   font-weight: bold;
   -webkit-box-shadow: $button-shadow;
   -moz-box-shadow: $button-shadow;
   box-shadow: $button-shadow;
   padding: $standard-element-spacing $huge-element-spacing;
+  font-size: $small-font-size;
   width: fit-content;
   height: fit-content;
   border-radius: $round-border-radius-50;
 }
 
 @mixin dish-card-action-button {
-  transform: scale(0.9);
   @include action-button-standard;
   margin: 0 auto;
 }

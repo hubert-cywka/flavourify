@@ -3,6 +3,7 @@
 
 .settings-panel-container {
   @include content-container(100);
+  @include translucent-tile;
 
   .settings-panel-header {
     box-sizing: border-box;
@@ -24,6 +25,10 @@
     }
   }
 
+  .user-info-container {
+    margin-bottom: $big-element-spacing;
+  }
+
   .displayed-setting {
     width: 100%;
     flex-grow: 1;
@@ -32,6 +37,11 @@
     .tags-management-panel {
       height: 100%;
       width: 100%;
+    }
+
+    .profile-edit-panel {
+      width: 100%;
+      height: 100%;
     }
   }
 }

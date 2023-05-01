@@ -22,7 +22,6 @@
 
     .tag-chip {
       @include chip;
-      background-color: $highlighted-background;
 
       &.selected {
         background-color: $strong-highlighted-background;

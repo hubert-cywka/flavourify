@@ -1,12 +1,12 @@
 import { BottomNavigationAction, BottomNavigation, Box } from '@mui/material';
 import ROUTE from '../../router/RoutingConstants';
-import SettingsApplicationsRoundedIcon from '@mui/icons-material/SettingsApplicationsRounded';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import './BottomNavbar.scss';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 const BottomNavbar = () => {
   const location = useLocation();
@@ -50,7 +50,7 @@ const BottomNavbar = () => {
           className="navbar-tile"
           label="Settings"
           value={ROUTE.SETTINGS}
-          icon={<SettingsApplicationsRoundedIcon />}
+          icon={<AccountCircleRoundedIcon />}
           sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
         />
       </BottomNavigation>
