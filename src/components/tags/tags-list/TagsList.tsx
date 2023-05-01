@@ -148,14 +148,14 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
             <Box className="tags-select-buttons">
               <Button
                 className="action-button"
-                variant="errorContained"
+                variant="errorOutlined"
                 startIcon={<SettingsBackupRestoreRoundedIcon />}
                 onClick={() => setDisplayedTags(DISH_TAGS_DEFAULT)}>
                 Clear
               </Button>
               <Button
                 className="action-button"
-                variant="successContained"
+                variant="successOutlined"
                 startIcon={<CheckCircleOutlineRounded />}
                 onClick={handleTagsEditDialogClose}>
                 Save

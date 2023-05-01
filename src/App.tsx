@@ -19,6 +19,10 @@ declare module '@mui/material/Button' {
     successContained: true;
     accentContained: true;
     secondaryContained: true;
+    errorOutlined: true;
+    successOutlined: true;
+    accentOutlined: true;
+    secondaryOutlined: true;
   }
 }
 

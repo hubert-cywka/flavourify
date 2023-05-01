@@ -8,7 +8,8 @@ import { ERROR_403_IMAGE } from './AppConstants';
 export const MOCK_USER: User = {
   username: 'mock_username',
   email: 'mock_email',
-  role: USER_ROLE.USER
+  role: USER_ROLE.USER,
+  picture: ''
 };
 
 export const MOCK_SIGN_UP_REQUEST: SignUpRequest = {

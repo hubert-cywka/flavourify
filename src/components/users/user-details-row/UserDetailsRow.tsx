@@ -72,6 +72,7 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
               <Box className="user-email">{user.email}</Box>
             </Box>
             <IconButton
+              sx={{ color: 'text.primary' }}
               className="expand-management-options-button"
               onClick={() => setAreButtonsDisplayed((prev) => !prev)}>
               {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}

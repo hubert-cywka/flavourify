@@ -11,6 +11,9 @@ import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
 import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 import { hasAdminPermission, signOutUser } from '../../../../services/AuthService';
 import UsersManagementPanel from '../../../users/users-management-panel/UsersManagementPanel';
+import UserInfo from '../../../users/user-info/UserInfo';
+import ProfileEditPanel from '../../../users/profile-edit-panel/ProfileEditPanel';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 interface SettingsPanelProps {
   className?: string;
@@ -36,16 +39,22 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
     setDisplayedSettingName('Manage users');
   };
 
+  const displayProfileEditPanel = () => {
+    setDisplayedSetting(<ProfileEditPanel className="profile-edit-panel" />);
+    setDisplayedSettingName('Edit profile');
+  };
+
   return (
-    <List
-      className={`settings-panel-container ${className}`}
-      sx={{ bgcolor: 'background.paper', color: 'text.secondary' }}>
+    <List className={`settings-panel-container ${className}`}>
       <ListItem className="settings-panel-header">
         <ListItemIcon>
           {displayedSetting ? (
-            <WestRoundedIcon sx={{ cursor: 'pointer' }} onClick={goBackToSettings} />
+            <WestRoundedIcon
+              sx={{ cursor: 'pointer', color: 'text.primary' }}
+              onClick={goBackToSettings}
+            />
           ) : (
-            <SettingsRounded />
+            <SettingsRounded sx={{ color: 'text.primary' }} />
           )}
         </ListItemIcon>
         <ListItemText disableTypography>{displayedSettingName}</ListItemText>
@@ -55,17 +64,26 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
         <Box className="displayed-setting">{displayedSetting}</Box>
       ) : (
         <>
+          <UserInfo className="user-info-container" />
+
+          <SettingsPanelItem
+            icon={<AccountCircleRoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
+            text="Edit profile"
+            className="settings-panel-item"
+            callback={displayProfileEditPanel}
+          />
+
           {hasAdminPermission() && (
             <>
               <SettingsPanelItem
-                icon={<TagRounded className="icon" />}
+                icon={<TagRounded className="icon" sx={{ color: 'text.primary' }} />}
                 text="Manage tags"
                 className="settings-panel-item"
                 callback={displayTagsManagementPanel}
               />
 
               <SettingsPanelItem
-                icon={<PeopleRoundedIcon className="icon" />}
+                icon={<PeopleRoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
                 text="Manage users"
                 className="settings-panel-item"
                 callback={displayUsersManagementPanel}
@@ -74,7 +92,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           )}
 
           <SettingsPanelItem
-            icon={<Brightness4RoundedIcon className="icon" />}
+            icon={<Brightness4RoundedIcon className="icon" sx={{ color: 'text.primary' }} />}
             text="Toggle color mode"
             className="settings-panel-item"
             callback={toggleColorMode}
@@ -82,7 +100,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
           />
 
           <SettingsPanelItem
-            icon={<LogoutRounded className="icon" />}
+            icon={<LogoutRounded className="icon" sx={{ color: 'text.primary' }} />}
             text="Logout"
             className="settings-panel-item"
             callback={signOutUser}

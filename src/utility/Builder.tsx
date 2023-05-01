@@ -2,10 +2,11 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { CircularProgress } from '@mui/material';
 
 class Builder {
-  private readonly _status: string = 'loading';
+  private _status: string = 'loading';
 
   success: ReactJSXElement = (<></>);
   error: ReactJSXElement = (<></>);
+  idle: ReactJSXElement = (<></>);
   loading: ReactJSXElement = (<CircularProgress sx={{ color: 'accent.main' }} />);
 
   constructor(status: string) {
@@ -15,7 +16,7 @@ class Builder {
   static createResult(status: string) {
     if (!status || !status.length)
       throw new Error(
-        "Status must be defined. Possible values: 'success', 'loading'. Any other value will be treated as 'error'."
+        "Status must be defined. Possible values: 'success', 'loading', 'idle', 'error'. Any other value will be treated as 'error'."
       );
     return new Builder(status);
   }
@@ -30,18 +31,26 @@ class Builder {
     return this;
   }
 
+  onIdle(result: ReactJSXElement) {
+    this.idle = result;
+    return this;
+  }
+
   onLoading(result: ReactJSXElement) {
     this.loading = result;
     return this;
   }
 
   build(): ReactJSXElement {
-    if (this._status === 'success') {
-      return this.success;
-    } else if (this._status === 'loading') {
-      return this.loading;
-    } else {
-      return this.error;
+    switch (this._status) {
+      case 'success':
+        return this.success;
+      case 'loading':
+        return this.loading;
+      case 'idle':
+        return this.idle;
+      default:
+        return this.error;
     }
   }
 }

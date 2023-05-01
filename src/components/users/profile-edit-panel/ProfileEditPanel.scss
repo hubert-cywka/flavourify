@@ -1,0 +1,27 @@
+@import '../../../styles/shared';
+@import '../../../styles/variables';
+
+.profile-edit-panel {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .profile-panel-form-container {
+    box-sizing: border-box;
+    padding: 0;
+    width: 100%;
+
+    .profile-panel-divider {
+      font-weight: bold;
+      font-size: $standard-font-size;
+      margin-bottom: $standard-element-spacing;
+      margin-top: $big-element-spacing;
+      box-sizing: border-box;
+    }
+
+    .profile-panel-requirements {
+      font-size: $small-font-size;
+      margin-bottom: $big-element-spacing;
+    }
+  }
+}

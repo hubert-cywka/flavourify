@@ -15,7 +15,8 @@ export const WRONG_PASSWORD = `Password doesn't meet requirements. It should be 
 export const PASSWORDS_NOT_MATCHING = 'Passwords do not match.';
 export const NICKNAME_REQUIRED = 'Nickname is required.';
 export const EMAIL_REQUIRED = 'Email is required.';
-export const PASSWORD_REQUIRED = 'Password is required.';
+export const CURRENT_PASSWORD_REQUIRED = 'You need to enter your current password.';
+export const NEW_PASSWORD_REQUIRED = 'Password is required.';
 export const CONFIRM_PASSWORD_REQUIRED = 'You need to confirm password.';
 export const SIGN_UP_SUCCESS = 'You can now sign in.';
 export const INVALID_SIGN_UP_DATA = 'Please enter valid data';
@@ -31,3 +32,11 @@ export const SIGN_UP_SUCCESS_IMAGE = '/sign-up-success.svg';
 
 export const REDIRECT_TO_SIGN_UP = 'I want to create new account.';
 export const REDIRECT_TO_SIGN_IN = 'I already have an account.';
+
+export const PASSWORD_CHANGE_SUCCESS = 'Password changed successfully.';
+export const PASSWORD_CHANGE_UNEXPECTED_ERROR = 'Failed to change password. Try again later.';
+export const PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR =
+  'Failed to change password. Current password is incorrect.';
+
+export const USERNAME_CHANGE_SUCCESS = 'Username changed successfully.';
+export const USERNAME_CHANGE_UNEXPECTED_ERROR = 'Failed to change username. Try again later.';
