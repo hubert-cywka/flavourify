@@ -15,7 +15,7 @@ import DishCard from '../dish-card/DishCard';
 import Builder from '../../../utility/Builder';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box } from '@mui/material';
-import SwiperRef, { EffectCreative, Virtual } from 'swiper';
+import SwiperRef from 'swiper';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useContext, useState } from 'react';
 import ErrorDishCard from '../dish-card/other-variants/error-dish-card/ErrorDishCard';
@@ -84,7 +84,6 @@ const DishesList = ({ className }: DishesListProps) => {
       <>
         {data && (
           <Swiper
-            modules={[Virtual, EffectCreative]}
             allowSlidePrev={!isLocked}
             allowSlideNext={!isLocked}
             initialSlide={lastViewedDish.slide}
@@ -94,7 +93,6 @@ const DishesList = ({ className }: DishesListProps) => {
             onReachBeginning={() => fetchPreviousPage()}
             onSlideChangeTransitionEnd={updateLastViewedDish}
             slidesPerView={1}
-            virtual={{ enabled: true, cache: false, addSlidesAfter: 1, addSlidesBefore: 1 }}
             className={`dishes-list-container ${className}`}>
             {prepareDishesSlides(data.pages)}
             {!hasNextPage && !isFetching ? (

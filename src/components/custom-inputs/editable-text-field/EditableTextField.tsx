@@ -16,6 +16,7 @@ interface EditableTextFieldProps {
   sx?: SxProps;
   autoFocus?: boolean;
   preventScroll?: boolean;
+  placeholder?: string;
 }
 
 const EditableTextField = ({
@@ -29,7 +30,8 @@ const EditableTextField = ({
   type,
   sx,
   autoFocus,
-  preventScroll
+  preventScroll,
+  placeholder
 }: EditableTextFieldProps) => {
   const [displayedValue, setDisplayedValue] = useState<string>(value);
   const { enqueueSnackbar } = useSnackbar();
@@ -87,8 +89,10 @@ const EditableTextField = ({
       value={displayedValue}
       onBlur={checkIfEmpty}
       onFocus={scrollIntoView}
+      placeholder={placeholder}
       onChange={(e) => handleChange(e)}
-      onMouseDown={(e) => allowEdit(e)}></Input>
+      onMouseDown={(e) => allowEdit(e)}
+    />
   );
 };
 

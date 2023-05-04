@@ -38,6 +38,7 @@ import {
   DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
   DISH_DELETE_SUCCESS,
+  DISH_NAME_PLACEHOLDER,
   DISH_UPDATE_ERROR,
   DISH_UPDATE_ERROR_IMAGE,
   DISH_UPDATE_SUCCESS,
@@ -269,6 +270,7 @@ const DishCardBack = ({
               className="dish-name"
               isReadOnly={readOnly}
               preventScroll
+              placeholder={DISH_NAME_PLACEHOLDER}
               value={displayedDish.name}
               reference={nameRef}
               max={DISH_NAME_MAX_LENGTH}

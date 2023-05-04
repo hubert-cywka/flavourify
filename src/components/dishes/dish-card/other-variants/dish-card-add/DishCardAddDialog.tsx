@@ -2,7 +2,6 @@ import DishCardBack from '../../dish-card-back/DishCardBack';
 import { Dish } from '../../../../../types/interfaces/Dish';
 import {
   DISH_IMAGE_PLACEHOLDER,
-  DISH_NAME_PLACEHOLDER,
   DISH_TAGS_DEFAULT
 } from '../../../../../constants/DishesConstants';
 import { Box, Dialog } from '@mui/material';
@@ -10,7 +9,7 @@ import './DishCardAddDialog.scss';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
   id: -1,
-  name: DISH_NAME_PLACEHOLDER,
+  name: '',
   recipe: [],
   ingredients: [],
   img: DISH_IMAGE_PLACEHOLDER,
