@@ -17,7 +17,8 @@ import {
   INGREDIENT_DEFAULT_UNIT,
   INGREDIENT_EDIT_ERROR,
   INGREDIENT_EDIT_IMAGE,
-  INGREDIENT_EDIT_INFO
+  INGREDIENT_EDIT_INFO,
+  NEW_INGREDIENT_PLACEHOLDER
 } from '../../../constants/DishesConstants';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -137,7 +138,12 @@ const IngredientTile = ({
               <EditableTextField
                 sx={{ color: 'text.primary' }}
                 className="editable-text-field"
-                value={displayedIngredient.name}
+                value={
+                  displayedIngredient.name === NEW_INGREDIENT_PLACEHOLDER
+                    ? ''
+                    : displayedIngredient.name
+                }
+                placeholder={NEW_INGREDIENT_PLACEHOLDER}
                 reference={nameRef}
                 max={INGREDIENT_NAME_MAX_LENGTH}
                 errorMessage={INGREDIENT_EDIT_ERROR}
