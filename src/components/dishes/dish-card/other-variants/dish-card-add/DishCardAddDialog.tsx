@@ -23,8 +23,12 @@ interface DishCardAddDialogProps {
 }
 
 const DishCardAddDialog = ({ onClose, className, open }: DishCardAddDialogProps) => {
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
-    <Dialog PaperProps={{ className: 'dish-card-back-dialog' }} open={open} onClose={onClose}>
+    <Dialog PaperProps={{ className: 'dish-card-back-dialog' }} open={open} onClose={handleClose}>
       <Box sx={{ color: 'text.primary', bgcolor: 'primary.main', width: '100%' }}>
         <DishCardBack
           dish={EMPTY_DISH_PLACEHOLDER}

@@ -9,10 +9,8 @@ import {
 } from '@mui/material';
 import './DishCardBack.scss';
 import { Dish } from '../../../../types/interfaces/Dish';
-import IngredientsList, {
-  getUpdatedIngredients
-} from '../../../ingredients/ingredients-list/IngredientsList';
-import DishRecipe, { getUpdatedRecipe } from '../../dish-recipe/DishRecipe';
+import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
+import DishRecipe from '../../dish-recipe/DishRecipe';
 import EditIconRounded from '@mui/icons-material/EditRounded';
 import {
   ArrowBackRounded,
@@ -25,15 +23,12 @@ import EditableTextField from '../../../custom-inputs/editable-text-field/Editab
 import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
 import { queryClient } from '../../../../services/QueryClient';
 import DishImage from '../../dish-image/DishImage';
-import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { DISHES_QUERY } from '../../../../constants/QueryConstants';
 import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
 import { DishCardProps } from '../DishCard';
 import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { validateDishFields } from '../../../../utility/validateDishFields';
-import { getCompleteTagsFromTagNames } from '../../../../utility/getCompleteTagsFromTagNames';
-import { getTags } from '../../../../services/TagsService';
 import {
   DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
@@ -43,13 +38,13 @@ import {
   DISH_UPDATE_ERROR_IMAGE,
   DISH_UPDATE_SUCCESS,
   DISH_UPDATE_SUCCESS_IMAGE,
-  IMAGE_COMPRESSION_ERROR,
   NAME_EDIT_ERROR
 } from '../../../../constants/DishesConstants';
 import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 import TagsList from '../../../tags/tags-list/TagsList';
 import StatusScreen from '../../../status-screen/StatusScreen';
 import { hasAdminPermission } from '../../../../services/AuthService';
+import { createUpdatedDishRecipe } from '../../../../utility/dishRecipeUpdateUtils';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -86,52 +81,20 @@ const DishCardBack = ({
     setReadOnly(true);
   };
 
-  const updateName = () => {
-    return nameRef?.current?.firstChild
-      ? (nameRef.current.firstChild as HTMLInputElement).value
-      : displayedDish.name;
-  };
-  const updateTags = async () => {
-    if (!tagsRef?.current?.children) return displayedDish.tags;
-
-    const newTags: string[] = [];
-    const newTagsArray = Array.from(tagsRef.current.children);
-    for (let i = 0; i < newTagsArray.length - 1; i++) {
-      newTags.push((newTagsArray[i] as HTMLDivElement).innerHTML);
-    }
-
-    const tagsList = await getTags(false);
-    return getCompleteTagsFromTagNames(newTags, tagsList);
-  };
-
-  const updateDishImage = async (): Promise<string> => {
-    if (!imageRef?.current) return displayedDish.img;
-    try {
-      return await getCompressedImageUrl(imageRef.current.src, 0.8);
-    } catch {
-      enqueueSnackbar(IMAGE_COMPRESSION_ERROR);
-      return displayedDish.img;
-    }
-  };
-
-  const createUpdatedDishRecipe = async (): Promise<Dish> => {
-    return {
-      ...displayedDish,
-      name: updateName(),
-      recipe: getUpdatedRecipe(recipeRef, displayedDish.recipe),
-      ingredients: getUpdatedIngredients(ingredientsRef, displayedDish.ingredients),
-      tags: await updateTags(),
-      img: await updateDishImage()
-    };
-  };
-
   const getRequestMethod = (dishToSend: Dish) => {
     return addMode ? addDish(dishToSend) : updateDish(dishToSend);
   };
 
   const approveEdit = async () => {
     setIsLoading(true);
-    const updatedDish = await createUpdatedDishRecipe();
+    const updatedDish = await createUpdatedDishRecipe(
+      nameRef,
+      recipeRef,
+      ingredientsRef,
+      tagsRef,
+      imageRef,
+      displayedDish
+    );
     const validationFailedReason = validateDishFields(updatedDish);
     if (validationFailedReason) {
       enqueueSnackbar(validationFailedReason);

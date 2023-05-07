@@ -10,6 +10,7 @@ import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { AnimatePresence, motion } from 'framer-motion';
 import { RECIPE_ADD_STEP_MOTION } from '../../../constants/MotionKeyConstants';
 import { DEFAULT_RECIPE_STEP } from '../../../constants/DishesConstants';
+import { getUpdatedRecipe } from '../../../utility/dishRecipeUpdateUtils';
 
 interface DishRecipeProps {
   recipe: string[];
@@ -18,16 +19,6 @@ interface DishRecipeProps {
   isReadOnly?: boolean;
 }
 
-export const getUpdatedRecipe = (ref: RefObject<any>, placeholder: string[]) => {
-  if (!ref?.current?.children) return placeholder;
-  const newRecipe: string[] = [];
-  const newRecipeArray: HTMLElement[] = Array.from(ref.current.children);
-  for (let i = 0; i < newRecipeArray.length - 1; i++) {
-    const step = (newRecipeArray[i].children[0].children[2].firstChild as HTMLInputElement).value;
-    if (step.length) newRecipe.push(step);
-  }
-  return newRecipe.slice();
-};
 const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProps) => {
   const [displayedRecipe, setDisplayedRecipe] = useState<string[]>(structuredClone(recipe));
 
