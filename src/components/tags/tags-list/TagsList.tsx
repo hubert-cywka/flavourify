@@ -27,8 +27,8 @@ import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import { AnimatePresence, motion } from 'framer-motion';
-import { TAGS_SELECT_IMAGE_MOTION } from '../../../constants/MotionKeyConstants';
+import Animate from '../../animate/Animate';
+import { fluentGrowAnimation } from '../../../constants/AnimationConfigs';
 
 interface TagsListProps {
   tags: Tag[];
@@ -96,6 +96,46 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
       });
   };
 
+  const buildErrorMessage = () => {
+    return (
+      <Box
+        className="tags-select-form"
+        sx={{ bgcolor: 'background.default', color: 'text.primary' }}>
+        <Box className="tags-select-form-content">
+          <img src={NO_TAGS_IMAGE} className="error-image" />
+          <Typography className="tags-select-info-header">{NO_TAGS_ERROR}</Typography>
+          {tagsList ? (
+            <>
+              <Typography className="tags-select-info-description">
+                {EMPTY_TAGS_LIST_ERROR}
+              </Typography>
+              <Button
+                className="action-button"
+                variant="accentContained"
+                startIcon={<ArrowForwardRounded />}
+                onClick={() => appRouter.navigate(ROUTE.SETTINGS)}>
+                Go to settings
+              </Button>
+            </>
+          ) : (
+            <>
+              <Typography className="tags-select-info-description">
+                {TAGS_LIST_FETCH_ERROR}
+              </Typography>
+              <Button
+                className="action-button"
+                variant="accentContained"
+                startIcon={<RestartAltRounded />}
+                onClick={() => refetch()}>
+                Reload
+              </Button>
+            </>
+          )}
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <>
       <Box className={`tags-list-container ${className}`} ref={reference}>
@@ -116,15 +156,9 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
             sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}
             className="tags-select-form">
             <Box className="tags-select-form-content">
-              <AnimatePresence>
-                <motion.div
-                  key={TAGS_SELECT_IMAGE_MOTION}
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: '80%' }}
-                  exit={{ opacity: 0, width: 0 }}>
-                  <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
-                </motion.div>
-              </AnimatePresence>
+              <Animate isVisible={true} animation={fluentGrowAnimation}>
+                <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
+              </Animate>
               <Typography className="tags-select-info-header">Update dish tags</Typography>
               <Typography className="tags-select-info-description">{TAGS_SELECTED_INFO}</Typography>
               <Typography className="selected-tags-text">Already selected:</Typography>
@@ -163,41 +197,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
             </Box>
           </Box>
         ) : (
-          <Box
-            className="tags-select-form"
-            sx={{ bgcolor: 'background.default', color: 'text.primary' }}>
-            <Box className="tags-select-form-content">
-              <img src={NO_TAGS_IMAGE} className="error-image" />
-              <Typography className="tags-select-info-header">{NO_TAGS_ERROR}</Typography>
-              {tagsList ? (
-                <>
-                  <Typography className="tags-select-info-description">
-                    {EMPTY_TAGS_LIST_ERROR}
-                  </Typography>
-                  <Button
-                    className="action-button"
-                    variant="accentContained"
-                    startIcon={<ArrowForwardRounded />}
-                    onClick={() => appRouter.navigate(ROUTE.SETTINGS)}>
-                    Go to settings
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Typography className="tags-select-info-description">
-                    {TAGS_LIST_FETCH_ERROR}
-                  </Typography>
-                  <Button
-                    className="action-button"
-                    variant="accentContained"
-                    startIcon={<RestartAltRounded />}
-                    onClick={() => refetch()}>
-                    Reload
-                  </Button>
-                </>
-              )}
-            </Box>
-          </Box>
+          buildErrorMessage()
         )}
       </Dialog>
     </>

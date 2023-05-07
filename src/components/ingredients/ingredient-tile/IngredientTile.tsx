@@ -20,11 +20,8 @@ import {
   INGREDIENT_EDIT_INFO,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../constants/DishesConstants';
-import { AnimatePresence, motion } from 'framer-motion';
-import {
-  INGREDIENT_EDIT_IMAGE_MOTION,
-  INGREDIENT_QUANTITY_ROWS_MOTION
-} from '../../../constants/MotionKeyConstants';
+import { expandCollapseAnimation, fluentGrowAnimation } from '../../../constants/AnimationConfigs';
+import Animate from '../../animate/Animate';
 
 interface IngredientTileProps {
   ingredient: Ingredient;
@@ -102,7 +99,9 @@ const IngredientTile = ({
   return (
     <>
       <Box className={`ingredient-tile-container ${className}`} onClick={openEditDialog}>
-        <Box className="ingredient-name">{displayedIngredient.name}</Box>
+        <Box className="ingredient-name">
+          {displayedIngredient.name ? displayedIngredient.name : NEW_INGREDIENT_PLACEHOLDER}
+        </Box>
         {displayedIngredient.quantity && (
           <>
             <Box className="ingredient-amount">
@@ -120,15 +119,9 @@ const IngredientTile = ({
           className="ingredients-edit-form"
           sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}>
           <Box className="ingredients-edit-form-content">
-            <AnimatePresence>
-              <motion.div
-                key={INGREDIENT_EDIT_IMAGE_MOTION}
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: '80%' }}
-                exit={{ opacity: 0, width: 0 }}>
-                <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
-              </motion.div>
-            </AnimatePresence>
+            <Animate isVisible={true} animation={fluentGrowAnimation}>
+              <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
+            </Animate>
             <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
             <Typography className="ingredients-edit-info-description">
               {INGREDIENT_EDIT_INFO}
@@ -149,39 +142,33 @@ const IngredientTile = ({
                 errorMessage={INGREDIENT_EDIT_ERROR}
               />
             </Box>
-            <AnimatePresence>
-              {!!displayedIngredient.quantity && (
-                <motion.div
-                  className="ingredient-quantity-rows"
-                  key={INGREDIENT_QUANTITY_ROWS_MOTION}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'fit-content' }}
-                  exit={{ opacity: 0, height: 0 }}>
-                  <Box className="ingredients-edit-form-row">
-                    <Typography className="field-name-label">Amount:</Typography>
-                    <EditableTextField
-                      sx={{ color: 'text.primary' }}
-                      autoFocus={displayedIngredient.quantity.amount === INGREDIENT_DEFAULT_AMOUNT}
-                      className="editable-text-field"
-                      value={displayedIngredient.quantity.amount.toString()}
-                      reference={amountRef}
-                      max={INGREDIENT_COUNT_MAX_LENGTH}
-                      type="number"
-                    />
-                  </Box>
-                  <Box className="ingredients-edit-form-row">
-                    <Typography className="field-name-label">Unit:</Typography>
-                    <EditableTextField
-                      sx={{ color: 'text.primary' }}
-                      className="editable-text-field"
-                      value={displayedIngredient.quantity.unit}
-                      reference={unitRef}
-                      max={INGREDIENT_UNIT_MAX_LENGTH}
-                    />
-                  </Box>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <Animate
+              isVisible={!!displayedIngredient.quantity}
+              className="ingredient-quantity-rows"
+              animation={expandCollapseAnimation}>
+              <Box className="ingredients-edit-form-row">
+                <Typography className="field-name-label">Amount:</Typography>
+                <EditableTextField
+                  sx={{ color: 'text.primary' }}
+                  autoFocus={displayedIngredient.quantity?.amount === INGREDIENT_DEFAULT_AMOUNT}
+                  className="editable-text-field"
+                  value={displayedIngredient.quantity?.amount.toString() ?? ''}
+                  reference={amountRef}
+                  max={INGREDIENT_COUNT_MAX_LENGTH}
+                  type="number"
+                />
+              </Box>
+              <Box className="ingredients-edit-form-row">
+                <Typography className="field-name-label">Unit:</Typography>
+                <EditableTextField
+                  sx={{ color: 'text.primary' }}
+                  className="editable-text-field"
+                  value={displayedIngredient.quantity?.unit ?? ''}
+                  reference={unitRef}
+                  max={INGREDIENT_UNIT_MAX_LENGTH}
+                />
+              </Box>
+            </Animate>
           </Box>
           <Box className="ingredients-edit-buttons">
             <Button

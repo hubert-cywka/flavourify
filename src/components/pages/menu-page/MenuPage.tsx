@@ -6,8 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { MENU_INGREDIENTS_QUERY } from '../../../constants/QueryConstants';
 import { getDishesIngredients } from '../../../services/DishService';
 import { getMenu } from '../../../services/MenuService';
-import { AnimatePresence, motion } from 'framer-motion';
-import { MENU_PAGE_MOTION, SUMMED_INGREDIENTS_MOTION } from '../../../constants/MotionKeyConstants';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import { useState } from 'react';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
@@ -19,6 +17,8 @@ import {
 } from '../../../constants/DishesConstants';
 import Builder from '../../../utility/Builder';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
+import { simpleOpacityAnimation, slideFromBottom } from '../../../constants/AnimationConfigs';
+import Animate from '../../animate/Animate';
 
 const MenuPage = () => {
   const [menu, setMenu] = useState(getMenu());
@@ -58,44 +58,29 @@ const MenuPage = () => {
         color: 'text.primary'
       }}>
       <TopNavbar className="top-navbar" />
-      <AnimatePresence>
-        <motion.div
-          className="menu-container"
-          key={MENU_PAGE_MOTION}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}>
-          <MenuPlan menu={menu} onMenuChange={setMenu} className="menu" />
+      <Animate className="menu-container" isVisible={true} animation={simpleOpacityAnimation}>
+        <MenuPlan menu={menu} onMenuChange={setMenu} className="menu" />
+        {!!menu.length && (
+          <IconButton className="toggle-ingredients-visibility-button" onClick={swapSlide}>
+            <ExpandCircleDownRoundedIcon
+              sx={{ color: 'text.primary' }}
+              className={areIngredientsVisible ? 'hide' : 'expand'}
+            />
+          </IconButton>
+        )}
 
-          {!!menu.length && (
-            <IconButton className="toggle-ingredients-visibility-button" onClick={swapSlide}>
-              <ExpandCircleDownRoundedIcon
-                sx={{ color: 'text.primary' }}
-                className={areIngredientsVisible ? 'hide' : 'expand'}
-              />
-            </IconButton>
-          )}
-
-          <AnimatePresence>
-            {areIngredientsVisible && (
-              <motion.div
-                className="menu-ingredients-container"
-                key={SUMMED_INGREDIENTS_MOTION}
-                initial={{ translateY: '100%' }}
-                animate={{ translateY: 0 }}
-                exit={{ translateY: '100%' }}
-                transition={{ bounce: 0, duration: 0.3 }}>
-                <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
-                  <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
-                  <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
-                  <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
-                  {buildIngredientsList()}
-                </Box>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </AnimatePresence>
+        <Animate
+          isVisible={areIngredientsVisible}
+          className="menu-ingredients-container"
+          animation={slideFromBottom}>
+          <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
+            <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
+            <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
+            <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
+            {buildIngredientsList()}
+          </Box>
+        </Animate>
+      </Animate>
     </Box>
   );
 };

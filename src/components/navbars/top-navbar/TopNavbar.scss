@@ -6,15 +6,13 @@
   @include navbar-max-width;
   padding: 0;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   height: $top-navbar-height;
   border-radius: $round-border-radius-50;
 
   .top-navbar-buttons {
     display: flex;
+    justify-content: flex-end;
     overflow: hidden;
-    justify-content: center;
     align-items: center;
 
     .back-button, .add-dish-button {
@@ -34,8 +32,13 @@
   .search-bar {
     flex-grow: 1;
     height: calc(#{$top-navbar-height} - #{$standard-element-spacing});
-    background: $white-transparent-background-20;
     margin: $small-element-spacing;
     box-sizing: border-box;
+    transition: background 0.25s;
+    cursor: pointer;
+
+    &.active {
+      background: $white-transparent-background-10;
+    }
   }
 }

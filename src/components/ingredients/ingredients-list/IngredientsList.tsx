@@ -12,8 +12,9 @@ import {
   MIN_INGREDIENTS_MULTIPLIER
 } from '../../../constants/NumberConstants';
 import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
-import { AnimatePresence, motion } from 'framer-motion';
 import { getUpdatedIngredients } from '../../../utility/dishRecipeUpdateUtils';
+import Animate from '../../animate/Animate';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
@@ -66,12 +67,11 @@ const IngredientsList = ({
     (): ReactJSXElement[] =>
       getReducedIngredientsList().map((ingredient, id) => {
         return (
-          <motion.div
-            className="ingredient-tile-container"
+          <Animate
             key={id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
+            isVisible={true}
+            animation={simpleOpacityAnimation}
+            className="ingredient-tile-container">
             <IngredientTile
               className={`ingredient-tile ${
                 ingredient.name === NEW_INGREDIENT_PLACEHOLDER && 'new-ingredient-tile'
@@ -82,7 +82,7 @@ const IngredientsList = ({
               multiplier={editable ? 1 : multiplier}
               deleteCallback={() => deleteIngredient(id)}
             />
-          </motion.div>
+          </Animate>
         );
       }),
     [displayedIngredients, editable, multiplier]
@@ -90,39 +90,37 @@ const IngredientsList = ({
 
   return (
     <Box className={`ingredient-list-container ${className}`} ref={reference}>
-      <AnimatePresence initial={false}>
-        {withMultiplier && !editable && (
-          <>
-            <Box className="servings-container">
-              <Typography className="servings-text">Servings: </Typography>
-              <MultiplierInput
-                className="multiplier-input"
-                callback={setMultiplier}
-                value={multiplier}
-                min={MIN_INGREDIENTS_MULTIPLIER}
-                max={MAX_INGREDIENTS_MULTIPLIER}
-              />
-            </Box>
-          </>
-        )}
-
-        {parsedIngredientsList}
-
-        {amountLimit > 0 && amountLimit < displayedIngredients.length && (
-          <Box className="ingredient-tile-container">
-            <IngredientTile
-              className="ingredient-tile"
-              ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
+      {withMultiplier && !editable && (
+        <>
+          <Box className="servings-container">
+            <Typography className="servings-text">Servings: </Typography>
+            <MultiplierInput
+              className="multiplier-input"
+              callback={setMultiplier}
+              value={multiplier}
+              min={MIN_INGREDIENTS_MULTIPLIER}
+              max={MAX_INGREDIENTS_MULTIPLIER}
             />
           </Box>
-        )}
+        </>
+      )}
 
-        {editable && (
-          <IconButton onClick={addNewIngredient} className="add-ingredient-button">
-            <AddCircleRounded sx={{ color: 'text.primary' }} />
-          </IconButton>
-        )}
-      </AnimatePresence>
+      {parsedIngredientsList}
+
+      {amountLimit > 0 && amountLimit < displayedIngredients.length && (
+        <Box className="ingredient-tile-container">
+          <IngredientTile
+            className="ingredient-tile"
+            ingredient={{ name: `And ${getNumberOfItemsOverLimit()} more` }}
+          />
+        </Box>
+      )}
+
+      {editable && (
+        <IconButton onClick={addNewIngredient} className="add-ingredient-button">
+          <AddCircleRounded sx={{ color: 'text.primary' }} />
+        </IconButton>
+      )}
     </Box>
   );
 };

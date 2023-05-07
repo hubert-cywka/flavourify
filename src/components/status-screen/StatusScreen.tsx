@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import './StatusScreen.scss';
-import { AnimatePresence, motion } from 'framer-motion';
-import { STATUS_SCREEN_MOTION } from '../../constants/MotionKeyConstants';
+import { wobblyAppearAnimation } from '../../constants/AnimationConfigs';
+import Animate from '../animate/Animate';
 
 interface StatusScreenProps {
   header: string;
@@ -27,44 +27,38 @@ const StatusScreen = ({
   open
 }: StatusScreenProps) => {
   return (
-    <AnimatePresence>
-      {open && (
-        <Modal sx={{ color: 'text.primary' }} className="status-screen-popup" open={open}>
-          <Box>
-            <motion.div
-              className="status-screen-container"
-              key={STATUS_SCREEN_MOTION}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}>
-              <img className="status-screen-image" src={imgSource} />
-              <Typography
-                className="status-screen-header"
-                sx={{ color: status === 'success' ? 'accent.success' : 'accent.error' }}>
-                {header}
-              </Typography>
-              <Typography className="status-screen-info">{caption}</Typography>
-              <Box className="status-screen-buttons">
-                {secondButtonOnClick && (
-                  <Button
-                    variant={'accentContained'}
-                    className="status-screen-secondary-button"
-                    onClick={secondButtonOnClick}>
-                    {secondButtonText}
-                  </Button>
-                )}
-                <Button
-                  variant={status === 'success' ? 'successContained' : 'errorContained'}
-                  className="status-screen-primary-button"
-                  onClick={close}>
-                  {buttonText ? buttonText : 'OK'}
-                </Button>
-              </Box>
-            </motion.div>
+    <Modal sx={{ color: 'text.primary' }} className="status-screen-popup" open={open}>
+      <Box>
+        <Animate
+          isVisible={open}
+          animation={wobblyAppearAnimation}
+          className="status-screen-container">
+          <img className="status-screen-image" src={imgSource} />
+          <Typography
+            className="status-screen-header"
+            sx={{ color: status === 'success' ? 'accent.success' : 'accent.error' }}>
+            {header}
+          </Typography>
+          <Typography className="status-screen-info">{caption}</Typography>
+          <Box className="status-screen-buttons">
+            {secondButtonOnClick && (
+              <Button
+                variant={'accentContained'}
+                className="status-screen-secondary-button"
+                onClick={secondButtonOnClick}>
+                {secondButtonText}
+              </Button>
+            )}
+            <Button
+              variant={status === 'success' ? 'successContained' : 'errorContained'}
+              className="status-screen-primary-button"
+              onClick={close}>
+              {buttonText ? buttonText : 'OK'}
+            </Button>
           </Box>
-        </Modal>
-      )}
-    </AnimatePresence>
+        </Animate>
+      </Box>
+    </Modal>
   );
 };
 

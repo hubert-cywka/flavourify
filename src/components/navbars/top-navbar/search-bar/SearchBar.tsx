@@ -16,7 +16,6 @@ import { getListOfDishesByName } from '../../../../services/DishService';
 import Builder from '../../../../utility/Builder';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
-import { motion } from 'framer-motion';
 
 interface SearchBarProps {
   className?: string;
@@ -85,13 +84,11 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
     <ClickAwayListener onClickAway={() => setAreSearchResultsDisplayed(false)}>
       <Box className="dish-names-list-container">
         <Box className={`search-bar-container ${className}`}>
-          <motion.div animate={{ marginRight: textFilter.length ? '5px' : '0' }}>
-            <SearchRounded
-              className="search-icon"
-              sx={{ color: 'primary.main' }}
-              onClick={setFocusOnInput}
-            />
-          </motion.div>
+          <SearchRounded
+            className="search-icon"
+            sx={{ color: 'primary.main' }}
+            onClick={setFocusOnInput}
+          />
           <Input
             inputRef={inputRef}
             onBlur={onBlur}
