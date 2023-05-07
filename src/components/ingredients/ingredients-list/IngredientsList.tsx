@@ -13,6 +13,7 @@ import {
 } from '../../../constants/NumberConstants';
 import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
 import { AnimatePresence, motion } from 'framer-motion';
+import { getUpdatedIngredients } from '../../../utility/dishRecipeUpdateUtils';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];
@@ -22,31 +23,6 @@ interface IngredientsListProps {
   editable?: boolean;
   reference?: RefObject<any>;
 }
-
-export const getUpdatedIngredients = (ref: RefObject<any>, placeholder: Ingredient[]) => {
-  if (!ref?.current?.children) return placeholder;
-
-  const newIngredients: Ingredient[] = [];
-  const ingredientTiles = Array.from(ref.current.children).slice(0, -1) as HTMLElement[];
-
-  for (const element of ingredientTiles) {
-    const newName = element.children[0].children[0].innerHTML;
-    if (newName === NEW_INGREDIENT_PLACEHOLDER) continue;
-    const newAmount = element.children[0].children[1]?.innerHTML;
-    const newUnit = element.children[0].children[2]?.innerHTML;
-
-    if (newAmount && newUnit) {
-      newIngredients.push({
-        name: newName,
-        quantity: { amount: parseFloat(newAmount), unit: newUnit }
-      });
-    } else {
-      newIngredients.push({ name: newName });
-    }
-  }
-
-  return newIngredients;
-};
 
 const IngredientsList = ({
   ingredients,

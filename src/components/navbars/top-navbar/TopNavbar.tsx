@@ -56,7 +56,6 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
           onBlur={() => setIsFocusOnSearchBar(false)}
           onFocus={() => setIsFocusOnSearchBar(true)}
         />
-
         {getButtons()}
       </Box>
 
