@@ -15,8 +15,6 @@ import {
 } from '../../../constants/DishesConstants';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import ErrorDishCard from '../../dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FOUND_DISH_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
 import { enqueueSnackbar } from 'notistack';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
@@ -24,6 +22,8 @@ import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { SWIPE_UP_BOUND } from '../../../constants/NumberConstants';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
+import Animate from '../../animate/Animate';
 
 const FoundDishPage = () => {
   const { id } = useParams();
@@ -79,17 +79,13 @@ const FoundDishPage = () => {
 
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <AnimatePresence>
-        <motion.div
-          className="found-dish-page-container"
-          key={FOUND_DISH_PAGE_MOTION}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}>
-          <TopNavbar className="top-navbar" searchValue={dish && dish.name} singleDishVariant />
-          <Box className="slide-container">{getQueryResults()}</Box>
-        </motion.div>
-      </AnimatePresence>
+      <Animate
+        className="found-dish-page-container"
+        isVisible={true}
+        animation={simpleOpacityAnimation}>
+        <TopNavbar className="top-navbar" searchValue={dish && dish.name} singleDishVariant />
+        <Box className="slide-container">{getQueryResults()}</Box>
+      </Animate>
     </Box>
   );
 };

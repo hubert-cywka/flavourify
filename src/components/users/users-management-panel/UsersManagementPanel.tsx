@@ -17,6 +17,7 @@ import Builder from '../../../utility/Builder';
 interface UsersManagementPanelProps {
   className?: string;
 }
+
 const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
   const { data, status } = useQuery([USERS_QUERY], getUsers);
   const buildUserDetailsRows = () => {

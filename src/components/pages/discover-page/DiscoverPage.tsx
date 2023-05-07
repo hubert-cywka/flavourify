@@ -5,36 +5,32 @@ import { Pagination } from 'swiper';
 import 'swiper/swiper.css';
 import RandomDishSlide from './random-dish-slide/RandomDishSlide';
 import LatestDishSlide from './latest-dish-slide/LatestDishSlide';
-import { AnimatePresence, motion } from 'framer-motion';
-import { DISCOVER_PAGE_MOTION } from '../../../constants/MotionKeyConstants';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
+import Animate from '../../animate/Animate';
 
 const DiscoverPage = () => {
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <AnimatePresence>
-        <motion.div
-          className="discover-page-container"
-          key={DISCOVER_PAGE_MOTION}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}>
-          <Swiper
-            modules={[Pagination]}
-            pagination={{
-              clickable: true,
-              type: 'bullets',
-              enabled: true
-            }}>
-            <SwiperSlide className="slide">
-              <LatestDishSlide />
-            </SwiperSlide>
+      <Animate
+        className="discover-page-container"
+        isVisible={true}
+        animation={simpleOpacityAnimation}>
+        <Swiper
+          modules={[Pagination]}
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+            enabled: true
+          }}>
+          <SwiperSlide className="slide">
+            <LatestDishSlide />
+          </SwiperSlide>
 
-            <SwiperSlide className="slide">
-              <RandomDishSlide />
-            </SwiperSlide>
-          </Swiper>
-        </motion.div>
-      </AnimatePresence>
+          <SwiperSlide className="slide">
+            <RandomDishSlide />
+          </SwiperSlide>
+        </Swiper>
+      </Animate>
     </Box>
   );
 };

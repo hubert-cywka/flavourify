@@ -7,10 +7,10 @@ import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import { AnimatePresence, motion } from 'framer-motion';
-import { RECIPE_ADD_STEP_MOTION } from '../../../constants/MotionKeyConstants';
 import { DEFAULT_RECIPE_STEP } from '../../../constants/DishesConstants';
 import { getUpdatedRecipe } from '../../../utility/dishRecipeUpdateUtils';
+import Animate from '../../animate/Animate';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 
 interface DishRecipeProps {
   recipe: string[];
@@ -91,34 +91,24 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
 
   return (
     <Box className={`dish-recipe-container ${className}`} ref={reference}>
-      <AnimatePresence initial={false}>
-        {getRecipeSteps().map((step, id) => (
-          <motion.div
-            key={id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
-            {step}
-          </motion.div>
-        ))}
+      {getRecipeSteps().map((step, id) => (
+        <Animate key={id} isVisible={true} animation={simpleOpacityAnimation}>
+          {step}
+        </Animate>
+      ))}
 
-        {!isReadOnly && (
-          <motion.div
-            key={RECIPE_ADD_STEP_MOTION}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
-            <Box onClick={addEmptyStep} className="recipe-step add-step">
-              <Button sx={{ textTransform: 'none' }}>
-                <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
-                <Typography className="add-step-text" variant="caption" color="text.primary">
-                  Add another step
-                </Typography>
-              </Button>
-            </Box>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {!isReadOnly && (
+        <Animate isVisible={true} animation={simpleOpacityAnimation}>
+          <Box onClick={addEmptyStep} className="recipe-step add-step">
+            <Button sx={{ textTransform: 'none' }}>
+              <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
+              <Typography className="add-step-text" variant="caption" color="text.primary">
+                Add another step
+              </Typography>
+            </Button>
+          </Box>
+        </Animate>
+      )}
     </Box>
   );
 };

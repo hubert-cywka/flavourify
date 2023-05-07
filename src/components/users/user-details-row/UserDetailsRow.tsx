@@ -8,7 +8,6 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import { AnimatePresence, motion } from 'framer-motion';
 import { USERS_QUERY } from '../../../constants/QueryConstants';
 import { deleteUser, updateUserRole } from '../../../services/UserService';
 import { queryClient } from '../../../services/QueryClient';
@@ -19,11 +18,14 @@ import {
   USER_ROLE_CHANGE_ERROR,
   USER_ROLE_CHANGE_SUCCESS
 } from '../../../constants/UserConstants';
+import { expandCollapseAnimation } from '../../../constants/AnimationConfigs';
+import Animate from '../../animate/Animate';
 
 interface UserDetailsRowProps {
   className?: string;
   user: User;
 }
+
 const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
   const [areButtonsDisplayed, setAreButtonsDisplayed] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -78,39 +80,35 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
               {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
             </IconButton>
           </Box>
-          <AnimatePresence>
-            {areButtonsDisplayed && (
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: 'fit-content' }}
-                exit={{ height: 0 }}
-                key={user.email}
-                className="user-manage-row">
-                <Button
-                  onClick={removeUser}
-                  className="action-button"
-                  variant="errorContained"
-                  endIcon={<DeleteForeverRoundedIcon />}>
-                  Delete user
-                </Button>
-                {user.role === USER_ROLE.ADMIN ? (
-                  <Button
-                    onClick={() => setUserRole(USER_ROLE.USER)}
-                    className="action-button"
-                    variant="accentContained">
-                    Demote to user
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => setUserRole(USER_ROLE.ADMIN)}
-                    className="action-button"
-                    variant="accentContained">
-                    Promote to admin
-                  </Button>
-                )}
-              </motion.div>
+
+          <Animate
+            isVisible={areButtonsDisplayed}
+            className="user-manage-row"
+            key={user.email}
+            animation={expandCollapseAnimation}>
+            <Button
+              onClick={removeUser}
+              className="action-button"
+              variant="errorContained"
+              endIcon={<DeleteForeverRoundedIcon />}>
+              Delete user
+            </Button>
+            {user.role === USER_ROLE.ADMIN ? (
+              <Button
+                onClick={() => setUserRole(USER_ROLE.USER)}
+                className="action-button"
+                variant="accentContained">
+                Demote to user
+              </Button>
+            ) : (
+              <Button
+                onClick={() => setUserRole(USER_ROLE.ADMIN)}
+                className="action-button"
+                variant="accentContained">
+                Promote to admin
+              </Button>
             )}
-          </AnimatePresence>
+          </Animate>
         </Box>
       </>
     </ClickAwayListener>

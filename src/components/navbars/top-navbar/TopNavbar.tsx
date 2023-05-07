@@ -5,10 +5,11 @@ import SearchBar from './search-bar/SearchBar';
 import { ArrowBackRounded } from '@mui/icons-material';
 import { useState } from 'react';
 import appRouter from '../../router/AppRouter';
-import { motion } from 'framer-motion';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
 import { hasAdminPermission } from '../../../services/AuthService';
+import { animated } from 'react-spring';
+import { useSpring } from '@react-spring/web';
 
 interface TopNavbarProps {
   className?: string;
@@ -20,11 +21,13 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   const [isFocusOnSearchBar, setIsFocusOnSearchBar] = useState(false);
   const [isDishAddDialogVisible, setIsDishAddDialogVisible] = useState(false);
 
+  const transition = useSpring({
+    width: isFocusOnSearchBar ? '0%' : '60%'
+  });
+
   const getButtons = () => {
     return (
-      <motion.div
-        className="top-navbar-buttons"
-        animate={{ width: isFocusOnSearchBar ? 0 : 'fit-content' }}>
+      <animated.div className="top-navbar-buttons" style={transition}>
         {!singleDishVariant ? (
           <>
             <DisplayedTag className="displayed-tag" />
@@ -43,7 +46,7 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
             onClick={() => appRouter.navigate(-1)}
           />
         )}
-      </motion.div>
+      </animated.div>
     );
   };
 
@@ -52,7 +55,7 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
       <Box className={`top-navbar-container ${className}`}>
         <SearchBar
           searchValue={searchValue}
-          className="search-bar"
+          className={`search-bar ${isFocusOnSearchBar ? 'active' : ''}`}
           onBlur={() => setIsFocusOnSearchBar(false)}
           onFocus={() => setIsFocusOnSearchBar(true)}
         />
