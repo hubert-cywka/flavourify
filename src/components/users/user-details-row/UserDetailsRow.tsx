@@ -1,4 +1,4 @@
-import { Box, Button, ClickAwayListener, IconButton } from '@mui/material';
+import { Box, Button, ClickAwayListener, Collapse, IconButton } from '@mui/material';
 import { User } from '../../../types/interfaces/User';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import { USER_ROLE } from '../../../types/enums/UserRole';
@@ -18,8 +18,6 @@ import {
   USER_ROLE_CHANGE_ERROR,
   USER_ROLE_CHANGE_SUCCESS
 } from '../../../constants/UserConstants';
-import { expandCollapseAnimation } from '../../../constants/AnimationConfigs';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 interface UserDetailsRowProps {
   className?: string;
@@ -55,68 +53,69 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
 
   const getManagementPanel = () => {
     return (
-      <AnimatePresence
-        isVisible={areButtonsDisplayed}
+      <Collapse
         className="user-manage-row"
         key={user.email}
-        animation={expandCollapseAnimation}>
-        <Button
-          onClick={removeUser}
-          className="action-button"
-          variant="errorContained"
-          endIcon={<DeleteForeverRoundedIcon />}>
-          Delete user
-        </Button>
-        {user.role === USER_ROLE.ADMIN ? (
-          <Button
-            onClick={() => setUserRole(USER_ROLE.USER)}
-            className="action-button"
-            variant="accentContained">
-            Demote to user
-          </Button>
-        ) : (
-          <Button
-            onClick={() => setUserRole(USER_ROLE.ADMIN)}
-            className="action-button"
-            variant="accentContained">
-            Promote to admin
-          </Button>
-        )}
-      </AnimatePresence>
+        unmountOnExit={true}
+        mountOnEnter={true}
+        in={areButtonsDisplayed}>
+        <ClickAwayListener onClickAway={() => setAreButtonsDisplayed(false)}>
+          <Box>
+            <Button
+              onClick={removeUser}
+              className="action-button"
+              variant="errorContained"
+              endIcon={<DeleteForeverRoundedIcon />}>
+              Delete user
+            </Button>
+            {user.role === USER_ROLE.ADMIN ? (
+              <Button
+                onClick={() => setUserRole(USER_ROLE.USER)}
+                className="action-button"
+                variant="accentContained">
+                Demote to user
+              </Button>
+            ) : (
+              <Button
+                onClick={() => setUserRole(USER_ROLE.ADMIN)}
+                className="action-button"
+                variant="accentContained">
+                Promote to admin
+              </Button>
+            )}
+          </Box>
+        </ClickAwayListener>
+      </Collapse>
     );
   };
 
   return (
-    <ClickAwayListener onClickAway={() => setAreButtonsDisplayed(false)}>
-      <>
-        <Box className={`user-details-row-container ${className}`}>
-          <Box className="user-details-row-content">
-            {user.role === USER_ROLE.ADMIN ? (
-              <Box className="user-role" sx={{ color: 'accent.success' }}>
-                <AdminPanelSettingsRoundedIcon />
-                Admin
-              </Box>
-            ) : (
-              <Box className="user-role" sx={{ color: 'accent.main' }}>
-                <AccountCircleRoundedIcon />
-                User
-              </Box>
-            )}
-            <Box className="user-info">
-              <Box className="user-username">{user.username}</Box>
-              <Box className="user-email">{user.email}</Box>
-            </Box>
-            <IconButton
-              sx={{ color: 'text.primary' }}
-              className="expand-management-options-button"
-              onClick={() => setAreButtonsDisplayed((prev) => !prev)}>
-              {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
-            </IconButton>
+    <Box className={`user-details-row-container ${className}`}>
+      <Box className="user-details-row-content">
+        {user.role === USER_ROLE.ADMIN ? (
+          <Box className="user-role" sx={{ color: 'accent.success' }}>
+            <AdminPanelSettingsRoundedIcon />
+            Admin
           </Box>
-          {getManagementPanel()}
+        ) : (
+          <Box className="user-role" sx={{ color: 'accent.main' }}>
+            <AccountCircleRoundedIcon />
+            User
+          </Box>
+        )}
+        <Box className="user-info">
+          <Box className="user-username">{user.username}</Box>
+          <Box className="user-email">{user.email}</Box>
         </Box>
-      </>
-    </ClickAwayListener>
+        <IconButton
+          sx={{ color: 'text.primary' }}
+          className="expand-management-options-button"
+          onClick={() => setAreButtonsDisplayed((prev) => !prev)}>
+          {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+        </IconButton>
+      </Box>
+      {getManagementPanel()}
+    </Box>
   );
 };
 

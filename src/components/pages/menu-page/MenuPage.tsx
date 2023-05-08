@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, IconButton } from '@mui/material';
+import { Box, Button, CircularProgress, IconButton, Slide } from '@mui/material';
 import './MenuPage.scss';
 import MenuPlan from './menu-plan/MenuPlan';
 import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
@@ -13,10 +13,7 @@ import {
 } from '../../../constants/DishesConstants';
 import Builder from '../../../utility/Builder';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
-import {
-  simpleOpacityAnimation,
-  slideFromBottomAnimation
-} from '../../../constants/AnimationConfigs';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
 import { useMenu } from '../../../utility/hooks/useMenu';
 import { useMenuIngredients } from '../../../utility/hooks/useDishIngredients';
@@ -71,17 +68,16 @@ const MenuPage = () => {
           </IconButton>
         )}
 
-        <AnimatePresence
-          isVisible={areIngredientsVisible}
-          className="menu-ingredients-container"
-          animation={slideFromBottomAnimation}>
-          <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
-            <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
-            <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
-            <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
-            {buildIngredientsList()}
+        <Slide in={areIngredientsVisible} direction="up">
+          <Box className="menu-ingredients-container">
+            <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
+              <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
+              <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
+              <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
+              {buildIngredientsList()}
+            </Box>
           </Box>
-        </AnimatePresence>
+        </Slide>
       </AnimatePresence>
     </Box>
   );

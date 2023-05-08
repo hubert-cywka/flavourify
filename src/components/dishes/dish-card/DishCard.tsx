@@ -15,13 +15,7 @@ import { useDrag } from '@use-gesture/react';
 import { useState } from 'react';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
 import { to } from 'react-spring';
-import { Box, Dialog } from '@mui/material';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
-import {
-  simpleOpacityAnimation,
-  slideFromRightAnimation,
-  slideFromLeftAnimation
-} from '../../../constants/AnimationConfigs';
+import { Box, Dialog, Fade, Slide } from '@mui/material';
 
 export interface DishCardProps {
   dish: Dish;
@@ -80,28 +74,27 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
       {...swipeHandlers()}
       style={{ x, transform: to([rotation], dragRotationTransform) }}
       className="dish-card">
-      <AnimatePresence
-        className="dish-card-motion"
-        isVisible={isFrontSide}
-        animation={slideFromRightAnimation}>
-        <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
-        <DishCardFront callback={handleCallback} dish={dish} className="dish-card-side" />
-      </AnimatePresence>
+      <Slide in={isFrontSide} direction="left" appear={false}>
+        <Box className="dish-card-motion">
+          <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
+          <DishCardFront callback={handleCallback} dish={dish} className="dish-card-side" />
+        </Box>
+      </Slide>
 
-      <AnimatePresence isVisible={!isFrontSide} animation={simpleOpacityAnimation}>
+      <Fade in={!isFrontSide} unmountOnExit={true} mountOnEnter={true}>
         <Dialog
           open={true}
           PaperProps={{
             sx: { background: 'none', boxShadow: 'none' },
             className: 'dish-card-back-dialog'
           }}>
-          <AnimatePresence isVisible={!isFrontSide} animation={slideFromLeftAnimation}>
+          <Slide in={!isFrontSide} direction="right">
             <Box className="dish-card-motion" sx={{ bgcolor: 'primary.main' }}>
               <DishCardBack callback={handleCallback} dish={dish} className="dish-card-side" />
             </Box>
-          </AnimatePresence>
+          </Slide>
         </Dialog>
-      </AnimatePresence>
+      </Fade>
     </animated.div>
   );
 };
