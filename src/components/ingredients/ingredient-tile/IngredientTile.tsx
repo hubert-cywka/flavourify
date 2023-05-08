@@ -1,4 +1,4 @@
-import { Dialog, Typography, Box, Button } from '@mui/material';
+import { Dialog, Typography, Box, Button, Collapse, Grow } from '@mui/material';
 import './IngredientTile.scss';
 import { type Ingredient } from '../../../types/interfaces/Ingredient';
 import { useState, useRef } from 'react';
@@ -20,8 +20,6 @@ import {
   INGREDIENT_EDIT_INFO,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../constants/DishesConstants';
-import { expandCollapseAnimation, fluentGrowAnimation } from '../../../constants/AnimationConfigs';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 interface IngredientTileProps {
   ingredient: Ingredient;
@@ -151,33 +149,32 @@ const IngredientTile = ({
             errorMessage={INGREDIENT_EDIT_ERROR}
           />
         </Box>
-        <AnimatePresence
-          isVisible={!!displayedIngredient.quantity}
-          className="ingredient-quantity-rows"
-          animation={expandCollapseAnimation}>
-          <Box className="ingredients-edit-form-row">
-            <Typography className="field-name-label">Amount:</Typography>
-            <EditableTextField
-              sx={{ color: 'text.primary' }}
-              autoFocus={displayedIngredient.quantity?.amount === INGREDIENT_DEFAULT_AMOUNT}
-              className="editable-text-field"
-              value={displayedIngredient.quantity?.amount.toString() ?? ''}
-              reference={amountRef}
-              max={INGREDIENT_COUNT_MAX_LENGTH}
-              type="number"
-            />
-          </Box>
-          <Box className="ingredients-edit-form-row">
-            <Typography className="field-name-label">Unit:</Typography>
-            <EditableTextField
-              sx={{ color: 'text.primary' }}
-              className="editable-text-field"
-              value={displayedIngredient.quantity?.unit ?? ''}
-              reference={unitRef}
-              max={INGREDIENT_UNIT_MAX_LENGTH}
-            />
-          </Box>
-        </AnimatePresence>
+        <Collapse in={!!displayedIngredient.quantity} className="ingredient-quantity-rows">
+          <>
+            <Box className="ingredients-edit-form-row">
+              <Typography className="field-name-label">Amount:</Typography>
+              <EditableTextField
+                sx={{ color: 'text.primary' }}
+                autoFocus={displayedIngredient.quantity?.amount === INGREDIENT_DEFAULT_AMOUNT}
+                className="editable-text-field"
+                value={displayedIngredient.quantity?.amount.toString() ?? ''}
+                reference={amountRef}
+                max={INGREDIENT_COUNT_MAX_LENGTH}
+                type="number"
+              />
+            </Box>
+            <Box className="ingredients-edit-form-row">
+              <Typography className="field-name-label">Unit:</Typography>
+              <EditableTextField
+                sx={{ color: 'text.primary' }}
+                className="editable-text-field"
+                value={displayedIngredient.quantity?.unit ?? ''}
+                reference={unitRef}
+                max={INGREDIENT_UNIT_MAX_LENGTH}
+              />
+            </Box>
+          </>
+        </Collapse>
       </>
     );
   };
@@ -201,9 +198,11 @@ const IngredientTile = ({
           className="ingredients-edit-form"
           sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}>
           <Box className="ingredients-edit-form-content">
-            <AnimatePresence isVisible={true} animation={fluentGrowAnimation}>
-              <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
-            </AnimatePresence>
+            <Grow in={true}>
+              <Box>
+                <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
+              </Box>
+            </Grow>
             <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
             <Typography className="ingredients-edit-info-description">
               {INGREDIENT_EDIT_INFO}

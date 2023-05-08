@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, Typography } from '@mui/material';
+import { Box, Button, Dialog, Grow, Typography } from '@mui/material';
 import './TagsList.scss';
 import {
   ArrowForwardRounded,
@@ -24,8 +24,6 @@ import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
-import { fluentGrowAnimation } from '../../../constants/AnimationConfigs';
 import { useTags } from '../../../utility/hooks/useTags';
 
 interface TagsListProps {
@@ -152,9 +150,11 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
             sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}
             className="tags-select-form">
             <Box className="tags-select-form-content">
-              <AnimatePresence isVisible={true} animation={fluentGrowAnimation}>
-                <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
-              </AnimatePresence>
+              <Grow in={true}>
+                <Box>
+                  <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
+                </Box>
+              </Grow>
               <Typography className="tags-select-info-header">Update dish tags</Typography>
               <Typography className="tags-select-info-description">{TAGS_SELECTED_INFO}</Typography>
               <Typography className="selected-tags-text">Already selected:</Typography>
