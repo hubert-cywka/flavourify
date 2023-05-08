@@ -82,18 +82,20 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
       </Slide>
 
       <Fade in={!isFrontSide} unmountOnExit={true} mountOnEnter={true}>
-        <Dialog
-          open={true}
-          PaperProps={{
-            sx: { background: 'none', boxShadow: 'none' },
-            className: 'dish-card-back-dialog'
-          }}>
-          <Slide in={!isFrontSide} direction="right">
-            <Box className="dish-card-motion" sx={{ bgcolor: 'primary.main' }}>
-              <DishCardBack callback={handleCallback} dish={dish} className="dish-card-side" />
-            </Box>
-          </Slide>
-        </Dialog>
+        <Box>
+          <Dialog
+            open={true}
+            PaperProps={{
+              sx: { background: 'none', boxShadow: 'none' },
+              className: 'dish-card-back-dialog'
+            }}>
+            <Slide in={!isFrontSide} direction="right">
+              <Box className="dish-card-motion" sx={{ bgcolor: 'primary.main' }}>
+                <DishCardBack callback={handleCallback} dish={dish} className="dish-card-side" />
+              </Box>
+            </Slide>
+          </Dialog>
+        </Box>
       </Fade>
     </animated.div>
   );
