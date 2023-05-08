@@ -1,7 +1,7 @@
 import Builder from '../../../../utility/Builder';
 import { Box, Button, FormHelperText, Input, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import {
   PASSWORD_CHANGE_SUCCESS,
@@ -93,6 +93,14 @@ const PasswordChangeForm = ({ className }: PasswordChangeFormProps) => {
     );
   };
 
+  const buildHelperText = (error: FieldError | undefined) => {
+    return (
+      <FormHelperText className="form-helper-text" error={!!error}>
+        {error?.message ?? ' '}
+      </FormHelperText>
+    );
+  };
+
   return (
     <form
       className={`profile-edit-form ${className}`}
@@ -105,9 +113,7 @@ const PasswordChangeForm = ({ className }: PasswordChangeFormProps) => {
         className="form-input"
         {...register('currentPassword')}
       />
-      <FormHelperText className="form-helper-text" error={!!errors.currentPassword}>
-        {errors?.currentPassword?.message ?? ' '}
-      </FormHelperText>
+      {buildHelperText(errors.currentPassword)}
 
       <Typography className="form-input-label">New password</Typography>
       <Input
@@ -117,24 +123,17 @@ const PasswordChangeForm = ({ className }: PasswordChangeFormProps) => {
         className="form-input"
         {...register('newPassword')}
       />
-      <FormHelperText className="form-helper-text" error={!!errors.newPassword}>
-        {errors?.newPassword?.message ?? ' '}
-      </FormHelperText>
+      {buildHelperText(errors.newPassword)}
 
       <Typography className="form-input-label">Confirm new password</Typography>
       <Input
-        sx={{
-          color: 'text.secondary',
-          borderColor: errors.confirmPassword ? 'error.main' : 'rgba(255, 255, 255, 0.5)'
-        }}
+        sx={{ borderColor: errors.confirmPassword ? 'error.main' : 'rgba(255, 255, 255, 0.5)' }}
         disableUnderline
         type="password"
         className="form-input"
         {...register('confirmPassword')}
       />
-      <FormHelperText className="form-helper-text" error={!!errors.confirmPassword}>
-        {errors?.confirmPassword?.message ?? ' '}
-      </FormHelperText>
+      {buildHelperText(errors.confirmPassword)}
 
       {Builder.createResult(status)
         .onSuccess(<>{getFormButtons()}</>)

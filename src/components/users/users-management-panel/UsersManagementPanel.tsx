@@ -1,4 +1,4 @@
-import { Box, Skeleton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
 import { User } from '../../../types/interfaces/User';
 import './UsersManagementPanel.scss';
@@ -8,7 +8,6 @@ import {
   USERS_NOT_FOUND_ERROR,
   USERS_NOT_FOUND_IMAGE
 } from '../../../constants/UserConstants';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import Builder from '../../../utility/Builder';
 import { useUsers } from '../../../utility/hooks/useUsers';
 
@@ -29,7 +28,6 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
           </Typography>
         </Box>
       )
-      .onLoading(<>{buildUserDetailsMocks()}</>)
       .onSuccess(
         <>
           {!!data &&
@@ -39,20 +37,6 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
         </>
       )
       .build();
-  };
-
-  const buildUserDetailsMocks = () => {
-    const mocks: ReactJSXElement[] = [];
-    for (let mockId = 0; mockId < 5; mockId++) {
-      mocks.push(
-        <Skeleton
-          className="user-details-row"
-          variant="rectangular"
-          sx={{ height: '60px', width: '100%' }}
-        />
-      );
-    }
-    return mocks;
   };
 
   return (

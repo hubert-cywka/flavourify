@@ -6,17 +6,17 @@ interface MultiplierInputProps {
   min?: number;
   max?: number;
   className?: string;
-  callback: (value: number) => void; // eslint-disable-line no-unused-vars
+  onChange: (value: number) => void; // eslint-disable-line no-unused-vars
 }
 
-const MultiplierInput = ({ value, callback, min, max, className }: MultiplierInputProps) => {
+const MultiplierInput = ({ value, onChange, min, max, className }: MultiplierInputProps) => {
   const handleValueChange = (arg: number) => {
     if ((min && min > value + arg) || (max && max < value + arg)) return;
-    callback(value + arg);
+    onChange(value + arg);
   };
 
   return (
-    <Box className={`multiplier-input-container ${className}`}>
+    <Box className={`multiplier-input-container ${className ?? ''}`}>
       <Box className="value-field">{value}</Box>
       <Box className="buttons-container">
         <Button

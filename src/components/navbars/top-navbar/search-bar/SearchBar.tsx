@@ -29,7 +29,8 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
 
   const { data, status } = useDishNames(textFilter);
 
-  const navigateToSearchResultPage = (id: number) => {
+  const navigateToSearchResultPage = (id: number | undefined) => {
+    if (id === undefined) return;
     setAreSearchResultsDisplayed(false);
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
   };
@@ -39,40 +40,29 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
     inputRef.current.focus();
   };
 
-  const getQueryResults = () => {
+  const getSearchListItem = (text: string, dishId?: number) => {
+    return (
+      <ListItem
+        key={dishId}
+        onClick={() => navigateToSearchResultPage(dishId)}
+        className="search-list-item">
+        <ListItemText className="list-item-text" disableTypography>
+          {text}
+        </ListItemText>
+        {dishId !== undefined && (
+          <ListItemIcon sx={{ color: 'accent.main' }}>
+            <NavigateNextRounded className="list-item-icon" />
+          </ListItemIcon>
+        )}
+      </ListItem>
+    );
+  };
+
+  const buildSearchResults = () => {
     return Builder.createResult(status)
-      .onSuccess(
-        <>
-          {data &&
-            data.map((dish) => (
-              <ListItem
-                key={dish.id}
-                className="search-list-item"
-                onClick={() => navigateToSearchResultPage(dish.id)}>
-                <ListItemText className="list-item-text" disableTypography>
-                  {dish.name}
-                </ListItemText>
-                <ListItemIcon sx={{ color: 'accent.main' }}>
-                  <NavigateNextRounded className="list-item-icon" />
-                </ListItemIcon>
-              </ListItem>
-            ))}
-        </>
-      )
-      .onError(
-        <ListItem className="search-list-item">
-          <ListItemText className="list-item-text" disableTypography>
-            Could not find any dishes
-          </ListItemText>
-        </ListItem>
-      )
-      .onLoading(
-        <ListItem className="search-list-item">
-          <ListItemText className="list-item-text" disableTypography>
-            Searching...
-          </ListItemText>
-        </ListItem>
-      )
+      .onSuccess(<>{data && data.map((dish) => getSearchListItem(dish.name, dish.id))}</>)
+      .onError(getSearchListItem('Could not find any dishes'))
+      .onLoading(getSearchListItem('Searching...'))
       .build();
   };
 
@@ -99,7 +89,7 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
         </Box>
         {areSearchResultsDisplayed && textFilter.length > 0 && (
           <List sx={{ bgcolor: 'secondary.main' }} className="search-list">
-            {getQueryResults()}
+            {buildSearchResults()}
           </List>
         )}
       </Box>

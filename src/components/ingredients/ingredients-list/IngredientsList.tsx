@@ -2,7 +2,7 @@ import IngredientTile from '../ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
 import { Ingredient } from '../../../types/interfaces/Ingredient';
-import { RefObject, useCallback, useMemo, useState } from 'react';
+import { RefObject, useMemo, useState } from 'react';
 import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
 import { AddCircleRounded } from '@mui/icons-material';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
@@ -40,14 +40,14 @@ const IngredientsList = ({
     setDisplayedIngredients(ingredients);
   }, [ingredients]);
 
-  const getReducedIngredientsList = useCallback((): Ingredient[] => {
+  const getReducedIngredientsList = (): Ingredient[] => {
     if (amountLimit <= 0) return displayedIngredients;
     return displayedIngredients.slice(0, amountLimit);
-  }, [displayedIngredients, amountLimit]);
+  };
 
-  const getNumberOfItemsOverLimit = useCallback((): number => {
+  const getNumberOfItemsOverLimit = (): number => {
     return displayedIngredients.length - amountLimit;
-  }, [displayedIngredients, amountLimit]);
+  };
 
   const addNewIngredient = () => {
     if (!reference) return;
@@ -74,13 +74,13 @@ const IngredientsList = ({
             className="ingredient-tile-container">
             <IngredientTile
               className={`ingredient-tile ${
-                ingredient.name === NEW_INGREDIENT_PLACEHOLDER && 'new-ingredient-tile'
+                ingredient.name === NEW_INGREDIENT_PLACEHOLDER ? 'new' : ''
               }`}
               opened={ingredient.name === NEW_INGREDIENT_PLACEHOLDER}
               editable={editable}
               ingredient={ingredient}
               multiplier={editable ? 1 : multiplier}
-              deleteCallback={() => deleteIngredient(id)}
+              onDelete={() => deleteIngredient(id)}
             />
           </AnimatePresence>
         );
@@ -91,18 +91,16 @@ const IngredientsList = ({
   return (
     <Box className={`ingredient-list-container ${className}`} ref={reference}>
       {withMultiplier && !editable && (
-        <>
-          <Box className="servings-container">
-            <Typography className="servings-text">Servings: </Typography>
-            <MultiplierInput
-              className="multiplier-input"
-              callback={setMultiplier}
-              value={multiplier}
-              min={MIN_INGREDIENTS_MULTIPLIER}
-              max={MAX_INGREDIENTS_MULTIPLIER}
-            />
-          </Box>
-        </>
+        <Box className="servings-container">
+          <Typography className="servings-text">Servings: </Typography>
+          <MultiplierInput
+            className="multiplier-input"
+            onChange={setMultiplier}
+            value={multiplier}
+            min={MIN_INGREDIENTS_MULTIPLIER}
+            max={MAX_INGREDIENTS_MULTIPLIER}
+          />
+        </Box>
       )}
 
       {parsedIngredientsList}

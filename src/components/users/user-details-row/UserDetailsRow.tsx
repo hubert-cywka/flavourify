@@ -53,6 +53,39 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
     }
   };
 
+  const getManagementPanel = () => {
+    return (
+      <AnimatePresence
+        isVisible={areButtonsDisplayed}
+        className="user-manage-row"
+        key={user.email}
+        animation={expandCollapseAnimation}>
+        <Button
+          onClick={removeUser}
+          className="action-button"
+          variant="errorContained"
+          endIcon={<DeleteForeverRoundedIcon />}>
+          Delete user
+        </Button>
+        {user.role === USER_ROLE.ADMIN ? (
+          <Button
+            onClick={() => setUserRole(USER_ROLE.USER)}
+            className="action-button"
+            variant="accentContained">
+            Demote to user
+          </Button>
+        ) : (
+          <Button
+            onClick={() => setUserRole(USER_ROLE.ADMIN)}
+            className="action-button"
+            variant="accentContained">
+            Promote to admin
+          </Button>
+        )}
+      </AnimatePresence>
+    );
+  };
+
   return (
     <ClickAwayListener onClickAway={() => setAreButtonsDisplayed(false)}>
       <>
@@ -80,35 +113,7 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
               {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
             </IconButton>
           </Box>
-
-          <AnimatePresence
-            isVisible={areButtonsDisplayed}
-            className="user-manage-row"
-            key={user.email}
-            animation={expandCollapseAnimation}>
-            <Button
-              onClick={removeUser}
-              className="action-button"
-              variant="errorContained"
-              endIcon={<DeleteForeverRoundedIcon />}>
-              Delete user
-            </Button>
-            {user.role === USER_ROLE.ADMIN ? (
-              <Button
-                onClick={() => setUserRole(USER_ROLE.USER)}
-                className="action-button"
-                variant="accentContained">
-                Demote to user
-              </Button>
-            ) : (
-              <Button
-                onClick={() => setUserRole(USER_ROLE.ADMIN)}
-                className="action-button"
-                variant="accentContained">
-                Promote to admin
-              </Button>
-            )}
-          </AnimatePresence>
+          {getManagementPanel()}
         </Box>
       </>
     </ClickAwayListener>

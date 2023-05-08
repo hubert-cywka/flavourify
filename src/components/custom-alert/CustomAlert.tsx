@@ -13,9 +13,9 @@ interface CustomAlertProps extends CustomContentProps {
 
 const CustomAlert = React.forwardRef<HTMLDivElement, CustomAlertProps>((props, ref) => {
   const { id, message, variant } = props;
+  const { closeSnackbar } = useSnackbar();
 
   const dismissSnackbar = () => {
-    const { closeSnackbar } = useSnackbar();
     return (
       <IconButton sx={{ color: '#ffffff' }} onClick={() => closeSnackbar(id)}>
         <HighlightOffRounded />
