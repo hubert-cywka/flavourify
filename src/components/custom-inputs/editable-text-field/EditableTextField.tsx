@@ -53,7 +53,7 @@ const EditableTextField = ({
       enqueueSnackbar(
         errorMessage ? errorMessage : `This value can be only ${max} characters long.`
       );
-    } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
+    } else if (type === 'number' && !isValidNumber(e.target.value)) {
       enqueueSnackbar(VALUE_MUST_BE_NUMBER);
     } else {
       setDisplayedValue(e.target.value);
@@ -74,16 +74,16 @@ const EditableTextField = ({
 
   return (
     <Input
-      autoFocus={autoFocus}
       ref={reference}
-      multiline={multiline}
       className={className}
-      disableUnderline={true}
       sx={{ color: 'text.secondary', ...sx }}
+      autoFocus={autoFocus}
+      multiline={multiline}
+      disableUnderline={true}
       value={displayedValue}
+      placeholder={placeholder}
       onBlur={checkIfEmpty}
       onFocus={scrollIntoView}
-      placeholder={placeholder}
       onChange={(e) => handleChange(e)}
       onMouseDown={(e) => allowEdit(e)}
     />

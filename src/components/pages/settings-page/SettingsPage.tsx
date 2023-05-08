@@ -7,7 +7,10 @@ import AnimatePresence from '../../animate-presence/AnimatePresence';
 export const SettingsPage = () => {
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <AnimatePresence isVisible={true} className="settings-container" animation={simpleOpacityAnimation}>
+      <AnimatePresence
+        isVisible={true}
+        className="settings-container"
+        animation={simpleOpacityAnimation}>
         <SettingsPanel className="settings-panel" />
       </AnimatePresence>
     </Box>
