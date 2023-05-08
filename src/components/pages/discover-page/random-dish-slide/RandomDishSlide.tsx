@@ -1,21 +1,13 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { DISHES_QUERY, RANDOM_DISHES_QUERY } from '../../../../constants/QueryConstants';
-import { getRandomDishes } from '../../../../services/DishService';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
 import '../SlidesShared.scss';
 import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded';
 import DishMiniCard from '../../../dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
+import { useRandomDish } from '../../../../utility/hooks/useRandomDish';
 
 const RandomDishSlide = () => {
-  const { data, refetch, isFetching } = useQuery(
-    [DISHES_QUERY, RANDOM_DISHES_QUERY],
-    () => getRandomDishes(1),
-    {
-      refetchOnWindowFocus: false
-    }
-  );
+  const { data, refetch, isFetching } = useRandomDish();
 
   const navigateToRecipe = (id: number) => {
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));

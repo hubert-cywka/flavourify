@@ -8,16 +8,14 @@ import {
   ListItemText
 } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { SearchRounded, TagRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
 import { Tag } from '../../../types/interfaces/Tag';
-import { getTags } from '../../../services/TagsService';
 import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import Builder from '../../../utility/Builder';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
-import { DISHES_QUERY, TAGS_WITH_CONTENT_QUERY } from '../../../constants/QueryConstants';
+import { useTags } from '../../../utility/hooks/useTags';
 
 interface DisplayedTagProps {
   className?: string;
@@ -25,12 +23,9 @@ interface DisplayedTagProps {
 
 const DisplayedTag = ({ className }: DisplayedTagProps) => {
   const [isTagSelectDialogOpen, setIsTagSelectDialogOpen] = useState<boolean>(false);
-  const { data: tagsList, status } = useQuery<Tag[]>({
-    queryFn: () => getTags(true),
-    queryKey: [DISHES_QUERY, TAGS_WITH_CONTENT_QUERY]
-  });
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const [textFilter, setTextFilter] = useState('');
+  const { data: tagsList, status } = useTags(true);
 
   const updateDisplayedTag = (tag: Tag) => {
     setLastViewedDish({ tag: tag, slide: 0 });

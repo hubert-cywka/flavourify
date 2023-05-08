@@ -6,12 +6,12 @@ import 'swiper/swiper.css';
 import RandomDishSlide from './random-dish-slide/RandomDishSlide';
 import LatestDishSlide from './latest-dish-slide/LatestDishSlide';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 const DiscoverPage = () => {
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <Animate
+      <AnimatePresence
         className="discover-page-container"
         isVisible={true}
         animation={simpleOpacityAnimation}>
@@ -30,7 +30,7 @@ const DiscoverPage = () => {
             <RandomDishSlide />
           </SwiperSlide>
         </Swiper>
-      </Animate>
+      </AnimatePresence>
     </Box>
   );
 };

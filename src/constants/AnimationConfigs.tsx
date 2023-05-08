@@ -27,21 +27,21 @@ export const expandCollapseAnimation: UseTransitionProps = {
   config: { friction: 15, tension: 120, clamp: true }
 };
 
-export const slideFromBottom: UseTransitionProps = {
+export const slideFromBottomAnimation: UseTransitionProps = {
   from: { transform: 'translateY(120%)' },
   enter: { transform: 'translateY(0%)' },
   leave: { transform: 'translateY(120%)' },
   config: { clamp: true }
 };
 
-export const slideFromLeft: UseTransitionProps = {
+export const slideFromLeftAnimation: UseTransitionProps = {
   from: { transform: 'translateX(-120%)' },
   enter: { transform: 'translateX(0%)' },
   leave: { transform: 'translateX(-120%)' },
   config: { clamp: true }
 };
 
-export const slideFromRight: UseTransitionProps = {
+export const slideFromRightAnimation: UseTransitionProps = {
   from: { transform: 'translateX(120%)' },
   enter: { transform: 'translateX(0%)' },
   leave: { transform: 'translateX(120%)' },

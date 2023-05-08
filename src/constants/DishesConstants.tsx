@@ -25,14 +25,13 @@ export const LAST_RECIPE_IMAGE = '/last-recipe.svg';
 export const LAST_RECIPE_TITLE = 'It was last recipe!';
 export const LAST_RECIPE_BUTTON = 'Return to beginning';
 
-export const DISH_UPDATE_SUCCESS = 'Dish updated successfully.';
-export const DISH_UPDATE_ERROR = 'Failed to update dish recipe. Please try again later.';
+export const DISH_UPDATE_SUCCESS = 'Dish saved successfully.';
+export const DISH_UPDATE_ERROR = 'Failed to save dish recipe. Please try again later.';
 export const IMAGE_COMPRESSION_ERROR = 'Failed to compress image. Updating dish without new image.';
 
 export const DISH_DELETE_SUCCESS = 'Dish recipe deleted successfully.';
 export const DISH_DELETE_ERROR = 'Failed to delete dish recipe. Please try again later.';
 
-export const DISH_ADD_SUCCESS = 'Dish added successfully.';
 export const DISH_EMPTY_NAME_ERROR = 'You have to enter dish name.';
 export const DISH_EMPTY_INGREDIENTS_ERROR = 'You have to add at least 1 ingredient.';
 export const DISH_EMPTY_RECIPE_ERROR = 'You have to add at least 1 recipe step.';

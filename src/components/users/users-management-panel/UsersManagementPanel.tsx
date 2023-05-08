@@ -1,8 +1,5 @@
 import { Box, Skeleton, Typography } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
-import { USERS_QUERY } from '../../../constants/QueryConstants';
-import { getUsers } from '../../../services/UserService';
 import { User } from '../../../types/interfaces/User';
 import './UsersManagementPanel.scss';
 import {
@@ -13,13 +10,15 @@ import {
 } from '../../../constants/UserConstants';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import Builder from '../../../utility/Builder';
+import { useUsers } from '../../../utility/hooks/useUsers';
 
 interface UsersManagementPanelProps {
   className?: string;
 }
 
 const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
-  const { data, status } = useQuery([USERS_QUERY], getUsers);
+  const { data, status } = useUsers();
+
   const buildUserDetailsRows = () => {
     return Builder.createResult(status)
       .onError(

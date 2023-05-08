@@ -9,7 +9,7 @@ import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { DEFAULT_RECIPE_STEP } from '../../../constants/DishesConstants';
 import { getUpdatedRecipe } from '../../../utility/dishRecipeUpdateUtils';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 
 interface DishRecipeProps {
@@ -92,13 +92,13 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
   return (
     <Box className={`dish-recipe-container ${className}`} ref={reference}>
       {getRecipeSteps().map((step, id) => (
-        <Animate key={id} isVisible={true} animation={simpleOpacityAnimation}>
+        <AnimatePresence key={id} isVisible={true} animation={simpleOpacityAnimation}>
           {step}
-        </Animate>
+        </AnimatePresence>
       ))}
 
       {!isReadOnly && (
-        <Animate isVisible={true} animation={simpleOpacityAnimation}>
+        <AnimatePresence isVisible={true} animation={simpleOpacityAnimation}>
           <Box onClick={addEmptyStep} className="recipe-step add-step">
             <Button sx={{ textTransform: 'none' }}>
               <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
@@ -107,7 +107,7 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
               </Typography>
             </Button>
           </Box>
-        </Animate>
+        </AnimatePresence>
       )}
     </Box>
   );
