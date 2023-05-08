@@ -27,8 +27,12 @@ const StatusScreen = ({
   return (
     <Modal sx={{ color: 'text.primary' }} className="status-screen-popup" open={open}>
       <Box>
-        <Grow in={open} className="status-screen-container">
-          <>
+        <Grow
+          in={open}
+          className="status-screen-container"
+          unmountOnExit={true}
+          mountOnEnter={true}>
+          <Box>
             <img className="status-screen-image" src={imgSource} />
             <Typography
               className="status-screen-header"
@@ -52,7 +56,7 @@ const StatusScreen = ({
                 {buttonText ? buttonText : 'OK'}
               </Button>
             </Box>
-          </>
+          </Box>
         </Grow>
       </Box>
     </Modal>
