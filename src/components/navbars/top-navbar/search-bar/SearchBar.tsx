@@ -10,12 +10,10 @@ import {
 import { NavigateNextRounded, SearchRounded } from '@mui/icons-material';
 import { useRef, useState } from 'react';
 import './SearchBar.scss';
-import { useQuery } from '@tanstack/react-query';
-import { DISHES_NAMES_QUERY } from '../../../../constants/QueryConstants';
-import { getListOfDishesByName } from '../../../../services/DishService';
 import Builder from '../../../../utility/Builder';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
+import { useDishNames } from '../../../../utility/hooks/useDishNames';
 
 interface SearchBarProps {
   className?: string;
@@ -29,9 +27,7 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
   const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { data, status } = useQuery([DISHES_NAMES_QUERY, { name: textFilter }], () =>
-    getListOfDishesByName(textFilter)
-  );
+  const { data, status } = useDishNames(textFilter);
 
   const navigateToSearchResultPage = (id: number) => {
     setAreSearchResultsDisplayed(false);

@@ -1,18 +1,18 @@
 import { animated, useTransition, UseTransitionProps } from 'react-spring';
 import { PropsWithChildren } from 'react';
 
-interface AnimateProps {
+interface AnimatePresenceProps {
   isVisible: boolean;
   animation: UseTransitionProps;
   className?: string;
 }
 
-const Animate = ({
+const AnimatePresence = ({
   isVisible,
   children,
   className,
   animation
-}: PropsWithChildren<AnimateProps>) => {
+}: PropsWithChildren<AnimatePresenceProps>) => {
   const transition = useTransition(isVisible, { ...animation });
 
   return transition(
@@ -25,4 +25,4 @@ const Animate = ({
   );
 };
 
-export default Animate;
+export default AnimatePresence;

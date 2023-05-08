@@ -11,12 +11,13 @@ import './DishCardBack.scss';
 import { Dish } from '../../../../types/interfaces/Dish';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishRecipe from '../../dish-recipe/DishRecipe';
-import EditIconRounded from '@mui/icons-material/EditRounded';
 import {
+  EditRounded,
   ArrowBackRounded,
   CancelRounded,
   CheckCircleRounded,
-  DeleteRounded
+  DeleteRounded,
+  PlaylistAddCheckRounded
 } from '@mui/icons-material';
 import { useRef, useState } from 'react';
 import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
@@ -30,7 +31,6 @@ import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { validateDishFields } from '../../../../utility/validateDishFields';
 import {
-  DISH_ADD_SUCCESS,
   DISH_DELETE_ERROR,
   DISH_DELETE_SUCCESS,
   DISH_NAME_PLACEHOLDER,
@@ -40,7 +40,6 @@ import {
   DISH_UPDATE_SUCCESS_IMAGE,
   NAME_EDIT_ERROR
 } from '../../../../constants/DishesConstants';
-import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded';
 import TagsList from '../../../tags/tags-list/TagsList';
 import StatusScreen from '../../../status-screen/StatusScreen';
 import { hasAdminPermission } from '../../../../services/AuthService';
@@ -95,12 +94,13 @@ const DishCardBack = ({
       imageRef,
       displayedDish
     );
+
     const validationFailedReason = validateDishFields(updatedDish);
     if (validationFailedReason) {
       enqueueSnackbar(validationFailedReason);
-      setIsLoading(false);
-      return;
+      return setIsLoading(false);
     }
+
     getRequestMethod(updatedDish)
       .then(async (res) => {
         queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
@@ -124,6 +124,7 @@ const DishCardBack = ({
   const removeDish = () => {
     if (dish.id === undefined) return;
     setIsLoading(true);
+
     deleteDish(dish.id)
       .then(async () => {
         queryClient.invalidateQueries({ queryKey: [DISHES_QUERY] }).finally(() => {
@@ -154,7 +155,7 @@ const DishCardBack = ({
             sx={{ color: 'accent.success' }}
             className="action-button"
             onClick={enterEditMode}>
-            <EditIconRounded />
+            <EditRounded />
           </IconButton>
           <IconButton
             sx={{ color: 'accent.error' }}
@@ -182,34 +183,84 @@ const DishCardBack = ({
     }
   };
 
-  const getStatusScreen = () => {
+  const getDishCardButton = () => {
+    const onClick = addMode ? approveEdit : handleFlipCallback;
+    const disabled = addMode ? isLoading : false;
+    const endIcon = addMode ? <PlaylistAddCheckRounded /> : <ArrowBackRounded />;
+    const buttonText = addMode ? 'Submit recipe' : 'Go back';
+
     return (
-      <>
-        <StatusScreen
-          header={'Success!'}
-          open={status === 'success'}
-          caption={addMode ? DISH_ADD_SUCCESS : DISH_UPDATE_SUCCESS}
-          imgSource={DISH_UPDATE_SUCCESS_IMAGE}
-          status={'success'}
-          close={() => {
-            setStatus('idle');
-            if (onQuerySuccess) onQuerySuccess();
-          }}
-        />
-        <StatusScreen
-          header={'Oops!'}
-          open={status === 'error'}
-          caption={DISH_UPDATE_ERROR}
-          imgSource={DISH_UPDATE_ERROR_IMAGE}
-          secondButtonText={'Retry'}
-          status={'error'}
-          close={() => setStatus('idle')}
-          secondButtonOnClick={() => {
-            setStatus('idle');
-            approveEdit();
-          }}
-        />
-      </>
+      <Button
+        onClick={onClick}
+        variant="successContained"
+        className="flip-card-button"
+        disabled={disabled}
+        endIcon={endIcon}>
+        {buttonText}
+      </Button>
+    );
+  };
+
+  const retryQuery = () => {
+    setStatus('idle');
+    approveEdit();
+  };
+
+  const closeStatusMessage = () => {
+    setStatus('idle');
+    if (status === 'success' && onQuerySuccess) onQuerySuccess();
+  };
+
+  const getStatusScreen = () => {
+    if (status === 'idle') return;
+
+    const isSuccess = status === 'success';
+    const header = isSuccess ? 'Success!' : 'Oops!';
+    const caption = isSuccess ? DISH_UPDATE_SUCCESS : DISH_UPDATE_ERROR;
+    const imageSource = isSuccess ? DISH_UPDATE_SUCCESS_IMAGE : DISH_UPDATE_ERROR_IMAGE;
+    const secondButtonText = isSuccess ? undefined : 'Retry';
+    const secondButtonOnClick = isSuccess ? undefined : retryQuery;
+
+    return (
+      <StatusScreen
+        header={header}
+        open={true}
+        caption={caption}
+        imgSource={imageSource}
+        secondButtonText={secondButtonText}
+        status={status}
+        close={closeStatusMessage}
+        secondButtonOnClick={secondButtonOnClick}
+      />
+    );
+  };
+
+  const getDishDeleteDialog = () => {
+    return (
+      <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
+        <Box className="delete-dialog" sx={{ bgcolor: 'primary.dark' }}>
+          <Box className="delete-dialog-text">
+            <Typography>Do you really want to delete this dish recipe?</Typography>
+            <Typography className="delete-dialog-warning">This is irreversible.</Typography>
+          </Box>
+          <Box>
+            <Button
+              className="delete-dialog-button"
+              variant="accentContained"
+              onClick={() => setIsDeleteDialogOpen(false)}
+              startIcon={<HighlightOffRoundedIcon />}>
+              Cancel
+            </Button>
+            <Button
+              className="delete-dialog-button"
+              variant="errorContained"
+              onClick={removeDish}
+              startIcon={<DeleteRounded />}>
+              Confirm
+            </Button>
+          </Box>
+        </Box>
+      </Dialog>
     );
   };
 
@@ -221,7 +272,6 @@ const DishCardBack = ({
           <Box className="image-container">
             <DishImage
               src={dish.img}
-              altText={dish.name}
               className="dish-image"
               editable={!readOnly}
               reference={imageRef}
@@ -260,54 +310,11 @@ const DishCardBack = ({
             />
           </Box>
         </Box>
-        {addMode ? (
-          <Button
-            onClick={approveEdit}
-            variant="successContained"
-            className="flip-card-button"
-            disabled={isLoading}
-            endIcon={<PlaylistAddCheckRoundedIcon />}>
-            Submit recipe
-          </Button>
-        ) : (
-          <Button
-            onClick={handleFlipCallback}
-            variant="secondaryContained"
-            className="flip-card-button"
-            startIcon={<ArrowBackRounded />}>
-            Go back
-          </Button>
-        )}
+        {getDishCardButton()}
       </Box>
 
       {getStatusScreen()}
-
-      {isDeleteDialogOpen && (
-        <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
-          <Box className="delete-dialog" sx={{ bgcolor: 'primary.dark' }}>
-            <Box className="delete-dialog-text">
-              <Typography>Do you really want to delete this dish recipe?</Typography>
-              <Typography className="delete-dialog-warning">This is irreversible.</Typography>
-            </Box>
-            <Box>
-              <Button
-                className="delete-dialog-button"
-                variant="accentContained"
-                onClick={() => setIsDeleteDialogOpen(false)}
-                startIcon={<HighlightOffRoundedIcon />}>
-                Cancel
-              </Button>
-              <Button
-                className="delete-dialog-button"
-                variant="errorContained"
-                onClick={removeDish}
-                startIcon={<DeleteRounded />}>
-                Confirm
-              </Button>
-            </Box>
-          </Box>
-        </Dialog>
-      )}
+      {getDishDeleteDialog()}
     </>
   );
 };

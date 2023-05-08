@@ -21,7 +21,7 @@ import {
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../constants/DishesConstants';
 import { expandCollapseAnimation, fluentGrowAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 interface IngredientTileProps {
   ingredient: Ingredient;
@@ -119,9 +119,9 @@ const IngredientTile = ({
           className="ingredients-edit-form"
           sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}>
           <Box className="ingredients-edit-form-content">
-            <Animate isVisible={true} animation={fluentGrowAnimation}>
+            <AnimatePresence isVisible={true} animation={fluentGrowAnimation}>
               <img src={INGREDIENT_EDIT_IMAGE} className="ingredients-edit-info-image" />
-            </Animate>
+            </AnimatePresence>
             <Typography className="ingredients-edit-info-header">Editing ingredients</Typography>
             <Typography className="ingredients-edit-info-description">
               {INGREDIENT_EDIT_INFO}
@@ -142,7 +142,7 @@ const IngredientTile = ({
                 errorMessage={INGREDIENT_EDIT_ERROR}
               />
             </Box>
-            <Animate
+            <AnimatePresence
               isVisible={!!displayedIngredient.quantity}
               className="ingredient-quantity-rows"
               animation={expandCollapseAnimation}>
@@ -168,7 +168,7 @@ const IngredientTile = ({
                   max={INGREDIENT_UNIT_MAX_LENGTH}
                 />
               </Box>
-            </Animate>
+            </AnimatePresence>
           </Box>
           <Box className="ingredients-edit-buttons">
             <Button

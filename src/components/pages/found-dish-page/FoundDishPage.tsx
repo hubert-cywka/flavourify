@@ -1,10 +1,7 @@
 import './FoundDishPage.scss';
 import { Box } from '@mui/material';
 import DishCard from '../../dishes/dish-card/DishCard';
-import { useQuery } from '@tanstack/react-query';
-import { DISH_QUERY, DISHES_QUERY } from '../../../constants/QueryConstants';
 import { useParams } from 'react-router';
-import { getDish } from '../../../services/DishService';
 import Builder from '../../../utility/Builder';
 import { useState } from 'react';
 import {
@@ -23,15 +20,12 @@ import { useDrag } from '@use-gesture/react';
 import { SWIPE_UP_BOUND } from '../../../constants/NumberConstants';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
+import { useDish } from '../../../utility/hooks/useDish';
 
 const FoundDishPage = () => {
   const { id } = useParams();
-  const {
-    data: dish,
-    status,
-    refetch
-  } = useQuery([DISHES_QUERY, DISH_QUERY, { id: id }], () => getDish(id ? parseInt(id) : 0));
+  const { data: dish, status, refetch } = useDish(id ? parseInt(id) : 0);
   const [swipesCount, setSwipesCount] = useState(0);
   const [swipeTriggered, setSwipeTriggered] = useState(false);
 
@@ -79,13 +73,13 @@ const FoundDishPage = () => {
 
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <Animate
+      <AnimatePresence
         className="found-dish-page-container"
         isVisible={true}
         animation={simpleOpacityAnimation}>
         <TopNavbar className="top-navbar" searchValue={dish && dish.name} singleDishVariant />
         <Box className="slide-container">{getQueryResults()}</Box>
-      </Animate>
+      </AnimatePresence>
     </Box>
   );
 };

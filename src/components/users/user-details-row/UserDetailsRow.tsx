@@ -19,7 +19,7 @@ import {
   USER_ROLE_CHANGE_SUCCESS
 } from '../../../constants/UserConstants';
 import { expandCollapseAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 interface UserDetailsRowProps {
   className?: string;
@@ -81,7 +81,7 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
             </IconButton>
           </Box>
 
-          <Animate
+          <AnimatePresence
             isVisible={areButtonsDisplayed}
             className="user-manage-row"
             key={user.email}
@@ -108,7 +108,7 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
                 Promote to admin
               </Button>
             )}
-          </Animate>
+          </AnimatePresence>
         </Box>
       </>
     </ClickAwayListener>

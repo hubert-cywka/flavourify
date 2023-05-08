@@ -13,7 +13,7 @@ import {
 } from '../../../constants/NumberConstants';
 import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
 import { getUpdatedIngredients } from '../../../utility/dishRecipeUpdateUtils';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 
 interface IngredientsListProps {
@@ -67,7 +67,7 @@ const IngredientsList = ({
     (): ReactJSXElement[] =>
       getReducedIngredientsList().map((ingredient, id) => {
         return (
-          <Animate
+          <AnimatePresence
             key={id}
             isVisible={true}
             animation={simpleOpacityAnimation}
@@ -82,7 +82,7 @@ const IngredientsList = ({
               multiplier={editable ? 1 : multiplier}
               deleteCallback={() => deleteIngredient(id)}
             />
-          </Animate>
+          </AnimatePresence>
         );
       }),
     [displayedIngredients, editable, multiplier]

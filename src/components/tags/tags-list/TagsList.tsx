@@ -10,9 +10,6 @@ import { RefObject, useEffect, useState } from 'react';
 import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../../../constants/NumberConstants';
 import { useSnackbar } from 'notistack';
 import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackupRestoreRounded';
-import { useQuery } from '@tanstack/react-query';
-import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
-import { getTags } from '../../../services/TagsService';
 import { Tag } from '../../../types/interfaces/Tag';
 import {
   EMPTY_TAGS_LIST_ERROR,
@@ -27,8 +24,9 @@ import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 import { fluentGrowAnimation } from '../../../constants/AnimationConfigs';
+import { useTags } from '../../../utility/hooks/useTags';
 
 interface TagsListProps {
   tags: Tag[];
@@ -38,9 +36,7 @@ interface TagsListProps {
 }
 
 const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
-  const { data: tagsList, refetch } = useQuery<Tag[]>([TAGS_QUERY, ALL_TAGS_QUERY], () =>
-    getTags(false)
-  );
+  const { data: tagsList, refetch } = useTags(false);
   const [displayedTags, setDisplayedTags] = useState<Tag[]>(tags);
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -156,9 +152,9 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
             sx={{ bgcolor: 'secondary.dark', color: 'text.primary' }}
             className="tags-select-form">
             <Box className="tags-select-form-content">
-              <Animate isVisible={true} animation={fluentGrowAnimation}>
+              <AnimatePresence isVisible={true} animation={fluentGrowAnimation}>
                 <img src={TAGS_SELECT_IMAGE} className="tags-select-info-image" />
-              </Animate>
+              </AnimatePresence>
               <Typography className="tags-select-info-header">Update dish tags</Typography>
               <Typography className="tags-select-info-description">{TAGS_SELECTED_INFO}</Typography>
               <Typography className="selected-tags-text">Already selected:</Typography>

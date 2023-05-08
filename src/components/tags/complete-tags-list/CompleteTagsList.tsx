@@ -1,11 +1,9 @@
 import { Tag, TagType } from '../../../types/interfaces/Tag';
 import { Box, Divider, Skeleton, SxProps } from '@mui/material';
 import './CompleteTagsList.scss';
-import { useQuery } from '@tanstack/react-query';
-import { ALL_TAGS_QUERY, TAGS_QUERY } from '../../../constants/QueryConstants';
-import { getTags } from '../../../services/TagsService';
 import { TAG_TYPES } from '../../../constants/TagsConstants';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { useTags } from '../../../utility/hooks/useTags';
 
 interface CompleteTagsListProps {
   className?: string;
@@ -15,7 +13,7 @@ interface CompleteTagsListProps {
 }
 
 const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: CompleteTagsListProps) => {
-  const { data: tags } = useQuery<Tag[]>([TAGS_QUERY, ALL_TAGS_QUERY], () => getTags(false));
+  const { data: tags } = useTags(false);
 
   const isTagSelected = (tagToCheck: Tag): boolean => {
     return !!selectedTags?.find((tag: Tag) => tag.id === tagToCheck.id);

@@ -2,14 +2,14 @@ import { Box } from '@mui/material';
 import './SettingsPage.scss';
 import SettingsPanel from './settings-panel/SettingsPanel';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 export const SettingsPage = () => {
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <Animate isVisible={true} className="settings-container" animation={simpleOpacityAnimation}>
+      <AnimatePresence isVisible={true} className="settings-container" animation={simpleOpacityAnimation}>
         <SettingsPanel className="settings-panel" />
-      </Animate>
+      </AnimatePresence>
     </Box>
   );
 };

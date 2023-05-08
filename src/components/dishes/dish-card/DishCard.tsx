@@ -16,11 +16,11 @@ import { useState } from 'react';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
 import { to } from 'react-spring';
 import { Box, Dialog } from '@mui/material';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 import {
   simpleOpacityAnimation,
-  slideFromRight,
-  slideFromLeft
+  slideFromRightAnimation,
+  slideFromLeftAnimation
 } from '../../../constants/AnimationConfigs';
 
 export interface DishCardProps {
@@ -42,8 +42,9 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
         x: down ? calculateSwipePosition(xAxis, SWIPE_RIGHT_BOUND) : 0,
         rotation: down ? calculateSwipePosition(xAxis, SWIPE_RIGHT_BOUND) / 10 : 0
       });
-      if (active && xAxis >= SWIPE_RIGHT_BOUND) setSwipeTriggered(true);
-      if (!active && swipeTriggered) {
+      if (active && xAxis >= SWIPE_RIGHT_BOUND) {
+        setSwipeTriggered(true);
+      } else if (!active && swipeTriggered) {
         setSwipeTriggered(false);
         addDishToMenu();
       }
@@ -55,8 +56,9 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
 
   const addDishToMenu = () => {
     if (isLocked) return;
-    if (getMenu().length >= MAX_MENU_SIZE) enqueueSnackbar(DISH_ADD_TO_MENU_ERROR);
-    else {
+    if (getMenu().length >= MAX_MENU_SIZE) {
+      enqueueSnackbar(DISH_ADD_TO_MENU_ERROR);
+    } else {
       addToMenu(dish);
       enqueueSnackbar(dish.name + DISH_ADD_TO_MENU_SUCCESS, {
         variant: 'success',
@@ -70,32 +72,36 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
     if (callback) callback();
   };
 
-  const transform = (r: number) => `perspective(1500px) rotateY(${r}deg) rotateZ(${r}deg)`;
+  const dragRotationTransform = (r: number) =>
+    `perspective(1500px) rotateY(${r}deg) rotateZ(${r}deg)`;
 
   return (
     <animated.div
       {...swipeHandlers()}
-      style={{ x, transform: to([rotation], transform) }}
+      style={{ x, transform: to([rotation], dragRotationTransform) }}
       className="dish-card">
-      <Animate className="dish-card-motion" isVisible={isFrontSide} animation={slideFromRight}>
+      <AnimatePresence
+        className="dish-card-motion"
+        isVisible={isFrontSide}
+        animation={slideFromRightAnimation}>
         <BookmarkAddRoundedIcon className="add-to-menu-button" onClick={addDishToMenu} />
         <DishCardFront callback={handleCallback} dish={dish} className="dish-card-side" />
-      </Animate>
+      </AnimatePresence>
 
-      <Animate isVisible={!isFrontSide} animation={simpleOpacityAnimation}>
+      <AnimatePresence isVisible={!isFrontSide} animation={simpleOpacityAnimation}>
         <Dialog
           open={true}
           PaperProps={{
             sx: { background: 'none', boxShadow: 'none' },
             className: 'dish-card-back-dialog'
           }}>
-          <Animate isVisible={!isFrontSide} animation={slideFromLeft}>
+          <AnimatePresence isVisible={!isFrontSide} animation={slideFromLeftAnimation}>
             <Box className="dish-card-motion" sx={{ bgcolor: 'primary.main' }}>
               <DishCardBack callback={handleCallback} dish={dish} className="dish-card-side" />
             </Box>
-          </Animate>
+          </AnimatePresence>
         </Dialog>
-      </Animate>
+      </AnimatePresence>
     </animated.div>
   );
 };

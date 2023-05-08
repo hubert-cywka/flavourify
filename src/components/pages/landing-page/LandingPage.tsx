@@ -3,18 +3,18 @@ import './LandingPage.scss';
 import DishesList from '../../dishes/dishes-list/DishesList';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
 
 const LandingPage = () => {
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
-      <Animate
+      <AnimatePresence
         className="landing-page-container"
         isVisible={true}
         animation={simpleOpacityAnimation}>
         <TopNavbar className="top-navbar" />
         <DishesList />
-      </Animate>
+      </AnimatePresence>
     </Box>
   );
 };

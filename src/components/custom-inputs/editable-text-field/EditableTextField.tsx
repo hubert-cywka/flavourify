@@ -1,5 +1,5 @@
 import { Input, SxProps } from '@mui/material';
-import React, { RefObject, useCallback, useState } from 'react';
+import React, { RefObject, useState } from 'react';
 import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import { useSnackbar } from 'notistack';
 import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from '../../../constants/AppConstants';
@@ -40,43 +40,37 @@ const EditableTextField = ({
     setDisplayedValue(value);
   }, [isReadOnly]);
 
-  const allowEdit = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isReadOnly) e.preventDefault();
-    },
-    [isReadOnly]
-  );
+  const allowEdit = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isReadOnly) e.preventDefault();
+  };
 
-  const isValidNumber = useCallback((value: string): boolean => {
+  const isValidNumber = (value: string): boolean => {
     return /^-?\d*\.?\d*$/.test(value);
-  }, []);
+  };
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      if (max && e.target.value.length > max) {
-        enqueueSnackbar(
-          errorMessage ? errorMessage : `This value can be only ${max} characters long.`
-        );
-      } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
-        enqueueSnackbar(VALUE_MUST_BE_NUMBER);
-      } else {
-        setDisplayedValue(e.target.value);
-      }
-    },
-    []
-  );
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (max && e.target.value.length > max) {
+      enqueueSnackbar(
+        errorMessage ? errorMessage : `This value can be only ${max} characters long.`
+      );
+    } else if (type && type === 'number' && !isValidNumber(e.target.value)) {
+      enqueueSnackbar(VALUE_MUST_BE_NUMBER);
+    } else {
+      setDisplayedValue(e.target.value);
+    }
+  };
 
-  const checkIfEmpty = useCallback(() => {
+  const checkIfEmpty = () => {
     if (!displayedValue.length) {
       enqueueSnackbar(FIELD_CANNOT_BE_EMPTY);
       setDisplayedValue(value);
     }
-  }, [displayedValue]);
+  };
 
-  const scrollIntoView = useCallback(() => {
+  const scrollIntoView = () => {
     if (reference?.current && preventScroll === false)
       reference.current.scrollIntoView({ behavior: 'smooth' });
-  }, [reference, preventScroll]);
+  };
 
   return (
     <Input

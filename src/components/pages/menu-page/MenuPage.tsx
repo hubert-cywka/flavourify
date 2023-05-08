@@ -2,10 +2,6 @@ import { Box, Button, CircularProgress, IconButton } from '@mui/material';
 import './MenuPage.scss';
 import MenuPlan from './menu-plan/MenuPlan';
 import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
-import { useQuery } from '@tanstack/react-query';
-import { MENU_INGREDIENTS_QUERY } from '../../../constants/QueryConstants';
-import { getDishesIngredients } from '../../../services/DishService';
-import { getMenu } from '../../../services/MenuService';
 import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import { useState } from 'react';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
@@ -17,15 +13,18 @@ import {
 } from '../../../constants/DishesConstants';
 import Builder from '../../../utility/Builder';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
-import { simpleOpacityAnimation, slideFromBottom } from '../../../constants/AnimationConfigs';
-import Animate from '../../animate/Animate';
+import {
+  simpleOpacityAnimation,
+  slideFromBottomAnimation
+} from '../../../constants/AnimationConfigs';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
+import { useMenu } from '../../../utility/hooks/useMenu';
+import { useMenuIngredients } from '../../../utility/hooks/useDishIngredients';
 
 const MenuPage = () => {
-  const [menu, setMenu] = useState(getMenu());
+  const { menu, setMenu } = useMenu();
   const [areIngredientsVisible, setAreIngredientsVisible] = useState<boolean>(false);
-  const { data, status, refetch } = useQuery([MENU_INGREDIENTS_QUERY], () =>
-    getDishesIngredients(menu.map((dish) => dish.id))
-  );
+  const { data, status, refetch } = useMenuIngredients(menu);
 
   const swapSlide = () => setAreIngredientsVisible((prev) => !prev);
 
@@ -58,7 +57,10 @@ const MenuPage = () => {
         color: 'text.primary'
       }}>
       <TopNavbar className="top-navbar" />
-      <Animate className="menu-container" isVisible={true} animation={simpleOpacityAnimation}>
+      <AnimatePresence
+        className="menu-container"
+        isVisible={true}
+        animation={simpleOpacityAnimation}>
         <MenuPlan menu={menu} onMenuChange={setMenu} className="menu" />
         {!!menu.length && (
           <IconButton className="toggle-ingredients-visibility-button" onClick={swapSlide}>
@@ -69,18 +71,18 @@ const MenuPage = () => {
           </IconButton>
         )}
 
-        <Animate
+        <AnimatePresence
           isVisible={areIngredientsVisible}
           className="menu-ingredients-container"
-          animation={slideFromBottom}>
+          animation={slideFromBottomAnimation}>
           <Box className="menu-ingredients" sx={{ bgcolor: 'primary.dark' }}>
             <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
             <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
             <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
             {buildIngredientsList()}
           </Box>
-        </Animate>
-      </Animate>
+        </AnimatePresence>
+      </AnimatePresence>
     </Box>
   );
 };

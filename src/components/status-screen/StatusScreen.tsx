@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import './StatusScreen.scss';
 import { wobblyAppearAnimation } from '../../constants/AnimationConfigs';
-import Animate from '../animate/Animate';
+import AnimatePresence from '../animate-presence/AnimatePresence';
 
 interface StatusScreenProps {
   header: string;
@@ -29,7 +29,7 @@ const StatusScreen = ({
   return (
     <Modal sx={{ color: 'text.primary' }} className="status-screen-popup" open={open}>
       <Box>
-        <Animate
+        <AnimatePresence
           isVisible={open}
           animation={wobblyAppearAnimation}
           className="status-screen-container">
@@ -56,7 +56,7 @@ const StatusScreen = ({
               {buttonText ? buttonText : 'OK'}
             </Button>
           </Box>
-        </Animate>
+        </AnimatePresence>
       </Box>
     </Modal>
   );
