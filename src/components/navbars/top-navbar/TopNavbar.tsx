@@ -22,51 +22,57 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   const [isDishAddDialogVisible, setIsDishAddDialogVisible] = useState(false);
 
   const transition = useSpring({
-    width: isFocusOnSearchBar ? '0%' : '60%'
+    width: isFocusOnSearchBar ? '0%' : '30%'
   });
 
-  const getButtons = () => {
+  const getStandardButtons = () => {
     return (
-      <animated.div className="top-navbar-buttons" style={transition}>
-        {!singleDishVariant ? (
-          <>
-            <DisplayedTag className="displayed-tag" />
-            {hasAdminPermission() && (
-              <AddRoundedIcon
-                sx={{ color: 'secondary.main' }}
-                className="add-dish-button"
-                onClick={() => setIsDishAddDialogVisible(true)}
-              />
-            )}
-          </>
-        ) : (
-          <ArrowBackRounded
-            className="back-button"
+      <>
+        <DisplayedTag className="displayed-tag" />
+        {hasAdminPermission() && (
+          <AddRoundedIcon
             sx={{ color: 'secondary.main' }}
-            onClick={() => appRouter.navigate(-1)}
+            className="add-dish-button"
+            onClick={() => setIsDishAddDialogVisible(true)}
           />
         )}
+      </>
+    );
+  };
+
+  const getBackButton = () => {
+    return (
+      <ArrowBackRounded
+        className="back-button"
+        sx={{ color: 'secondary.main' }}
+        onClick={() => appRouter.navigate(-1)}
+      />
+    );
+  };
+
+  const buildButtons = () => {
+    return (
+      <animated.div className="top-navbar-buttons" style={transition}>
+        {!singleDishVariant ? getStandardButtons() : getBackButton()}
       </animated.div>
     );
   };
 
   return (
-    <>
-      <Box className={`top-navbar-container ${className}`}>
-        <SearchBar
-          searchValue={searchValue}
-          className={`search-bar ${isFocusOnSearchBar ? 'active' : ''}`}
-          onBlur={() => setIsFocusOnSearchBar(false)}
-          onFocus={() => setIsFocusOnSearchBar(true)}
-        />
-        {getButtons()}
-      </Box>
+    <Box className={`top-navbar-container ${className ?? ''}`}>
+      <SearchBar
+        searchValue={searchValue}
+        className={`search-bar ${isFocusOnSearchBar ? 'active' : ''}`}
+        onBlur={() => setIsFocusOnSearchBar(false)}
+        onFocus={() => setIsFocusOnSearchBar(true)}
+      />
+      {buildButtons()}
 
       <DishCardAddDialog
         open={isDishAddDialogVisible}
         onClose={() => setIsDishAddDialogVisible(false)}
       />
-    </>
+    </Box>
   );
 };
 

@@ -7,52 +7,42 @@ import './BottomNavbar.scss';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { To } from 'react-router-dom';
 
 const BottomNavbar = () => {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
   const navigate = useNavigate();
 
-  const navigateTo = (_event: SyntheticEvent<Element, Event>, newPath: string) => {
-    setPath(newPath);
-    navigate(newPath);
-  };
-
   useEffect(() => {
     setPath(location.pathname);
   }, [location]);
 
+  const navigateTo = (_event: SyntheticEvent, newPath: string) => {
+    setPath(newPath);
+    navigate(newPath);
+  };
+
+  const buildNavigationTile = (icon: ReactJSXElement, label: string, route: To) => {
+    return (
+      <BottomNavigationAction
+        className="navbar-tile"
+        label={label}
+        value={route}
+        icon={icon}
+        sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
+      />
+    );
+  };
+
   return (
     <Box className="bottom-navbar-container">
       <BottomNavigation value={path} onChange={navigateTo} sx={{ bgcolor: 'secondary.main' }}>
-        <BottomNavigationAction
-          className="navbar-tile"
-          label="Recipes"
-          value={ROUTE.LANDING}
-          icon={<ReceiptLongRoundedIcon />}
-          sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
-        />
-        <BottomNavigationAction
-          className="navbar-tile"
-          label="Menu"
-          value={ROUTE.WEEK_MENU}
-          icon={<RestaurantMenuRoundedIcon />}
-          sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
-        />
-        <BottomNavigationAction
-          className="navbar-tile"
-          label="Discover"
-          value={ROUTE.DISCOVER}
-          icon={<TravelExploreRoundedIcon />}
-          sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
-        />
-        <BottomNavigationAction
-          className="navbar-tile"
-          label="Settings"
-          value={ROUTE.SETTINGS}
-          icon={<AccountCircleRoundedIcon />}
-          sx={{ color: 'text.primary', '&.Mui-selected': { color: 'accent.main' } }}
-        />
+        {buildNavigationTile(<ReceiptLongRoundedIcon />, 'Recipes', ROUTE.LANDING)}
+        {buildNavigationTile(<RestaurantMenuRoundedIcon />, 'Menu', ROUTE.WEEK_MENU)}
+        {buildNavigationTile(<TravelExploreRoundedIcon />, 'Discover', ROUTE.DISCOVER)}
+        {buildNavigationTile(<AccountCircleRoundedIcon />, 'Settings', ROUTE.SETTINGS)}
       </BottomNavigation>
     </Box>
   );
