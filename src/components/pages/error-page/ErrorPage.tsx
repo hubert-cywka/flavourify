@@ -52,33 +52,30 @@ const ErrorPage = () => {
   };
 
   const buildStatusScreen = () => {
-    if (hasUserPermission()) {
-      return (
-        <StatusScreen
-          open={true}
-          close={() => appRouter.navigate(-1)}
-          buttonText={'Go back'}
-          secondButtonOnClick={() => appRouter.navigate(ROUTE.LANDING)}
-          secondButtonText={'Go to home page'}
-          header={getErrorHeader()}
-          imgSource={getErrorImageSrc()}
-          caption={getErrorInfo()}
-          status={'error'}></StatusScreen>
-      );
-    } else {
-      return (
-        <StatusScreen
-          open={true}
-          close={() => appRouter.navigate(ROUTE.AUTH)}
-          buttonText={'Sign in'}
-          header={getErrorHeader()}
-          imgSource={getErrorImageSrc()}
-          caption={getErrorInfo()}
-          status={'error'}></StatusScreen>
-      );
-    }
+    const isExtended = hasUserPermission();
+    const onClose = isExtended
+      ? () => appRouter.navigate(-1)
+      : () => appRouter.navigate(ROUTE.AUTH);
+    const buttonText = isExtended ? 'Go back' : 'Sign in';
+    const onSecondButtonClick = isExtended ? () => appRouter.navigate(ROUTE.LANDING) : undefined;
+    const secondButtonText = isExtended ? 'Go to home page' : undefined;
+
+    return (
+      <StatusScreen
+        open={true}
+        close={onClose}
+        buttonText={buttonText}
+        secondButtonOnClick={onSecondButtonClick}
+        secondButtonText={secondButtonText}
+        header={getErrorHeader()}
+        imgSource={getErrorImageSrc()}
+        caption={getErrorInfo()}
+        status={'error'}
+      />
+    );
   };
 
   return error?.status ? buildStatusScreen() : <Navigate to={ROUTE.LANDING} replace />;
 };
+
 export default ErrorPage;

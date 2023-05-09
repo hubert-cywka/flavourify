@@ -81,9 +81,7 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
   };
 
   function onDragEnd(result: DropResult) {
-    if (!result.destination) return;
-    if (result.destination.index === result.source.index) return;
-
+    if (!result.destination || result.destination.index === result.source.index) return;
     const reorderedMenu = reorderMenuList(menu, result.source.index, result.destination.index);
     updateMenu(reorderedMenu);
     onMenuChange(getMenu());
@@ -103,49 +101,44 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
     );
   };
 
-  return (
-    <>
-      {menu && menu.length ? (
-        <Box className={`menu-plan-container ${className}`}>
-          <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
-          <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
-
-          <Box className="menu-plan">
-            <Box className="menu-plan-columns">
-              <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="menu-list">
-                  {(provided: DroppableProvided) => (
-                    <Box
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="menu-plan-names-column">
-                      {getMenuItemBoxes()}
-                      {provided.placeholder}
-                    </Box>
-                  )}
-                </Droppable>
-              </DragDropContext>
-            </Box>
-          </Box>
+  return menu && menu.length ? (
+    <Box className={`menu-plan-container ${className}`}>
+      <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
+      <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
+      <Box className="menu-plan">
+        <Box className="menu-plan-columns">
+          <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="menu-list">
+              {(provided: DroppableProvided) => (
+                <Box
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className="menu-plan-names-column">
+                  {getMenuItemBoxes()}
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+          </DragDropContext>
         </Box>
-      ) : (
-        <Box className={`menu-plan-container empty-menu-plan-container ${className}`}>
-          <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
-          <Box className="empty-menu-content">
-            <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
-            <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
-            <Button
-              variant="secondaryContained"
-              className="action-button"
-              endIcon={<ArrowForwardRounded />}
-              onClick={() => appRouter.navigate(ROUTE.LANDING)}>
-              Find recipes
-            </Button>
-          </Box>
-        </Box>
-      )}
-    </>
+      </Box>
+    </Box>
+  ) : (
+    <Box className={`menu-plan-container empty-menu-plan-container ${className}`}>
+      <img src={EMPTY_MENU_IMAGE} className="empty-menu-image" />
+      <Box className="empty-menu-content">
+        <Typography className="empty-menu-header">{EMPTY_MENU_ERROR}</Typography>
+        <Typography className="empty-menu-info">{EMPTY_MENU_INFO}</Typography>
+        <Button
+          variant="secondaryContained"
+          className="action-button"
+          endIcon={<ArrowForwardRounded />}
+          onClick={() => appRouter.navigate(ROUTE.LANDING)}>
+          Find recipes
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

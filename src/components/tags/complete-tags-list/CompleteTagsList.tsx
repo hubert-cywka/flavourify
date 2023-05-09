@@ -50,17 +50,22 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
     return arrayOfMockups;
   };
 
+  const buildTagsTypeSection = (type: TagType) => {
+    const tags = getListOfTagsByType(type);
+    if (tags.length) {
+      return (
+        <>
+          <Divider className="tags-divider">{type}</Divider>
+          <Box className="tags-container">{tags}</Box>
+        </>
+      );
+    }
+  };
+
   return (
     <Box className={`all-tags-list-container ${className}`} sx={sx}>
       {TAG_TYPES.map((type, id) => (
-        <Box key={id}>
-          {!!getListOfTagsByType(type).length && (
-            <>
-              <Divider className="tags-divider">{type}</Divider>
-              <Box className="tags-container">{getListOfTagsByType(type)}</Box>
-            </>
-          )}
-        </Box>
+        <Box key={id}>{buildTagsTypeSection(type)}</Box>
       ))}
     </Box>
   );

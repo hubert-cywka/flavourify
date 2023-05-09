@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Fade } from '@mui/material';
 import './TopNavbar.scss';
 import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
 import SearchBar from './search-bar/SearchBar';
@@ -68,10 +68,14 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
       />
       {buildButtons()}
 
-      <DishCardAddDialog
-        open={isDishAddDialogVisible}
-        onClose={() => setIsDishAddDialogVisible(false)}
-      />
+      <Fade in={isDishAddDialogVisible} unmountOnExit={true} mountOnEnter={true}>
+        <Box>
+          <DishCardAddDialog
+            open={isDishAddDialogVisible}
+            onClose={() => setIsDishAddDialogVisible(false)}
+          />
+        </Box>
+      </Fade>
     </Box>
   );
 };
