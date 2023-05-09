@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, Button, Collapse, IconButton, Typography } from '@mui/material';
 import './DishRecipe.scss';
 import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
 import { RefObject, useState } from 'react';
@@ -97,18 +97,16 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
         </AnimatePresence>
       ))}
 
-      {!isReadOnly && (
-        <AnimatePresence isVisible={true} animation={simpleOpacityAnimation}>
-          <Box onClick={addEmptyStep} className="recipe-step add-step">
-            <Button sx={{ textTransform: 'none' }}>
-              <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
-              <Typography className="add-step-text" variant="caption" color="text.primary">
-                Add another step
-              </Typography>
-            </Button>
-          </Box>
-        </AnimatePresence>
-      )}
+      <Collapse in={!isReadOnly} unmountOnExit={true} mountOnEnter={true}>
+        <Box onClick={addEmptyStep} className="recipe-step add-step">
+          <Button sx={{ textTransform: 'none' }}>
+            <AddCircleRoundedIcon sx={{ color: 'text.primary' }} />
+            <Typography className="add-step-text" variant="caption" color="text.primary">
+              Add another step
+            </Typography>
+          </Button>
+        </Box>
+      </Collapse>
     </Box>
   );
 };

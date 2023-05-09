@@ -53,7 +53,7 @@ const FoundDishPage = () => {
     }
   };
 
-  const getQueryResults = () => {
+  const buildFoundDish = () => {
     return Builder.createResult(status)
       .onSuccess(
         <animated.div {...swipeHandlers()} style={{ y }} className="found-dish-container">
@@ -78,7 +78,7 @@ const FoundDishPage = () => {
         isVisible={true}
         animation={simpleOpacityAnimation}>
         <TopNavbar className="top-navbar" searchValue={dish && dish.name} singleDishVariant />
-        <Box className="slide-container">{getQueryResults()}</Box>
+        <Box className="slide-container">{buildFoundDish()}</Box>
       </AnimatePresence>
     </Box>
   );

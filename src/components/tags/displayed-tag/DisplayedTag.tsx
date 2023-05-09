@@ -31,7 +31,29 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
     setLastViewedDish({ tag: tag, slide: 0 });
   };
 
-  const getQueryResult = () => {
+  const parseListOfTags = () => {
+    return tagsList?.map((tag) => {
+      if (!textFilter || tag.name.toLowerCase().includes(textFilter.toLowerCase()))
+        return (
+          <ListItem
+            className="search-list-item"
+            key={tag.id}
+            onClick={() => updateDisplayedTag(tag)}>
+            <ListItemText className="list-item-text" disableTypography>
+              <Box className="tag-name">{tag.name}</Box>
+              <Box className="list-item-info">{tag.type}</Box>
+            </ListItemText>
+            {tag.id === lastViewedDish.tag.id && (
+              <ListItemIcon>
+                <DoneRoundedIcon className="list-item-icon" sx={{ color: 'accent.main' }} />
+              </ListItemIcon>
+            )}
+          </ListItem>
+        );
+    });
+  };
+
+  const buildListOfTags = () => {
     return Builder.createResult(status)
       .onSuccess(
         <Box className="tag-items-container">
@@ -45,26 +67,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
               </ListItemIcon>
             )}
           </ListItem>
-          {tagsList &&
-            tagsList.map((tag) => {
-              if (!textFilter || tag.name.toLowerCase().includes(textFilter.toLowerCase()))
-                return (
-                  <ListItem
-                    className="search-list-item"
-                    key={tag.id}
-                    onClick={() => updateDisplayedTag(tag)}>
-                    <ListItemText className="list-item-text" disableTypography>
-                      <Box className="tag-name">{tag.name}</Box>
-                      <Box className="list-item-info">{tag.type}</Box>
-                    </ListItemText>
-                    {tag.id === lastViewedDish.tag.id && (
-                      <ListItemIcon>
-                        <DoneRoundedIcon className="list-item-icon" sx={{ color: 'accent.main' }} />
-                      </ListItemIcon>
-                    )}
-                  </ListItem>
-                );
-            })}
+          {parseListOfTags()}
         </Box>
       )
       .onError(
@@ -101,7 +104,7 @@ const DisplayedTag = ({ className }: DisplayedTagProps) => {
                 className="search-input"
               />
             </ListItem>
-            {getQueryResult()}
+            {buildListOfTags()}
           </List>
         )}
       </Box>
