@@ -89,6 +89,10 @@
   .tag-chip {
     @include chip;
 
+    &.edit-tags-chip {
+      cursor: pointer;
+    }
+
     .tags-edit-icon {
       height: 0.6rem;
       margin-right: $small-element-spacing;

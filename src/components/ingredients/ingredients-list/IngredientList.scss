@@ -9,6 +9,7 @@
 
     .ingredient-tile {
       @include chip;
+      cursor: pointer;
 
       &.new {
         border: 2px solid rgba(255, 255, 255, 0.75);
