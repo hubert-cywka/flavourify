@@ -135,7 +135,7 @@ const TagsList = ({ tags, className, editable, reference }: TagsListProps) => {
       <Box className={`tags-list-container ${className}`} ref={reference}>
         {getListOfTags()}
         {editable && (
-          <Box className="tag-chip" onClick={() => setIsEditDialogVisible(true)}>
+          <Box className="tag-chip edit-tags-chip" onClick={() => setIsEditDialogVisible(true)}>
             <EditRounded className="tags-edit-icon" /> Edit tags
           </Box>
         )}
