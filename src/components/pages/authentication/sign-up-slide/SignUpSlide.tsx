@@ -5,7 +5,7 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { createUser } from '../../../../services/UserService';
-import { AxiosError } from 'axios';
+import { AxiosError, HttpStatusCode } from 'axios';
 import StatusScreen from '../../../status-screen/StatusScreen';
 import { useMutation } from '@tanstack/react-query';
 import {
@@ -82,7 +82,7 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
     await createNewUser()
       .then(() => setHasSignedUp(true))
       .catch((err: AxiosError) => {
-        if (err?.response?.status === 409) {
+        if (err?.response?.status === HttpStatusCode.Conflict) {
           setSignUpError(EMAIL_ALREADY_EXISTS);
         } else {
           setSignUpError(SIGN_UP_UNEXPECTED_ERROR);

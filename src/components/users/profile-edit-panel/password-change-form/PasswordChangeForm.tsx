@@ -8,7 +8,7 @@ import {
   PASSWORD_CHANGE_UNEXPECTED_ERROR,
   PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR
 } from '../../../../constants/UserConstants';
-import { AxiosError } from 'axios';
+import { AxiosError, HttpStatusCode } from 'axios';
 import * as yup from 'yup';
 import {
   getConfirmPasswordValidationSchema,
@@ -58,7 +58,7 @@ const PasswordChangeForm = ({ className }: PasswordChangeFormProps) => {
     const status = error?.response?.status;
 
     switch (status) {
-      case 409:
+      case HttpStatusCode.Conflict:
         return PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR;
 
       default:

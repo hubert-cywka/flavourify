@@ -1,10 +1,9 @@
-import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
+import axios, { AxiosHeaders, AxiosRequestConfig, HttpStatusCode } from 'axios';
 import ROUTE from '../components/router/RoutingConstants';
 import { getAuthToken, refreshToken, signOutUser } from './AuthService';
 import AppRouter from '../components/router/AppRouter';
 
 export const apiURL = 'https://1710-212-51-207-126.ngrok-free.app';
-//export const apiURL = 'http://localhost:8080';
 
 export const apiClient = axios.create({
   baseURL: apiURL,
@@ -31,21 +30,21 @@ export const setupInterceptors = () => {
   apiClient.interceptors.response.use(null, (error) => {
     const status = error?.response?.status;
     switch (status) {
-      case 401:
+      case HttpStatusCode.Unauthorized:
         if (!window.location.href.includes(ROUTE.AUTH)) {
           return refreshToken()
             .then(() => {
               return apiClient.request(error.config);
             })
             .catch(async (error) => {
-              if (error?.response?.status === 403) {
+              if (error?.response?.status === HttpStatusCode.Forbidden) {
                 await signOutUser();
               }
             });
         }
         break;
 
-      case 403:
+      case HttpStatusCode.Forbidden:
         if (!window.location.href.includes(ROUTE.AUTH)) {
           AppRouter.navigate(ROUTE.ERROR, {
             state: { status: status },
@@ -54,7 +53,7 @@ export const setupInterceptors = () => {
         }
         break;
 
-      case 500:
+      case HttpStatusCode.InternalServerError:
         AppRouter.navigate(ROUTE.ERROR, {
           state: { status: status },
           replace: true
