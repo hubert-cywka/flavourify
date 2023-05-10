@@ -10,7 +10,7 @@ import {
 } from '../../../../constants/AuthConstants';
 import { useMutation } from '@tanstack/react-query';
 import { signInUser } from '../../../../services/AuthService';
-import { AxiosError } from 'axios';
+import { AxiosError, HttpStatusCode } from 'axios';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
 import { useForm } from 'react-hook-form';
@@ -40,7 +40,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
     signIn()
       .then(() => appRouter.navigate(ROUTE.LANDING))
       .catch((err: AxiosError) => {
-        if (err?.response?.status === 401) {
+        if (err?.response?.status === HttpStatusCode.Unauthorized) {
           setSignInError(USER_NOT_FOUND);
         } else {
           setSignInError(SIGN_UP_UNEXPECTED_ERROR);

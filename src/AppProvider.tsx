@@ -20,11 +20,8 @@ interface AppProviderProps {
   children: ReactJSXElement | ReactJSXElement[];
 }
 const AppProvider = ({ children }: AppProviderProps) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [colorMode, setColorMode] = useLocalStorage(
-    'COLOR_MODE_STORAGE_KEY',
-    prefersDarkMode ? 'dark' : 'light'
-  );
+  const preferredColorMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
+  const [colorMode, setColorMode] = useLocalStorage('COLOR_MODE_STORAGE_KEY', preferredColorMode);
   const [lastViewedDish, setLastViewedDish] = useState<lastViewedDishI>({
     tag: ALL_TAGS,
     slide: 0
