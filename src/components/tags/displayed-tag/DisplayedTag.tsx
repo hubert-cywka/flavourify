@@ -15,7 +15,7 @@ import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import Builder from '../../../utility/Builder';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
-import { useTags } from '../../../utility/hooks/useTags';
+import { useTags } from '../../../utility/hooks/queries/useTags';
 
 interface DisplayedTagProps {
   className?: string;

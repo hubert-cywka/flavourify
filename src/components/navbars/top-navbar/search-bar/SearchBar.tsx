@@ -13,7 +13,7 @@ import './SearchBar.scss';
 import Builder from '../../../../utility/Builder';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
-import { useDishNames } from '../../../../utility/hooks/useDishNames';
+import { useDishNames } from '../../../../utility/hooks/queries/useDishNames';
 
 interface SearchBarProps {
   className?: string;

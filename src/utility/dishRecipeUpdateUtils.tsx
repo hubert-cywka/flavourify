@@ -27,7 +27,7 @@ export const getUpdatedDishImage = async (
 ): Promise<string> => {
   if (!ref?.current) return placeholder;
   try {
-    return await getCompressedImageUrl(ref.current.src, 0.8);
+    return await getCompressedImageUrl(ref.current.src, 0.5);
   } catch {
     enqueueSnackbar(IMAGE_COMPRESSION_ERROR);
     return placeholder;

@@ -68,7 +68,7 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
       <CardMedia
         className={`${className} ${editable && 'editable-image'}`}
         component="img"
-        loading="lazy"
+        loading="eager"
         alt={altText}
         ref={reference}
         image={displayedImageSrc}

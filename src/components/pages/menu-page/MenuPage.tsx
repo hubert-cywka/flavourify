@@ -15,8 +15,8 @@ import Builder from '../../../utility/Builder';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
-import { useMenu } from '../../../utility/hooks/useMenu';
-import { useMenuIngredients } from '../../../utility/hooks/useDishIngredients';
+import { useMenu } from '../../../utility/hooks/queries/useMenu';
+import { useMenuIngredients } from '../../../utility/hooks/queries/useDishIngredients';
 
 const MenuPage = () => {
   const { menu, setMenu } = useMenu();
