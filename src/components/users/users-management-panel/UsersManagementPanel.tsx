@@ -1,8 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Input, Typography } from '@mui/material';
+import { ChangeEvent, useState, KeyboardEvent, useRef } from 'react';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
 import { User } from '../../../types/interfaces/User';
 import './UsersManagementPanel.scss';
 import {
+  NO_USERS_FOUND,
   USER_EDIT_INFO,
   USER_EDIT_WARNING,
   USERS_NOT_FOUND_ERROR,
@@ -10,13 +12,52 @@ import {
 } from '../../../constants/UserConstants';
 import Builder from '../../../utility/Builder';
 import { useUsers } from '../../../utility/hooks/queries/useUsers';
+import { filterUsers } from '../../../utility/userUtils';
 
 interface UsersManagementPanelProps {
   className?: string;
 }
 
 const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
+  const [filter, setFilter] = useState('');
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const { data, status } = useUsers();
+
+  const createFilteredUserRows = () => {
+    if (!data) return;
+    const userRows = filterUsers(data, filter).map((user: User, id) => {
+      return <UserDetailsRow className="user-details-row" user={user} key={id} />;
+    });
+    if (userRows.length) {
+      return userRows;
+    } else {
+      return <Box className="user-details-row no-users">{NO_USERS_FOUND}</Box>;
+    }
+  };
+
+  const updateFilter = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFilter(e.target.value);
+  };
+
+  const blurOnEnter = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur();
+    }
+  };
+
+  const getFilterInput = () => {
+    return (
+      <Input
+        inputRef={inputRef}
+        defaultValue={filter}
+        placeholder="Search for users"
+        disableUnderline
+        className="filter-input"
+        onKeyUp={(e) => blurOnEnter(e)}
+        onChange={(e) => updateFilter(e)}
+      />
+    );
+  };
 
   const buildUserDetailsRows = () => {
     return Builder.createResult(status)
@@ -28,14 +69,7 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
           </Typography>
         </Box>
       )
-      .onSuccess(
-        <>
-          {!!data &&
-            data.map((user: User, id) => {
-              return <UserDetailsRow className="user-details-row" user={user} key={id} />;
-            })}
-        </>
-      )
+      .onSuccess(<>{createFilteredUserRows()}</>)
       .build();
   };
 
@@ -43,6 +77,7 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
     <Box className={`users-management-panel ${className} `}>
       <Typography className="users-management-warning">{USER_EDIT_WARNING}</Typography>
       <Typography className="users-management-info">{USER_EDIT_INFO}</Typography>
+      {getFilterInput()}
       {buildUserDetailsRows()}
     </Box>
   );

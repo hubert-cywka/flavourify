@@ -22,7 +22,7 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   const [isDishAddDialogVisible, setIsDishAddDialogVisible] = useState(false);
 
   const transition = useSpring({
-    width: isFocusOnSearchBar ? '0%' : '30%'
+    width: isFocusOnSearchBar ? '0%' : '50%'
   });
 
   const getStandardButtons = () => {

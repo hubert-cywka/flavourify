@@ -6,6 +6,7 @@ export const USER_EDIT_INFO = `Select user and remove one's account, give admin 
 export const USER_EDIT_WARNING = `For security reasons, your account is not displayed here.`;
 export const USERS_NOT_FOUND_ERROR = `Seems like you are the only user. But don't worry, others are queueing to sign up, for sure!`;
 export const USERS_NOT_FOUND_IMAGE = '/users-not-found.svg';
+export const NO_USERS_FOUND = 'There are no users with such username or email.';
 
 export const PASSWORD_CHANGE_SUCCESS = 'Password changed successfully.';
 export const PASSWORD_CHANGE_UNEXPECTED_ERROR = 'Failed to change password. Try again later.';
