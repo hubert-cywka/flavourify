@@ -1,5 +1,5 @@
-import { SnackbarProvider } from 'notistack';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { SnackbarProvider } from 'notistack';
 import CustomAlert from './components/custom-alert/CustomAlert';
 
 interface AlertProviderProps {

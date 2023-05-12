@@ -1,18 +1,5 @@
 import { Dialog, Typography, Box, Button, Collapse, Grow } from '@mui/material';
 import './IngredientTile.scss';
-import { type Ingredient } from '../../../types/interfaces/Ingredient';
-import { useState, useRef } from 'react';
-import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
-import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import {
-  INGREDIENT_COUNT_MAX_LENGTH,
-  INGREDIENT_DEFAULT_AMOUNT,
-  INGREDIENT_NAME_MAX_LENGTH,
-  INGREDIENT_UNIT_MAX_LENGTH
-} from '../../../constants/NumberConstants';
 import {
   INGREDIENT_DEFAULT_UNIT,
   INGREDIENT_EDIT_ERROR,
@@ -20,6 +7,19 @@ import {
   INGREDIENT_EDIT_INFO,
   NEW_INGREDIENT_PLACEHOLDER
 } from '../../../constants/DishesConstants';
+import {
+  INGREDIENT_COUNT_MAX_LENGTH,
+  INGREDIENT_DEFAULT_AMOUNT,
+  INGREDIENT_NAME_MAX_LENGTH,
+  INGREDIENT_UNIT_MAX_LENGTH
+} from '../../../constants/NumberConstants';
+import { type Ingredient } from '../../../types/interfaces/Ingredient';
+import { useState, useRef } from 'react';
+import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
+import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
 interface IngredientTileProps {
   ingredient: Ingredient;

@@ -1,10 +1,10 @@
 import { Box, Button, CircularProgress, IconButton, Slide } from '@mui/material';
 import './MenuPage.scss';
-import MenuPlan from './menu-plan/MenuPlan';
-import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
-import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import { useState } from 'react';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
+import MenuPlan from './menu-plan/MenuPlan';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import {
   MENU_INGREDIENTS_INFO,
   MENU_INGREDIENTS_HEADER,
@@ -12,11 +12,11 @@ import {
   NO_INGREDIENTS_ERROR
 } from '../../../constants/DishesConstants';
 import Builder from '../../../utility/Builder';
-import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
-import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
-import { useMenu } from '../../../utility/hooks/queries/useMenu';
 import { useMenuIngredients } from '../../../utility/hooks/queries/useDishIngredients';
+import { useMenu } from '../../../utility/hooks/queries/useMenu';
+import AnimatePresence from '../../animate-presence/AnimatePresence';
+import IngredientsList from '../../ingredients/ingredients-list/IngredientsList';
+import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 
 const MenuPage = () => {
   const { menu, setMenu } = useMenu();

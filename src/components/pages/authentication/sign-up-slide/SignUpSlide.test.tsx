@@ -1,12 +1,10 @@
 import { act, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import AppProvider from '../../../../AppProvider';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { QueryClientProvider } from '@tanstack/react-query';
-import testsQueryClient from '../../../../utility/testing/TestsQueryClient';
-import { MOCK_SIGN_UP_REQUEST } from '../../../../constants/MockConstants';
 import { signUpMockServer, signUpMockServerHandlers, SignUpPageObjects } from './SignUpPageObjects';
 import SignUpSlide from './SignUpSlide';
+import AppProvider from '../../../../AppProvider';
 import {
   EMAIL_REQUIREMENTS,
   NICKNAME_REQUIREMENTS,
@@ -22,10 +20,12 @@ import {
   SIGN_UP_UNEXPECTED_ERROR,
   EMAIL_ALREADY_EXISTS
 } from '../../../../constants/AuthConstants';
+import { MOCK_SIGN_UP_REQUEST } from '../../../../constants/MockConstants';
 import {
   NICKNAME_MAXIMUM_LENGTH,
   NICKNAME_MINIMUM_LENGTH
 } from '../../../../constants/NumberConstants';
+import testsQueryClient from '../../../../utility/testing/TestsQueryClient';
 
 const mockSlideToSignIn = jest.fn();
 const SignUpPO: SignUpPageObjects = new SignUpPageObjects();

@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+import { NavigateNextRounded, SearchRounded } from '@mui/icons-material';
 import {
   Box,
   ClickAwayListener,
@@ -7,13 +9,11 @@ import {
   ListItemIcon,
   ListItemText
 } from '@mui/material';
-import { NavigateNextRounded, SearchRounded } from '@mui/icons-material';
-import { useRef, useState } from 'react';
 import './SearchBar.scss';
 import Builder from '../../../../utility/Builder';
+import { useDishNames } from '../../../../utility/hooks/queries/useDishNames';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
-import { useDishNames } from '../../../../utility/hooks/queries/useDishNames';
 
 interface SearchBarProps {
   className?: string;

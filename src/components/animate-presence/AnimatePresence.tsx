@@ -1,5 +1,5 @@
-import { animated, useTransition, UseTransitionProps } from 'react-spring';
 import { PropsWithChildren } from 'react';
+import { animated, useTransition, UseTransitionProps } from 'react-spring';
 
 interface AnimatePresenceProps {
   isVisible: boolean;

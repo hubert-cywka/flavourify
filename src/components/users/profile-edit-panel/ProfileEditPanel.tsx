@@ -1,8 +1,8 @@
 import { Box, Tab } from '@mui/material';
 import PasswordChangeForm from './password-change-form/PasswordChangeForm';
 import './ProfileEditPanel.scss';
-import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from '../../../constants/AuthConstants';
 import UsernameChangeForm from './username-change-form/UsernameChangeForm';
+import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from '../../../constants/AuthConstants';
 import UserInfo from '../user-info/UserInfo';
 import TabList from '@mui/lab/TabList';
 import { TabContext, TabPanel } from '@mui/lab';

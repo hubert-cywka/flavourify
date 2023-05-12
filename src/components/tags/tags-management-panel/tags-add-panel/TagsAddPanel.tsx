@@ -1,5 +1,11 @@
+import { RefObject } from 'react';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { TabPanel } from '@mui/lab';
 import { Box, Button, Input, Typography } from '@mui/material';
+import { AxiosError, HttpStatusCode } from 'axios';
+import { enqueueSnackbar } from 'notistack';
+import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../../constants/NumberConstants';
+import { TAGS_QUERY } from '../../../../constants/QueryConstants';
 import {
   TAG_ADD_ERROR,
   TAG_ADD_ERROR_CONFLICT,
@@ -8,17 +14,11 @@ import {
   TAG_ADD_REQUIREMENTS,
   TAG_ADD_SUCCESS
 } from '../../../../constants/TagsConstants';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../../constants/NumberConstants';
-import { createTag } from '../../../../services/TagsService';
 import { queryClient } from '../../../../services/QueryClient';
-import { TAGS_QUERY } from '../../../../constants/QueryConstants';
-import { AxiosError, HttpStatusCode } from 'axios';
-import { enqueueSnackbar } from 'notistack';
+import { createTag } from '../../../../services/TagsService';
 import { getName, getType } from '../../../../utility/tagsUtils';
-import { RefObject } from 'react';
-import { TagsSubPanelProps } from '../TagsManagementPanel';
 import TagTypeSelector from '../tag-type-selector/TagTypeSelector';
+import { TagsSubPanelProps } from '../TagsManagementPanel';
 
 interface TagsAddPanelProps extends TagsSubPanelProps {
   tagNameRef: RefObject<HTMLInputElement>;

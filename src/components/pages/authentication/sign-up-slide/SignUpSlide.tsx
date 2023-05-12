@@ -1,13 +1,14 @@
-import { Box, Button, ClickAwayListener, Input, Typography } from '@mui/material';
 import { useState } from 'react';
-import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
+import { yupResolver } from '@hookform/resolvers/yup';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
-import { createUser } from '../../../../services/UserService';
-import { AxiosError, HttpStatusCode } from 'axios';
-import StatusScreen from '../../../status-screen/StatusScreen';
+import { Box, Button, ClickAwayListener, Input, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
+import { AxiosError, HttpStatusCode } from 'axios';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import {
   EMAIL_ALREADY_EXISTS,
   EMAIL_REQUIREMENTS,
@@ -22,15 +23,14 @@ import {
   SIGN_UP_INITIAL_INFO,
   REDIRECT_TO_SIGN_IN
 } from '../../../../constants/AuthConstants';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import {
   getConfirmPasswordValidationSchema,
   getEmailValidationSchema,
   getNicknameValidationSchema,
   getNewPasswordValidationSchema
 } from '../../../../constants/ValidationSchemas';
+import { createUser } from '../../../../services/UserService';
+import StatusScreen from '../../../status-screen/StatusScreen';
 
 type SignUpInputs = {
   nickname: string;

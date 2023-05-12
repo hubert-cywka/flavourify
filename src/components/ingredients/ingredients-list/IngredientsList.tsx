@@ -1,20 +1,20 @@
 import IngredientTile from '../ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
-import { Ingredient } from '../../../types/interfaces/Ingredient';
 import { RefObject, useMemo, useState } from 'react';
-import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
-import { AddCircleRounded } from '@mui/icons-material';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
+import { AddCircleRounded } from '@mui/icons-material';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
+import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
 import {
   MAX_INGREDIENTS_MULTIPLIER,
   MIN_INGREDIENTS_MULTIPLIER
 } from '../../../constants/NumberConstants';
-import { NEW_INGREDIENT_PLACEHOLDER } from '../../../constants/DishesConstants';
+import { Ingredient } from '../../../types/interfaces/Ingredient';
 import { getUpdatedIngredients } from '../../../utility/dishRecipeUpdateUtils';
+import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
-import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
+import MultiplierInput from '../../custom-inputs/multiplier-input/MultiplierInput';
 
 interface IngredientsListProps {
   ingredients: Ingredient[];

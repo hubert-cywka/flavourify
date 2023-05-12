@@ -1,5 +1,8 @@
 import './DishesList.scss';
-import { Dish } from '../../../types/interfaces/Dish';
+import { useState } from 'react';
+import { Box } from '@mui/material';
+import SwiperRef from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   LAST_RECIPE_BUTTON,
   LAST_RECIPE_IMAGE,
@@ -9,14 +12,11 @@ import {
   NO_RECIPES_TITLE
 } from '../../../constants/DishesConstants';
 import { DishesPage } from '../../../services/DishService';
-import DishCard from '../dish-card/DishCard';
+import { Dish } from '../../../types/interfaces/Dish';
 import Builder from '../../../utility/Builder';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box } from '@mui/material';
-import SwiperRef from 'swiper';
-import { useState } from 'react';
-import ErrorDishCard from '../dish-card/other-variants/error-dish-card/ErrorDishCard';
 import { useDishes } from '../../../utility/hooks/queries/useDishes';
+import DishCard from '../dish-card/DishCard';
+import ErrorDishCard from '../dish-card/other-variants/error-dish-card/ErrorDishCard';
 
 interface DishesListProps {
   className?: string;

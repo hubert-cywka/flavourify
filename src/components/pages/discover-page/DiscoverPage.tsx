@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import './DiscoverPage.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
-import RandomDishSlide from './random-dish-slide/RandomDishSlide';
 import LatestDishSlide from './latest-dish-slide/LatestDishSlide';
+import RandomDishSlide from './random-dish-slide/RandomDishSlide';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
 

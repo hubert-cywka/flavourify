@@ -5,9 +5,9 @@ import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import './BottomNavbar.scss';
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { useLocation, useNavigate } from 'react-router';
 import { To } from 'react-router-dom';
 
 const BottomNavbar = () => {

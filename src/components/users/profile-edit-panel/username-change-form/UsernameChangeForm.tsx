@@ -1,19 +1,19 @@
 import Builder from '../../../../utility/Builder';
-import { Box, Button, FormHelperText, Input, Typography } from '@mui/material';
-import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import { useSnackbar } from 'notistack';
 import {
   USERNAME_CHANGE_SUCCESS,
   USERNAME_CHANGE_UNEXPECTED_ERROR
 } from '../../../../constants/UserConstants';
-import * as yup from 'yup';
-import { getNicknameValidationSchema } from '../../../../constants/ValidationSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Button, FormHelperText, Input, Typography } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import '../ProfileEditFormShared.scss';
-import { changeMyUsername } from '../../../../services/UserService';
-import { queryClient } from '../../../../services/QueryClient';
 import { USER_DETAILS_QUERY } from '../../../../constants/QueryConstants';
+import { getNicknameValidationSchema } from '../../../../constants/ValidationSchemas';
+import { queryClient } from '../../../../services/QueryClient';
+import { changeMyUsername } from '../../../../services/UserService';
 
 type UsernameChangeInputs = {
   username: string;

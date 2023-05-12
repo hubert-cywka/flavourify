@@ -1,12 +1,12 @@
 import { SnackbarContent, CustomContentProps, useSnackbar } from 'notistack';
 import { Box, IconButton } from '@mui/material';
-import { HighlightOffRounded } from '@mui/icons-material';
 import React from 'react';
+import { HighlightOffRounded } from '@mui/icons-material';
 import './CustomAlert.scss';
-import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
 import GppBadRoundedIcon from '@mui/icons-material/GppBadRounded';
 import GppMaybeRoundedIcon from '@mui/icons-material/GppMaybeRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
 interface CustomAlertProps extends CustomContentProps {
   variant: 'success' | 'info' | 'error' | 'warning';
 }

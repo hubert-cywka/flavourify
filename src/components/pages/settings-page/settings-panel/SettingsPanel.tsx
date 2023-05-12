@@ -1,19 +1,19 @@
-import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { useContext, useState } from 'react';
 import { LogoutRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
-import { useContext, useState } from 'react';
-import { ColorModeContext } from '../../../../contexts/ColorModeContext';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
+import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
+import { ColorModeContext } from '../../../../contexts/ColorModeContext';
 import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
-import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 import { hasAdminPermission, signOutUser } from '../../../../services/AuthService';
-import UsersManagementPanel from '../../../users/users-management-panel/UsersManagementPanel';
-import UserInfo from '../../../users/user-info/UserInfo';
+import TagsManagementPanel from '../../../tags/tags-management-panel/TagsManagementPanel';
 import ProfileEditPanel from '../../../users/profile-edit-panel/ProfileEditPanel';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import UserInfo from '../../../users/user-info/UserInfo';
+import UsersManagementPanel from '../../../users/users-management-panel/UsersManagementPanel';
 
 interface SettingsPanelProps {
   className?: string;

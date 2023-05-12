@@ -1,25 +1,25 @@
 import './FoundDishPage.scss';
-import { Box } from '@mui/material';
-import DishCard from '../../dishes/dish-card/DishCard';
-import { useParams } from 'react-router';
-import Builder from '../../../utility/Builder';
 import { useState } from 'react';
+import { Box } from '@mui/material';
+import { useSpring, animated } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
+import { enqueueSnackbar } from 'notistack';
+import { useParams } from 'react-router';
+import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import {
   DISH_SEARCH_DONE,
   NO_RECIPES_BUTTON,
   NO_RECIPES_IMAGE,
   NO_RECIPES_TITLE
 } from '../../../constants/DishesConstants';
-import TopNavbar from '../../navbars/top-navbar/TopNavbar';
+import { SWIPE_UP_BOUND } from '../../../constants/NumberConstants';
+import Builder from '../../../utility/Builder';
+import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
+import DishCard from '../../dishes/dish-card/DishCard';
 import ErrorDishCard from '../../dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
-import { enqueueSnackbar } from 'notistack';
+import TopNavbar from '../../navbars/top-navbar/TopNavbar';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import { useSpring, animated } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
-import { SWIPE_UP_BOUND } from '../../../constants/NumberConstants';
-import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
-import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
 import { useDish } from '../../../utility/hooks/queries/useDish';
 

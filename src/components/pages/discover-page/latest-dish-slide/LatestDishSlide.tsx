@@ -1,5 +1,5 @@
-import Builder from '../../../../utility/Builder';
 import { Box, Button, Skeleton, Typography } from '@mui/material';
+import Builder from '../../../../utility/Builder';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
 import '../SlidesShared.scss';
