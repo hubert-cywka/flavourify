@@ -21,7 +21,8 @@
 
     .profile-panel-requirements {
       font-size: $small-font-size;
-      margin-bottom: $big-element-spacing;
+      width: 90%;
+      margin: 0 auto $big-element-spacing;
     }
   }
 }

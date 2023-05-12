@@ -33,11 +33,12 @@ $mini-dish-card-height: calc(60 * var(--vh));
 $slide-bottom-container-height: calc(10 * var(--vh));
 $slide-header-margin: 25px;
 
-$tiny-font-size: 0.6rem;
-$small-font-size: 0.75rem;
-$standard-font-size: 0.9rem;
-$big-font-size: 1.1rem;
-$huge-font-size: 2rem;
+$chip-font-size: 0.6125rem;
+$tiny-font-size: 0.6875rem;
+$small-font-size: 0.825rem;
+$standard-font-size: 1rem;
+$big-font-size: 1.125rem;
+$huge-font-size: 1.75rem;
 $icon-font-size: 3rem;
 $small-icon-font-size: 1.75rem;
 
@@ -46,6 +47,5 @@ $strong-shadow: 0px 8px 15px 0px rgba(29, 29, 29, 0.5);
 $button-shadow: 0 8px 5px -5px rgba(20, 20, 20, 0.1);
 
 $firm-shadow: 0px 0px 10px 0px rgba(29, 29, 29, 0.5);
-
 
 $max-page-width: calc(64 * var(--vh));

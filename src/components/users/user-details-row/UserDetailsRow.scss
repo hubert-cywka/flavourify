@@ -8,7 +8,10 @@
     display: flex;
 
     .user-info {
-      text-align: left;
+      margin-left: $standard-element-spacing;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
       .user-username {
         font-weight: bold;
@@ -25,16 +28,12 @@
       justify-content: center;
       align-items: center;
       font-size: $small-font-size;
-      margin-right: $standard-element-spacing;
+      margin: 0 $standard-element-spacing;
       width: 10%;
     }
 
     .expand-management-options-button {
       margin-left: auto;
-    }
-
-    .user-username, .user-email, .user-role {
-      margin-left: $standard-element-spacing;
     }
   }
 

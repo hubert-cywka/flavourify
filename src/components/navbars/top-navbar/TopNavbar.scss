@@ -30,12 +30,10 @@
   }
 
   .search-bar {
-    flex-grow: 1;
     height: calc(#{$top-navbar-height} - #{$standard-element-spacing});
     margin: $small-element-spacing;
     box-sizing: border-box;
     transition: background 0.25s;
-    cursor: pointer;
 
     &.active {
       background: $white-transparent-background-10;

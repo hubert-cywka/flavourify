@@ -73,7 +73,7 @@ const IngredientsList = ({
             animation={simpleOpacityAnimation}
             className="ingredient-tile-container">
             <IngredientTile
-              className={`ingredient-tile ${
+              className={`ingredient-tile ${editable ? 'editable' : ''} ${
                 ingredient.name === NEW_INGREDIENT_PLACEHOLDER ? 'new' : ''
               }`}
               opened={ingredient.name === NEW_INGREDIENT_PLACEHOLDER}

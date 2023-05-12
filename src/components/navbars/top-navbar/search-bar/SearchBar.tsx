@@ -68,7 +68,7 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
 
   return (
     <ClickAwayListener onClickAway={() => setAreSearchResultsDisplayed(false)}>
-      <Box className="dish-names-list-container">
+      <Box className="search-bar-wrapper">
         <Box className={`search-bar-container ${className}`}>
           <SearchRounded
             className="search-icon"

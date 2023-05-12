@@ -5,6 +5,24 @@
   overflow-y: auto;
   height: 100%;
 
+  .filter-input {
+    width: 90%;
+    margin: $big-element-spacing auto;
+    box-sizing: border-box;
+    padding: $standard-element-spacing $big-element-spacing;
+    border-radius: $round-border-radius-50;
+    border: thin solid $white-transparent-background-20;
+    background: transparent;
+    transition: 0.25s;
+    display: block;
+
+    &:focus-within {
+      background: $white-transparent-background-20;
+      border-color: transparent;
+      padding: $standard-element-spacing calc(#{$big-element-spacing} + 5px);
+    }
+  }
+
   .users-not-found-image {
     margin-top: auto;
     max-height: 50%;
@@ -19,12 +37,21 @@
   }
 
   .user-details-row {
-    background: $highlighted-background;
-    padding: $standard-element-spacing;
+    background: $white-transparent-background-5;
+    padding: $small-element-spacing $standard-element-spacing;
     box-sizing: border-box;
     border-radius: $inner-border-radius-5;
     margin: $small-element-spacing 0;
     width: 100%;
+
+    &:hover {
+      background: $white-transparent-background-10;
+    }
+
+    &.no-users {
+      padding: $huge-element-spacing;
+      font-weight: bold;
+    }
   }
 
   .users-management-info, .users-management-warning {
