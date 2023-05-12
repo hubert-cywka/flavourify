@@ -21,7 +21,7 @@ import { SWIPE_UP_BOUND } from '../../../constants/NumberConstants';
 import { calculateSwipePosition } from '../../../utility/calculateSwipePosition';
 import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
 import AnimatePresence from '../../animate-presence/AnimatePresence';
-import { useDish } from '../../../utility/hooks/useDish';
+import { useDish } from '../../../utility/hooks/queries/useDish';
 
 const FoundDishPage = () => {
   const { id } = useParams();

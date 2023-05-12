@@ -9,10 +9,10 @@ import { DeleteRounded } from '@mui/icons-material';
 import CompleteTagsList from '../../complete-tags-list/CompleteTagsList';
 import TabPanel from '@mui/lab/TabPanel';
 import { TagsSubPanelProps } from '../TagsManagementPanel';
-import { deleteTag } from '../../../../services/TagsService';
 import { queryClient } from '../../../../services/QueryClient';
 import { TAGS_QUERY } from '../../../../constants/QueryConstants';
 import { enqueueSnackbar } from 'notistack';
+import { deleteTag } from '../../../../services/TagsService';
 
 const TagsRemovePanel = ({
   value,

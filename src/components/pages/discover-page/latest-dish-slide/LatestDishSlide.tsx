@@ -5,7 +5,7 @@ import ROUTE from '../../../router/RoutingConstants';
 import '../SlidesShared.scss';
 import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
 import DishMiniCard from '../../../dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
-import { useLatestDish } from '../../../../utility/hooks/useLatestDish';
+import { useLatestDish } from '../../../../utility/hooks/queries/useLatestDish';
 
 const LatestDishSlide = () => {
   const { data, status } = useLatestDish();

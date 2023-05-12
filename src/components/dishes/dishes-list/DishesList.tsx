@@ -16,7 +16,7 @@ import { Box } from '@mui/material';
 import SwiperRef from 'swiper';
 import { useState } from 'react';
 import ErrorDishCard from '../dish-card/other-variants/error-dish-card/ErrorDishCard';
-import { useDishes } from '../../../utility/hooks/useDishes';
+import { useDishes } from '../../../utility/hooks/queries/useDishes';
 
 interface DishesListProps {
   className?: string;

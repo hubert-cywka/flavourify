@@ -9,7 +9,7 @@ import {
   USERS_NOT_FOUND_IMAGE
 } from '../../../constants/UserConstants';
 import Builder from '../../../utility/Builder';
-import { useUsers } from '../../../utility/hooks/useUsers';
+import { useUsers } from '../../../utility/hooks/queries/useUsers';
 
 interface UsersManagementPanelProps {
   className?: string;

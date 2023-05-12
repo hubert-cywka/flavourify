@@ -24,7 +24,7 @@ import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import { useTags } from '../../../utility/hooks/useTags';
+import { useTags } from '../../../utility/hooks/queries/useTags';
 
 interface TagsListProps {
   tags: Tag[];

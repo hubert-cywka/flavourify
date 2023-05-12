@@ -3,7 +3,7 @@ import { Box, Divider, Skeleton, SxProps } from '@mui/material';
 import './CompleteTagsList.scss';
 import { TAG_TYPES } from '../../../constants/TagsConstants';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import { useTags } from '../../../utility/hooks/useTags';
+import { useTags } from '../../../utility/hooks/queries/useTags';
 
 interface CompleteTagsListProps {
   className?: string;

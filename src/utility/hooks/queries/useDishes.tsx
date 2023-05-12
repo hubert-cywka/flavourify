@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { DISHES_QUERY } from '../../constants/QueryConstants';
-import { getDishesPage } from '../../services/DishService';
-import { lastViewedDishContext } from '../../contexts/LastViewedDishContext';
+import { DISHES_QUERY } from '../../../constants/QueryConstants';
+import { getDishesPage } from '../../../services/DishService';
+import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
 import { useContext } from 'react';
 
 export const useDishes = () => {
