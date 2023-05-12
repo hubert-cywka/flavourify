@@ -1,10 +1,10 @@
-import DishCardBack from '../../dish-card-back/DishCardBack';
-import { Dish } from '../../../../../types/interfaces/Dish';
+import { Box, Dialog } from '@mui/material';
 import {
   DISH_IMAGE_PLACEHOLDER,
   DISH_TAGS_DEFAULT
 } from '../../../../../constants/DishesConstants';
-import { Box, Dialog } from '@mui/material';
+import { Dish } from '../../../../../types/interfaces/Dish';
+import DishCardBack from '../../dish-card-back/DishCardBack';
 import './DishCardAddDialog.scss';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {

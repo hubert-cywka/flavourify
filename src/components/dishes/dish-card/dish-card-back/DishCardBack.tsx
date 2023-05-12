@@ -8,7 +8,26 @@ import {
   Typography
 } from '@mui/material';
 import './DishCardBack.scss';
+import { useSnackbar } from 'notistack';
+import {
+  DISH_DELETE_ERROR,
+  DISH_DELETE_SUCCESS,
+  DISH_NAME_PLACEHOLDER,
+  DISH_UPDATE_ERROR,
+  DISH_UPDATE_ERROR_IMAGE,
+  DISH_UPDATE_SUCCESS,
+  DISH_UPDATE_SUCCESS_IMAGE,
+  NAME_EDIT_ERROR
+} from '../../../../constants/DishesConstants';
+import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
+import { DISHES_QUERY } from '../../../../constants/QueryConstants';
+import { hasAdminPermission } from '../../../../services/AuthService';
+import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
+import { queryClient } from '../../../../services/QueryClient';
 import { Dish } from '../../../../types/interfaces/Dish';
+import { createUpdatedDishRecipe } from '../../../../utility/dishRecipeUpdateUtils';
+import { validateDishFields } from '../../../../utility/validateDishFields';
+import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
 import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
 import DishRecipe from '../../dish-recipe/DishRecipe';
 import {
@@ -20,30 +39,11 @@ import {
   PlaylistAddCheckRounded
 } from '@mui/icons-material';
 import { useRef, useState } from 'react';
-import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
-import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
-import { queryClient } from '../../../../services/QueryClient';
 import DishImage from '../../dish-image/DishImage';
-import { DISHES_QUERY } from '../../../../constants/QueryConstants';
-import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
 import { DishCardProps } from '../DishCard';
-import { useSnackbar } from 'notistack';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { validateDishFields } from '../../../../utility/validateDishFields';
-import {
-  DISH_DELETE_ERROR,
-  DISH_DELETE_SUCCESS,
-  DISH_NAME_PLACEHOLDER,
-  DISH_UPDATE_ERROR,
-  DISH_UPDATE_ERROR_IMAGE,
-  DISH_UPDATE_SUCCESS,
-  DISH_UPDATE_SUCCESS_IMAGE,
-  NAME_EDIT_ERROR
-} from '../../../../constants/DishesConstants';
 import TagsList from '../../../tags/tags-list/TagsList';
 import StatusScreen from '../../../status-screen/StatusScreen';
-import { hasAdminPermission } from '../../../../services/AuthService';
-import { createUpdatedDishRecipe } from '../../../../utility/dishRecipeUpdateUtils';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;

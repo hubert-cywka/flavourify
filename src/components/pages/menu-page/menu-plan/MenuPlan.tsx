@@ -9,12 +9,7 @@ import {
   DroppableProvided,
   DropResult
 } from '@hello-pangea/dnd';
-import { getMenu, MenuItem, removeFromMenu, updateMenu } from '../../../../services/MenuService';
 import { ArrowForwardRounded, ClearRounded, ManageSearchRounded } from '@mui/icons-material';
-import ROUTE from '../../../router/RoutingConstants';
-import appRouter from '../../../router/AppRouter';
-import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
-import { queryClient } from '../../../../services/QueryClient';
 import {
   EMPTY_MENU_ERROR,
   EMPTY_MENU_IMAGE,
@@ -22,6 +17,11 @@ import {
   MENU_PLAN_HEADER,
   MENU_PLAN_INFO
 } from '../../../../constants/DishesConstants';
+import { MENU_INGREDIENTS_QUERY } from '../../../../constants/QueryConstants';
+import { getMenu, MenuItem, removeFromMenu, updateMenu } from '../../../../services/MenuService';
+import { queryClient } from '../../../../services/QueryClient';
+import appRouter from '../../../router/AppRouter';
+import ROUTE from '../../../router/RoutingConstants';
 
 interface MenuPlanProps {
   menu: MenuItem[];

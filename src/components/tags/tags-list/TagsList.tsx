@@ -7,10 +7,10 @@ import {
   RestartAltRounded
 } from '@mui/icons-material';
 import { RefObject, useEffect, useState } from 'react';
-import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../../../constants/NumberConstants';
 import { useSnackbar } from 'notistack';
+import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
+import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../../../constants/NumberConstants';
 import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackupRestoreRounded';
-import { Tag } from '../../../types/interfaces/Tag';
 import {
   EMPTY_TAGS_LIST_ERROR,
   NO_TAGS_ERROR,
@@ -20,11 +20,11 @@ import {
   TAGS_SELECTED_ERROR,
   TAGS_SELECTED_INFO
 } from '../../../constants/TagsConstants';
-import { DISH_TAGS_DEFAULT } from '../../../constants/DishesConstants';
-import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
+import { Tag } from '../../../types/interfaces/Tag';
+import { useTags } from '../../../utility/hooks/queries/useTags';
 import appRouter from '../../router/AppRouter';
 import ROUTE from '../../router/RoutingConstants';
-import { useTags } from '../../../utility/hooks/queries/useTags';
+import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 
 interface TagsListProps {
   tags: Tag[];

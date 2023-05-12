@@ -1,15 +1,15 @@
 import { Box, Fade } from '@mui/material';
 import './TopNavbar.scss';
-import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
+import { useSpring } from '@react-spring/web';
+import { animated } from 'react-spring';
 import SearchBar from './search-bar/SearchBar';
 import { ArrowBackRounded } from '@mui/icons-material';
 import { useState } from 'react';
+import { hasAdminPermission } from '../../../services/AuthService';
+import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
 import appRouter from '../../router/AppRouter';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
-import { hasAdminPermission } from '../../../services/AuthService';
-import { animated } from 'react-spring';
-import { useSpring } from '@react-spring/web';
+import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
 
 interface TopNavbarProps {
   className?: string;

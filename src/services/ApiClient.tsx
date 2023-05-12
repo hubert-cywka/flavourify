@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders, AxiosRequestConfig, HttpStatusCode } from 'axios';
-import ROUTE from '../components/router/RoutingConstants';
 import { getAuthToken, refreshToken, signOutUser } from './AuthService';
 import AppRouter from '../components/router/AppRouter';
+import ROUTE from '../components/router/RoutingConstants';
 
 export const apiURL = 'https://1710-212-51-207-126.ngrok-free.app';
 

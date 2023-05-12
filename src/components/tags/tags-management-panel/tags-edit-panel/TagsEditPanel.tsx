@@ -1,5 +1,10 @@
+import { RefObject } from 'react';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import TabPanel from '@mui/lab/TabPanel';
 import { Box, Button, Input, Typography } from '@mui/material';
+import { enqueueSnackbar } from 'notistack';
+import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../../constants/NumberConstants';
+import { TAGS_QUERY } from '../../../../constants/QueryConstants';
 import {
   TAG_ADD_REQUIREMENTS,
   TAG_UPDATE_ERROR,
@@ -7,17 +12,12 @@ import {
   TAG_UPDATE_INFO,
   TAG_UPDATE_SUCCESS
 } from '../../../../constants/TagsConstants';
-import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import CompleteTagsList from '../../complete-tags-list/CompleteTagsList';
-import { getName, getType } from '../../../../utility/tagsUtils';
-import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from '../../../../constants/NumberConstants';
-import { updateTag } from '../../../../services/TagsService';
 import { queryClient } from '../../../../services/QueryClient';
-import { TAGS_QUERY } from '../../../../constants/QueryConstants';
-import { enqueueSnackbar } from 'notistack';
-import { TagsSubPanelProps } from '../TagsManagementPanel';
-import { RefObject } from 'react';
+import { updateTag } from '../../../../services/TagsService';
+import { getName, getType } from '../../../../utility/tagsUtils';
+import CompleteTagsList from '../../complete-tags-list/CompleteTagsList';
 import TagTypeSelector from '../tag-type-selector/TagTypeSelector';
+import { TagsSubPanelProps } from '../TagsManagementPanel';
 
 interface TagsEditPanelProps extends TagsSubPanelProps {
   tagNameRef: RefObject<HTMLInputElement>;

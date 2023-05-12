@@ -1,6 +1,6 @@
+import { RefObject } from 'react';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { TAG_TYPES } from '../../../../constants/TagsConstants';
-import { RefObject } from 'react';
 import { TagType } from '../../../../types/interfaces/Tag';
 
 interface TagTypeSelectorProps {

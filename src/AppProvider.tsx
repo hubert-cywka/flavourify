@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import {
   createTheme,
   darken,
@@ -7,14 +8,13 @@ import {
   ThemeProvider,
   useMediaQuery
 } from '@mui/material';
-import { useLocalStorage } from './utility/hooks/useLocalStorage';
-import { ColorModeContext } from './contexts/ColorModeContext';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './services/QueryClient';
-import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
-import { ALL_TAGS } from './constants/TagsConstants';
 import { AlertProvider } from './AlertProvider';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { ALL_TAGS } from './constants/TagsConstants';
+import { ColorModeContext } from './contexts/ColorModeContext';
+import { lastViewedDishContext, lastViewedDishI } from './contexts/LastViewedDishContext';
+import { queryClient } from './services/QueryClient';
+import { useLocalStorage } from './utility/hooks/useLocalStorage';
 
 interface AppProviderProps {
   children: ReactJSXElement | ReactJSXElement[];

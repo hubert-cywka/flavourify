@@ -1,11 +1,11 @@
-import AppRouter from './components/router/AppRouter';
-import { RouterProvider } from 'react-router';
-import { closeSnackbar, enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { apiClient, apiURL } from './services/ApiClient';
+import { closeSnackbar, enqueueSnackbar } from 'notistack';
+import { RouterProvider } from 'react-router';
+import AppProvider from './AppProvider';
+import AppRouter from './components/router/AppRouter';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
-import AppProvider from './AppProvider';
+import { apiClient, apiURL } from './services/ApiClient';
 import {
   setCustomViewportHeightVariable,
   setCustomViewportSizeVariableUpdater,

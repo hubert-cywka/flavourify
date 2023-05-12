@@ -1,14 +1,14 @@
 import { act, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { signInMockServer, signInMockServerHandlers, SignInPageObjects } from './SignInPageObjects';
+import SignInSlide from './SignInSlide';
 import AppProvider from '../../../../AppProvider';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import SignInSlide from './SignInSlide';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { SIGN_UP_UNEXPECTED_ERROR, USER_NOT_FOUND } from '../../../../constants/AuthConstants';
+import { MOCK_SIGN_IN_REQUEST } from '../../../../constants/MockConstants';
 import testsQueryClient from '../../../../utility/testing/TestsQueryClient';
 import appRouter from '../../../router/AppRouter';
-import { MOCK_SIGN_IN_REQUEST } from '../../../../constants/MockConstants';
-import { SIGN_UP_UNEXPECTED_ERROR, USER_NOT_FOUND } from '../../../../constants/AuthConstants';
 
 const mockSlideToSignUp = jest.fn();
 const SignInPO: SignInPageObjects = new SignInPageObjects();

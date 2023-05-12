@@ -1,18 +1,18 @@
+import { DeleteRounded } from '@mui/icons-material';
+import TabPanel from '@mui/lab/TabPanel';
 import { Box, Button, Typography } from '@mui/material';
+import { enqueueSnackbar } from 'notistack';
+import { TAGS_QUERY } from '../../../../constants/QueryConstants';
 import {
   TAG_DELETE_ERROR,
   TAG_DELETE_INFO,
   TAG_DELETE_SUCCESS,
   TAG_DELETE_WARNING
 } from '../../../../constants/TagsConstants';
-import { DeleteRounded } from '@mui/icons-material';
-import CompleteTagsList from '../../complete-tags-list/CompleteTagsList';
-import TabPanel from '@mui/lab/TabPanel';
-import { TagsSubPanelProps } from '../TagsManagementPanel';
 import { queryClient } from '../../../../services/QueryClient';
-import { TAGS_QUERY } from '../../../../constants/QueryConstants';
-import { enqueueSnackbar } from 'notistack';
 import { deleteTag } from '../../../../services/TagsService';
+import CompleteTagsList from '../../complete-tags-list/CompleteTagsList';
+import { TagsSubPanelProps } from '../TagsManagementPanel';
 
 const TagsRemovePanel = ({
   value,

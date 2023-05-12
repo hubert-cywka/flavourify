@@ -1,9 +1,9 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { act, render } from '@testing-library/react';
-import AppProvider from '../../../AppProvider';
 import { MOCK_INPUT_VALUE } from '../../../constants/MockConstants';
 import EditableTextField from './EditableTextField';
 import { EditableTextFieldPageObjects } from './EditableTextFieldPageObjects';
+import AppProvider from '../../../AppProvider';
 import '@testing-library/jest-dom';
 import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from '../../../constants/AppConstants';
 

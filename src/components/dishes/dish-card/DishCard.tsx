@@ -1,13 +1,13 @@
-import DishCardFront from './dish-card-front/DishCardFront';
-import DishCardBack from './dish-card-back/DishCardBack';
-import { Dish } from '../../../types/interfaces/Dish';
 import { useSnackbar } from 'notistack';
-import { addToMenu, getMenu } from '../../../services/MenuService';
-import { MAX_MENU_SIZE, SWIPE_RIGHT_BOUND } from '../../../constants/NumberConstants';
+import DishCardBack from './dish-card-back/DishCardBack';
+import DishCardFront from './dish-card-front/DishCardFront';
 import {
   DISH_ADD_TO_MENU_ERROR,
   DISH_ADD_TO_MENU_SUCCESS
 } from '../../../constants/DishesConstants';
+import { MAX_MENU_SIZE, SWIPE_RIGHT_BOUND } from '../../../constants/NumberConstants';
+import { addToMenu, getMenu } from '../../../services/MenuService';
+import { Dish } from '../../../types/interfaces/Dish';
 import './DishCard.scss';
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
 import { useSpring, animated } from '@react-spring/web';

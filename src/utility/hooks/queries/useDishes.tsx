@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { DISHES_QUERY } from '../../../constants/QueryConstants';
-import { getDishesPage } from '../../../services/DishService';
 import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
-import { useContext } from 'react';
+import { getDishesPage } from '../../../services/DishService';
 
 export const useDishes = () => {
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);

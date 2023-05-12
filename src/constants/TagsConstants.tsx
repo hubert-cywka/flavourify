@@ -1,10 +1,10 @@
-import { Tag, TagType } from '../types/interfaces/Tag';
 import {
   MAX_TAGS_NUMBER,
   MIN_TAGS_NUMBER,
   TAG_NAME_MAX_LENGTH,
   TAG_NAME_MIN_LENGTH
 } from './NumberConstants';
+import { Tag, TagType } from '../types/interfaces/Tag';
 
 export const TAG_DELETE_WARNING = 'This change is irreversible.';
 export const TAG_DELETE_ERROR = 'Failed to delete tag. Please try again later';

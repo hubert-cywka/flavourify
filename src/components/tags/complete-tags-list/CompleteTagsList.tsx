@@ -1,5 +1,5 @@
-import { Tag, TagType } from '../../../types/interfaces/Tag';
 import { Box, Divider, Skeleton, SxProps } from '@mui/material';
+import { Tag, TagType } from '../../../types/interfaces/Tag';
 import './CompleteTagsList.scss';
 import { TAG_TYPES } from '../../../constants/TagsConstants';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';

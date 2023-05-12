@@ -1,5 +1,5 @@
-import { Dish } from '../../../../../types/interfaces/Dish';
 import { CardMedia, Box } from '@mui/material';
+import { Dish } from '../../../../../types/interfaces/Dish';
 import './DishMiniCard.scss';
 import TagsList from '../../../../tags/tags-list/TagsList';
 

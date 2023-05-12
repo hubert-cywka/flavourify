@@ -1,6 +1,6 @@
-import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
 
 interface SettingsPanelItemProps {
   className?: string;

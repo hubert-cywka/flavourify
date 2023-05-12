@@ -10,11 +10,11 @@ import {
 import { useContext, useState } from 'react';
 import { SearchRounded, TagRounded } from '@mui/icons-material';
 import './DisplayedTag.scss';
-import { Tag } from '../../../types/interfaces/Tag';
-import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
-import Builder from '../../../utility/Builder';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { ALL_TAGS, NO_TAGS_ERROR } from '../../../constants/TagsConstants';
+import { lastViewedDishContext } from '../../../contexts/LastViewedDishContext';
+import { Tag } from '../../../types/interfaces/Tag';
+import Builder from '../../../utility/Builder';
 import { useTags } from '../../../utility/hooks/queries/useTags';
 
 interface DisplayedTagProps {

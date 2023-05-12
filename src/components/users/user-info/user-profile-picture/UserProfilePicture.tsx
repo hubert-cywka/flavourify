@@ -1,18 +1,18 @@
 import { useRef } from 'react';
+import { Box, Input } from '@mui/material';
+import imageCompression from 'browser-image-compression';
 import { useSnackbar } from 'notistack';
 import { IMAGE_EDIT_ERROR } from '../../../../constants/DishesConstants';
-import imageCompression from 'browser-image-compression';
-import { Box, Input } from '@mui/material';
 import './UserProfilePicture.scss';
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded';
-import { changeMyProfilePicture } from '../../../../services/UserService';
-import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 import { USER_DETAILS_QUERY } from '../../../../constants/QueryConstants';
-import { queryClient } from '../../../../services/QueryClient';
 import {
   PROFILE_PICTURE_CHANGE_SUCCESS,
   PROFILE_PICTURE_CHANGE_UNEXPECTED_ERROR
 } from '../../../../constants/UserConstants';
+import { queryClient } from '../../../../services/QueryClient';
+import { changeMyProfilePicture } from '../../../../services/UserService';
+import { getCompressedImageUrl } from '../../../../utility/getCompressedImageUrl';
 
 interface UserProfilePictureProps {
   src: string;

@@ -1,12 +1,12 @@
 import { RefObject } from 'react';
-import { Tag } from '../types/interfaces/Tag';
-import { getTags } from '../services/TagsService';
+import { enqueueSnackbar } from 'notistack';
 import { getCompleteTagsFromTagNames } from './getCompleteTagsFromTagNames';
 import { getCompressedImageUrl } from './getCompressedImageUrl';
-import { enqueueSnackbar } from 'notistack';
 import { IMAGE_COMPRESSION_ERROR, NEW_INGREDIENT_PLACEHOLDER } from '../constants/DishesConstants';
-import { Ingredient } from '../types/interfaces/Ingredient';
+import { getTags } from '../services/TagsService';
 import { Dish } from '../types/interfaces/Dish';
+import { Ingredient } from '../types/interfaces/Ingredient';
+import { Tag } from '../types/interfaces/Tag';
 
 export const getUpdatedTags = async (ref: RefObject<any>, placeholder: Tag[]) => {
   if (!ref?.current?.children) return placeholder;

@@ -1,7 +1,7 @@
-import { Box, SelectChangeEvent, Tab } from '@mui/material';
+import { Dispatch, SetStateAction, SyntheticEvent, useRef, useState } from 'react';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { Dispatch, SetStateAction, SyntheticEvent, useRef, useState } from 'react';
+import { Box, SelectChangeEvent, Tab } from '@mui/material';
 import { Tag, TagType } from '../../../types/interfaces/Tag';
 import './TagsManagementPanel.scss';
 import TagsAddPanel from './tags-add-panel/TagsAddPanel';

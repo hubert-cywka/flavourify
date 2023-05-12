@@ -1,7 +1,4 @@
-import AppRouter from '../../router/AppRouter';
-import StatusScreen from '../../status-screen/StatusScreen';
-import appRouter from '../../router/AppRouter';
-import ROUTE from '../../router/RoutingConstants';
+import { Navigate } from 'react-router';
 import {
   ERROR_403_CAPTION,
   ERROR_403_HEADER,
@@ -14,7 +11,10 @@ import {
   ERROR_500_IMAGE
 } from '../../../constants/AppConstants';
 import { hasUserPermission } from '../../../services/AuthService';
-import { Navigate } from 'react-router';
+import AppRouter from '../../router/AppRouter';
+import appRouter from '../../router/AppRouter';
+import ROUTE from '../../router/RoutingConstants';
+import StatusScreen from '../../status-screen/StatusScreen';
 
 const ErrorPage = () => {
   const error = AppRouter.state.location.state;

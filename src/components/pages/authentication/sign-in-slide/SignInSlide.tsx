@@ -1,19 +1,19 @@
-import { Box, Button, Input, Typography } from '@mui/material';
+import { useState } from 'react';
 import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
 import KeyRoundedIcon from '@mui/icons-material/KeyRounded';
-import { useState } from 'react';
+import { Box, Button, Input, Typography } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError, HttpStatusCode } from 'axios';
+import { useForm } from 'react-hook-form';
 import {
   REDIRECT_TO_SIGN_UP,
   SIGN_IN_IMAGE,
   SIGN_UP_UNEXPECTED_ERROR,
   USER_NOT_FOUND
 } from '../../../../constants/AuthConstants';
-import { useMutation } from '@tanstack/react-query';
 import { signInUser } from '../../../../services/AuthService';
-import { AxiosError, HttpStatusCode } from 'axios';
 import appRouter from '../../../router/AppRouter';
 import ROUTE from '../../../router/RoutingConstants';
-import { useForm } from 'react-hook-form';
 
 type SignInInputs = {
   email: string;
