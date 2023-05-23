@@ -2,8 +2,8 @@
 
 @mixin page-container {
   width: 100vw;
+  height: calc(100 * var(--vh, 1vh));
   box-sizing: border-box;
-  height: calc(100 * var(--vh));
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -16,7 +16,7 @@
 
 @mixin dish-card {
   width: $dish-card-width;
-  height: calc(100 * var(--vh) - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
+  height: calc(100 * var(--vh, 1vh) - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
   margin: $standard-element-spacing auto 0;
   position: relative;
   box-sizing: border-box;

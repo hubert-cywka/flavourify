@@ -28,7 +28,7 @@ const SignInSlide = ({ slideToSignUp }: SignInSlideProps) => {
   const [signInError, setSignInError] = useState('');
   const { register, handleSubmit, getValues } = useForm<SignInInputs>();
   const { mutateAsync: signIn, status } = useMutation(['SIGN_IN_QUERY_KEY'], () =>
-    signInUser({ email: getValues('email'), password: getValues('password') })
+    signInUser({ email: getValues('email').trim(), password: getValues('password').trim() })
   );
 
   const handleSignIn = () => {
