@@ -67,9 +67,9 @@ const SignUpSlide = ({ slideToSignIn }: SignUpSlideProps) => {
 
   const { mutateAsync: createNewUser, status } = useMutation(['SIGN_UP_QUERY_KEY'], () =>
     createUser({
-      username: getValues('nickname'),
-      email: getValues('email'),
-      password: getValues('password')
+      username: getValues('nickname').trim(),
+      email: getValues('email').trim(),
+      password: getValues('password').trim()
     })
   );
 

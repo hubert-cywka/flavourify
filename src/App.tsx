@@ -6,11 +6,6 @@ import AppRouter from './components/router/AppRouter';
 import { APP_OFFLINE_ALERT } from './constants/AppConstants';
 import { OFFLINE_STATUS_NOTIFICATION_KEY } from './constants/NotificationKeyConstants';
 import { apiClient, apiURL } from './services/ApiClient';
-import {
-  setCustomViewportHeightVariable,
-  setCustomViewportSizeVariableUpdater,
-  setCustomViewportWidthVariable
-} from './utility/viewportSizeVariable';
 
 declare module '@mui/material/Button' {
   // eslint-disable-next-line no-unused-vars
@@ -50,10 +45,6 @@ function App() {
     }, 3000);
     return () => clearInterval(interval);
   }, [shouldDisplayAlert]);
-
-  setCustomViewportWidthVariable();
-  setCustomViewportHeightVariable();
-  setCustomViewportSizeVariableUpdater();
 
   return (
     <AppProvider>

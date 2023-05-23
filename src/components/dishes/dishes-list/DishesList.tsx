@@ -77,6 +77,7 @@ const DishesList = ({ className }: DishesListProps) => {
       <>
         {data && (
           <Swiper
+            observer
             allowSlidePrev={!isLocked}
             allowSlideNext={!isLocked}
             initialSlide={lastViewedDish.slide}
