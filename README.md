@@ -2,6 +2,11 @@
 
 Whole frontend and backend created by myself.
 
+I've developed a recipe book app that caters to users' needs (actually, mine needs) by providing a convenient way to maintain collection of recipes. This app also incorporates a user system with JWT, refresh tokens, roles.
+One of the app's standout features is the option to create menus. Users can plan their meals by selecting recipes from available ones. The app then calculates the required ingredients, streamlining the grocery shopping process.
+The app was built using React and TypeScript, utilizing popular libraries such as Material UI, React Query, and React Hook Form for enhanced functionality and user experience. Its Mobile First Design ensures a seamless mobile viewing experience, and thanks to Capacitor, it can be easily converted into a mobile app.
+Backend is implemented with usage of Spring Boot.
+
 Currently deployed at [flavourify.netlify.app](https://flavourify.netlify.app).
 
 ![Menu](https://user-images.githubusercontent.com/98762890/236291765-0026e2b9-7b24-430c-9247-97307514db98.png)
