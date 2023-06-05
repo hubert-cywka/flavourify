@@ -3,7 +3,7 @@ import { getAuthToken, refreshToken, signOutUser } from './AuthService';
 import AppRouter from '../components/router/AppRouter';
 import ROUTE from '../components/router/RoutingConstants';
 
-export const apiURL = process.env.API_URL ?? 'http://localhost:8080';
+export const apiURL = process.env.REACT_APP_PROD_API_URL ?? 'http://localhost:8080';
 
 export const apiClient = axios.create({
   baseURL: apiURL,
