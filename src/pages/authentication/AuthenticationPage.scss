@@ -1,0 +1,110 @@
+@import "../../styles/shared";
+@import "../../styles/variables";
+
+.authentication-page-container {
+  @include page-container;
+
+  .sign-in-slide, .sign-up-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    will-change: transform;
+  }
+
+  .sign-in-slide {
+    background: #4b13a9;
+  }
+
+  .sign-up-slide {
+    background: #320b72;
+  }
+
+  .authentication-slide {
+    @include content-container(100);
+    height: 100%;
+    overflow-y: auto;
+    justify-content: center;
+
+    .sign-up-info, .authentication-input, .authentication-button {
+      padding: $standard-element-spacing;
+      border-radius: $inner-border-radius-5;
+      width: 80%;
+    }
+
+    .sign-up-info, .authentication-panel-redirect {
+      font-size: $small-font-size;
+    }
+
+    .sign-up-info, .authentication-button, .authentication-panel-redirect {
+      font-weight: bold;
+    }
+
+    .sign-up-info {
+      background: $white-transparent-background-5;
+      box-sizing: border-box;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.success {
+       color: rgba(22, 255, 105, 0.8);
+      }
+
+      &.error {
+        color: rgba(255, 0, 0, 0.8);
+      }
+
+      &.info {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .sign-in-image {
+      max-width: 75%;
+    }
+
+    .sign-up-image {
+      max-width: 50%;
+    }
+
+    .authentication-form {
+      width: 100%;
+
+      .authentication-input {
+        background: $white-transparent-background-10;
+        margin: $small-element-spacing auto 0 auto;
+        font-size: $standard-font-size;
+
+        .authentication-input-icon {
+          margin-right: $standard-element-spacing;
+        }
+      }
+    }
+
+    .authentication-panel-header {
+      font-weight: bold;
+      font-size: $huge-font-size;
+    }
+
+    .authentication-panel-caption {
+      margin: 0 auto $standard-element-spacing;
+    }
+
+    .authentication-button {
+      margin: $standard-element-spacing auto;
+    }
+
+    .authentication-panel-redirect {
+      z-index: 10;
+      margin: 0 auto $big-element-spacing auto;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -11,6 +11,6 @@ export const setCustomViewportWidthVariable = () => {
 export const setCustomViewportSizeVariableUpdater = () => {
   window.addEventListener('resize', () => {
     setCustomViewportHeightVariable();
-    setCustomViewportHeightVariable();
+    setCustomViewportWidthVariable();
   });
 };

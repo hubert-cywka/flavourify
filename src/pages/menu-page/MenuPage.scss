@@ -1,0 +1,101 @@
+@import '../../styles/shared';
+@import '../../styles/variables';
+
+.menu-page-container {
+  @include page-container;
+
+  .top-navbar {
+    @include navbar;
+  }
+
+  .menu-container {
+    @include content-container(100);
+    height: calc(100 * var(--vh) - #{$bottom-navbar-height} - 2 * #{$standard-element-spacing} - #{$page-offset} - #{$top-navbar-height});
+    margin-top: calc(#{$top-navbar-height} + #{$standard-element-spacing} + #{$page-offset});
+    margin-bottom: $bottom-navbar-height;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .menu, .menu-ingredients-container {
+      width: 90%;
+    }
+
+    .menu-ingredients-container {
+      will-change: transform;
+    }
+
+    .toggle-ingredients-visibility-button {
+      position: absolute;
+      bottom: 0;
+      z-index: 10000;
+
+      .hide, .expand {
+        transition: transform 0.5s;
+        font-size: $small-icon-font-size;
+      }
+
+      .hide {
+        transform: rotate(0deg);
+      }
+
+      .expand {
+        transform: rotate(180deg);
+      }
+    }
+
+    .menu-ingredients-container {
+      @include shadow($shadow);
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      overflow-y: hidden;
+      box-sizing: border-box;
+      height: 100%;
+
+      .menu-ingredients {
+        border-radius: $outer-border-radius-10;
+        padding: $standard-element-spacing $standard-element-spacing calc(#{$big-element-spacing} + #{$small-icon-font-size});
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+
+        .no-ingredients {
+          margin: auto;
+
+          .no-ingredients-error {
+            margin-top: auto;
+            font-weight: bold;
+            font-size: $standard-font-size;
+            margin-bottom: $standard-element-spacing;
+          }
+
+          .refetch-ingredients-button {
+            @include action-button-standard;
+          }
+        }
+
+        .menu-ingredients-header {
+          @include info-header;
+          margin: $standard-element-spacing 0;
+          font-weight: bold;
+        }
+
+        .menu-ingredients-info {
+          @include info-description;
+          width: 90%;
+          margin: 0 auto $big-element-spacing;
+          opacity: 0.9;
+        }
+
+        .menu-ingredients-image {
+          width: 85%;
+        }
+      }
+    }
+  }
+}
