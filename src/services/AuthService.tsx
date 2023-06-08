@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import { apiClient } from './ApiClient';
-import appRouter from '../components/router/AppRouter';
-import ROUTE from '../components/router/RoutingConstants';
+import appRouter from '../router/AppRouter';
+import ROUTE from '../router/RoutingConstants';
 import { USER_ROLE } from '../types/enums/UserRole';
 import { SignInRequest } from '../types/interfaces/SignInRequest';
 import { SignInResponse } from '../types/interfaces/SignInResponse';

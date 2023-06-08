@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+@import '../../../styles/shared';
+
+.settings-panel-container {
+  @include content-container(100);
+  @include translucent-tile;
+
+  .settings-panel-header {
+    box-sizing: border-box;
+    padding-bottom: $big-element-spacing;
+    margin-bottom: $standard-element-spacing;
+    font-weight: bold;
+    @include shadow($button-shadow);
+  }
+
+  .settings-panel-item {
+    cursor: pointer;
+    border: thin solid $lightly-highlighted-background;
+    font-size: $small-font-size;
+
+    .icon {
+      font-size: $big-font-size;
+    }
+
+    &:hover {
+      background-color: $highlighted-background;
+    }
+  }
+
+  .user-info-container {
+    margin-bottom: $big-element-spacing;
+  }
+
+  .displayed-setting {
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+
+    .tags-management-panel {
+      height: 100%;
+      width: 100%;
+    }
+
+    .profile-edit-panel {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

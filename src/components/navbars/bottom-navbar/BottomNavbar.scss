@@ -11,6 +11,7 @@
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 10;
+  overflow: hidden;
 
   .MuiBottomNavigation-root {
     border-radius: $outer-border-radius-25 $outer-border-radius-25 0 0;

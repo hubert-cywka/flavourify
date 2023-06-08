@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+@import '../../styles/shared';
+
+.discover-page-container {
+  @include page-container;
+  display: flex;
+  flex-direction: column;
+  padding-top: $huge-element-spacing;
+
+    .slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
+      height: calc(var(--vh) * 100 - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$standard-element-spacing});
+      margin-bottom: $bottom-navbar-height + $standard-element-spacing;
+    }
+
+  .swiper-pagination {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+
+    .swiper-pagination-bullet {
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: $white-transparent-background-35;
+      border-radius: $round-border-radius-50;
+      margin: 0 5px;
+      transition: background-color 0.25s ease-in-out, width 0.25s ease-in-out, height 0.25s ease-in-out;
+
+      &.swiper-pagination-bullet-active {
+        background: $white-transparent-background-75;
+        width: 0.9rem;
+        height: 0.9rem;
+      }
+    }
+  }
+}

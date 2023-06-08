@@ -1,8 +1,10 @@
 @import './variables';
 
 @mixin page-container {
-  width: 100vw;
-  height: calc(100 * var(--vh, 1vh));
+  width: calc(100 * var(--vw));
+  height: calc(100 * var(--vh));
+  max-width: 100vw;
+  max-height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -16,8 +18,8 @@
 
 @mixin dish-card {
   width: $dish-card-width;
-  height: calc(100 * var(--vh, 1vh) - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
-  margin: $standard-element-spacing auto 0;
+  height: calc(100 * var(--vh) - #{$bottom-navbar-height} - #{$huge-element-spacing} - #{$page-offset} - #{$top-navbar-height});
+  margin: $standard-element-spacing 0 0;
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -142,7 +144,7 @@
 
 @mixin content-container($desktop-width-percentage) {
   width: 100%;
-  @media (orientation: landscape) and (min-width: 910px) {
+  @media (min-width: $md) {
     max-width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
     width: calc(#{$max-page-width} * #{$desktop-width-percentage} / 100);
   }
@@ -168,7 +170,7 @@
 }
 
 @mixin navbar-max-width {
-  @media (orientation: landscape) and (min-width: 910px)  {
+  @media (min-width: $md)  {
     max-width: calc(#{$max-page-width} + #{$big-element-spacing});
   }
 }

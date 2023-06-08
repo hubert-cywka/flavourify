@@ -22,8 +22,8 @@ import {
 } from '../../../constants/TagsConstants';
 import { Tag } from '../../../types/interfaces/Tag';
 import { useTags } from '../../../utility/hooks/queries/useTags';
-import appRouter from '../../router/AppRouter';
-import ROUTE from '../../router/RoutingConstants';
+import appRouter from '../../../router/AppRouter';
+import ROUTE from '../../../router/RoutingConstants';
 import CompleteTagsList from '../complete-tags-list/CompleteTagsList';
 
 interface TagsListProps {

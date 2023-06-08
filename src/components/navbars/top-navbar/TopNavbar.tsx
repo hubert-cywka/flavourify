@@ -7,7 +7,7 @@ import { ArrowBackRounded } from '@mui/icons-material';
 import { useState } from 'react';
 import { hasAdminPermission } from '../../../services/AuthService';
 import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
-import appRouter from '../../router/AppRouter';
+import appRouter from '../../../router/AppRouter';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
 

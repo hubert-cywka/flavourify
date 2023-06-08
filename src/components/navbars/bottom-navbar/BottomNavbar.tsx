@@ -1,5 +1,5 @@
 import { BottomNavigationAction, BottomNavigation, Box } from '@mui/material';
-import ROUTE from '../../router/RoutingConstants';
+import ROUTE from '../../../router/RoutingConstants';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';

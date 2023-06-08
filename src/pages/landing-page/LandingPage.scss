@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+@import '../../styles/shared';
+
+.landing-page-container {
+  @include page-container;
+
+  .top-navbar {
+    @include navbar;
+  }
+}
