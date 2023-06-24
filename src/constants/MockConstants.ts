@@ -1,9 +1,9 @@
 import { ERROR_403_IMAGE } from './AppConstants';
-import { USER_ROLE } from '../types/enums/UserRole';
-import { SignInRequest } from '../types/interfaces/SignInRequest';
-import { SignInResponse } from '../types/interfaces/SignInResponse';
-import { SignUpRequest } from '../types/interfaces/SignUpRequest';
-import { User } from '../types/interfaces/User';
+import { USER_ROLE } from 'types/enums/UserRole';
+import { SignInRequest } from 'types/interfaces/SignInRequest';
+import { SignInResponse } from 'types/interfaces/SignInResponse';
+import { SignUpRequest } from 'types/interfaces/SignUpRequest';
+import { User } from 'types/interfaces/User';
 
 export const MOCK_USER: User = {
   username: 'mock_username',

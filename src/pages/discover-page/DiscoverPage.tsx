@@ -3,10 +3,10 @@ import './DiscoverPage.scss';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
-import LatestDishSlide from './latest-dish-slide/LatestDishSlide';
-import RandomDishSlide from './random-dish-slide/RandomDishSlide';
-import { simpleOpacityAnimation } from '../../constants/AnimationConfigs';
-import AnimatePresence from '../../components/animate-presence/AnimatePresence';
+import LatestDishSlide from 'pages/discover-page/latest-dish-slide/LatestDishSlide';
+import RandomDishSlide from 'pages/discover-page/random-dish-slide/RandomDishSlide';
+import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import AnimatePresence from 'components/animate-presence/AnimatePresence';
 
 const DiscoverPage = () => {
   return (

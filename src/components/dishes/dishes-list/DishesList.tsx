@@ -11,12 +11,12 @@ import {
   NO_RECIPES_IMAGE,
   NO_RECIPES_TITLE
 } from '../../../constants/DishesConstants';
-import { DishesPage } from '../../../services/DishService';
-import { Dish } from '../../../types/interfaces/Dish';
-import Builder from '../../../utility/Builder';
-import { useDishes } from '../../../utility/hooks/queries/useDishes';
-import DishCard from '../dish-card/DishCard';
-import ErrorDishCard from '../dish-card/other-variants/error-dish-card/ErrorDishCard';
+import { DishesPage } from 'services/DishService';
+import { Dish } from 'types/interfaces/Dish';
+import Builder from 'utility/Builder';
+import { useDishes } from 'utility/hooks/queries/useDishes';
+import DishCard from 'components/dishes/dish-card/DishCard';
+import ErrorDishCard from 'components/dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
 
 interface DishesListProps {
   className?: string;

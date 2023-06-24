@@ -5,12 +5,12 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { simpleOpacityAnimation } from '../../../constants/AnimationConfigs';
-import { DEFAULT_RECIPE_STEP } from '../../../constants/DishesConstants';
-import { getUpdatedRecipe } from '../../../utility/dishRecipeUpdateUtils';
-import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import AnimatePresence from '../../animate-presence/AnimatePresence';
-import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
+import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import { DEFAULT_RECIPE_STEP } from 'constants/DishesConstants';
+import { getUpdatedRecipe } from 'utility/dishRecipeUpdateUtils';
+import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import AnimatePresence from 'components/animate-presence/AnimatePresence';
+import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
 
 interface DishRecipeProps {
   recipe: string[];

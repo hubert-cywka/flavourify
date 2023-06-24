@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders, AxiosRequestConfig, HttpStatusCode } from 'axios';
 import { getAuthToken, refreshToken, signOutUser } from './AuthService';
-import AppRouter from '../router/AppRouter';
-import ROUTE from '../router/RoutingConstants';
+import AppRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
 
 export const apiURL = process.env.REACT_APP_PROD_API_URL ?? 'http://localhost:8080';
 

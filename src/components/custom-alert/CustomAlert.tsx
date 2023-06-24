@@ -7,6 +7,7 @@ import GppBadRoundedIcon from '@mui/icons-material/GppBadRounded';
 import GppMaybeRoundedIcon from '@mui/icons-material/GppMaybeRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
+
 interface CustomAlertProps extends CustomContentProps {
   variant: 'success' | 'info' | 'error' | 'warning';
 }

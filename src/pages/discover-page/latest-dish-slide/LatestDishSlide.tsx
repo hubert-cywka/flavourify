@@ -1,11 +1,11 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import Builder from '../../../utility/Builder';
-import appRouter from '../../../router/AppRouter';
-import ROUTE from '../../../router/RoutingConstants';
+import Builder from 'utility/Builder';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
 import '../SlidesShared.scss';
 import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
-import DishMiniCard from '../../../components/dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
-import { useLatestDish } from '../../../utility/hooks/queries/useLatestDish';
+import DishMiniCard from 'components/dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
+import { useLatestDish } from 'utility/hooks/queries/useLatestDish';
 
 const LatestDishSlide = () => {
   const { data, status } = useLatestDish();

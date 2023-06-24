@@ -1,8 +1,8 @@
 import { Box, Slide } from '@mui/material';
 import './AuthenticationPage.scss';
 import { useState } from 'react';
-import SignInSlide from './sign-in-slide/SignInSlide';
-import SignUpSlide from './sign-up-slide/SignUpSlide';
+import SignInSlide from 'pages/authentication/sign-in-slide/SignInSlide';
+import SignUpSlide from 'pages/authentication/sign-up-slide/SignUpSlide';
 
 const AuthenticationPage = () => {
   const [isSignInVisible, setIsSignInVisible] = useState<boolean>(true);

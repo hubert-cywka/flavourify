@@ -1,4 +1,4 @@
-import { Tag } from '../types/interfaces/Tag';
+import { Tag } from 'types/interfaces/Tag';
 
 export const getCompleteTagsFromTagNames = (names: string[], tags: Tag[]) => {
   const newParsedTags: Tag[] = [];

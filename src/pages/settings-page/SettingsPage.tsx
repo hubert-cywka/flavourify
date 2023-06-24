@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import './SettingsPage.scss';
-import SettingsPanel from './settings-panel/SettingsPanel';
-import { simpleOpacityAnimation } from '../../constants/AnimationConfigs';
-import AnimatePresence from '../../components/animate-presence/AnimatePresence';
+import SettingsPanel from 'pages/settings-page/settings-panel/SettingsPanel';
+import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import AnimatePresence from 'components/animate-presence/AnimatePresence';
 
 export const SettingsPage = () => {
   return (

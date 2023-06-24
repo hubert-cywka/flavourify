@@ -1,7 +1,7 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { Navigate } from 'react-router';
 import ROUTE from './RoutingConstants';
-import { hasAdminPermission, hasUserPermission } from '../services/AuthService';
+import { hasAdminPermission, hasUserPermission } from 'services/AuthService';
 
 interface SecuredPathProps {
   children: ReactJSXElement;

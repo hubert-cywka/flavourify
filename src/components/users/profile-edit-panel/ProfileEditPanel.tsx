@@ -1,9 +1,9 @@
 import { Box, Tab } from '@mui/material';
-import PasswordChangeForm from './password-change-form/PasswordChangeForm';
 import './ProfileEditPanel.scss';
-import UsernameChangeForm from './username-change-form/UsernameChangeForm';
-import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from '../../../constants/AuthConstants';
-import UserInfo from '../user-info/UserInfo';
+import PasswordChangeForm from 'components/users/profile-edit-panel/password-change-form/PasswordChangeForm';
+import UsernameChangeForm from 'components/users/profile-edit-panel/username-change-form/UsernameChangeForm';
+import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from 'constants/AuthConstants';
+import UserInfo from 'components/users/user-info/UserInfo';
 import TabList from '@mui/lab/TabList';
 import { TabContext, TabPanel } from '@mui/lab';
 import { SyntheticEvent, useState } from 'react';

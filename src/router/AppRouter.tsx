@@ -2,14 +2,14 @@ import { Navigate } from 'react-router';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import ROUTE from './RoutingConstants';
 import SecuredPath, { AccessType } from './SecuredPath';
-import BottomNavbar from '../components/navbars/bottom-navbar/BottomNavbar';
-import AuthenticationPage from '../pages/authentication/AuthenticationPage';
-import DiscoverPage from '../pages/discover-page/DiscoverPage';
-import ErrorPage from '../pages/error-page/ErrorPage';
-import FoundDishPage from '../pages/found-dish-page/FoundDishPage';
-import LandingPage from '../pages/landing-page/LandingPage';
-import MenuPage from '../pages/menu-page/MenuPage';
-import SettingsPage from '../pages/settings-page/SettingsPage';
+import BottomNavbar from 'components/navbars/bottom-navbar/BottomNavbar';
+import AuthenticationPage from 'pages/authentication/AuthenticationPage';
+import DiscoverPage from 'pages/discover-page/DiscoverPage';
+import ErrorPage from 'pages/error-page/ErrorPage';
+import FoundDishPage from 'pages/found-dish-page/FoundDishPage';
+import LandingPage from 'pages/landing-page/LandingPage';
+import MenuPage from 'pages/menu-page/MenuPage';
+import SettingsPage from 'pages/settings-page/SettingsPage';
 
 const appRouter = createBrowserRouter([
   {

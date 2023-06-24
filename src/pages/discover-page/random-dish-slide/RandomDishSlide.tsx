@@ -1,10 +1,10 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import appRouter from '../../../router/AppRouter';
-import ROUTE from '../../../router/RoutingConstants';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
 import '../SlidesShared.scss';
 import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded';
-import DishMiniCard from '../../../components/dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
-import { useRandomDish } from '../../../utility/hooks/queries/useRandomDish';
+import DishMiniCard from 'components/dishes/dish-card/other-variants/dish-mini-card/DishMiniCard';
+import { useRandomDish } from 'utility/hooks/queries/useRandomDish';
 
 const RandomDishSlide = () => {
   const { data, refetch, isFetching } = useRandomDish();

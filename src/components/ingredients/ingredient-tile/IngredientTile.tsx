@@ -12,11 +12,11 @@ import {
   INGREDIENT_DEFAULT_AMOUNT,
   INGREDIENT_NAME_MAX_LENGTH,
   INGREDIENT_UNIT_MAX_LENGTH
-} from '../../../constants/NumberConstants';
-import { type Ingredient } from '../../../types/interfaces/Ingredient';
+} from 'constants/NumberConstants';
+import { type Ingredient } from 'types/interfaces/Ingredient';
 import { useState, useRef } from 'react';
-import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
-import EditableTextField from '../../custom-inputs/editable-text-field/EditableTextField';
+import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
