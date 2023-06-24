@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { TagType } from '../types/interfaces/Tag';
+import { TagType } from 'types/interfaces/Tag';
 
 export const getName = (tagNameRef: RefObject<HTMLInputElement>): string => {
   if (!tagNameRef?.current) return '';

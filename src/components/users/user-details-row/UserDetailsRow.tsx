@@ -1,5 +1,5 @@
 import { Box, Button, ClickAwayListener, Collapse, IconButton } from '@mui/material';
-import { User } from '../../../types/interfaces/User';
+import { User } from 'types/interfaces/User';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import './UserDetailsRow.scss';
 import { useState } from 'react';
@@ -8,16 +8,16 @@ import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSetting
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { useSnackbar } from 'notistack';
-import { USERS_QUERY } from '../../../constants/QueryConstants';
+import { USERS_QUERY } from 'constants/QueryConstants';
 import {
   USER_DELETE_ERROR,
   USER_DELETE_SUCCESS,
   USER_ROLE_CHANGE_ERROR,
   USER_ROLE_CHANGE_SUCCESS
-} from '../../../constants/UserConstants';
-import { queryClient } from '../../../services/QueryClient';
-import { deleteUser, updateUserRole } from '../../../services/UserService';
-import { USER_ROLE } from '../../../types/enums/UserRole';
+} from 'constants/UserConstants';
+import { queryClient } from 'services/QueryClient';
+import { deleteUser, updateUserRole } from 'services/UserService';
+import { USER_ROLE } from 'types/enums/UserRole';
 
 interface UserDetailsRowProps {
   className?: string;

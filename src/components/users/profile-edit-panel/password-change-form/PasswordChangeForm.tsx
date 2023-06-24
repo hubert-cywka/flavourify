@@ -1,9 +1,9 @@
-import Builder from '../../../../utility/Builder';
+import Builder from 'utility/Builder';
 import {
   PASSWORD_CHANGE_SUCCESS,
   PASSWORD_CHANGE_UNEXPECTED_ERROR,
   PASSWORD_CHANGE_WRONG_CREDENTIALS_ERROR
-} from '../../../../constants/UserConstants';
+} from 'constants/UserConstants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, FormHelperText, Input, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
@@ -12,14 +12,14 @@ import { useSnackbar } from 'notistack';
 import { FieldError, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import '../ProfileEditFormShared.scss';
-import { USER_DETAILS_QUERY } from '../../../../constants/QueryConstants';
+import { USER_DETAILS_QUERY } from 'constants/QueryConstants';
 import {
   getConfirmPasswordValidationSchema,
   getNewPasswordValidationSchema,
   getCurrentPasswordValidationSchema
-} from '../../../../constants/ValidationSchemas';
-import { queryClient } from '../../../../services/QueryClient';
-import { changeMyPassword } from '../../../../services/UserService';
+} from 'constants/ValidationSchemas';
+import { queryClient } from 'services/QueryClient';
+import { changeMyPassword } from 'services/UserService';
 
 type PasswordChangeInputs = {
   currentPassword: string;

@@ -1,12 +1,12 @@
 import jwtDecode from 'jwt-decode';
 import { apiClient } from './ApiClient';
-import appRouter from '../router/AppRouter';
-import ROUTE from '../router/RoutingConstants';
-import { USER_ROLE } from '../types/enums/UserRole';
-import { SignInRequest } from '../types/interfaces/SignInRequest';
-import { SignInResponse } from '../types/interfaces/SignInResponse';
-import { TokenRefreshResponse } from '../types/interfaces/TokenRefreshResponse';
-import { User } from '../types/interfaces/User';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
+import { USER_ROLE } from 'types/enums/UserRole';
+import { SignInRequest } from 'types/interfaces/SignInRequest';
+import { SignInResponse } from 'types/interfaces/SignInResponse';
+import { TokenRefreshResponse } from 'types/interfaces/TokenRefreshResponse';
+import { User } from 'types/interfaces/User';
 
 const AUTH_KEY = 'AUTH_TOKEN';
 const AUTH_REFRESH_KEY = 'AUTH_REFRESH_TOKEN';

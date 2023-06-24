@@ -5,15 +5,15 @@ import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import SettingsPanelItem from './settings-panel-item/SettingsPanelItem';
-import { ColorModeContext } from '../../../contexts/ColorModeContext';
+import SettingsPanelItem from 'pages/settings-page/settings-panel/settings-panel-item/SettingsPanelItem';
+import { ColorModeContext } from 'contexts/ColorModeContext';
 import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import { hasAdminPermission, signOutUser } from '../../../services/AuthService';
-import TagsManagementPanel from '../../../components/tags/tags-management-panel/TagsManagementPanel';
-import ProfileEditPanel from '../../../components/users/profile-edit-panel/ProfileEditPanel';
-import UserInfo from '../../../components/users/user-info/UserInfo';
-import UsersManagementPanel from '../../../components/users/users-management-panel/UsersManagementPanel';
+import { hasAdminPermission, signOutUser } from 'services/AuthService';
+import TagsManagementPanel from 'components/tags/tags-management-panel/TagsManagementPanel';
+import ProfileEditPanel from 'components/users/profile-edit-panel/ProfileEditPanel';
+import UserInfo from 'components/users/user-info/UserInfo';
+import UsersManagementPanel from 'components/users/users-management-panel/UsersManagementPanel';
 
 interface SettingsPanelProps {
   className?: string;

@@ -1,7 +1,7 @@
 import { CardMedia, Box } from '@mui/material';
-import { Dish } from '../../../../../types/interfaces/Dish';
+import { Dish } from 'types/interfaces/Dish';
 import './DishMiniCard.scss';
-import TagsList from '../../../../tags/tags-list/TagsList';
+import TagsList from 'components/tags/tags-list/TagsList';
 
 interface DishMiniCardProps {
   dish: Dish;

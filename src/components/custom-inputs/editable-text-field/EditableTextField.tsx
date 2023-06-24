@@ -1,22 +1,18 @@
 import React, { RefObject, useState } from 'react';
 import { Input, SxProps } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from '../../../constants/AppConstants';
-import { useUpdateEffect } from '../../../utility/hooks/useUpdateEffect';
+import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from 'constants/AppConstants';
+import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
 
-interface EditableTextFieldProps {
+interface EditableTextFieldProps extends React.ComponentProps<'input'> {
   isReadOnly?: boolean;
   value: string;
-  className?: string;
   reference?: RefObject<any>;
   multiline?: boolean;
-  max?: number;
   errorMessage?: string;
   type?: 'text' | 'number';
   sx?: SxProps;
-  autoFocus?: boolean;
   preventScroll?: boolean;
-  placeholder?: string;
 }
 
 const EditableTextField = ({

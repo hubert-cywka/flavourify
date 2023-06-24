@@ -5,11 +5,11 @@ import { animated } from 'react-spring';
 import SearchBar from './search-bar/SearchBar';
 import { ArrowBackRounded } from '@mui/icons-material';
 import { useState } from 'react';
-import { hasAdminPermission } from '../../../services/AuthService';
-import DishCardAddDialog from '../../dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
-import appRouter from '../../../router/AppRouter';
+import { hasAdminPermission } from 'services/AuthService';
+import DishCardAddDialog from 'components/dishes/dish-card/other-variants/dish-card-add/DishCardAddDialog';
+import appRouter from 'router/AppRouter';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DisplayedTag from '../../tags/displayed-tag/DisplayedTag';
+import DisplayedTag from 'components/tags/displayed-tag/DisplayedTag';
 
 interface TopNavbarProps {
   className?: string;

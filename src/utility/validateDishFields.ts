@@ -5,9 +5,9 @@ import {
   DISH_NAME_PLACEHOLDER,
   DISH_NOT_CHANGED_NAME_ERROR,
   DISH_WRONG_TAGS_COUNT_ERROR
-} from '../constants/DishesConstants';
-import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from '../constants/NumberConstants';
-import { Dish } from '../types/interfaces/Dish';
+} from 'constants/DishesConstants';
+import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from 'constants/NumberConstants';
+import { Dish } from 'types/interfaces/Dish';
 
 export const validateDishFields = (validatedDish: Dish): string => {
   if (!validatedDish.name.length) {

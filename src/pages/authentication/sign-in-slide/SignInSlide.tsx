@@ -10,10 +10,10 @@ import {
   SIGN_IN_IMAGE,
   SIGN_UP_UNEXPECTED_ERROR,
   USER_NOT_FOUND
-} from '../../../constants/AuthConstants';
-import { signInUser } from '../../../services/AuthService';
-import appRouter from '../../../router/AppRouter';
-import ROUTE from '../../../router/RoutingConstants';
+} from 'constants/AuthConstants';
+import { signInUser } from 'services/AuthService';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
 
 type SignInInputs = {
   email: string;

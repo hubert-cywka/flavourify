@@ -1,9 +1,9 @@
 import { Box, Button, Divider } from '@mui/material';
 import './DishCardFront.scss';
-import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
-import TagsList from '../../../tags/tags-list/TagsList';
-import DishImage from '../../dish-image/DishImage';
-import { DishCardProps } from '../DishCard';
+import IngredientsList from 'components/ingredients/ingredients-list/IngredientsList';
+import TagsList from 'components/tags/tags-list/TagsList';
+import DishImage from 'components/dishes/dish-image/DishImage';
+import { DishCardProps } from 'components/dishes/dish-card/DishCard';
 import { ArrowForwardRounded } from '@mui/icons-material';
 
 const DishCardFront = ({ dish, className, callback }: DishCardProps) => {

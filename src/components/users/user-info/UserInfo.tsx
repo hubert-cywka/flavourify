@@ -1,8 +1,8 @@
 import { Box, Skeleton } from '@mui/material';
-import Builder from '../../../utility/Builder';
+import Builder from 'utility/Builder';
 import './UserInfo.scss';
-import UserProfilePicture from './user-profile-picture/UserProfilePicture';
-import { useUserDetails } from '../../../utility/hooks/queries/useUserDetails';
+import UserProfilePicture from 'components/users/user-info/user-profile-picture/UserProfilePicture';
+import { useUserDetails } from 'utility/hooks/queries/useUserDetails';
 
 interface UserInfoProps {
   className?: string;

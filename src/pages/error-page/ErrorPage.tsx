@@ -9,12 +9,12 @@ import {
   ERROR_500_CAPTION,
   ERROR_500_HEADER,
   ERROR_500_IMAGE
-} from '../../constants/AppConstants';
-import { hasUserPermission } from '../../services/AuthService';
-import AppRouter from '../../router/AppRouter';
-import appRouter from '../../router/AppRouter';
-import ROUTE from '../../router/RoutingConstants';
-import StatusScreen from '../../components/status-screen/StatusScreen';
+} from 'constants/AppConstants';
+import { hasUserPermission } from 'services/AuthService';
+import AppRouter from 'router/AppRouter';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
+import StatusScreen from 'components/status-screen/StatusScreen';
 
 const ErrorPage = () => {
   const error = AppRouter.state.location.state;

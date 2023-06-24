@@ -22,15 +22,15 @@ import {
   SIGN_UP_REQUIREMENTS_MET,
   SIGN_UP_INITIAL_INFO,
   REDIRECT_TO_SIGN_IN
-} from '../../../constants/AuthConstants';
+} from 'constants/AuthConstants';
 import {
   getConfirmPasswordValidationSchema,
   getEmailValidationSchema,
   getNicknameValidationSchema,
   getNewPasswordValidationSchema
-} from '../../../constants/ValidationSchemas';
-import { createUser } from '../../../services/UserService';
-import StatusScreen from '../../../components/status-screen/StatusScreen';
+} from 'constants/ValidationSchemas';
+import { createUser } from 'services/UserService';
+import StatusScreen from 'components/status-screen/StatusScreen';
 
 type SignUpInputs = {
   nickname: string;

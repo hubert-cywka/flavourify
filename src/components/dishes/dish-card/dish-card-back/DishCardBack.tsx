@@ -18,18 +18,18 @@ import {
   DISH_UPDATE_SUCCESS,
   DISH_UPDATE_SUCCESS_IMAGE,
   NAME_EDIT_ERROR
-} from '../../../../constants/DishesConstants';
-import { DISH_NAME_MAX_LENGTH } from '../../../../constants/NumberConstants';
-import { DISHES_QUERY } from '../../../../constants/QueryConstants';
-import { hasAdminPermission } from '../../../../services/AuthService';
-import { addDish, deleteDish, updateDish } from '../../../../services/DishService';
-import { queryClient } from '../../../../services/QueryClient';
-import { Dish } from '../../../../types/interfaces/Dish';
-import { createUpdatedDishRecipe } from '../../../../utility/dishRecipeUpdateUtils';
-import { validateDishFields } from '../../../../utility/validateDishFields';
-import EditableTextField from '../../../custom-inputs/editable-text-field/EditableTextField';
-import IngredientsList from '../../../ingredients/ingredients-list/IngredientsList';
-import DishRecipe from '../../dish-recipe/DishRecipe';
+} from 'constants/DishesConstants';
+import { DISH_NAME_MAX_LENGTH } from 'constants/NumberConstants';
+import { DISHES_QUERY } from 'constants/QueryConstants';
+import { hasAdminPermission } from 'services/AuthService';
+import { addDish, deleteDish, updateDish } from 'services/DishService';
+import { queryClient } from 'services/QueryClient';
+import { Dish } from 'types/interfaces/Dish';
+import { createUpdatedDishRecipe } from 'utility/dishRecipeUpdateUtils';
+import { validateDishFields } from 'utility/validateDishFields';
+import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
+import IngredientsList from 'components/ingredients/ingredients-list/IngredientsList';
+import DishRecipe from 'components/dishes/dish-recipe/DishRecipe';
 import {
   EditRounded,
   ArrowBackRounded,
@@ -39,15 +39,15 @@ import {
   PlaylistAddCheckRounded
 } from '@mui/icons-material';
 import { useRef, useState } from 'react';
-import DishImage from '../../dish-image/DishImage';
-import { DishCardProps } from '../DishCard';
+import DishImage from 'components/dishes/dish-image/DishImage';
+import { DishCardProps } from 'components/dishes/dish-card/DishCard';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import TagsList from '../../../tags/tags-list/TagsList';
-import StatusScreen from '../../../status-screen/StatusScreen';
+import TagsList from 'components/tags/tags-list/TagsList';
+import StatusScreen from 'components/status-screen/StatusScreen';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
-  onQuerySuccess?: () => void;
+  onMutationSuccess?: () => void;
 }
 
 const DishCardBack = ({
@@ -55,7 +55,7 @@ const DishCardBack = ({
   className,
   callback,
   addMode,
-  onQuerySuccess
+  onMutationSuccess
 }: DishCardBackProps) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
@@ -208,7 +208,7 @@ const DishCardBack = ({
 
   const closeStatusMessage = () => {
     setStatus('idle');
-    if (status === 'success' && onQuerySuccess) onQuerySuccess();
+    if (status === 'success' && onMutationSuccess) onMutationSuccess();
   };
 
   const getStatusScreen = () => {

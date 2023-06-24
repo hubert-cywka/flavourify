@@ -5,23 +5,23 @@ import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { enqueueSnackbar } from 'notistack';
 import { useParams } from 'react-router';
-import { simpleOpacityAnimation } from '../../constants/AnimationConfigs';
+import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
 import {
   DISH_SEARCH_DONE,
   NO_RECIPES_BUTTON,
   NO_RECIPES_IMAGE,
   NO_RECIPES_TITLE
-} from '../../constants/DishesConstants';
-import { SWIPE_UP_BOUND } from '../../constants/NumberConstants';
-import Builder from '../../utility/Builder';
-import { calculateSwipePosition } from '../../utility/calculateSwipePosition';
-import DishCard from '../../components/dishes/dish-card/DishCard';
-import ErrorDishCard from '../../components/dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
-import TopNavbar from '../../components/navbars/top-navbar/TopNavbar';
-import appRouter from '../../router/AppRouter';
-import ROUTE from '../../router/RoutingConstants';
-import AnimatePresence from '../../components/animate-presence/AnimatePresence';
-import { useDish } from '../../utility/hooks/queries/useDish';
+} from 'constants/DishesConstants';
+import { SWIPE_UP_BOUND } from 'constants/NumberConstants';
+import Builder from 'utility/Builder';
+import { calculateSwipePosition } from 'utility/calculateSwipePosition';
+import DishCard from 'components/dishes/dish-card/DishCard';
+import ErrorDishCard from 'components/dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
+import TopNavbar from 'components/navbars/top-navbar/TopNavbar';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
+import AnimatePresence from 'components/animate-presence/AnimatePresence';
+import { useDish } from 'utility/hooks/queries/useDish';
 
 const FoundDishPage = () => {
   const { id } = useParams();

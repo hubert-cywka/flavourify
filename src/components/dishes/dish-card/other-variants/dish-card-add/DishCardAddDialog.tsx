@@ -1,10 +1,7 @@
 import { Box, Dialog } from '@mui/material';
-import {
-  DISH_IMAGE_PLACEHOLDER,
-  DISH_TAGS_DEFAULT
-} from '../../../../../constants/DishesConstants';
-import { Dish } from '../../../../../types/interfaces/Dish';
-import DishCardBack from '../../dish-card-back/DishCardBack';
+import { DISH_IMAGE_PLACEHOLDER, DISH_TAGS_DEFAULT } from 'constants/DishesConstants';
+import { Dish } from 'types/interfaces/Dish';
+import DishCardBack from 'components/dishes/dish-card/dish-card-back/DishCardBack';
 import './DishCardAddDialog.scss';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
@@ -30,7 +27,7 @@ const DishCardAddDialog = ({ onClose, className, open }: DishCardAddDialogProps)
           dish={EMPTY_DISH_PLACEHOLDER}
           addMode={true}
           className={`dish-card-side ${className}`}
-          onQuerySuccess={onClose}
+          onMutationSuccess={onClose}
         />
       </Box>
     </Dialog>

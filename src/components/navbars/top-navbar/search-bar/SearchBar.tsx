@@ -10,10 +10,10 @@ import {
   ListItemText
 } from '@mui/material';
 import './SearchBar.scss';
-import Builder from '../../../../utility/Builder';
-import { useDishNames } from '../../../../utility/hooks/queries/useDishNames';
-import appRouter from '../../../../router/AppRouter';
-import ROUTE from '../../../../router/RoutingConstants';
+import Builder from 'utility/Builder';
+import { useDishNames } from 'utility/hooks/queries/useDishNames';
+import appRouter from 'router/AppRouter';
+import ROUTE from 'router/RoutingConstants';
 
 interface SearchBarProps {
   className?: string;
