@@ -1,10 +1,10 @@
 import { act, render } from '@testing-library/react';
-import { MOCK_INPUT_VALUE } from 'constants/MockConstants';
+import { MOCK_INPUT_VALUE } from 'shared/constants/MockConstants';
 import EditableTextField from './EditableTextField';
 import { EditableTextFieldPageObjects } from './EditableTextFieldPageObjects';
 import '@testing-library/jest-dom';
-import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from 'constants/AppConstants';
-import AppProvider from 'AppProvider';
+import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from 'shared/constants/AppConstants';
+import AppProvider from 'shared/providers/AppProvider';
 
 const prepareMockupPage = async (
   mockValue: string,

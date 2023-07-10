@@ -1,6 +1,6 @@
 import { Box, Dialog } from '@mui/material';
-import { DISH_IMAGE_PLACEHOLDER, DISH_TAGS_DEFAULT } from 'constants/DishesConstants';
-import { Dish } from 'types/interfaces/Dish';
+import { DISH_IMAGE_PLACEHOLDER, DISH_TAGS_DEFAULT } from 'shared/constants/DishesConstants';
+import { Dish } from 'shared/types/Dish';
 import DishCardBack from 'components/dishes/dish-card/dish-card-back/DishCardBack';
 import './DishCardAddDialog.scss';
 

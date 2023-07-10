@@ -1,5 +1,5 @@
 import { CardMedia, Box } from '@mui/material';
-import { Dish } from 'types/interfaces/Dish';
+import { Dish } from 'shared/types/Dish';
 import './DishMiniCard.scss';
 import TagsList from 'components/tags/tags-list/TagsList';
 

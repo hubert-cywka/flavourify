@@ -4,12 +4,15 @@ import './IngredientList.scss';
 import { RefObject, useMemo, useState } from 'react';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { AddCircleRounded } from '@mui/icons-material';
-import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
-import { NEW_INGREDIENT_PLACEHOLDER } from 'constants/DishesConstants';
-import { MAX_INGREDIENTS_MULTIPLIER, MIN_INGREDIENTS_MULTIPLIER } from 'constants/NumberConstants';
-import { Ingredient } from 'types/interfaces/Ingredient';
-import { getUpdatedIngredients } from 'utility/dishRecipeUpdateUtils';
-import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
+import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
+import {
+  MAX_INGREDIENTS_MULTIPLIER,
+  MIN_INGREDIENTS_MULTIPLIER
+} from 'shared/constants/NumberConstants';
+import { Ingredient } from 'shared/types/Dish';
+import { getUpdatedIngredients } from 'shared/utility/dishRecipeUpdateUtils';
+import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
 import MultiplierInput from 'components/custom-inputs/multiplier-input/MultiplierInput';
 

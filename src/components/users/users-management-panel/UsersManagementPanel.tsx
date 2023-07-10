@@ -1,7 +1,7 @@
 import { Box, Input, Typography } from '@mui/material';
 import { ChangeEvent, useState, KeyboardEvent, useRef } from 'react';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
-import { User } from '../../../types/interfaces/User';
+import { UserDetails } from 'shared/types/User';
 import './UsersManagementPanel.scss';
 import {
   NO_USERS_FOUND,
@@ -9,10 +9,10 @@ import {
   USER_EDIT_WARNING,
   USERS_NOT_FOUND_ERROR,
   USERS_NOT_FOUND_IMAGE
-} from '../../../constants/UserConstants';
-import Builder from '../../../utility/Builder';
-import { useUsers } from '../../../utility/hooks/queries/useUsers';
-import { filterUsers } from '../../../utility/userUtils';
+} from 'shared/constants/UserConstants';
+import Builder from 'shared/utility/Builder';
+import { useUsers } from 'shared/hooks/queries/useUsers';
+import { filterUsers } from 'shared/utility/userUtils';
 
 interface UsersManagementPanelProps {
   className?: string;
@@ -25,7 +25,7 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
 
   const createFilteredUserRows = () => {
     if (!data) return;
-    const userRows = filterUsers(data, filter).map((user: User, id) => {
+    const userRows = filterUsers(data, filter).map((user: UserDetails, id) => {
       return <UserDetailsRow className="user-details-row" user={user} key={id} />;
     });
     if (userRows.length) {

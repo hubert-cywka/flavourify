@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import './LandingPage.scss';
-import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
 import DishesList from 'components/dishes/dishes-list/DishesList';
 import TopNavbar from 'components/navbars/top-navbar/TopNavbar';
-import { useResizeOnUpdate } from 'utility/hooks/useResizeOnUpdate';
+import { useResizeOnUpdate } from 'shared/hooks/useResizeOnUpdate';
 
 const LandingPage = () => {
   useResizeOnUpdate();

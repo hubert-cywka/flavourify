@@ -9,7 +9,7 @@ import {
   ERROR_500_CAPTION,
   ERROR_500_HEADER,
   ERROR_500_IMAGE
-} from 'constants/AppConstants';
+} from 'shared/constants/AppConstants';
 import { hasUserPermission } from 'services/AuthService';
 import AppRouter from 'router/AppRouter';
 import appRouter from 'router/AppRouter';

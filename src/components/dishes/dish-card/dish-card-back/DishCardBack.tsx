@@ -18,15 +18,15 @@ import {
   DISH_UPDATE_SUCCESS,
   DISH_UPDATE_SUCCESS_IMAGE,
   NAME_EDIT_ERROR
-} from 'constants/DishesConstants';
-import { DISH_NAME_MAX_LENGTH } from 'constants/NumberConstants';
-import { DISHES_QUERY } from 'constants/QueryConstants';
+} from 'shared/constants/DishesConstants';
+import { DISH_NAME_MAX_LENGTH } from 'shared/constants/NumberConstants';
+import { DISHES_QUERY } from 'shared/constants/QueryConstants';
 import { hasAdminPermission } from 'services/AuthService';
 import { addDish, deleteDish, updateDish } from 'services/DishService';
 import { queryClient } from 'services/QueryClient';
-import { Dish } from 'types/interfaces/Dish';
-import { createUpdatedDishRecipe } from 'utility/dishRecipeUpdateUtils';
-import { validateDishFields } from 'utility/validateDishFields';
+import { Dish } from 'shared/types/Dish';
+import { createUpdatedDishRecipe } from 'shared/utility/dishRecipeUpdateUtils';
+import { validateDishFields } from 'shared/utility/validateDishFields';
 import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
 import IngredientsList from 'components/ingredients/ingredients-list/IngredientsList';
 import DishRecipe from 'components/dishes/dish-recipe/DishRecipe';

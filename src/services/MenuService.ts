@@ -1,5 +1,4 @@
-import { Dish } from 'types/interfaces/Dish';
-import { Ingredient } from 'types/interfaces/Ingredient';
+import { Ingredient, Dish } from 'shared/types/Dish';
 
 export interface MenuItem {
   id: number;

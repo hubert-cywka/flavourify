@@ -1,11 +1,11 @@
 import { Box, CardMedia, IconButton, Input, Typography } from '@mui/material';
 import { RefObject, useRef, useState } from 'react';
-import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import './DishImage.scss';
 import FilterRoundedIcon from '@mui/icons-material/FilterRounded';
 import imageCompression from 'browser-image-compression';
 import { useSnackbar } from 'notistack';
-import { IMAGE_EDIT_ERROR, IMAGE_EDIT_INFO } from 'constants/DishesConstants';
+import { IMAGE_EDIT_ERROR, IMAGE_EDIT_INFO } from 'shared/constants/DishesConstants';
 
 interface DishImageProps {
   src: string;

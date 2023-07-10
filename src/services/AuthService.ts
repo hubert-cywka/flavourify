@@ -2,11 +2,8 @@ import jwtDecode from 'jwt-decode';
 import { apiClient } from './ApiClient';
 import appRouter from 'router/AppRouter';
 import ROUTE from 'router/RoutingConstants';
-import { USER_ROLE } from 'types/enums/UserRole';
-import { SignInRequest } from 'types/interfaces/SignInRequest';
-import { SignInResponse } from 'types/interfaces/SignInResponse';
-import { TokenRefreshResponse } from 'types/interfaces/TokenRefreshResponse';
-import { User } from 'types/interfaces/User';
+import { SignInRequest, SignInResponse, TokenRefreshResponse } from 'shared/types/Auth';
+import { UserDetails, USER_ROLE } from 'shared/types/User.d';
 
 const AUTH_KEY = 'AUTH_TOKEN';
 const AUTH_REFRESH_KEY = 'AUTH_REFRESH_TOKEN';
@@ -43,7 +40,7 @@ export function hasAdminPermission() {
   const code = getAuthToken();
   if (!code) return false;
   try {
-    const decoded: User = jwtDecode(code);
+    const decoded: UserDetails = jwtDecode(code);
     return decoded.role === USER_ROLE.ADMIN;
   } catch (e) {
     return false;

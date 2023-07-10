@@ -1,10 +1,10 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { act, render } from '@testing-library/react';
-import AppProvider from 'AppProvider';
+import AppProvider from 'shared/providers/AppProvider';
 import '@testing-library/jest-dom';
 import StatusScreen from './StatusScreen';
 import { StatusScreenPageObjects } from './StatusScreenPageObjects';
-import { MOCK_CAPTION, MOCK_HEADER, MOCK_IMG_SOURCE } from 'constants/MockConstants';
+import { MOCK_CAPTION, MOCK_HEADER, MOCK_IMG_SOURCE } from 'shared/constants/MockConstants';
 
 const prepareMockupPage = async (page: ReactJSXElement) => {
   await act(() => render(<AppProvider>{page}</AppProvider>));

@@ -2,7 +2,7 @@ import { Box, Tab } from '@mui/material';
 import './ProfileEditPanel.scss';
 import PasswordChangeForm from 'components/users/profile-edit-panel/password-change-form/PasswordChangeForm';
 import UsernameChangeForm from 'components/users/profile-edit-panel/username-change-form/UsernameChangeForm';
-import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from 'constants/AuthConstants';
+import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from 'shared/constants/AuthConstants';
 import UserInfo from 'components/users/user-info/UserInfo';
 import TabList from '@mui/lab/TabList';
 import { TabContext, TabPanel } from '@mui/lab';

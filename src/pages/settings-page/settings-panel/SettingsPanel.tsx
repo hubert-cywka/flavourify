@@ -6,7 +6,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import SettingsPanelItem from 'pages/settings-page/settings-panel/settings-panel-item/SettingsPanelItem';
-import { ColorModeContext } from 'contexts/ColorModeContext';
+import { ColorModeContext } from 'shared/contexts/ColorModeContext';
 import './SettingsPanel.scss';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { hasAdminPermission, signOutUser } from 'services/AuthService';
