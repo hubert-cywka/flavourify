@@ -10,6 +10,7 @@ import DishCardAddDialog from 'components/dishes/dish-card/other-variants/dish-c
 import appRouter from 'router/AppRouter';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DisplayedTag from 'components/tags/displayed-tag/DisplayedTag';
+import classNames from 'classnames';
 
 interface TopNavbarProps {
   className?: string;
@@ -59,10 +60,10 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   };
 
   return (
-    <Box className={`top-navbar-container ${className ?? ''}`}>
+    <Box component="nav" className={classNames('top-navbar-container', className)}>
       <SearchBar
         searchValue={searchValue}
-        className={`search-bar ${isFocusOnSearchBar ? 'active' : ''}`}
+        className={classNames('search-bar', { active: isFocusOnSearchBar })}
         onBlur={() => setIsFocusOnSearchBar(false)}
         onFocus={() => setIsFocusOnSearchBar(true)}
       />

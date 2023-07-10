@@ -34,6 +34,7 @@
     margin: $small-element-spacing;
     box-sizing: border-box;
     transition: background 0.25s;
+    cursor: pointer;
 
     &.active {
       background: $white-transparent-background-10;

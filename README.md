@@ -40,6 +40,11 @@ Backend is implemented with usage of Java + Spring Boot.
 - Automated CI / CD using GitHub Actions, tests are run automatically and if they are successful app is deployed,
 - Configured development environment (linters, global imports, envs)
 
+## Videos
+[Editing dishes, browsing, managing menu](https://user-images.githubusercontent.com/98762890/236290278-e1565e3c-2223-461b-99df-efe14fbc7c28.webm) \
+[Settings panel, editing tags, users](https://user-images.githubusercontent.com/98762890/236290300-62d4bbae-4580-4d46-9a60-5538e7dd78a3.webm) \
+[Signing up, signing in](https://user-images.githubusercontent.com/98762890/236290307-a01dab8d-1c5a-43c2-bf27-d59af55ee078.webm)
+
 ## Gallery
 
 ### Biweekly menu 
@@ -56,12 +61,6 @@ Backend is implemented with usage of Java + Spring Boot.
 
 ### Calculated ingredients needed for recipe 
 ![Menu Calculator](https://user-images.githubusercontent.com/98762890/236291777-ba2643b7-e4a5-42e4-b289-ce2178bd686c.png)
-
-
-## Videos
-[Editing dishes, browsing, managing menu](https://user-images.githubusercontent.com/98762890/236290278-e1565e3c-2223-461b-99df-efe14fbc7c28.webm) \
-[Settings panel, editing tags, users](https://user-images.githubusercontent.com/98762890/236290300-62d4bbae-4580-4d46-9a60-5538e7dd78a3.webm) \
-[Signing up, signing in](https://user-images.githubusercontent.com/98762890/236290307-a01dab8d-1c5a-43c2-bf27-d59af55ee078.webm) 
 
 ## Installation
 Just run `npm install` and then `npm run`. Your app should be available at `localhost:3000`.
