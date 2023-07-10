@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
 import LatestDishSlide from 'pages/discover-page/latest-dish-slide/LatestDishSlide';
 import RandomDishSlide from 'pages/discover-page/random-dish-slide/RandomDishSlide';
-import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
 
 const DiscoverPage = () => {

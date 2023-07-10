@@ -4,7 +4,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { signUpMockServer, signUpMockServerHandlers, SignUpPageObjects } from './SignUpPageObjects';
 import SignUpSlide from './SignUpSlide';
-import AppProvider from '../../../AppProvider';
+import AppProvider from '../../../shared/providers/AppProvider';
 import {
   EMAIL_REQUIREMENTS,
   NICKNAME_REQUIREMENTS,
@@ -16,16 +16,12 @@ import {
   WRONG_PASSWORD,
   NICKNAME_TOO_SHORT,
   NICKNAME_TOO_LONG,
-  INVALID_SIGN_UP_DATA,
   SIGN_UP_UNEXPECTED_ERROR,
   EMAIL_ALREADY_EXISTS
-} from '../../../constants/AuthConstants';
-import { MOCK_SIGN_UP_REQUEST } from '../../../constants/MockConstants';
-import {
-  NICKNAME_MAXIMUM_LENGTH,
-  NICKNAME_MINIMUM_LENGTH
-} from '../../../constants/NumberConstants';
-import testsQueryClient from '../../../utility/testing/TestsQueryClient';
+} from 'shared/constants/AuthConstants';
+import { MOCK_SIGN_UP_REQUEST } from 'shared/constants/MockConstants';
+import { NICKNAME_MAXIMUM_LENGTH, NICKNAME_MINIMUM_LENGTH } from 'shared/constants/NumberConstants';
+import testsQueryClient from 'shared/testing/TestsQueryClient';
 
 const mockSlideToSignIn = jest.fn();
 const SignUpPO: SignUpPageObjects = new SignUpPageObjects();

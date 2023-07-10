@@ -1,14 +1,14 @@
 import { apiClient } from './ApiClient';
-import { SignUpRequest } from 'types/interfaces/SignUpRequest';
-import { User } from 'types/interfaces/User';
+import { UserDetails } from 'shared/types/User';
+import { SignUpRequest } from 'shared/types/Auth';
 
 export const createUser = async (userData: SignUpRequest) => {
-  const { data } = await apiClient.post<User>(`/auth/signup`, userData);
+  const { data } = await apiClient.post<UserDetails>(`/auth/signup`, userData);
   return data;
 };
 
 export const getUsers = async () => {
-  const { data } = await apiClient.get<User[]>('/users');
+  const { data } = await apiClient.get<UserDetails[]>('/users');
   return data;
 };
 
@@ -40,6 +40,6 @@ export const changeMyProfilePicture = async (newPicture: string) => {
 };
 
 export const getUserDetails = async () => {
-  const { data } = await apiClient.get<User>(`/users/me`);
+  const { data } = await apiClient.get<UserDetails>(`/users/me`);
   return data;
 };

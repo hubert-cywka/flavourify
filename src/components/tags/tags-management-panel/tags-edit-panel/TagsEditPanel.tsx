@@ -3,18 +3,18 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import TabPanel from '@mui/lab/TabPanel';
 import { Box, Button, Input, Typography } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
-import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from 'constants/NumberConstants';
-import { TAGS_QUERY } from 'constants/QueryConstants';
+import { TAG_NAME_MAX_LENGTH, TAG_NAME_MIN_LENGTH } from 'shared/constants/NumberConstants';
+import { TAGS_QUERY } from 'shared/constants/QueryConstants';
 import {
   TAG_ADD_REQUIREMENTS,
   TAG_UPDATE_ERROR,
   TAG_UPDATE_ERROR_LENGTH,
   TAG_UPDATE_INFO,
   TAG_UPDATE_SUCCESS
-} from 'constants/TagsConstants';
+} from 'shared/constants/TagsConstants';
 import { queryClient } from 'services/QueryClient';
 import { updateTag } from 'services/TagsService';
-import { getName, getType } from 'utility/tagsUtils';
+import { getName, getType } from 'shared/utility/tagsUtils';
 import CompleteTagsList from 'components/tags/complete-tags-list/CompleteTagsList';
 import TagTypeSelector from 'components/tags/tags-management-panel/tag-type-selector/TagTypeSelector';
 import { TagsSubPanelProps } from 'components/tags/tags-management-panel/TagsManagementPanel';

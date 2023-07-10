@@ -16,8 +16,8 @@ import {
   EMPTY_MENU_INFO,
   MENU_PLAN_HEADER,
   MENU_PLAN_INFO
-} from 'constants/DishesConstants';
-import { MENU_INGREDIENTS_QUERY } from 'constants/QueryConstants';
+} from 'shared/constants/DishesConstants';
+import { MENU_INGREDIENTS_QUERY } from 'shared/constants/QueryConstants';
 import { getMenu, MenuItem, removeFromMenu, updateMenu } from 'services/MenuService';
 import { queryClient } from 'services/QueryClient';
 import appRouter from 'router/AppRouter';

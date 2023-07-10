@@ -1,5 +1,5 @@
 import { apiClient } from './ApiClient';
-import { Tag, TagType } from 'types/interfaces/Tag';
+import { Tag, TagType } from 'shared/types/Dish';
 
 export const getTags = async (onlyWithContent?: boolean): Promise<Tag[]> => {
   const { data } = await apiClient.get(`/tags?withContent=${onlyWithContent}`);

@@ -4,16 +4,16 @@ import { useState } from 'react';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import MenuPlan from './menu-plan/MenuPlan';
-import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
+import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import {
   MENU_INGREDIENTS_INFO,
   MENU_INGREDIENTS_HEADER,
   MENU_INGREDIENTS_IMAGE,
   NO_INGREDIENTS_ERROR
-} from 'constants/DishesConstants';
-import Builder from 'utility/Builder';
-import { useMenuIngredients } from 'utility/hooks/queries/useDishIngredients';
-import { useMenu } from 'utility/hooks/queries/useMenu';
+} from 'shared/constants/DishesConstants';
+import Builder from 'shared/utility/Builder';
+import { useMenuIngredients } from 'shared/hooks/queries/useDishIngredients';
+import { useMenu } from 'shared/hooks/queries/useMenu';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
 import IngredientsList from 'components/ingredients/ingredients-list/IngredientsList';
 import TopNavbar from 'components/navbars/top-navbar/TopNavbar';

@@ -6,16 +6,16 @@ import {
   INGREDIENT_EDIT_IMAGE,
   INGREDIENT_EDIT_INFO,
   NEW_INGREDIENT_PLACEHOLDER
-} from '../../../constants/DishesConstants';
+} from 'shared/constants/DishesConstants';
 import {
   INGREDIENT_COUNT_MAX_LENGTH,
   INGREDIENT_DEFAULT_AMOUNT,
   INGREDIENT_NAME_MAX_LENGTH,
   INGREDIENT_UNIT_MAX_LENGTH
-} from 'constants/NumberConstants';
-import { type Ingredient } from 'types/interfaces/Ingredient';
+} from 'shared/constants/NumberConstants';
+import { type Ingredient } from 'shared/types/Dish';
 import { useState, useRef } from 'react';
-import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';

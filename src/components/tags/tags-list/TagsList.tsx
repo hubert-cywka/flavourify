@@ -8,8 +8,8 @@ import {
 } from '@mui/icons-material';
 import { RefObject, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { DISH_TAGS_DEFAULT } from 'constants/DishesConstants';
-import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from 'constants/NumberConstants';
+import { DISH_TAGS_DEFAULT } from 'shared/constants/DishesConstants';
+import { MAX_TAGS_NUMBER, MIN_TAGS_NUMBER } from 'shared/constants/NumberConstants';
 import SettingsBackupRestoreRoundedIcon from '@mui/icons-material/SettingsBackupRestoreRounded';
 import {
   EMPTY_TAGS_LIST_ERROR,
@@ -19,9 +19,9 @@ import {
   TAGS_SELECT_IMAGE,
   TAGS_SELECTED_ERROR,
   TAGS_SELECTED_INFO
-} from 'constants/TagsConstants';
-import { Tag } from 'types/interfaces/Tag';
-import { useTags } from 'utility/hooks/queries/useTags';
+} from 'shared/constants/TagsConstants';
+import { Tag } from 'shared/types/Dish';
+import { useTags } from 'shared/hooks/queries/useTags';
 import appRouter from 'router/AppRouter';
 import ROUTE from 'router/RoutingConstants';
 import CompleteTagsList from 'components/tags/complete-tags-list/CompleteTagsList';

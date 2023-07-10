@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, SyntheticEvent, useRef, useState } from 'reac
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { Box, SelectChangeEvent, Tab } from '@mui/material';
-import { Tag, TagType } from 'types/interfaces/Tag';
+import { Tag, TagType } from 'shared/types/Dish';
 import './TagsManagementPanel.scss';
 import TagsAddPanel from './tags-add-panel/TagsAddPanel';
 import TagsEditPanel from './tags-edit-panel/TagsEditPanel';

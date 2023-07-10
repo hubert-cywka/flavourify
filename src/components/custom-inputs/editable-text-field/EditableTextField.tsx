@@ -1,8 +1,8 @@
 import React, { RefObject, useState } from 'react';
 import { Input, SxProps } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from 'constants/AppConstants';
-import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import { FIELD_CANNOT_BE_EMPTY, VALUE_MUST_BE_NUMBER } from 'shared/constants/AppConstants';
+import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 
 interface EditableTextFieldProps extends React.ComponentProps<'input'> {
   isReadOnly?: boolean;

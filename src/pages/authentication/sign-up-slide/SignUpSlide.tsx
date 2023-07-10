@@ -22,13 +22,13 @@ import {
   SIGN_UP_REQUIREMENTS_MET,
   SIGN_UP_INITIAL_INFO,
   REDIRECT_TO_SIGN_IN
-} from 'constants/AuthConstants';
+} from 'shared/constants/AuthConstants';
 import {
   getConfirmPasswordValidationSchema,
   getEmailValidationSchema,
   getNicknameValidationSchema,
   getNewPasswordValidationSchema
-} from 'constants/ValidationSchemas';
+} from 'shared/constants/ValidationSchemas';
 import { createUser } from 'services/UserService';
 import StatusScreen from 'components/status-screen/StatusScreen';
 

@@ -5,10 +5,10 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { simpleOpacityAnimation } from 'constants/AnimationConfigs';
-import { DEFAULT_RECIPE_STEP } from 'constants/DishesConstants';
-import { getUpdatedRecipe } from 'utility/dishRecipeUpdateUtils';
-import { useUpdateEffect } from 'utility/hooks/useUpdateEffect';
+import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
+import { DEFAULT_RECIPE_STEP } from 'shared/constants/DishesConstants';
+import { getUpdatedRecipe } from 'shared/utility/dishRecipeUpdateUtils';
+import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
 import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
 

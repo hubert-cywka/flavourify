@@ -2,9 +2,9 @@ import { act, configure, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { REDIRECT_TO_SIGN_UP } from '../../../constants/AuthConstants';
-import { MOCK_SIGN_IN_RESPONSE } from '../../../constants/MockConstants';
-import { apiURL } from '../../../services/ApiClient';
+import { REDIRECT_TO_SIGN_UP } from 'shared/constants/AuthConstants';
+import { MOCK_SIGN_IN_RESPONSE } from 'shared/constants/MockConstants';
+import { apiURL } from 'services/ApiClient';
 
 configure({ testIdAttribute: 'class' });
 

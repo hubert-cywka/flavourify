@@ -1,16 +1,16 @@
 import { useSnackbar } from 'notistack';
 import DishCardBack from 'components/dishes/dish-card/dish-card-back/DishCardBack';
 import DishCardFront from 'components/dishes/dish-card/dish-card-front/DishCardFront';
-import { DISH_ADD_TO_MENU_ERROR, DISH_ADD_TO_MENU_SUCCESS } from 'constants/DishesConstants';
-import { MAX_MENU_SIZE, SWIPE_RIGHT_BOUND } from 'constants/NumberConstants';
+import { DISH_ADD_TO_MENU_ERROR, DISH_ADD_TO_MENU_SUCCESS } from 'shared/constants/DishesConstants';
+import { MAX_MENU_SIZE, SWIPE_RIGHT_BOUND } from 'shared/constants/NumberConstants';
 import { addToMenu, getMenu } from 'services/MenuService';
-import { Dish } from 'types/interfaces/Dish';
+import { Dish } from 'shared/types/Dish';
 import './DishCard.scss';
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
 import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { useState } from 'react';
-import { calculateSwipePosition } from 'utility/calculateSwipePosition';
+import { calculateSwipePosition } from 'shared/utility/calculateSwipePosition';
 import { to } from 'react-spring';
 import { Box, Dialog, Fade, Slide } from '@mui/material';
 
