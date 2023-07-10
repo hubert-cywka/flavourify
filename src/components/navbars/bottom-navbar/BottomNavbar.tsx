@@ -37,7 +37,7 @@ const BottomNavbar = () => {
   };
 
   return (
-    <Box className="bottom-navbar-container">
+    <Box component="header" className="bottom-navbar-container">
       <BottomNavigation value={path} onChange={navigateTo} sx={{ bgcolor: 'secondary.main' }}>
         {buildNavigationTile(<ReceiptLongRoundedIcon />, 'Recipes', ROUTE.LANDING)}
         {buildNavigationTile(<RestaurantMenuRoundedIcon />, 'Menu', ROUTE.WEEK_MENU)}
