@@ -1,16 +1,12 @@
-import { Box, Button, Collapse, IconButton, Typography } from '@mui/material';
-import './DishRecipe.scss';
+import { Box, Button, Collapse, Typography } from '@mui/material';
+import './DishRecipeShared.scss';
 import { RefObject, useState } from 'react';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
-import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
-import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import { DEFAULT_RECIPE_STEP } from 'shared/constants/DishesConstants';
 import { getUpdatedRecipe } from 'shared/utility/dishRecipeUpdateUtils';
 import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
-import AnimatePresence from 'components/animate-presence/AnimatePresence';
-import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
+import RecipeStep from './recipe-step/RecipeStep';
+import classNames from 'classnames';
 
 interface DishRecipeProps {
   recipe: string[];
@@ -49,54 +45,21 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
     setDisplayedRecipe(newRecipe.slice());
   };
 
-  const getRecipeSteps = () =>
-    displayedRecipe.slice().map((step, id) => {
-      return (
-        <Box key={step} className="recipe-step">
-          {!isReadOnly && (
-            <Box className="recipe-step-reorder-buttons" sx={{ color: 'accent.main' }}>
-              {id !== 0 && (
-                <ArrowDropUpRoundedIcon
-                  className="recipe-step-reorder-button"
-                  onClick={() => reorderSteps(id, id - 1)}
-                />
-              )}
-              {id !== displayedRecipe.length - 1 && (
-                <ArrowDropDownRoundedIcon
-                  className="recipe-step-reorder-button"
-                  onClick={() => reorderSteps(id, id + 1)}
-                />
-              )}
-            </Box>
-          )}
-          <Typography sx={{ color: 'text.primary' }} className="recipe-step-number">
-            {id + 1}
-          </Typography>
-          <EditableTextField
-            autoFocus={step === DEFAULT_RECIPE_STEP}
-            className="recipe-step-text"
-            value={step}
-            sx={{ color: 'text.primary' }}
-            isReadOnly={isReadOnly}
-            multiline={true}
-          />
-          {!isReadOnly && (
-            <IconButton className="delete-step-button" onClick={() => removeStep(id)}>
-              <HighlightOffRoundedIcon sx={{ color: 'text.primary' }} />
-            </IconButton>
-          )}
-        </Box>
-      );
-    });
-
   return (
-    <Box className={`dish-recipe-container ${className}`} ref={reference}>
-      {getRecipeSteps().map((step, id) => (
-        <AnimatePresence key={id} isVisible={true} animation={simpleOpacityAnimation}>
-          {step}
-        </AnimatePresence>
+    <Box className={classNames('dish-recipe-container', className)} ref={reference}>
+      {displayedRecipe.slice().map((step, id) => (
+        <RecipeStep
+          key={`${id}:${step}`}
+          step={step}
+          id={id}
+          onMoveDown={() => reorderSteps(id, id + 1)}
+          onMoveUp={() => reorderSteps(id, id - 1)}
+          isLast={id === displayedRecipe.length - 1}
+          isFirst={id === 0}
+          isReadOnly={isReadOnly}
+          onRemove={() => removeStep(id)}
+        />
       ))}
-
       <Collapse in={!isReadOnly} unmountOnExit={true} mountOnEnter={true}>
         <Box onClick={addEmptyStep} className="recipe-step add-step">
           <Button sx={{ textTransform: 'none' }}>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { ComponentProps, useContext, useState } from 'react';
 import { LogoutRounded, SettingsRounded, TagRounded } from '@mui/icons-material';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
@@ -14,12 +14,9 @@ import TagsManagementPanel from 'components/tags/tags-management-panel/TagsManag
 import ProfileEditPanel from 'components/users/profile-edit-panel/ProfileEditPanel';
 import UserInfo from 'components/users/user-info/UserInfo';
 import UsersManagementPanel from 'components/users/users-management-panel/UsersManagementPanel';
+import classNames from 'classnames';
 
-interface SettingsPanelProps {
-  className?: string;
-}
-
-const SettingsPanel = ({ className }: SettingsPanelProps) => {
+const SettingsPanel = ({ className }: ComponentProps<'div'>) => {
   const [displayedSetting, setDisplayedSetting] = useState<ReactJSXElement | null>(null);
   const [displayedSettingName, setDisplayedSettingName] = useState<string>('Settings');
   const { toggleColorMode } = useContext(ColorModeContext);
@@ -45,7 +42,7 @@ const SettingsPanel = ({ className }: SettingsPanelProps) => {
   };
 
   return (
-    <List className={`settings-panel-container ${className}`}>
+    <List className={classNames('settings-panel-container', className)}>
       <ListItem className="settings-panel-header">
         <ListItemIcon>
           {displayedSetting ? (

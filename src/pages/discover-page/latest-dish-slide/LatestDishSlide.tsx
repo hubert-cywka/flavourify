@@ -14,28 +14,24 @@ const LatestDishSlide = () => {
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
   };
 
-  const buildLatestDishCard = () => {
-    return Builder.createResult(status)
-      .onSuccess(
-        <Box className="mini-dish-card-container">
-          {data && (
-            <DishMiniCard
-              onClick={() => navigateToRecipe(data.id)}
-              className="mini-dish-card"
-              dish={data}
-            />
-          )}
-        </Box>
-      )
-      .onError(<Skeleton variant="rectangular" className="mini-dish-card" />)
-      .onLoading(<Skeleton variant="rectangular" className="mini-dish-card" />)
-      .build();
-  };
-
   return (
     <Box className="slide-container">
       <Typography className="header">Discover.</Typography>
-      {buildLatestDishCard()}
+      {Builder.createResult(status)
+        .onSuccess(
+          <Box className="mini-dish-card-container">
+            {data && (
+              <DishMiniCard
+                onClick={() => navigateToRecipe(data.id)}
+                className="mini-dish-card"
+                dish={data}
+              />
+            )}
+          </Box>
+        )
+        .onError(<Skeleton variant="rectangular" className="mini-dish-card" />)
+        .onLoading(<Skeleton variant="rectangular" className="mini-dish-card" />)
+        .build()}
       <Box className="slide-bottom-container">
         <Typography className="bottom-caption">Check all our recipes.</Typography>
         <Button

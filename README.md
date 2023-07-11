@@ -4,7 +4,6 @@ Currently deployed at [flavourify.netlify.app](https://flavourify.netlify.app).
 
 ![sign-in.png](/.github/media/sign-in.png)
 
-## Description
 Recipe book app that caters to users' needs (actually, mine needs) by providing a convenient way to maintain collection of recipes. This app also incorporates a user system with JWT, refresh tokens, roles.
 One of the app's standout features is the option to create menus. Users can plan their meals by selecting recipes from available ones. The app then calculates the required ingredients, streamlining the grocery shopping process.
 The app was built using React and TypeScript, utilizing popular libraries such as Material UI, React Query, and React Hook Form for enhanced functionality and user experience. Its Mobile First Design ensures a seamless mobile viewing experience, and thanks to Capacitor, it can be easily converted into a mobile app.

@@ -5,10 +5,11 @@ import TagsList from 'components/tags/tags-list/TagsList';
 import DishImage from 'components/dishes/dish-image/DishImage';
 import { DishCardProps } from 'components/dishes/dish-card/DishCard';
 import { ArrowForwardRounded } from '@mui/icons-material';
+import classNames from 'classnames';
 
 const DishCardFront = ({ dish, className, callback }: DishCardProps) => {
   return (
-    <Box className={`dish-card-front-container ${className}`}>
+    <Box className={classNames('dish-card-front-container', className)}>
       <Box className="image-container">
         <DishImage src={dish.img} altText={dish.name} className="dish-image" />
       </Box>

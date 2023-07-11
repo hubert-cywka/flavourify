@@ -9,16 +9,15 @@ import './DishCard.scss';
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
 import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { calculateSwipePosition } from 'shared/utility/calculateSwipePosition';
 import { to } from 'react-spring';
 import { Box, Dialog, Fade, Slide } from '@mui/material';
 
-export interface DishCardProps {
+export interface DishCardProps extends ComponentProps<'div'> {
   dish: Dish;
   isLocked?: boolean;
   callback?: () => void;
-  className?: string;
 }
 
 const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {

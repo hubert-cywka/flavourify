@@ -1,8 +1,7 @@
 import IngredientTile from 'components/ingredients/ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
-import { RefObject, useMemo, useState } from 'react';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { ComponentProps, RefObject, useState } from 'react';
 import { AddCircleRounded } from '@mui/icons-material';
 import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
@@ -14,12 +13,12 @@ import { Ingredient } from 'shared/types/Dish';
 import { getUpdatedIngredients } from 'shared/utility/dishRecipeUpdateUtils';
 import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import AnimatePresence from 'components/animate-presence/AnimatePresence';
-import MultiplierInput from 'components/custom-inputs/multiplier-input/MultiplierInput';
+import MultiplierInput from 'components/primitives/multiplier-input/MultiplierInput';
+import classNames from 'classnames';
 
-interface IngredientsListProps {
+interface IngredientsListProps extends ComponentProps<'div'> {
   ingredients: Ingredient[];
   amountLimit: number;
-  className?: string;
   withMultiplier?: boolean;
   editable?: boolean;
   reference?: RefObject<any>;
@@ -63,31 +62,6 @@ const IngredientsList = ({
     setDisplayedIngredients(updatedIngredients.slice());
   };
 
-  const parsedIngredientsList = useMemo(
-    (): ReactJSXElement[] =>
-      getReducedIngredientsList().map((ingredient, id) => {
-        return (
-          <AnimatePresence
-            key={id}
-            isVisible={true}
-            animation={simpleOpacityAnimation}
-            className="ingredient-tile-container">
-            <IngredientTile
-              className={`ingredient-tile ${editable ? 'editable' : ''} ${
-                ingredient.name === NEW_INGREDIENT_PLACEHOLDER ? 'new' : ''
-              }`}
-              opened={ingredient.name === NEW_INGREDIENT_PLACEHOLDER}
-              editable={editable}
-              ingredient={ingredient}
-              multiplier={editable ? 1 : multiplier}
-              onDelete={() => deleteIngredient(id)}
-            />
-          </AnimatePresence>
-        );
-      }),
-    [displayedIngredients, editable, multiplier]
-  );
-
   return (
     <Box className={`ingredient-list-container ${className}`} ref={reference}>
       {withMultiplier && !editable && (
@@ -103,7 +77,26 @@ const IngredientsList = ({
         </Box>
       )}
 
-      {parsedIngredientsList}
+      {getReducedIngredientsList().map((ingredient, id) => {
+        return (
+          <AnimatePresence
+            key={id}
+            isVisible={true}
+            animation={simpleOpacityAnimation}
+            className="ingredient-tile-container">
+            <IngredientTile
+              className={classNames('ingredient-tile', editable, {
+                new: ingredient.name === NEW_INGREDIENT_PLACEHOLDER
+              })}
+              isEditDialogOpen={ingredient.name === NEW_INGREDIENT_PLACEHOLDER}
+              editable={editable}
+              ingredient={ingredient}
+              multiplier={editable ? 1 : multiplier}
+              onDelete={() => deleteIngredient(id)}
+            />
+          </AnimatePresence>
+        );
+      })}
 
       {amountLimit > 0 && amountLimit < displayedIngredients.length && (
         <Box className="ingredient-tile-container">

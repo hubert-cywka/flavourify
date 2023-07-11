@@ -1,0 +1,27 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.delete-dialog-container {
+  .delete-dialog {
+    padding: $standard-element-spacing;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .delete-dialog-text {
+      padding: $standard-element-spacing;
+
+      .delete-dialog-warning {
+        font-weight: bold;
+        margin-bottom: $standard-element-spacing;
+      }
+    }
+
+    .delete-dialog-button {
+      @include action-button-standard;
+      margin: $standard-element-spacing $standard-element-spacing 0 $standard-element-spacing;
+    }
+  }
+}

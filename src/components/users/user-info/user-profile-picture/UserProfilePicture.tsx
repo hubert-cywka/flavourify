@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { ComponentProps, useRef } from 'react';
 import { Box, Input } from '@mui/material';
 import imageCompression from 'browser-image-compression';
 import { useSnackbar } from 'notistack';
@@ -13,11 +13,11 @@ import {
 import { queryClient } from 'services/QueryClient';
 import { changeMyProfilePicture } from 'services/UserService';
 import { getCompressedImageUrl } from 'shared/utility/getCompressedImageUrl';
+import classNames from 'classnames';
 
-interface UserProfilePictureProps {
+interface UserProfilePictureProps extends ComponentProps<'div'> {
   src: string;
   fallbackText: string;
-  className?: string;
   editable?: boolean;
 }
 
@@ -62,7 +62,7 @@ const UserProfilePicture = ({
   };
 
   return (
-    <label htmlFor="profile-picture" className={`profile-picture-container ${className}`}>
+    <label htmlFor="profile-picture" className={classNames('profile-picture-container', className)}>
       {editable && (
         <>
           <Input

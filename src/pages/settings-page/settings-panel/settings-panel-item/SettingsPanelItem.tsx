@@ -1,9 +1,9 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { ComponentProps } from 'react';
 
-interface SettingsPanelItemProps {
-  className?: string;
+interface SettingsPanelItemProps extends ComponentProps<'div'> {
   icon: ReactJSXElement;
   text: string;
   callback?: () => void;

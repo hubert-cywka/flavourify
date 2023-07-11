@@ -1,4 +1,4 @@
-@import './src/styles/variables';
+@import '../../../styles/variables';
 
 .multiplier-input-container {
   width: fit-content;
@@ -19,7 +19,7 @@
   }
 
   .buttons-container {
-    .increment-button, .decrement-button {
+    .button, .button {
       padding: 0 $small-element-spacing;
       font-weight: bold;
 
@@ -28,6 +28,5 @@
         height: 100%;
       }
     }
-
   }
 }

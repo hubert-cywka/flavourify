@@ -9,11 +9,11 @@ export class MultiplierInputPageObjects {
   }
 
   get plusButton(): Promise<Element> {
-    return screen.findByTestId(/increment-button(?!\S)/);
+    return screen.findByLabelText(/Increment(?!\S)/);
   }
 
   get minusButton(): Promise<Element> {
-    return screen.findByTestId(/decrement-button(?!\S)/);
+    return screen.findByLabelText(/Decrement(?!\S)/);
   }
 
   increaseCounter = async () => {

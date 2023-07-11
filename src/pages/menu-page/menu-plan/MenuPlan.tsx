@@ -1,6 +1,5 @@
 import { Box, Button, IconButton, Typography } from '@mui/material';
 import './MenuPlan.scss';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import {
   DragDropContext,
   Draggable,
@@ -22,11 +21,12 @@ import { getMenu, MenuItem, removeFromMenu, updateMenu } from 'services/MenuServ
 import { queryClient } from 'services/QueryClient';
 import appRouter from 'router/AppRouter';
 import ROUTE from 'router/RoutingConstants';
+import classNames from 'classnames';
+import { ComponentProps } from 'react';
 
-interface MenuPlanProps {
+interface MenuPlanProps extends ComponentProps<'div'> {
   menu: MenuItem[];
   onMenuChange: (menu: MenuItem[]) => void; // eslint-disable-line no-unused-vars
-  className?: string;
 }
 
 const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
@@ -45,39 +45,6 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
 
   const goToDishDetails = (id: number) => {
     appRouter.navigate(ROUTE.FOUND_DISH.replace(':id', id.toString()));
-  };
-
-  const getDateBoxes = (): ReactJSXElement[] => {
-    return menu.map((item, id) => (
-      <Box key={id} className="menu-plan-date">
-        {getParsedDate(item.date)}
-      </Box>
-    ));
-  };
-
-  const getMenuItemBoxes = (): ReactJSXElement[] => {
-    return menu.map((item, id) => (
-      <Draggable
-        key={item.id + item.name + item.date.toString()}
-        draggableId={item.id + item.name + item.date.toString()}
-        index={id}>
-        {(provided: DraggableProvided) => (
-          <Box
-            className="menu-plan-dish"
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}>
-            <IconButton onClick={() => goToDishDetails(item.id)}>
-              <ManageSearchRounded sx={{ color: 'accent.main' }} />
-            </IconButton>
-            <Box className="menu-plan-dish-name">{item.name}</Box>
-            <IconButton className="menu-plan-dish-delete-button" onClick={() => removeFromList(id)}>
-              <ClearRounded sx={{ color: 'accent.main' }} />
-            </IconButton>
-          </Box>
-        )}
-      </Draggable>
-    ));
   };
 
   function onDragEnd(result: DropResult) {
@@ -102,12 +69,18 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
   };
 
   return menu && menu.length ? (
-    <Box className={`menu-plan-container ${className}`}>
+    <Box className={classNames('menu-plan-container', className)}>
       <Box className="menu-plan-header">{MENU_PLAN_HEADER}</Box>
       <Box className="menu-plan-info">{MENU_PLAN_INFO}</Box>
       <Box className="menu-plan">
         <Box className="menu-plan-columns">
-          <Box className="menu-plan-dates-column"> {getDateBoxes()}</Box>
+          <Box className="menu-plan-dates-column">
+            {menu.map((item, id) => (
+              <Box key={id} className="menu-plan-date">
+                {getParsedDate(item.date)}
+              </Box>
+            ))}
+          </Box>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="menu-list">
               {(provided: DroppableProvided) => (
@@ -115,7 +88,30 @@ const MenuPlan = ({ className, menu, onMenuChange }: MenuPlanProps) => {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   className="menu-plan-names-column">
-                  {getMenuItemBoxes()}
+                  {menu.map((item, id) => (
+                    <Draggable
+                      key={item.id + item.name + item.date.toString()}
+                      draggableId={item.id + item.name + item.date.toString()}
+                      index={id}>
+                      {(provided: DraggableProvided) => (
+                        <Box
+                          className="menu-plan-dish"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}>
+                          <IconButton onClick={() => goToDishDetails(item.id)}>
+                            <ManageSearchRounded sx={{ color: 'accent.main' }} />
+                          </IconButton>
+                          <Box className="menu-plan-dish-name">{item.name}</Box>
+                          <IconButton
+                            className="menu-plan-dish-delete-button"
+                            onClick={() => removeFromList(id)}>
+                            <ClearRounded sx={{ color: 'accent.main' }} />
+                          </IconButton>
+                        </Box>
+                      )}
+                    </Draggable>
+                  ))}
                   {provided.placeholder}
                 </Box>
               )}

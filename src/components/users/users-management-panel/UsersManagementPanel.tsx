@@ -1,5 +1,5 @@
 import { Box, Input, Typography } from '@mui/material';
-import { ChangeEvent, useState, KeyboardEvent, useRef } from 'react';
+import { ChangeEvent, useState, KeyboardEvent, useRef, ComponentProps } from 'react';
 import UserDetailsRow from '../user-details-row/UserDetailsRow';
 import { UserDetails } from 'shared/types/User';
 import './UsersManagementPanel.scss';
@@ -13,21 +13,20 @@ import {
 import Builder from 'shared/utility/Builder';
 import { useUsers } from 'shared/hooks/queries/useUsers';
 import { filterUsers } from 'shared/utility/userUtils';
+import classNames from 'classnames';
 
-interface UsersManagementPanelProps {
-  className?: string;
-}
-
-const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
+const UsersManagementPanel = ({ className }: ComponentProps<'div'>) => {
   const [filter, setFilter] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { data, status } = useUsers();
 
   const createFilteredUserRows = () => {
     if (!data) return;
+
     const userRows = filterUsers(data, filter).map((user: UserDetails, id) => {
       return <UserDetailsRow className="user-details-row" user={user} key={id} />;
     });
+
     if (userRows.length) {
       return userRows;
     } else {
@@ -45,8 +44,10 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
     }
   };
 
-  const getFilterInput = () => {
-    return (
+  return (
+    <Box className={classNames('users-management-panel', className)}>
+      <Typography className="users-management-warning">{USER_EDIT_WARNING}</Typography>
+      <Typography className="users-management-info">{USER_EDIT_INFO}</Typography>
       <Input
         inputRef={inputRef}
         defaultValue={filter}
@@ -56,29 +57,17 @@ const UsersManagementPanel = ({ className }: UsersManagementPanelProps) => {
         onKeyUp={(e) => blurOnEnter(e)}
         onChange={(e) => updateFilter(e)}
       />
-    );
-  };
-
-  const buildUserDetailsRows = () => {
-    return Builder.createResult(status)
-      .onError(
-        <Box>
-          <img className="users-not-found-image" src={USERS_NOT_FOUND_IMAGE} />
-          <Typography sx={{ color: 'accent.error' }} className="users-not-found-text">
-            {USERS_NOT_FOUND_ERROR}
-          </Typography>
-        </Box>
-      )
-      .onSuccess(<>{createFilteredUserRows()}</>)
-      .build();
-  };
-
-  return (
-    <Box className={`users-management-panel ${className} `}>
-      <Typography className="users-management-warning">{USER_EDIT_WARNING}</Typography>
-      <Typography className="users-management-info">{USER_EDIT_INFO}</Typography>
-      {getFilterInput()}
-      {buildUserDetailsRows()}
+      {Builder.createResult(status)
+        .onError(
+          <Box>
+            <img className="users-not-found-image" src={USERS_NOT_FOUND_IMAGE} />
+            <Typography sx={{ color: 'accent.error' }} className="users-not-found-text">
+              {USERS_NOT_FOUND_ERROR}
+            </Typography>
+          </Box>
+        )
+        .onSuccess(<>{createFilteredUserRows()}</>)
+        .build()}
     </Box>
   );
 };

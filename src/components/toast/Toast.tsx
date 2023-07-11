@@ -17,14 +17,6 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const { id, message, variant } = props;
   const { closeSnackbar } = useSnackbar();
 
-  const dismissSnackbar = () => {
-    return (
-      <IconButton sx={{ color: '#ffffff' }} onClick={() => closeSnackbar(id)}>
-        <HighlightOffRounded />
-      </IconButton>
-    );
-  };
-
   const getIcon = () => {
     switch (variant) {
       case 'success':
@@ -43,7 +35,11 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
       <Box className={classNames('toast', variant)}>
         <Box className="toast-icon">{getIcon()}</Box>
         <Box className="toast-text">{message}</Box>
-        <Box className="toast-buttons">{dismissSnackbar()}</Box>
+        <Box className="toast-buttons">
+          <IconButton sx={{ color: '#ffffff' }} onClick={() => closeSnackbar(id)}>
+            <HighlightOffRounded />
+          </IconButton>
+        </Box>
       </Box>
     </SnackbarContent>
   );

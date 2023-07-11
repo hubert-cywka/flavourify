@@ -3,6 +3,8 @@ import { DISH_IMAGE_PLACEHOLDER, DISH_TAGS_DEFAULT } from 'shared/constants/Dish
 import { Dish } from 'shared/types/Dish';
 import DishCardBack from 'components/dishes/dish-card/dish-card-back/DishCardBack';
 import './DishCardAddDialog.scss';
+import { ComponentProps } from 'react';
+import classNames from 'classnames';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
   id: -1,
@@ -13,10 +15,9 @@ const EMPTY_DISH_PLACEHOLDER: Dish = {
   tags: DISH_TAGS_DEFAULT
 };
 
-interface DishCardAddDialogProps {
+interface DishCardAddDialogProps extends ComponentProps<'div'> {
   onClose: () => void;
   open: boolean;
-  className?: string;
 }
 
 const DishCardAddDialog = ({ onClose, className, open }: DishCardAddDialogProps) => {
@@ -24,10 +25,10 @@ const DishCardAddDialog = ({ onClose, className, open }: DishCardAddDialogProps)
     <Dialog PaperProps={{ className: 'dish-card-back-dialog' }} open={open} onClose={onClose}>
       <Box sx={{ color: 'text.primary', bgcolor: 'primary.main', width: '100%' }}>
         <DishCardBack
+          className={classNames('dish-card-side', className)}
           dish={EMPTY_DISH_PLACEHOLDER}
-          addMode={true}
-          className={`dish-card-side ${className}`}
           onMutationSuccess={onClose}
+          addMode={true}
         />
       </Box>
     </Dialog>
