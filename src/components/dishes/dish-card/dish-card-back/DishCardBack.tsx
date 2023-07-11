@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  Divider,
-  IconButton,
-  Typography
-} from '@mui/material';
+import { Box, Button, CircularProgress, Divider, IconButton } from '@mui/material';
 import './DishCardBack.scss';
 import { useSnackbar } from 'notistack';
 import {
@@ -27,7 +19,7 @@ import { queryClient } from 'services/QueryClient';
 import { Dish } from 'shared/types/Dish';
 import { createUpdatedDishRecipe } from 'shared/utility/dishRecipeUpdateUtils';
 import { validateDishFields } from 'shared/utility/validateDishFields';
-import EditableTextField from 'components/custom-inputs/editable-text-field/EditableTextField';
+import EditableTextField from 'components/primitives/editable-text-field/EditableTextField';
 import IngredientsList from 'components/ingredients/ingredients-list/IngredientsList';
 import DishRecipe from 'components/dishes/dish-recipe/DishRecipe';
 import {
@@ -41,9 +33,10 @@ import {
 import { useRef, useState } from 'react';
 import DishImage from 'components/dishes/dish-image/DishImage';
 import { DishCardProps } from 'components/dishes/dish-card/DishCard';
-import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import TagsList from 'components/tags/tags-list/TagsList';
 import StatusScreen from 'components/status-screen/StatusScreen';
+import classNames from 'classnames';
+import DishDeleteDialog from './dish-delete-dialog/DishDeleteDialog';
 
 interface DishCardBackProps extends DishCardProps {
   addMode?: boolean;
@@ -57,11 +50,13 @@ const DishCardBack = ({
   addMode,
   onMutationSuccess
 }: DishCardBackProps) => {
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [displayedDish, setDisplayedDish] = useState<Dish>(structuredClone(dish));
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<'success' | 'error' | 'idle'>('idle');
-  const [readOnly, setReadOnly] = useState<boolean>(!addMode);
+  const [readOnly, setReadOnly] = useState(!addMode);
+
+  const isStatusSuccess = status === 'success';
 
   const nameRef = useRef<HTMLInputElement>(null);
   const recipeRef = useRef<HTMLDivElement>(null);
@@ -140,7 +135,7 @@ const DishCardBack = ({
       });
   };
 
-  const getEditingPanel = () => {
+  const buildEditingPanel = () => {
     if (isLoading) {
       return (
         <CircularProgress
@@ -183,24 +178,6 @@ const DishCardBack = ({
     }
   };
 
-  const getDishCardButton = () => {
-    const onClick = addMode ? approveEdit : handleFlipCallback;
-    const disabled = addMode ? isLoading : false;
-    const endIcon = addMode ? <PlaylistAddCheckRounded /> : <ArrowBackRounded />;
-    const buttonText = addMode ? 'Submit recipe' : 'Go back';
-
-    return (
-      <Button
-        onClick={onClick}
-        variant="successContained"
-        className="flip-card-button"
-        disabled={disabled}
-        endIcon={endIcon}>
-        {buttonText}
-      </Button>
-    );
-  };
-
   const retryQuery = () => {
     setStatus('idle');
     approveEdit();
@@ -211,63 +188,20 @@ const DishCardBack = ({
     if (status === 'success' && onMutationSuccess) onMutationSuccess();
   };
 
-  const getStatusScreen = () => {
-    if (status === 'idle') return;
-
-    const isSuccess = status === 'success';
-    const header = isSuccess ? 'Success!' : 'Oops!';
-    const caption = isSuccess ? DISH_UPDATE_SUCCESS : DISH_UPDATE_ERROR;
-    const imageSource = isSuccess ? DISH_UPDATE_SUCCESS_IMAGE : DISH_UPDATE_ERROR_IMAGE;
-    const secondButtonText = isSuccess ? undefined : 'Retry';
-    const secondButtonOnClick = isSuccess ? undefined : retryQuery;
-
-    return (
-      <StatusScreen
-        header={header}
-        open={true}
-        caption={caption}
-        imgSource={imageSource}
-        secondButtonText={secondButtonText}
-        status={status}
-        close={closeStatusMessage}
-        secondButtonOnClick={secondButtonOnClick}
-      />
-    );
-  };
-
-  const getDishDeleteDialog = () => {
-    return (
-      <Dialog className="delete-dialog-container" open={isDeleteDialogOpen}>
-        <Box className="delete-dialog" sx={{ bgcolor: 'primary.dark' }}>
-          <Box className="delete-dialog-text">
-            <Typography>Do you really want to delete this dish recipe?</Typography>
-            <Typography className="delete-dialog-warning">This is irreversible.</Typography>
-          </Box>
-          <Box>
-            <Button
-              className="delete-dialog-button"
-              variant="accentContained"
-              onClick={() => setIsDeleteDialogOpen(false)}
-              startIcon={<HighlightOffRoundedIcon />}>
-              Cancel
-            </Button>
-            <Button
-              className="delete-dialog-button"
-              variant="errorContained"
-              onClick={removeDish}
-              startIcon={<DeleteRounded />}>
-              Confirm
-            </Button>
-          </Box>
-        </Box>
-      </Dialog>
-    );
+  const getButtonText = () => {
+    if (!addMode) {
+      return 'Go back';
+    } else {
+      return isLoading ? 'Submitting...' : 'Submit recipe';
+    }
   };
 
   return (
     <>
-      <Box className={`dish-card-back-container ${className}`}>
-        {!addMode && hasAdminPermission() && <Box className="edit-panel">{getEditingPanel()}</Box>}
+      <Box className={classNames('dish-card-back-container', className)}>
+        {!addMode && hasAdminPermission() && (
+          <Box className="edit-panel">{buildEditingPanel()}</Box>
+        )}
         <Box className="scrollable-dish-details">
           <Box className="image-container">
             <DishImage
@@ -310,11 +244,34 @@ const DishCardBack = ({
             />
           </Box>
         </Box>
-        {getDishCardButton()}
+        <Button
+          variant="successContained"
+          className="flip-card-button"
+          onClick={addMode ? approveEdit : handleFlipCallback}
+          disabled={addMode ? isLoading : false}
+          endIcon={addMode ? <PlaylistAddCheckRounded /> : <ArrowBackRounded />}>
+          {getButtonText()}
+        </Button>
       </Box>
 
-      {getStatusScreen()}
-      {getDishDeleteDialog()}
+      {status !== 'idle' && (
+        <StatusScreen
+          header={isStatusSuccess ? 'Success!' : 'Oops!'}
+          open={true}
+          caption={isStatusSuccess ? DISH_UPDATE_SUCCESS : DISH_UPDATE_ERROR}
+          imgSource={isStatusSuccess ? DISH_UPDATE_SUCCESS_IMAGE : DISH_UPDATE_ERROR_IMAGE}
+          secondButtonText={isStatusSuccess ? undefined : 'Retry'}
+          status={status}
+          close={closeStatusMessage}
+          secondButtonOnClick={isStatusSuccess ? undefined : retryQuery}
+        />
+      )}
+
+      <DishDeleteDialog
+        isOpen={isDeleteDialogOpen}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        deleteCallback={removeDish}
+      />
     </>
   );
 };

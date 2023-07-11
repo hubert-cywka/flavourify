@@ -4,9 +4,10 @@ import './CompleteTagsList.scss';
 import { TAG_TYPES } from 'shared/constants/TagsConstants';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { useTags } from 'shared/hooks/queries/useTags';
+import classNames from 'classnames';
+import { ComponentProps } from 'react';
 
-interface CompleteTagsListProps {
-  className?: string;
+interface CompleteTagsListProps extends ComponentProps<'div'> {
   onTagSelect: (tag: Tag) => void; // eslint-disable-line no-unused-vars
   selectedTags: Tag[] | null;
   sx?: SxProps;
@@ -30,7 +31,7 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
         organizedTagChips.push(
           <Box
             key={tag.id}
-            className={`tag-chip ${isTagSelected(tag) && 'selected'}`}
+            className={classNames('tag-chip', { selected: isTagSelected(tag) })}
             onClick={() => onTagSelect(tag)}>
             {tag.name}
           </Box>
@@ -63,7 +64,7 @@ const CompleteTagsList = ({ className, onTagSelect, selectedTags, sx }: Complete
   };
 
   return (
-    <Box className={`all-tags-list-container ${className}`} sx={sx}>
+    <Box className={classNames('all-tags-list-container', className)} sx={sx}>
       {TAG_TYPES.map((type, id) => (
         <Box key={id}>{buildTagsTypeSection(type)}</Box>
       ))}

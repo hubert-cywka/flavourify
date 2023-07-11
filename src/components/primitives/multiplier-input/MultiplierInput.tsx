@@ -1,5 +1,6 @@
 import { Box, Button } from '@mui/material';
 import './MultiplierInput.scss';
+import classNames from 'classnames';
 
 interface MultiplierInputProps {
   value: number;
@@ -15,22 +16,24 @@ const MultiplierInput = ({ value, onChange, min, max, className }: MultiplierInp
     onChange(value + arg);
   };
 
+  const buildButton = (text: string, valueChangeArgument: number, label: string) => {
+    return (
+      <Button
+        aria-label={label}
+        className="button"
+        sx={{ color: 'text.primary' }}
+        onClick={() => handleValueChange(valueChangeArgument)}>
+        {text}
+      </Button>
+    );
+  };
+
   return (
-    <Box className={`multiplier-input-container ${className ?? ''}`}>
+    <Box className={classNames('multiplier-input-container', className)}>
       <Box className="value-field">{value}</Box>
       <Box className="buttons-container">
-        <Button
-          className="decrement-button"
-          sx={{ color: 'text.primary' }}
-          onClick={() => handleValueChange(-1)}>
-          -
-        </Button>
-        <Button
-          className="increment-button"
-          sx={{ color: 'text.primary' }}
-          onClick={() => handleValueChange(1)}>
-          +
-        </Button>
+        {buildButton('-', -1, 'Decrement value')}
+        {buildButton('+', 1, 'Increment value')}
       </Box>
     </Box>
   );

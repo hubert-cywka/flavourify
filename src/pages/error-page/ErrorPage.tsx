@@ -70,7 +70,7 @@ const ErrorPage = () => {
         header={getErrorHeader()}
         imgSource={getErrorImageSrc()}
         caption={getErrorInfo()}
-        status={'error'}
+        status="error"
       />
     );
   };

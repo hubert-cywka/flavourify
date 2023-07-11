@@ -1,5 +1,5 @@
 import './DishesList.scss';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { Box } from '@mui/material';
 import SwiperRef from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,12 +17,9 @@ import Builder from 'shared/utility/Builder';
 import { useDishes } from 'shared/hooks/queries/useDishes';
 import DishCard from 'components/dishes/dish-card/DishCard';
 import ErrorDishCard from 'components/dishes/dish-card/other-variants/error-dish-card/ErrorDishCard';
+import classNames from 'classnames';
 
-interface DishesListProps {
-  className?: string;
-}
-
-const DishesList = ({ className }: DishesListProps) => {
+const DishesList = ({ className }: ComponentProps<'div'>) => {
   const [isLocked, setIsLocked] = useState(false);
   const [swiperRef, setSwiperRef] = useState<SwiperRef | null>(null);
 
@@ -87,7 +84,7 @@ const DishesList = ({ className }: DishesListProps) => {
             onReachBeginning={() => fetchPreviousPage()}
             onSlideChangeTransitionEnd={updateLastViewedDish}
             slidesPerView={1}
-            className={`dishes-list-container ${className}`}>
+            className={classNames('dishes-list-container', className)}>
             {prepareDishesSlides(data.pages)}
             {!hasNextPage && !isFetching ? (
               <SwiperSlide>
@@ -108,7 +105,7 @@ const DishesList = ({ className }: DishesListProps) => {
       </>
     )
     .onError(
-      <Box className={`dishes-list-container error ${className}`}>
+      <Box className={classNames('dishes-list-container', 'error', className)}>
         <ErrorDishCard
           callback={refetch}
           img={NO_RECIPES_IMAGE}

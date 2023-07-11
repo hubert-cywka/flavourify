@@ -27,6 +27,27 @@
     .add-dish-button {
       margin: 0 $big-element-spacing 0 0;
     }
+
+    .displayed-tag {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      padding: $standard-element-spacing;
+      box-sizing: border-box;
+
+      .displayed-tag-icon {
+        @include navbar-icon;
+        box-sizing: border-box;
+        margin: 0 $standard-element-spacing;
+      }
+
+      .displayed-tag-name {
+        white-space: nowrap;
+        font-size: $small-font-size;
+      }
+    }
   }
 
   .search-bar {

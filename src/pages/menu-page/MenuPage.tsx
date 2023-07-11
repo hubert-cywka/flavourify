@@ -25,27 +25,6 @@ const MenuPage = () => {
 
   const swapSlide = () => setAreIngredientsVisible((prev) => !prev);
 
-  const buildIngredientsList = () => {
-    return Builder.createResult(status)
-      .onSuccess(
-        <>{data && <IngredientsList withMultiplier ingredients={data} amountLimit={0} />}</>
-      )
-      .onLoading(<CircularProgress className="no-ingredients" />)
-      .onError(
-        <Box className="no-ingredients">
-          <Box className="no-ingredients-error">{NO_INGREDIENTS_ERROR}</Box>
-          <Button
-            endIcon={<RefreshRoundedIcon />}
-            className="refetch-ingredients-button"
-            variant="accentContained"
-            onClick={() => refetch()}>
-            Retry
-          </Button>
-        </Box>
-      )
-      .build();
-  };
-
   return (
     <Box
       className="menu-page-container"
@@ -74,7 +53,26 @@ const MenuPage = () => {
               <img className="menu-ingredients-image" src={MENU_INGREDIENTS_IMAGE} />
               <Box className="menu-ingredients-header">{MENU_INGREDIENTS_HEADER}</Box>
               <Box className="menu-ingredients-info">{MENU_INGREDIENTS_INFO}</Box>
-              {buildIngredientsList()}
+              {Builder.createResult(status)
+                .onSuccess(
+                  <>
+                    {data && <IngredientsList withMultiplier ingredients={data} amountLimit={0} />}
+                  </>
+                )
+                .onLoading(<CircularProgress className="no-ingredients" />)
+                .onError(
+                  <Box className="no-ingredients">
+                    <Box className="no-ingredients-error">{NO_INGREDIENTS_ERROR}</Box>
+                    <Button
+                      endIcon={<RefreshRoundedIcon />}
+                      className="refetch-ingredients-button"
+                      variant="accentContained"
+                      onClick={() => refetch()}>
+                      Retry
+                    </Button>
+                  </Box>
+                )
+                .build()}
             </Box>
           </Box>
         </Slide>

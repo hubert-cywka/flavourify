@@ -7,6 +7,7 @@ import './TagsManagementPanel.scss';
 import TagsAddPanel from './tags-add-panel/TagsAddPanel';
 import TagsEditPanel from './tags-edit-panel/TagsEditPanel';
 import TagsRemovePanel from './tags-remove-panel/TagsRemovePanel';
+import classNames from 'classnames';
 
 interface TagsManagementPanelProps {
   className?: string;
@@ -65,7 +66,7 @@ const TagsManagementPanel = ({ className }: TagsManagementPanelProps) => {
   };
 
   return (
-    <Box className={`tags-management-panel-container ${className}`}>
+    <Box className={classNames('tags-management-panel-container', className)}>
       <TabContext value={visibleTab}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleTabChange} centered>

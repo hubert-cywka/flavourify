@@ -6,13 +6,10 @@ import { NICKNAME_REQUIREMENTS, PASSWORD_REQUIREMENTS } from 'shared/constants/A
 import UserInfo from 'components/users/user-info/UserInfo';
 import TabList from '@mui/lab/TabList';
 import { TabContext, TabPanel } from '@mui/lab';
-import { SyntheticEvent, useState } from 'react';
+import { ComponentProps, SyntheticEvent, useState } from 'react';
+import classNames from 'classnames';
 
-interface EditProfilePanelProps {
-  className?: string;
-}
-
-const ProfileEditPanel = ({ className }: EditProfilePanelProps) => {
+const ProfileEditPanel = ({ className }: ComponentProps<'div'>) => {
   const [visibleTab, setVisibleTab] = useState('1');
 
   const handleTabChange = (event: SyntheticEvent, newValue: string) => {
@@ -20,7 +17,7 @@ const ProfileEditPanel = ({ className }: EditProfilePanelProps) => {
   };
 
   return (
-    <Box className={`profile-edit-panel ${className}`}>
+    <Box className={classNames('profile-edit-panel', className)}>
       <UserInfo editableProfilePicture />
 
       <TabContext value={visibleTab}>

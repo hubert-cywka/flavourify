@@ -1,0 +1,78 @@
+@import './src/styles/variables';
+@import './src/styles/shared';
+
+.ingredients-edit-form {
+  padding: $standard-element-spacing;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .ingredients-edit-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .action-button {
+      @include action-button-standard;
+      margin: $small-element-spacing;
+    }
+  }
+
+  .ingredients-edit-form-content {
+    padding: $standard-element-spacing $big-element-spacing;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+
+    .ingredients-edit-info-image {
+      width: 80%;
+      display: block;
+      margin: 0 auto $standard-element-spacing;
+    }
+
+    .ingredients-edit-info-header {
+      @include info-header;
+      margin-bottom: $standard-element-spacing;
+    }
+
+    .ingredients-edit-info-description {
+      @include info-description;
+      margin-bottom: $huge-element-spacing;
+    }
+
+    .ingredient-quantity-rows {
+      width: 100%;
+    }
+
+    .ingredients-edit-form-row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
+      .field-name-label {
+        margin-right: $standard-element-spacing;
+        font-weight: 600;
+        opacity: 0.75;
+      }
+
+      .editable-text-field, .field-name-label {
+        font-size: $standard-font-size;
+        margin-bottom: $standard-element-spacing;
+      }
+
+      .editable-text-field {
+        padding: $small-element-spacing $standard-element-spacing;
+        background-color: $white-transparent-background-5;
+        border-radius: $outer-border-radius-10;
+        flex-grow: 1;
+      }
+    }
+  }
+}

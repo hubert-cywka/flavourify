@@ -1,0 +1,21 @@
+@import 'src/styles/variables';
+@import 'src/styles/shared';
+
+.tags-search-list {
+  @include search-list;
+  padding-bottom: $big-element-spacing;
+
+  .search-icon {
+    font-size: $big-font-size;
+  }
+
+  .tags-list-header {
+    @include search-bar;
+    margin-left: $standard-element-spacing;
+  }
+
+  .tag-items-container {
+    position: relative;
+    overflow-y: auto;
+  }
+}

@@ -4,7 +4,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { signUpMockServer, signUpMockServerHandlers, SignUpPageObjects } from './SignUpPageObjects';
 import SignUpSlide from './SignUpSlide';
-import AppProvider from '../../../shared/providers/AppProvider';
+import AppProvider from 'shared/providers/AppProvider';
 import {
   EMAIL_REQUIREMENTS,
   NICKNAME_REQUIREMENTS,

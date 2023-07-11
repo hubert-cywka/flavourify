@@ -40,7 +40,7 @@ const DishImage = ({ src, altText, className, editable, reference }: DishImagePr
     const files = input.files;
 
     if (files && validateUploadedImage(files)) {
-      setDisplayedImageSrc(await imageCompression.getDataUrlFromFile(files[0]));
+      imageCompression.getDataUrlFromFile(files[0]).then((res) => setDisplayedImageSrc(res));
     }
   };
 

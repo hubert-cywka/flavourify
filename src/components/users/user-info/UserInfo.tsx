@@ -3,9 +3,10 @@ import Builder from 'shared/utility/Builder';
 import './UserInfo.scss';
 import UserProfilePicture from 'components/users/user-info/user-profile-picture/UserProfilePicture';
 import { useUserDetails } from 'shared/hooks/queries/useUserDetails';
+import classNames from 'classnames';
+import { ComponentProps } from 'react';
 
-interface UserInfoProps {
-  className?: string;
+interface UserInfoProps extends ComponentProps<'div'> {
   editableProfilePicture?: boolean;
 }
 
@@ -13,7 +14,7 @@ const UserInfo = ({ className, editableProfilePicture }: UserInfoProps) => {
   const { data, status } = useUserDetails();
 
   return (
-    <Box className={`user-info ${className}`}>
+    <Box className={classNames('user-info', className)}>
       {Builder.createResult(status)
         .onSuccess(
           <>

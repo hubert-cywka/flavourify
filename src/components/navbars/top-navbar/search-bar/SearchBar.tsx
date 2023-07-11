@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ComponentProps, useRef, useState } from 'react';
 import { NavigateNextRounded, SearchRounded } from '@mui/icons-material';
 import {
   Box,
@@ -14,17 +14,17 @@ import Builder from 'shared/utility/Builder';
 import { useDishNames } from 'shared/hooks/queries/useDishNames';
 import appRouter from 'router/AppRouter';
 import ROUTE from 'router/RoutingConstants';
+import classNames from 'classnames';
 
-interface SearchBarProps {
-  className?: string;
+interface SearchBarProps extends ComponentProps<'div'> {
   searchValue?: string;
   onFocus: () => void;
   onBlur: () => void;
 }
 
 const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) => {
+  const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState(false);
   const [textFilter, setTextFilter] = useState('');
-  const [areSearchResultsDisplayed, setAreSearchResultsDisplayed] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { data, status } = useDishNames(textFilter);
@@ -40,7 +40,7 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
     inputRef.current.focus();
   };
 
-  const getSearchListItem = (text: string, dishId?: number) => {
+  const buildSearchListItem = (text: string, dishId?: number) => {
     return (
       <ListItem
         key={dishId}
@@ -58,18 +58,10 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
     );
   };
 
-  const buildSearchResults = () => {
-    return Builder.createResult(status)
-      .onSuccess(<>{data && data.map((dish) => getSearchListItem(dish.name, dish.id))}</>)
-      .onError(getSearchListItem('Could not find any dishes'))
-      .onLoading(getSearchListItem('Searching...'))
-      .build();
-  };
-
   return (
     <ClickAwayListener onClickAway={() => setAreSearchResultsDisplayed(false)}>
       <Box className="search-bar-wrapper">
-        <Box className={`search-bar-container ${className}`}>
+        <Box className={classNames('search-bar-container', className)}>
           <SearchRounded
             className="search-icon"
             sx={{ color: 'primary.main' }}
@@ -89,7 +81,11 @@ const SearchBar = ({ className, searchValue, onBlur, onFocus }: SearchBarProps) 
         </Box>
         {areSearchResultsDisplayed && textFilter.length > 0 && (
           <List sx={{ bgcolor: 'secondary.main' }} className="search-list">
-            {buildSearchResults()}
+            {Builder.createResult(status)
+              .onSuccess(<>{data && data.map((dish) => buildSearchListItem(dish.name, dish.id))}</>)
+              .onError(buildSearchListItem('Could not find any dishes'))
+              .onLoading(buildSearchListItem('Searching...'))
+              .build()}
           </List>
         )}
       </Box>

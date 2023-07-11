@@ -1,7 +1,7 @@
 import { Box, Button, ClickAwayListener, Collapse, IconButton } from '@mui/material';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import './UserDetailsRow.scss';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
@@ -17,9 +17,9 @@ import {
 import { queryClient } from 'services/QueryClient';
 import { deleteUser, updateUserRole } from 'services/UserService';
 import { USER_ROLE, UserDetails } from 'shared/types/User.d';
+import classNames from 'classnames';
 
-interface UserDetailsRowProps {
-  className?: string;
+interface UserDetailsRowProps extends ComponentProps<'div'> {
   user: UserDetails;
 }
 
@@ -50,8 +50,32 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
     }
   };
 
-  const getManagementPanel = () => {
-    return (
+  return (
+    <Box className={classNames('user-details-row-container', className)}>
+      <Box className="user-details-row-content">
+        {user.role === USER_ROLE.ADMIN ? (
+          <Box className="user-role" sx={{ color: 'accent.success' }}>
+            <AdminPanelSettingsRoundedIcon />
+            Admin
+          </Box>
+        ) : (
+          <Box className="user-role" sx={{ color: 'accent.main' }}>
+            <AccountCircleRoundedIcon />
+            User
+          </Box>
+        )}
+        <Box className="user-info">
+          <Box className="user-username">{user.username}</Box>
+          <Box className="user-email">{user.email}</Box>
+        </Box>
+        <IconButton
+          sx={{ color: 'text.primary' }}
+          className="expand-management-options-button"
+          onClick={() => setAreButtonsDisplayed((prev) => !prev)}>
+          {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+        </IconButton>
+      </Box>
+
       <Collapse
         className="user-manage-row"
         key={user.email}
@@ -85,35 +109,6 @@ const UserDetailsRow = ({ className, user }: UserDetailsRowProps) => {
           </Box>
         </ClickAwayListener>
       </Collapse>
-    );
-  };
-
-  return (
-    <Box className={`user-details-row-container ${className}`}>
-      <Box className="user-details-row-content">
-        {user.role === USER_ROLE.ADMIN ? (
-          <Box className="user-role" sx={{ color: 'accent.success' }}>
-            <AdminPanelSettingsRoundedIcon />
-            Admin
-          </Box>
-        ) : (
-          <Box className="user-role" sx={{ color: 'accent.main' }}>
-            <AccountCircleRoundedIcon />
-            User
-          </Box>
-        )}
-        <Box className="user-info">
-          <Box className="user-username">{user.username}</Box>
-          <Box className="user-email">{user.email}</Box>
-        </Box>
-        <IconButton
-          sx={{ color: 'text.primary' }}
-          className="expand-management-options-button"
-          onClick={() => setAreButtonsDisplayed((prev) => !prev)}>
-          {areButtonsDisplayed ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
-        </IconButton>
-      </Box>
-      {getManagementPanel()}
     </Box>
   );
 };

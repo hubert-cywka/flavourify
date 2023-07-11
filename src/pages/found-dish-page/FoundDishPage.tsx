@@ -53,24 +53,6 @@ const FoundDishPage = () => {
     }
   };
 
-  const buildFoundDish = () => {
-    return Builder.createResult(status)
-      .onSuccess(
-        <animated.div {...swipeHandlers()} style={{ y }} className="found-dish-container">
-          {dish && <DishCard dish={dish} />}
-        </animated.div>
-      )
-      .onError(
-        <ErrorDishCard
-          title={NO_RECIPES_TITLE}
-          callback={refetch}
-          caption={NO_RECIPES_BUTTON}
-          img={NO_RECIPES_IMAGE}
-        />
-      )
-      .build();
-  };
-
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'text.primary' }}>
       <AnimatePresence
@@ -78,7 +60,23 @@ const FoundDishPage = () => {
         isVisible={true}
         animation={simpleOpacityAnimation}>
         <TopNavbar className="top-navbar" searchValue={dish && dish.name} singleDishVariant />
-        <Box className="slide-container">{buildFoundDish()}</Box>
+        <Box className="slide-container">
+          {Builder.createResult(status)
+            .onSuccess(
+              <animated.div {...swipeHandlers()} style={{ y }} className="found-dish-container">
+                {dish && <DishCard dish={dish} />}
+              </animated.div>
+            )
+            .onError(
+              <ErrorDishCard
+                title={NO_RECIPES_TITLE}
+                callback={refetch}
+                caption={NO_RECIPES_BUTTON}
+                img={NO_RECIPES_IMAGE}
+              />
+            )
+            .build()}
+        </Box>
       </AnimatePresence>
     </Box>
   );

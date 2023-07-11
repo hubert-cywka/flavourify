@@ -9,7 +9,7 @@ export class EditableTextFieldPageObjects {
   }
 
   get alert(): Promise<Element> {
-    return screen.findByTestId(/alert-text(?!\S)/);
+    return screen.findByTestId(/toast-text(?!\S)/);
   }
 
   clickOnInput = async () => {

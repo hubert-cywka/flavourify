@@ -1,6 +1,6 @@
 import { ERROR_403_IMAGE } from './AppConstants';
 import { SignUpRequest, SignInResponse, SignInRequest } from 'shared/types/Auth';
-import { UserDetails, USER_ROLE } from 'shared/types/User';
+import { UserDetails, USER_ROLE } from 'shared/types/User.d';
 
 export const MOCK_USER: UserDetails = {
   username: 'mock_username',

@@ -1,10 +1,9 @@
-import Builder from 'shared/utility/Builder';
 import {
   USERNAME_CHANGE_SUCCESS,
   USERNAME_CHANGE_UNEXPECTED_ERROR
 } from 'shared/constants/UserConstants';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, FormHelperText, Input, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, FormHelperText, Input, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
@@ -14,16 +13,14 @@ import { USER_DETAILS_QUERY } from 'shared/constants/QueryConstants';
 import { getNicknameValidationSchema } from 'shared/constants/ValidationSchemas';
 import { queryClient } from 'services/QueryClient';
 import { changeMyUsername } from 'services/UserService';
+import { ComponentProps } from 'react';
+import classNames from 'classnames';
 
 type UsernameChangeInputs = {
   username: string;
 };
 
-interface UsernameChangeFormProps {
-  className?: string;
-}
-
-const UsernameChangeForm = ({ className }: UsernameChangeFormProps) => {
+const UsernameChangeForm = ({ className }: ComponentProps<'div'>) => {
   const { enqueueSnackbar } = useSnackbar();
   const { mutateAsync: changeUsername, status } = useMutation([], () =>
     changeMyUsername(getValues('username'))
@@ -54,26 +51,9 @@ const UsernameChangeForm = ({ className }: UsernameChangeFormProps) => {
       .finally(() => reset());
   };
 
-  const getFormButtons = () => {
-    return (
-      <Box className="form-buttons-container">
-        <Button
-          className="form-clear-button form-button"
-          type="reset"
-          onClick={() => reset()}
-          variant="errorOutlined">
-          Clear
-        </Button>
-        <Button className="form-submit-button form-button" type="submit" variant="successContained">
-          Update username
-        </Button>
-      </Box>
-    );
-  };
-
   return (
     <form
-      className={`profile-edit-form ${className}`}
+      className={classNames('profile-edit-form', className)}
       onSubmit={handleSubmit(handleUsernameChange)}>
       <Typography className="form-input-label">New username</Typography>
       <Input
@@ -86,11 +66,25 @@ const UsernameChangeForm = ({ className }: UsernameChangeFormProps) => {
         {errors?.username?.message ?? ' '}
       </FormHelperText>
 
-      {Builder.createResult(status)
-        .onSuccess(<>{getFormButtons()}</>)
-        .onError(<>{getFormButtons()}</>)
-        .onIdle(getFormButtons())
-        .build()}
+      {status === 'loading' ? (
+        <CircularProgress sx={{ color: 'accent.main' }} />
+      ) : (
+        <Box className="form-buttons-container">
+          <Button
+            className="form-clear-button form-button"
+            type="reset"
+            onClick={() => reset()}
+            variant="errorOutlined">
+            Clear
+          </Button>
+          <Button
+            className="form-submit-button form-button"
+            type="submit"
+            variant="successContained">
+            Update username
+          </Button>
+        </Box>
+      )}
     </form>
   );
 };
