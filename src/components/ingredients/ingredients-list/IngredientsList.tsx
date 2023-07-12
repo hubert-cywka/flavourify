@@ -1,7 +1,7 @@
 import IngredientTile from 'components/ingredients/ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
-import { ComponentProps, RefObject, useState } from 'react';
+import { ComponentProps, memo, RefObject, useState } from 'react';
 import { AddCircleRounded } from '@mui/icons-material';
 import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
@@ -116,4 +116,4 @@ const IngredientsList = ({
   );
 };
 
-export default IngredientsList;
+export default memo(IngredientsList);

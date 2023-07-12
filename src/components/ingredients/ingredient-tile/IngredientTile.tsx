@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import './IngredientTile.scss';
 import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
 import { type Ingredient } from 'shared/types/Dish';
-import { useState, ComponentProps } from 'react';
+import { useState, ComponentProps, memo } from 'react';
 import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import classNames from 'classnames';
 import IngredientEditDialog from '../ingredient-edit-dialog/IngredientEditDialog';
@@ -72,4 +72,4 @@ const IngredientTile = ({
   );
 };
 
-export default IngredientTile;
+export default memo(IngredientTile);

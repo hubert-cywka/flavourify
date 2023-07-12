@@ -1,6 +1,6 @@
 import { Box, Button, Collapse, Typography } from '@mui/material';
 import './DishRecipeShared.scss';
-import { RefObject, useState } from 'react';
+import { memo, RefObject, useState } from 'react';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { DEFAULT_RECIPE_STEP } from 'shared/constants/DishesConstants';
 import { getUpdatedRecipe } from 'shared/utility/dishRecipeUpdateUtils';
@@ -74,4 +74,4 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
   );
 };
 
-export default DishRecipe;
+export default memo(DishRecipe);

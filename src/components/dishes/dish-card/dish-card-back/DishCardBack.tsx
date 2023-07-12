@@ -30,7 +30,7 @@ import {
   DeleteRounded,
   PlaylistAddCheckRounded
 } from '@mui/icons-material';
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import DishImage from 'components/dishes/dish-image/DishImage';
 import { DishCardProps } from 'components/dishes/dish-card/DishCard';
 import TagsList from 'components/tags/tags-list/TagsList';
@@ -276,4 +276,4 @@ const DishCardBack = ({
   );
 };
 
-export default DishCardBack;
+export default memo(DishCardBack);

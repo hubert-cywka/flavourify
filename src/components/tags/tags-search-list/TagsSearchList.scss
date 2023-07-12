@@ -1,7 +1,7 @@
 @import 'src/styles/variables';
 @import 'src/styles/shared';
 
-.tags-search-list {
+.tags-search-list-container {
   @include search-list;
   padding-bottom: $big-element-spacing;
 

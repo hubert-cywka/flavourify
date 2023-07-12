@@ -4,12 +4,13 @@ import Builder from 'shared/utility/Builder';
 import { ALL_TAGS, NO_TAGS_ERROR } from 'shared/constants/TagsConstants';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { Tag } from 'shared/types/Dish';
-import { useContext, useState } from 'react';
+import { ComponentProps, useContext, useState } from 'react';
 import { lastViewedDishContext } from 'shared/contexts/LastViewedDishContext';
 import { useTags } from 'shared/hooks/queries/useTags';
 import './TagsSearchList.scss';
+import classNames from 'classnames';
 
-const TagsSearchList = () => {
+const TagsSearchList = ({ className }: ComponentProps<'div'>) => {
   const { lastViewedDish, setLastViewedDish } = useContext(lastViewedDishContext);
   const { data: tagsList, status } = useTags(true);
   const [textFilter, setTextFilter] = useState('');
@@ -41,7 +42,9 @@ const TagsSearchList = () => {
   };
 
   return (
-    <List className="tags-search-list" sx={{ bgcolor: 'secondary.main' }}>
+    <List
+      className={classNames('tags-search-list-container', className)}
+      sx={{ bgcolor: 'secondary.main' }}>
       <ListItem className="tags-list-header">
         <SearchRounded className="search-icon" sx={{ color: 'text.primary' }} />
         <Input

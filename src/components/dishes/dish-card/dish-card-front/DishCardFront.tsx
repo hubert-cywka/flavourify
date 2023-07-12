@@ -6,6 +6,7 @@ import DishImage from 'components/dishes/dish-image/DishImage';
 import { DishCardProps } from 'components/dishes/dish-card/DishCard';
 import { ArrowForwardRounded } from '@mui/icons-material';
 import classNames from 'classnames';
+import { memo } from 'react';
 
 const DishCardFront = ({ dish, className, callback }: DishCardProps) => {
   return (
@@ -36,4 +37,4 @@ const DishCardFront = ({ dish, className, callback }: DishCardProps) => {
   );
 };
 
-export default DishCardFront;
+export default memo(DishCardFront);

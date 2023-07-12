@@ -2,6 +2,7 @@ import { Box, Button, Dialog, Typography } from '@mui/material';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { DeleteRounded } from '@mui/icons-material';
 import './DishDeleteDialog.scss';
+import { memo } from 'react';
 
 interface DishDeleteDialogProps {
   isOpen: boolean;
@@ -38,4 +39,4 @@ const DishDeleteDialog = ({ isOpen, onClose, deleteCallback }: DishDeleteDialogP
   );
 };
 
-export default DishDeleteDialog;
+export default memo(DishDeleteDialog);

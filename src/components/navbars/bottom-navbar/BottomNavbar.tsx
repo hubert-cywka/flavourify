@@ -4,7 +4,7 @@ import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import './BottomNavbar.scss';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { memo, SyntheticEvent, useEffect, useState } from 'react';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -61,4 +61,4 @@ const BottomNavbar = () => {
   );
 };
 
-export default BottomNavbar;
+export default memo(BottomNavbar);

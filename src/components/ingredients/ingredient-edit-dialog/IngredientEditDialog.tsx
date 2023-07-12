@@ -16,7 +16,7 @@ import {
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { Ingredient } from 'shared/types/Dish';
 import './IngredientEditDialog.scss';
 
@@ -161,4 +161,4 @@ const IngredientEditDialog = ({
   );
 };
 
-export default IngredientEditDialog;
+export default memo(IngredientEditDialog);
