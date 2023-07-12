@@ -1,5 +1,5 @@
 import { Box, CardMedia, IconButton, Input, Typography } from '@mui/material';
-import { memo, RefObject, useRef, useState } from "react";
+import { memo, RefObject, useRef, useState } from 'react';
 import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import './DishImage.scss';
 import FilterRoundedIcon from '@mui/icons-material/FilterRounded';
