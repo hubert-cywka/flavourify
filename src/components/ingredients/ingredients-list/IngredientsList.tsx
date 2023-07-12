@@ -1,7 +1,7 @@
 import IngredientTile from 'components/ingredients/ingredient-tile/IngredientTile';
 import { Box, IconButton, Typography } from '@mui/material';
 import './IngredientList.scss';
-import { ComponentProps, memo, RefObject, useState } from 'react';
+import { ComponentProps, memo, RefObject, useCallback, useState } from 'react';
 import { AddCircleRounded } from '@mui/icons-material';
 import { simpleOpacityAnimation } from 'shared/constants/AnimationConfigs';
 import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
@@ -55,12 +55,15 @@ const IngredientsList = ({
     setDisplayedIngredients(updatedIngredients.slice());
   };
 
-  const deleteIngredient = (id: number) => {
-    if (!reference) return;
-    const updatedIngredients = getUpdatedIngredients(reference, displayedIngredients);
-    updatedIngredients.splice(id, 1);
-    setDisplayedIngredients(updatedIngredients.slice());
-  };
+  const deleteIngredient = useCallback(
+    (id: number) => {
+      if (!reference) return;
+      const updatedIngredients = getUpdatedIngredients(reference, displayedIngredients);
+      updatedIngredients.splice(id, 1);
+      setDisplayedIngredients(updatedIngredients.slice());
+    },
+    [reference, displayedIngredients]
+  );
 
   return (
     <Box className={`ingredient-list-container ${className}`} ref={reference}>

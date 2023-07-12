@@ -9,7 +9,7 @@ import './DishCard.scss';
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
 import { useSpring, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, useCallback, useState } from 'react';
 import { calculateSwipePosition } from 'shared/utility/calculateSwipePosition';
 import { to } from 'react-spring';
 import { Box, Dialog, Fade, Slide } from '@mui/material';
@@ -57,10 +57,10 @@ const DishCard = ({ dish, callback, isLocked }: DishCardProps) => {
     }
   };
 
-  const handleCallback = () => {
+  const handleCallback = useCallback(() => {
     setIsFrontSide((prev) => !prev);
     if (callback) callback();
-  };
+  }, [callback, isFrontSide]);
 
   const dragRotationTransform = (r: number) =>
     `perspective(1500px) rotateY(${r}deg) rotateZ(${r}deg)`;
