@@ -1,5 +1,4 @@
 import { Box, Button, Typography, Skeleton, Divider } from '@mui/material';
-import { memo } from 'react';
 import './ErrorDishCard.scss';
 
 interface ErrorDishCardProps {
@@ -39,4 +38,4 @@ const ErrorDishCard = ({ img, title, caption, callback, loading }: ErrorDishCard
   );
 };
 
-export default memo(ErrorDishCard);
+export default ErrorDishCard;

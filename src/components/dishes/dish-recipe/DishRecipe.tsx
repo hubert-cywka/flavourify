@@ -1,6 +1,6 @@
 import { Box, Button, Collapse, Typography } from '@mui/material';
 import './DishRecipeShared.scss';
-import { memo, RefObject, useState } from 'react';
+import { memo, RefObject, useCallback, useState } from 'react';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { DEFAULT_RECIPE_STEP } from 'shared/constants/DishesConstants';
 import { getUpdatedRecipe } from 'shared/utility/dishRecipeUpdateUtils';
@@ -22,28 +22,34 @@ const DishRecipe = ({ recipe, className, isReadOnly, reference }: DishRecipeProp
     setDisplayedRecipe(recipe);
   }, [isReadOnly, recipe]);
 
-  const reorderSteps = (position: number, toPosition: number) => {
-    if (toPosition < 0 || toPosition >= displayedRecipe.length) return;
-    if (!reference) return;
-    const newRecipe = getUpdatedRecipe(reference, displayedRecipe);
-    const [movedElement] = newRecipe.splice(position, 1);
-    newRecipe.splice(toPosition, 0, movedElement);
-    setDisplayedRecipe(newRecipe.slice());
-  };
+  const reorderSteps = useCallback(
+    (position: number, toPosition: number) => {
+      if (toPosition < 0 || toPosition >= displayedRecipe.length) return;
+      if (!reference) return;
+      const newRecipe = getUpdatedRecipe(reference, displayedRecipe);
+      const [movedElement] = newRecipe.splice(position, 1);
+      newRecipe.splice(toPosition, 0, movedElement);
+      setDisplayedRecipe(newRecipe.slice());
+    },
+    [reference, displayedRecipe]
+  );
 
-  const addEmptyStep = () => {
+  const addEmptyStep = useCallback(() => {
     if (!reference) return;
     const newRecipe = getUpdatedRecipe(reference, displayedRecipe);
     newRecipe.push(DEFAULT_RECIPE_STEP);
     setDisplayedRecipe(newRecipe.slice());
-  };
+  }, [reference, displayedRecipe]);
 
-  const removeStep = (id: number) => {
-    if (!reference) return;
-    const newRecipe = getUpdatedRecipe(reference, displayedRecipe);
-    newRecipe.splice(id, 1);
-    setDisplayedRecipe(newRecipe.slice());
-  };
+  const removeStep = useCallback(
+    (id: number) => {
+      if (!reference) return;
+      const newRecipe = getUpdatedRecipe(reference, displayedRecipe);
+      newRecipe.splice(id, 1);
+      setDisplayedRecipe(newRecipe.slice());
+    },
+    [reference, displayedRecipe]
+  );
 
   return (
     <Box className={classNames('dish-recipe-container', className)} ref={reference}>

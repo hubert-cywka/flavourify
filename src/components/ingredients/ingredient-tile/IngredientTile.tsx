@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import './IngredientTile.scss';
 import { NEW_INGREDIENT_PLACEHOLDER } from 'shared/constants/DishesConstants';
 import { type Ingredient } from 'shared/types/Dish';
-import { useState, ComponentProps, memo } from 'react';
+import { useState, ComponentProps, memo, useCallback } from 'react';
 import { useUpdateEffect } from 'shared/hooks/useUpdateEffect';
 import classNames from 'classnames';
 import IngredientEditDialog from '../ingredient-edit-dialog/IngredientEditDialog';
@@ -30,13 +30,13 @@ const IngredientTile = ({
     setDisplayedIngredient(ingredient);
   }, [ingredient]);
 
-  const openEditDialog = () => {
+  const openEditDialog = useCallback(() => {
     if (editable) setIsDialogOpen(true);
-  };
+  }, []);
 
-  const closeEditDialog = () => {
+  const closeEditDialog = useCallback(() => {
     setIsDialogOpen(false);
-  };
+  }, []);
 
   const getMultipliedAmount = () => {
     if (!displayedIngredient.quantity) return;
