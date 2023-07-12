@@ -3,7 +3,7 @@ import { DISH_IMAGE_PLACEHOLDER, DISH_TAGS_DEFAULT } from 'shared/constants/Dish
 import { Dish } from 'shared/types/Dish';
 import DishCardBack from 'components/dishes/dish-card/dish-card-back/DishCardBack';
 import './DishCardAddDialog.scss';
-import { ComponentProps } from 'react';
+import { ComponentProps, memo } from 'react';
 import classNames from 'classnames';
 
 const EMPTY_DISH_PLACEHOLDER: Dish = {
@@ -35,4 +35,4 @@ const DishCardAddDialog = ({ onClose, className, open }: DishCardAddDialogProps)
   );
 };
 
-export default DishCardAddDialog;
+export default memo(DishCardAddDialog);

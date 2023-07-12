@@ -7,6 +7,7 @@ import EditableTextField from 'components/primitives/editable-text-field/Editabl
 import { DEFAULT_RECIPE_STEP } from 'shared/constants/DishesConstants';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import '../DishRecipeShared.scss';
+import { memo } from 'react';
 
 interface RecipeStepProps {
   id: number;
@@ -66,4 +67,4 @@ const RecipeStep = ({
   );
 };
 
-export default RecipeStep;
+export default memo(RecipeStep);

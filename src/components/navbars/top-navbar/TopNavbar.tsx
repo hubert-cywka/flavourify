@@ -42,14 +42,14 @@ const TopNavbar = ({ className, singleDishVariant, searchValue }: TopNavbarProps
   return (
     <ClickAwayListener onClickAway={closeTagSelectDialog}>
       <Box component="nav" className={classNames('top-navbar-container', className)}>
+        {isTagSelectDialogOpen && <TagsSearchList className="tags-search-list" />}
+
         <SearchBar
           searchValue={searchValue}
           className={classNames('search-bar', { active: isFocusOnSearchBar })}
           onBlur={() => setIsFocusOnSearchBar(false)}
           onFocus={() => setIsFocusOnSearchBar(true)}
         />
-
-        {isTagSelectDialogOpen && <TagsSearchList />}
 
         <animated.div className="top-navbar-buttons" style={transition}>
           {!singleDishVariant ? (

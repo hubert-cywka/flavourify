@@ -9,6 +9,10 @@
   height: $top-navbar-height;
   border-radius: $round-border-radius-50;
 
+  .tags-search-list {
+    position: absolute;
+  }
+
   .top-navbar-buttons {
     display: flex;
     justify-content: flex-end;
