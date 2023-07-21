@@ -11,33 +11,33 @@ Backend is implemented with usage of Java + Spring Boot.
 
 ## Features
 ### What can user do?
-- create account and sign in,
-- change password, nickname and profile picture,
-- browse recipes available in application,
-- filter recipes by name, cuisine, type of dish etc.,
-- add recipes to their biweekly menu,
-- delete, reorder recipes from menu,
-- calculate sum of ingredients needed for one specific dish or whole menu,
-- download app on mobile (apk will be added soon).
+- create account and sign in ✅
+- change password, nickname and profile picture ✅
+- browse recipes available in application ✅
+- filter recipes by name, cuisine, type of dish etc. ✅
+- add recipes to their biweekly menu ✅
+- delete, reorder recipes from menu ✅
+- calculate sum of ingredients needed for one specific dish or whole menu ✅ 
+- download app on mobile ⌛
 
 ### What can admin do?
-- everything user can do,
-- add new recipes via user-friendly form, this includes adding name, tags, recipe steps, image, ingredients,
-- modify available recipes, delete old ones,
-- add new dish tags, including `cuisine`, `course`, `diet` and `other` categories,
-- modify previously added tags, deleting them (this does not allow dishes with those tags),
-- browse list of users, changing their role to admin or user, deleting their accounts,
-- filter users by nickname or email.
+- everything user can do ✅
+- add new recipes via user-friendly form, this includes adding name, tags, recipe steps, image, ingredients ✅
+- modify available recipes, delete old ones ✅
+- add new dish tags, including `cuisine`, `course`, `diet` and `other` categories ✅
+- modify previously added tags, deleting them (this does not allow dishes with those tags) ✅
+- browse list of users, changing their role to admin or user, deleting their accounts ✅
+- filter users by nickname or email ✅
 
 ### Other features
-- both JWT and refresh token are used for authentication and authorization,
-- server status is constantly monitored and displayed to user,
-- protected access to routes,
-- global handling of 500, 403 and 401 errors.
+- both JWT and refresh token are used for authentication and authorization ✅
+- server status is constantly monitored and displayed to user ✅
+- protected access to routes ✅
+- global handling of 500, 403 and 401 errors ✅
 
 ### Additional things I did
-- Automated CI / CD using GitHub Actions, tests are run automatically and if they are successful app is deployed,
-- Configured development environment (linters, global imports, envs)
+- Automated CI / CD using GitHub Actions, tests are run automatically and if they are successful app is deployed ✅
+- Configured development environment (linters, global imports, envs) ✅
 
 ## Videos
 [Editing dishes, browsing, managing menu](https://user-images.githubusercontent.com/98762890/236290278-e1565e3c-2223-461b-99df-efe14fbc7c28.webm) \
@@ -46,19 +46,19 @@ Backend is implemented with usage of Java + Spring Boot.
 
 ## Gallery
 
-### Biweekly menu 
+#### Biweekly menu 
 ![Menu](https://user-images.githubusercontent.com/98762890/236291765-0026e2b9-7b24-430c-9247-97307514db98.png)
 
-### Main view of dish recipe 
+#### Main view of dish recipe 
 ![Dish Card Front](https://user-images.githubusercontent.com/98762890/236291771-03dcf1e4-9f0e-41a6-b9bd-04c7e8341112.png)
 
-### View of empty menu and search bar 
+#### View of empty menu and search bar 
 ![Looking for dish](https://user-images.githubusercontent.com/98762890/236291773-12bb9922-e23f-42c8-95ef-ea14dc49c9c7.png)
 
-### Settings page 
+#### Settings page 
 ![Profile](https://user-images.githubusercontent.com/98762890/236291775-d1ad8579-d386-4967-b42a-7d426f5dea43.png)
 
-### Calculated ingredients needed for recipe 
+#### Calculated ingredients needed for recipe 
 ![Menu Calculator](https://user-images.githubusercontent.com/98762890/236291777-ba2643b7-e4a5-42e4-b289-ce2178bd686c.png)
 
 ## Installation
