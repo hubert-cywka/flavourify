@@ -31,7 +31,9 @@ const IngredientTile = ({
   }, [ingredient]);
 
   const openEditDialog = useCallback(() => {
-    if (editable) setIsDialogOpen(true);
+    if (editable) {
+      setIsDialogOpen(true);
+    }
   }, []);
 
   const closeEditDialog = useCallback(() => {
