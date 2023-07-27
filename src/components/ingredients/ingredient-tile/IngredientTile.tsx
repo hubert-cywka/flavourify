@@ -34,7 +34,7 @@ const IngredientTile = ({
     if (editable) {
       setIsDialogOpen(true);
     }
-  }, []);
+  }, [editable]);
 
   const closeEditDialog = useCallback(() => {
     setIsDialogOpen(false);
